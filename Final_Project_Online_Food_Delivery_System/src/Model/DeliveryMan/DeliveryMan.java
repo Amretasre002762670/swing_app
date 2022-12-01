@@ -11,8 +11,17 @@ import Model.UserAccount.UserAccount;
  * @author puppalanagavaishnavi
  */
 public class DeliveryMan {
+    private int deliveryManId;
     private String deliveryManName;
     private UserAccount userAccount;
+
+    public int getDeliveryManId() {
+        return deliveryManId;
+    }
+
+    public void setDeliveryManId(int deliveryManId) {
+        this.deliveryManId = deliveryManId;
+    }
 
     public String getDeliveryManName() {
         return deliveryManName;
