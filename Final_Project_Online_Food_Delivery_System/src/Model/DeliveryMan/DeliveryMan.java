@@ -11,7 +11,7 @@ import Model.UserAccount.UserAccount;
  * @author puppalanagavaishnavi
  */
 public class DeliveryMan {
-
+    private int deliveryManId;
     private String deliveryManName;
     private UserAccount userAccount;
     private String community;
@@ -20,6 +20,14 @@ public class DeliveryMan {
         this.userAccount = userAccount;
         this.deliveryManName = this.userAccount.getUsername();
         this.community = community;
+    }
+
+    public int getDeliveryManId() {
+        return deliveryManId;
+    }
+
+    public void setDeliveryManId(int deliveryManId) {
+        this.deliveryManId = deliveryManId;
     }
 
     public String getDeliveryManName() {

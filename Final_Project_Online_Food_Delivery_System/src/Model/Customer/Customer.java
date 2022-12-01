@@ -12,12 +12,14 @@ import Model.UserAccount.UserAccount;
  */
 public class Customer {
 
+    private int custId;
     private String custName;
     private String home_streetAddress;
     private String home_City;
     private String home_pincode;
     private int custPhoneNumber;
     private UserAccount userAccount;
+
 
     public Customer(String custName, String home_streetAddress, String home_City, String home_pincode, int custPhoneNumber, UserAccount userAccount) {
         this.userAccount = userAccount;
@@ -28,6 +30,14 @@ public class Customer {
         this.custPhoneNumber = this.userAccount.getPhone_number();
     }
     
+    public int getCustId() {
+        return custId;
+    }
+
+    public void setCustId(int custId) {
+        this.custId = custId;
+    }
+
     public String getCustName() {
         return custName;
     }
