@@ -5,7 +5,7 @@
 package Model.System;
 
 import Model.Employee.EmployeeDirectory;
-import Model.Roles.Role;
+import Model.Role.Role;
 import Model.UserAccount.UserAccountDirectory;
 import Model.WorkQueue.WorkQueue;
 import java.util.ArrayList;

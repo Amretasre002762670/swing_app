@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model.System;
-
+import Model.Customer.Customer;
 import Model.Customer.CustomerDirectory;
 import Model.DeliveryMan.DeliveryManDirectory;
 import Model.Restaurant.RestaurantDirectory;
-import Model.Roles.Role;
-import Model.Roles.SystemAdminrole;
+import Model.Role.Role;
+import Model.Role.SystemAdminrole;
 import java.util.ArrayList;
 
 /**
