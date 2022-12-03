@@ -4,6 +4,8 @@
  */
 package Model.UserAccount;
 
+import Model.Employee.Employee;
+import Model.Roles.SystemAdminrole;
 import java.util.ArrayList;
 
 /**
@@ -20,4 +22,8 @@ public class UserAccountDirectory {
     public ArrayList<UserAccount> getUserAccountList() {
         return userAccountList;
 }
+
+    public UserAccount createUserAccount(String sysadmin, String sysadmin0, Employee employee, SystemAdminrole systemAdminrole) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
