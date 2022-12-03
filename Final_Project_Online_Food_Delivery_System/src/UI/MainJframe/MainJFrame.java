@@ -4,6 +4,18 @@
  */
 package UI.MainJframe;
 
+import Model.Customer.Customer;
+import Model.Customer.CustomerDirectory;
+import Model.UserAccount.UserAccount;
+import UI.CustomerWorkArea.CustomerWorkArea;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author amretasrerengarajan
@@ -13,8 +25,20 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    CustomerDirectory customerList;
+
     public MainJFrame() {
         initComponents();
+        lblWarningUserType.setVisible(false);
+        this.customerList = new CustomerDirectory();
+    }
+
+    public void checkUserType(String selectedRole) {
+        if (selectedRole.equals("Choose a User!")) {
+            lblWarningUserType.setVisible(true);
+        } else {
+            lblWarningUserType.setVisible(false);
+        }
     }
 
     /**
@@ -26,32 +50,329 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblFrameTitle = new javax.swing.JLabel();
+        panelBackWorkArea = new javax.swing.JPanel();
+        panelLogin = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        lblUserType = new javax.swing.JLabel();
+        btnUserType = new javax.swing.JComboBox<>();
+        btnLogin = new javax.swing.JButton();
+        chckBoxShowPassword = new javax.swing.JCheckBox();
+        lblNewUser = new javax.swing.JLabel();
+        btnNewUserLogin = new javax.swing.JLabel();
+        lblWarningUserType = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(1000, 1000));
+        setMinimumSize(new java.awt.Dimension(1000, 1000));
+        setPreferredSize(new java.awt.Dimension(1000, 1000));
+        setSize(new java.awt.Dimension(600, 600));
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Online Delivery System");
+        lblFrameTitle.setBackground(new java.awt.Color(204, 255, 204));
+        lblFrameTitle.setFont(new java.awt.Font("Helvetica Neue", 3, 24)); // NOI18N
+        lblFrameTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFrameTitle.setText("Online Delivery System");
+
+        panelBackWorkArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelBackWorkArea.setMaximumSize(new java.awt.Dimension(650, 650));
+        panelBackWorkArea.setMinimumSize(new java.awt.Dimension(650, 650));
+        panelBackWorkArea.setPreferredSize(new java.awt.Dimension(650, 650));
+        panelBackWorkArea.setLayout(new java.awt.CardLayout());
+
+        panelLogin.setBackground(new java.awt.Color(204, 204, 255));
+        panelLogin.setMaximumSize(new java.awt.Dimension(675, 675));
+        panelLogin.setMinimumSize(new java.awt.Dimension(675, 675));
+        panelLogin.setPreferredSize(new java.awt.Dimension(675, 675));
+
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Login Page");
+
+        lblUserName.setText("User Name:");
+
+        lblPassword.setText("Password:");
+
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
+
+        lblUserType.setText("User Login Type:");
+
+        btnUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a User!", "Customer", "Delivery Man", "Restaurant Admin", "Community Admin", "System Admin" }));
+        btnUserType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnUserTypeFocusLost(evt);
+            }
+        });
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        chckBoxShowPassword.setText("Show Password");
+        chckBoxShowPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chckBoxShowPasswordActionPerformed(evt);
+            }
+        });
+
+        lblNewUser.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        lblNewUser.setForeground(new java.awt.Color(255, 0, 51));
+        lblNewUser.setText("New User?");
+
+        btnNewUserLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnNewUserLogin.setForeground(new java.awt.Color(51, 51, 255));
+        btnNewUserLogin.setText("Create New User Profile");
+        btnNewUserLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNewUserLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnNewUserLoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnNewUserLoginFocusLost(evt);
+            }
+        });
+        btnNewUserLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewUserLoginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNewUserLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNewUserLoginMouseExited(evt);
+            }
+        });
+
+        lblWarningUserType.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblWarningUserType.setForeground(new java.awt.Color(255, 0, 51));
+        lblWarningUserType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblWarningUserType.setText("Choose a valid Role!");
+
+        javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
+        panelLogin.setLayout(panelLoginLayout);
+        panelLoginLayout.setHorizontalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(btnLogin))
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addComponent(lblNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNewUserLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                            .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUserName)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addComponent(lblUserType)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUserType, 0, 213, Short.MAX_VALUE)))
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(chckBoxShowPassword))
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWarningUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        panelLoginLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUserName, lblUserType});
+
+        panelLoginLayout.setVerticalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblTitle)
+                .addGap(70, 70, 70)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserName)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chckBoxShowPassword))
+                .addGap(50, 50, 50)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserType)
+                    .addComponent(btnUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblWarningUserType))
+                .addGap(55, 55, 55)
+                .addComponent(btnLogin)
+                .addGap(66, 66, 66)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewUser)
+                    .addComponent(btnNewUserLogin))
+                .addContainerGap(253, Short.MAX_VALUE))
+        );
+
+        panelBackWorkArea.add(panelLogin, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1194, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFrameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelBackWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addGap(1200, 1200, 1200))
+                .addComponent(lblFrameTitle)
+                .addGap(18, 18, 18)
+                .addComponent(panelBackWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserNameActionPerformed
+
+    private void chckBoxShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chckBoxShowPasswordActionPerformed
+        // TODO add your handling code here:
+        if (chckBoxShowPassword.isSelected()) {
+            txtPassword.setEchoChar((char) 0);
+        } else {
+            txtPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chckBoxShowPasswordActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        String userType = String.valueOf(btnUserType.getSelectedItem());
+        Customer resultCustomer = null;
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+        String userRole = (String) btnUserType.getSelectedItem();
+        checkUserType(userRole);
+        CustomerWorkArea cusWorkArea;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=?");
+
+            st.setString(1, userName);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+//                dispose();
+
+                UserAccount user = new UserAccount();
+                user.setUsername(rs.getString("user_name"));
+                user.setPassword(rs.getString("user_password"));
+                user.setRole(rs.getString("user_role"));
+
+//                Customer customer_profile = new Customer(user);
+                try {
+                    PreparedStatement st_customer_profile = (PreparedStatement) connection
+                            .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
+                    st_customer_profile.setString(1, userName);
+
+                    ResultSet rs_cus_dir = st_customer_profile.executeQuery();
+                    if (rs_cus_dir.next()) {
+                        Customer customer_profile = new Customer(rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), rs_cus_dir.getString("customer_pincode"), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")), user, rs_cus_dir.getString("customer_emailid"));
+                        customerList.addCustomer(customer_profile);
+                        cusWorkArea = new CustomerWorkArea(customer_profile);
+                        panelBackWorkArea.removeAll();
+                        panelBackWorkArea.add("Customer", cusWorkArea);
+                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+//                        System.out.println(rs_cus_dir.getString("customer_id"));
+//                        System.out.println(rs_cus_dir.getString("customer_name"));
+//                        System.out.println(rs_cus_dir.getString("customer_emailid"));
+//                        System.out.println(rs_cus_dir.getString("customer_phoneNum"));
+//                        System.out.println(rs_cus_dir.getString("customer_street_address"));
+                    }
+
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Wrong Username & Password");
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+//        if (txtUserName.getText().equals("user") && txtPassword.getText().equals("user") && userType.equals("Customer")) {
+//            if (customerList.findCustomer(txtUserName.getText(), txtPassword.getText())) {
+//                resultCustomer = customerList.searchCustomerProfile(txtUserName.getText());
+//            }
+//            CustomerWorkArea cusWorkArea = new CustomerWorkArea(resultCustomer);
+//            panelBackWorkArea.removeAll();
+//            panelBackWorkArea.add("Customer", cusWorkArea);
+//            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnNewUserLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseEntered
+        // TODO add your handling code here:
+        btnNewUserLogin.setForeground(new Color(0, 204, 255));
+
+    }//GEN-LAST:event_btnNewUserLoginMouseEntered
+
+    private void btnNewUserLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNewUserLoginFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewUserLoginFocusGained
+
+    private void btnNewUserLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNewUserLoginFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewUserLoginFocusLost
+
+    private void btnNewUserLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseExited
+        // TODO add your handling code here:
+        btnNewUserLogin.setForeground(new Color(51, 51, 255));
+    }//GEN-LAST:event_btnNewUserLoginMouseExited
+
+    private void btnUserTypeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnUserTypeFocusLost
+        // TODO add your handling code here:
+        if (btnUserType.getSelectedItem().equals("Choose a User!")) {
+            lblWarningUserType.setVisible(true);
+        } else {
+            lblWarningUserType.setVisible(false);
+        }
+    }//GEN-LAST:event_btnUserTypeFocusLost
+
+    private void btnNewUserLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseClicked
+        // TODO add your handling code here:
+        NewUserLogin newUserPanel = new NewUserLogin();
+        panelBackWorkArea.removeAll();
+        panelBackWorkArea.add("New User", newUserPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnNewUserLoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -89,6 +410,20 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel btnNewUserLogin;
+    private javax.swing.JComboBox<String> btnUserType;
+    private javax.swing.JCheckBox chckBoxShowPassword;
+    private javax.swing.JLabel lblFrameTitle;
+    private javax.swing.JLabel lblNewUser;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JLabel lblUserType;
+    private javax.swing.JLabel lblWarningUserType;
+    private javax.swing.JPanel panelBackWorkArea;
+    private javax.swing.JPanel panelLogin;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

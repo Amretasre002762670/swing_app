@@ -18,16 +18,21 @@ public class Customer {
     private String home_City;
     private String home_pincode;
     private int custPhoneNumber;
+    private String cus_emailid;
     private UserAccount userAccount;
 
-
-    public Customer(String custName, String home_streetAddress, String home_City, String home_pincode, int custPhoneNumber, UserAccount userAccount) {
+    public Customer(UserAccount user) {
+        this.userAccount = user;
+    }
+    
+    public Customer(String custName, String home_streetAddress, String home_City, String home_pincode, int custPhoneNumber, UserAccount userAccount, String cus_emailid) {
         this.userAccount = userAccount;
-        this.custName = userAccount.getUsername();
+        this.custName = custName;
         this.home_streetAddress = home_streetAddress;
         this.home_City = home_City;
         this.home_pincode = home_pincode;
-        this.custPhoneNumber = this.userAccount.getPhone_number();
+        this.cus_emailid = cus_emailid;
+        this.custPhoneNumber = custPhoneNumber;
     }
     
     public int getCustId() {
@@ -85,7 +90,14 @@ public class Customer {
     public void setHome_pincode(String home_pincode) {
         this.home_pincode = home_pincode;
     }
-    
+
+    public String getCus_emailid() {
+        return cus_emailid;
+    }
+
+    public void setCus_emailid(String cus_emailid) {
+        this.cus_emailid = cus_emailid;
+    }
     
 
 }

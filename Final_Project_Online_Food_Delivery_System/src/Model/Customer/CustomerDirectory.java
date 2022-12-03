@@ -25,4 +25,30 @@ public class CustomerDirectory {
         this.customerList = customerList;
     }
     
+    public Customer addCustomer(Customer newCustomer) {
+        customerList.add(newCustomer);
+        return newCustomer;
+    }
+    
+    public boolean findCustomer(String customerName, String customerPassword) {
+        boolean ifCustomer = false;
+        for (Customer cus: customerList) {
+            if (cus.getCustName().equals(customerName) && cus.getUserAccount().getPassword().equals(customerPassword)) {
+                ifCustomer = true;
+            }
+        }
+        return ifCustomer;
+    }
+    
+    public Customer searchCustomerProfile(String customerName) {
+        Customer resultCustomer = null;
+        for (Customer cus: customerList) {
+            if (cus.getCustName().equals(customerName)) {
+//                resultCustomer = new Customer(customerProfile.getCustName(), customerProfile.getHome_streetAddress(), customerProfile.getHome_City(), customerProfile.getHome_pincode(), customerProfile.getUserAccount().getPhone_number(), customerProfile.getUserAccount());
+                  resultCustomer = cus;
+            }
+        }
+        return resultCustomer;
+    }
+    
 }
