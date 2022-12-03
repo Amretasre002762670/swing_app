@@ -242,7 +242,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
-
+    {}
    public void populateTree() {
          DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
          model.reload();
