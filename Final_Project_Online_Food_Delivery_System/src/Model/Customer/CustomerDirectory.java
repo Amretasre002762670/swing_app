@@ -4,6 +4,7 @@
  */
 package Model.Customer;
 
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +25,16 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    
-    public Customer addCustomer(Customer newCustomer) {
-        customerList.add(newCustomer);
-        return newCustomer;
+    public Customer createCustomer(){
+        Customer c = new Customer();
+        customerList.add(c);  
+        return c;
     }
+   
+     public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
+    
     
     public boolean findCustomer(String customerName, String customerPassword) {
         boolean ifCustomer = false;
