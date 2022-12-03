@@ -294,7 +294,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 UserAccount user = new UserAccount();
                 user.setUsername(rs.getString("user_name"));
                 user.setPassword(rs.getString("user_password"));
-                user.setRole(rs.getString("user_role"));
+             //  user.setRole(rs.getString("user_role"));
 
 //                Customer customer_profile = new Customer(user);
                 try {
@@ -305,7 +305,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     ResultSet rs_cus_dir = st_customer_profile.executeQuery();
                     if (rs_cus_dir.next()) {
                         Customer customer_profile = new Customer(rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), rs_cus_dir.getString("customer_pincode"), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")), user, rs_cus_dir.getString("customer_emailid"));
-                        customerList.addCustomer(customer_profile);
+                 //       customerList.createCustomer(customer_profile);
                         cusWorkArea = new CustomerWorkArea(customer_profile);
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("Customer", cusWorkArea);
