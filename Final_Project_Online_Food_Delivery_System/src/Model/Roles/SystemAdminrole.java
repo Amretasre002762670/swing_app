@@ -4,10 +4,17 @@
  */
 package Model.Roles;
 
+
+
 /**
  *
  * @author puppalanagavaishnavi
  */
-public class SystemAdminrole {
+
+    public class SystemAdminrole {
+
+  
     
 }
+
+

@@ -4,10 +4,14 @@
  */
 package Model.Roles;
 
+
+
 /**
  *
  * @author puppalanagavaishnavi
  */
-public class RestaurantAdminrole {
+public class RestaurantAdminrole  {
+    
+
     
 }
