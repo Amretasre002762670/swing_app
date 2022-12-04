@@ -4,17 +4,24 @@
  */
 package UI.DeliveryManWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import UI.DeliveryManWorkArea.ViewQueue;
+
 /**
  *
  * @author SRADDHA
  */
 public class DeliveryManWorkArea extends javax.swing.JPanel {
+    private JPanel userprocessContainer;
 
     /**
      * Creates new form DeliveryManWorkArea
      */
-    public DeliveryManWorkArea() {
+    javax.swing.JPanel panelBackWorkArea;
+    public DeliveryManWorkArea(javax.swing.JPanel panelBackWorkArea) {
         initComponents();
+        this.panelBackWorkArea = panelBackWorkArea;
     }
 
     /**
@@ -56,6 +63,11 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
 
         btndelcuroders.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btndelcuroders.setText("Current Order");
+        btndelcuroders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndelcurodersActionPerformed(evt);
+            }
+        });
 
         lbldelloggedin.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         lbldelloggedin.setText("Logged in as :");
@@ -125,8 +137,18 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
 
     private void btndelviewqueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelviewqueueActionPerformed
         // TODO add your handling code here:
-        
+        {  
+        ViewQueue viewqueue = new ViewQueue();
+    panelBackWorkArea.removeAll();
+                            panelBackWorkArea.add("ViewQueue", viewqueue);
+                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                            
+    }                                               
     }//GEN-LAST:event_btndelviewqueueActionPerformed
+
+    private void btndelcurodersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelcurodersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndelcurodersActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

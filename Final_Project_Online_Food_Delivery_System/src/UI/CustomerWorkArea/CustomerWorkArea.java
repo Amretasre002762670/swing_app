@@ -58,6 +58,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         btnSearchRestaurants.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         btnSearchRestaurants.setText("Search Restaurants");
         btnSearchRestaurants.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchRestaurants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchRestaurantsActionPerformed(evt);
+            }
+        });
 
         btnTrackOrder.setBackground(new java.awt.Color(204, 255, 204));
         btnTrackOrder.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
@@ -118,13 +123,12 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                                 .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLandingPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)))))
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLandingPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         CustomerLandingPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSearchRestaurants, btnTrackOrder, btnViewOrderHistory, lblSmallHeading});
@@ -134,9 +138,9 @@ public class CustomerWorkArea extends javax.swing.JPanel {
             .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblLoggedOut)
-                .addGap(24, 24, 24)
+                .addGap(16, 16, 16)
                 .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoggedIn)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,7 +152,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                 .addComponent(btnTrackOrder)
                 .addGap(50, 50, 50)
                 .addComponent(btnViewOrderHistory)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         add(CustomerLandingPanel, "card2");
@@ -171,6 +175,10 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
+
+    private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
