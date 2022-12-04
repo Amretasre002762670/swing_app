@@ -9,7 +9,11 @@ package UI.DeliveryManWorkArea;
  * @author SRADDHA
  */
 public class Currentorder extends javax.swing.JPanel {
-
+     javax.swing.JPanel panelBackWorkArea;
+    public Currentorder(javax.swing.JPanel panelBackWorkArea) {
+        initComponents();
+        this.panelBackWorkArea = panelBackWorkArea;
+    }
     /**
      * Creates new form Currentorder
      */
@@ -181,6 +185,12 @@ public class Currentorder extends javax.swing.JPanel {
 
     private void btnresdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresdetailsActionPerformed
         // TODO add your handling code here:
+        {
+        RestaurantDetails resdetails = new RestaurantDetails();
+        panelBackWorkArea.add("RestaurantDetails",resdetails);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+   
+    }
     }//GEN-LAST:event_btnresdetailsActionPerformed
 
 
