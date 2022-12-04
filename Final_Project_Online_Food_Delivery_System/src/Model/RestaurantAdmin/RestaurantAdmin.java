@@ -4,6 +4,7 @@
  */
 package Model.RestaurantAdmin;
 
+import Model.Restaurant.Restaurant;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -19,6 +20,7 @@ public class RestaurantAdmin {
     private String resPincode;
     private String resType; // Eg Indian, Italian, BBQ, etc
     private int resPhoneNum;
+    private Restaurant restaurantDetails;
 
     public UserAccount getAccountDetails() {
         return accountDetails;

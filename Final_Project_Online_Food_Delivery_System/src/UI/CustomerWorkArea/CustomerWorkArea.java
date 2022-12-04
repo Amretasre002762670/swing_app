@@ -17,9 +17,10 @@ public class CustomerWorkArea extends javax.swing.JPanel {
      * Creates new form CustomerWorkArea
      */
     Customer cusAccount;
-
-    public CustomerWorkArea(Customer cusAccount) {
+    javax.swing.JPanel panelBackWorkArea;
+    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea) {
         initComponents();
+        this.panelBackWorkArea = panelBackWorkArea;
         this.cusAccount = cusAccount;
         txtUserName.setEditable(false);
         txtUserName.setText(cusAccount.getCustName());
@@ -91,6 +92,9 @@ public class CustomerWorkArea extends javax.swing.JPanel {
             }
         });
         lblLoggedOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLoggedOutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblLoggedOutMouseEntered(evt);
             }
@@ -171,6 +175,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
+
+    private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lblLoggedOutMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

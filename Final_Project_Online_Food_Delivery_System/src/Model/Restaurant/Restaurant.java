@@ -4,6 +4,7 @@
  */
 package Model.Restaurant;
 
+import Model.RestaurantAdmin.RestaurantAdmin;
 import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
@@ -12,14 +13,15 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class Restaurant {
+
     private int restaurantId;
-      private String restaurantName;
-    private String restaurantManager;
-    private Integer phoneNumber;
-    private String address;
+    private String restaurantName;
+    private RestaurantAdmin restaurantAdmin;
+    private int phoneNumber;
+    private String res_street_add;
+    private String res_city;
+    private String res_pincode;
     private ArrayList<String> menulist;
-    
-    private UserAccount userAccount;
 
     public int getRestaurantId() {
         return restaurantId;
@@ -37,28 +39,12 @@ public class Restaurant {
         this.restaurantName = restaurantName;
     }
 
-    public String getRestaurantManager() {
-        return restaurantManager;
-    }
-
-    public void setRestaurantManager(String restaurantManager) {
-        this.restaurantManager = restaurantManager;
-    } 
-
-    public Integer getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public ArrayList<String> getMenulist() {
@@ -69,12 +55,38 @@ public class Restaurant {
         this.menulist = menulist;
     }
 
-    public UserAccount getUserAccount() {
-        return userAccount;
+    public String getRes_street_add() {
+        return res_street_add;
     }
 
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
+    public void setRes_street_add(String res_street_add) {
+        this.res_street_add = res_street_add;
+    }
+
+    public String getRes_city() {
+        return res_city;
+    }
+
+    public void setRes_city(String res_city) {
+        this.res_city = res_city;
+    }
+
+    public String getRes_pincode() {
+        return res_pincode;
+    }
+
+    public void setRes_pincode(String res_pincode) {
+        this.res_pincode = res_pincode;
+    }
+
+    public RestaurantAdmin getRestaurantAdmin() {
+        return restaurantAdmin;
+    }
+
+    public void setRestaurantAdmin(RestaurantAdmin restaurantAdmin) {
+        this.restaurantAdmin = restaurantAdmin;
     }
     
+    
+
 }

@@ -112,6 +112,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnUserTypeFocusLost(evt);
             }
         });
+        btnUserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserTypeActionPerformed(evt);
+            }
+        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -296,31 +301,37 @@ public class MainJFrame extends javax.swing.JFrame {
                 user.setPassword(rs.getString("user_password"));
                 user.setRole(rs.getString("user_role"));
 
-//                Customer customer_profile = new Customer(user);
-                try {
-                    PreparedStatement st_customer_profile = (PreparedStatement) connection
-                            .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
-                    st_customer_profile.setString(1, userName);
+                if (rs.getString("user_role").equals("Customer")) {
+                    //                Customer customer_profile = new Customer(user);
+                    try {
+                        PreparedStatement st_customer_profile = (PreparedStatement) connection
+                                .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
+                        st_customer_profile.setString(1, userName);
 
-                    ResultSet rs_cus_dir = st_customer_profile.executeQuery();
-                    if (rs_cus_dir.next()) {
-                        Customer customer_profile = new Customer(rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), rs_cus_dir.getString("customer_pincode"), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")), user, rs_cus_dir.getString("customer_emailid"));
-                        customerList.addCustomer(customer_profile);
-                        cusWorkArea = new CustomerWorkArea(customer_profile);
-                        panelBackWorkArea.removeAll();
-                        panelBackWorkArea.add("Customer", cusWorkArea);
-                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                        ResultSet rs_cus_dir = st_customer_profile.executeQuery();
+                        if (rs_cus_dir.next()) {
+                            Customer customer_profile = new Customer(rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), rs_cus_dir.getString("customer_pincode"), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")), user, rs_cus_dir.getString("customer_emailid"));
+                            customerList.addCustomer(customer_profile);
+                            cusWorkArea = new CustomerWorkArea(customer_profile, panelBackWorkArea);
+                            panelBackWorkArea.removeAll();
+                            panelBackWorkArea.add("Customer", cusWorkArea);
+                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                            JOptionPane.showMessageDialog(this, "You have successfully logged in");
 //                        System.out.println(rs_cus_dir.getString("customer_id"));
 //                        System.out.println(rs_cus_dir.getString("customer_name"));
 //                        System.out.println(rs_cus_dir.getString("customer_emailid"));
 //                        System.out.println(rs_cus_dir.getString("customer_phoneNum"));
 //                        System.out.println(rs_cus_dir.getString("customer_street_address"));
-                    }
+                        }
 
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
+                } else if (rs.getString("user_role").equals("Delivery Man")) {
+                    // add your code here
+                    JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
                 }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Wrong Username & Password");
             }
@@ -373,6 +384,10 @@ public class MainJFrame extends javax.swing.JFrame {
         panelBackWorkArea.add("New User", newUserPanel);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnNewUserLoginMouseClicked
+
+    private void btnUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUserTypeActionPerformed
 
     /**
      * @param args the command line arguments
