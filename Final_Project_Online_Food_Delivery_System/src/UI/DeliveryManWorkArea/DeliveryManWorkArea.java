@@ -140,14 +140,21 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         {  
         ViewQueue viewqueue = new ViewQueue();
     panelBackWorkArea.removeAll();
-                            panelBackWorkArea.add("ViewQueue", viewqueue);
-                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    panelBackWorkArea.add("ViewQueue", viewqueue);
+    ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
                             
     }                                               
     }//GEN-LAST:event_btndelviewqueueActionPerformed
 
     private void btndelcurodersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelcurodersActionPerformed
         // TODO add your handling code here:
+        {
+        Currentorder curorder = new Currentorder();
+        panelBackWorkArea.removeAll();
+        panelBackWorkArea.add("Currentorder",curorder);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+   
+    }
     }//GEN-LAST:event_btndelcurodersActionPerformed
 
 
