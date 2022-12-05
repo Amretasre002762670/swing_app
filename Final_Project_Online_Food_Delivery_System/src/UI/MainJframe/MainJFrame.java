@@ -6,7 +6,11 @@ package UI.MainJframe;
 
 import Model.Customer.Customer;
 import Model.Customer.CustomerDirectory;
+import Model.Restaurant.Restaurant;
+import Model.Restaurant.RestaurantDirectory;
+import Model.RestaurantAdmin.RestaurantAdmin;
 import Model.UserAccount.UserAccount;
+import Model.UserAccount.UserAccountDirectory;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import java.awt.Color;
 import java.sql.Connection;
@@ -26,11 +30,17 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     CustomerDirectory customerList;
+    UserAccountDirectory userAccountDir;
+    RestaurantDirectory resList;
 
     public MainJFrame() {
         initComponents();
         lblWarningUserType.setVisible(false);
         this.customerList = new CustomerDirectory();
+        this.userAccountDir = new UserAccountDirectory();
+        this.resList = new RestaurantDirectory();
+        populateCustomerList();
+        populateRestaurantList();
     }
 
     public void checkUserType(String selectedRole) {
@@ -38,6 +48,109 @@ public class MainJFrame extends javax.swing.JFrame {
             lblWarningUserType.setVisible(true);
         } else {
             lblWarningUserType.setVisible(false);
+        }
+    }
+
+    public void populateCustomerList() {
+        Customer addCustomer;
+        UserAccount addUser;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM Customer_Directory");
+
+            PreparedStatement st_userAcct = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM User_Account_Directory u, Customer_Directory c WHERE u.user_id = c.user_id");
+
+            ResultSet rs = st.executeQuery();
+            ResultSet rs_userAcct = st_userAcct.executeQuery();
+            while (rs_userAcct.next()) {
+                while (rs.next()) {
+                    int custId = Integer.parseInt(rs.getString("customer_id"));
+                    String custName = rs.getString("customer_name");
+                    String custEmailID = rs.getString("customer_emailid");
+                    int custPhoneNum = Integer.parseInt(rs.getString("customer_phoneNum"));
+                    String cusStreetAdd = rs.getString("customer_street_address");
+                    String cusCity = rs.getString("customer_city");
+                    int cusPincode = Integer.parseInt(rs.getString("customer_pincode"));
+
+//                int account_id = Integer.parseInt(rs_userAcct.getString("user_id"));
+                    String accountName = rs_userAcct.getString("user_name");
+                    String accountPassword = rs_userAcct.getString("user_password");
+                    String accountRole = rs_userAcct.getString("user_role");
+
+                    addUser = new UserAccount();
+                    addUser.setUsername(accountName);
+                    addUser.setPassword(accountPassword);
+                    addUser.setRole(accountRole);
+
+                    addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
+                    customerList.addCustomer(addCustomer);
+                    userAccountDir.addUserAccounts(addUser);
+                }
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void populateRestaurantList() {
+        Restaurant addRes;
+        RestaurantAdmin resAdmin;
+        UserAccount resAdminAcct;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM Restaurant_Directory;");
+
+            PreparedStatement st_res_admin = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM User_Account_Directory u, Restaurant_Admin_Directory r WHERE u.user_id = r.user_id");
+
+            ResultSet rs = st.executeQuery();
+            ResultSet rs_admin_dir = st_res_admin.executeQuery();
+
+            while (rs_admin_dir.next()) {
+                while (rs.next()) {
+                    int resId = Integer.parseInt(rs.getString("restaurant_id"));
+                    String restName = rs.getString("restaurant_name");
+                    int resPhoneNum = Integer.parseInt(rs.getString("restaurant_phoneNum"));
+                    String resStreetAdd = rs.getString("restaurant_street_address");
+                    String resCity = rs.getString("restaurant_city");
+                    int resPincode = Integer.parseInt(rs.getString("restaurant_pincode"));
+                    String resType = rs.getString("restaurant_type");
+
+                    resAdminAcct = new UserAccount();
+                    resAdminAcct.setUsername(rs_admin_dir.getString("user_name"));
+                    resAdminAcct.setPassword(rs_admin_dir.getString("user_password"));
+                    resAdminAcct.setUsername(rs_admin_dir.getString("user_role"));
+                    
+                    resAdmin = new RestaurantAdmin();
+                    resAdmin.setAccountDetails(resAdminAcct);
+                    resAdmin.setResAdminId(Integer.parseInt(rs_admin_dir.getString("res_admin_id")));
+                    resAdmin.setResName(restName);
+                    
+                    addRes = new Restaurant();
+                    addRes.setRestaurantName(restName);
+                    addRes.setRestaurantId(resId);
+                    addRes.setRestaurantAdmin(resAdmin);
+                    addRes.setRes_street_add(resStreetAdd);
+                    addRes.setRes_pincode(resPincode);
+                    addRes.setRes_city(resCity);
+                    addRes.setPhoneNumber(resPhoneNum);
+                    addRes.setRes_type(resType);
+                    
+                    resList.addRestaurant(addRes);
+
+                }
+            }
+            
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
     }
 
@@ -231,7 +344,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewUser)
                     .addComponent(btnNewUserLogin))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
 
         panelBackWorkArea.add(panelLogin, "card2");
@@ -302,36 +415,46 @@ public class MainJFrame extends javax.swing.JFrame {
                 user.setRole(rs.getString("user_role"));
 
                 if (rs.getString("user_role").equals("Customer")) {
-                    //                Customer customer_profile = new Customer(user);
-                    try {
-                        PreparedStatement st_customer_profile = (PreparedStatement) connection
-                                .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
-                        st_customer_profile.setString(1, userName);
-
-                        ResultSet rs_cus_dir = st_customer_profile.executeQuery();
-                        if (rs_cus_dir.next()) {
-                            Customer customer_profile = new Customer(rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), rs_cus_dir.getString("customer_pincode"), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")), user, rs_cus_dir.getString("customer_emailid"));
-                            customerList.addCustomer(customer_profile);
-                            cusWorkArea = new CustomerWorkArea(customer_profile, panelBackWorkArea);
-                            panelBackWorkArea.removeAll();
-                            panelBackWorkArea.add("Customer", cusWorkArea);
-                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-                            JOptionPane.showMessageDialog(this, "You have successfully logged in");
-//                        System.out.println(rs_cus_dir.getString("customer_id"));
-//                        System.out.println(rs_cus_dir.getString("customer_name"));
-//                        System.out.println(rs_cus_dir.getString("customer_emailid"));
-//                        System.out.println(rs_cus_dir.getString("customer_phoneNum"));
-//                        System.out.println(rs_cus_dir.getString("customer_street_address"));
-                        }
-
-                    } catch (SQLException sqlException) {
-                        sqlException.printStackTrace();
+                    Customer searchCustomer = customerList.searchCustomerWithUserAccount(user);
+                    if (searchCustomer != null) {
+                        cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, resList);
+                        panelBackWorkArea.removeAll();
+                        panelBackWorkArea.add("Customer", cusWorkArea);
+                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        txtUserName.setText("");
+                        txtPassword.setText("");
+                        btnUserType.setSelectedIndex(0);
+                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Customer not available!");
                     }
+                    //                Customer customer_profile = new Customer(user);
+//                    try {
+//                        PreparedStatement st_customer_profile = (PreparedStatement) connection
+//                                .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
+//                        st_customer_profile.setString(1, userName);
+//
+//                        ResultSet rs_cus_dir = st_customer_profile.executeQuery();
+//                        if (rs_cus_dir.next()) {
+//
+//                            Customer customer_profile = new Customer(Integer.parseInt(rs_cus_dir.getString("customer_id")), rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), Integer.parseInt(rs_cus_dir.getString("customer_pincode")), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")),  rs_cus_dir.getString("customer_emailid"), user);
+//                            cusWorkArea = new CustomerWorkArea(customer_profile, panelBackWorkArea);
+//                            panelBackWorkArea.removeAll();
+//                            panelBackWorkArea.add("Customer", cusWorkArea);
+//                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//                            JOptionPane.showMessageDialog(this, "You have successfully logged in");
+//                        }
+//
+//                    } catch (SQLException sqlException) {
+//                        sqlException.printStackTrace();
+//                    }
                 } else if (rs.getString("user_role").equals("Delivery Man")) {
                     // add your code here
                     JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
                 }
 
+            } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
+                JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
             } else {
                 JOptionPane.showMessageDialog(this, "Wrong Username & Password");
             }

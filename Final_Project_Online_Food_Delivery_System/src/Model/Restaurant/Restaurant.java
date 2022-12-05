@@ -5,7 +5,6 @@
 package Model.Restaurant;
 
 import Model.RestaurantAdmin.RestaurantAdmin;
-import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,8 @@ public class Restaurant {
     private int phoneNumber;
     private String res_street_add;
     private String res_city;
-    private String res_pincode;
+    private int res_pincode;
+    private String res_type;
     private ArrayList<String> menulist;
 
     public int getRestaurantId() {
@@ -71,11 +71,11 @@ public class Restaurant {
         this.res_city = res_city;
     }
 
-    public String getRes_pincode() {
+    public int getRes_pincode() {
         return res_pincode;
     }
 
-    public void setRes_pincode(String res_pincode) {
+    public void setRes_pincode(int res_pincode) {
         this.res_pincode = res_pincode;
     }
 
@@ -86,7 +86,14 @@ public class Restaurant {
     public void setRestaurantAdmin(RestaurantAdmin restaurantAdmin) {
         this.restaurantAdmin = restaurantAdmin;
     }
-    
+
+    public String getRes_type() {
+        return res_type;
+    }
+
+    public void setRes_type(String res_type) {
+        this.res_type = res_type;
+    }
     
 
 }

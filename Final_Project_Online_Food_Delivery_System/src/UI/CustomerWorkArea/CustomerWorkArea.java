@@ -5,6 +5,9 @@
 package UI.CustomerWorkArea;
 
 import Model.Customer.Customer;
+import Model.Restaurant.Restaurant;
+import Model.Restaurant.RestaurantDirectory;
+import UI.Restaurants.RestaurantSearchPanel;
 import java.awt.Color;
 
 /**
@@ -18,12 +21,19 @@ public class CustomerWorkArea extends javax.swing.JPanel {
      */
     Customer cusAccount;
     javax.swing.JPanel panelBackWorkArea;
-    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea) {
+    javax.swing.JPanel panelLogin;
+    RestaurantDirectory resList;
+
+    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea, javax.swing.JPanel panelLogin, RestaurantDirectory resList) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
+        this.panelLogin = panelLogin;
         this.cusAccount = cusAccount;
+        this.resList = resList;
+//        this.CustomerWorkAreaPanel = new CustomerWorkArea(this.cusAccount, this.panelBackWorkArea, this.panelLogin, this.resList);
         txtUserName.setEditable(false);
         txtUserName.setText(cusAccount.getCustName());
+//        
     }
 
     /**
@@ -59,6 +69,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         btnSearchRestaurants.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         btnSearchRestaurants.setText("Search Restaurants");
         btnSearchRestaurants.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchRestaurants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchRestaurantsActionPerformed(evt);
+            }
+        });
 
         btnTrackOrder.setBackground(new java.awt.Color(204, 255, 204));
         btnTrackOrder.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
@@ -178,8 +193,19 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
         // TODO add your handling code here:
-        
+        panelBackWorkArea.removeAll();
+        panelBackWorkArea.add("LoginPanel", panelLogin);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//        panelBackWorkArea.remove(this);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_lblLoggedOutMouseClicked
+
+    private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
+        // TODO add your handling code here:
+        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea);
+        panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

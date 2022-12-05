@@ -4,6 +4,7 @@
  */
 package Model.Customer;
 
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -49,6 +50,16 @@ public class CustomerDirectory {
             }
         }
         return resultCustomer;
+    }
+    
+    public Customer searchCustomerWithUserAccount(UserAccount user) {
+        Customer searchedCustomer = null;
+        for(Customer customer: customerList) {
+            if(customer.getUserAccount().getUsername().equals(user.getUsername())) {
+                searchedCustomer = customer;
+            }
+        }
+        return searchedCustomer;
     }
     
 }

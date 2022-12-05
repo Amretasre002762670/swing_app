@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class UserAccountDirectory {
-      private ArrayList<UserAccount> userAccountList;
+
+    private ArrayList<UserAccount> userAccountList;
 
     public UserAccountDirectory() {
         userAccountList = new ArrayList();
@@ -19,5 +20,20 @@ public class UserAccountDirectory {
 
     public ArrayList<UserAccount> getUserAccountList() {
         return userAccountList;
-}
+    }
+    
+    public UserAccount addUserAccounts(UserAccount newUser) {
+        userAccountList.add(newUser);
+        return newUser;
+    }
+    
+    public UserAccount findUserAccountWithUserName(String userName) {
+        UserAccount searchedUser = null;
+        for(UserAccount account: userAccountList) {
+            if(account.getUsername().equals(userName)) {
+                searchedUser = account;
+            }
+        }
+        return searchedUser;
+    }
 }
