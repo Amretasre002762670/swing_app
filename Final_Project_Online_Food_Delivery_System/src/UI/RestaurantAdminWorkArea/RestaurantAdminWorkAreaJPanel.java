@@ -4,6 +4,8 @@
  */
 package UI.RestaurantAdminWorkArea;
 
+import java.awt.Color;
+
 /**
  *
  * @author puppalanagavaishnavi
@@ -26,19 +28,136 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        manageEmployeeJButton = new javax.swing.JButton();
+        manageOrganizationJButton = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        lblLoggedIn = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        lblLoggedOut = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 204, 255));
+        setForeground(new java.awt.Color(204, 204, 255));
+
+        manageEmployeeJButton.setText("Manage menu");
+        manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageEmployeeJButtonActionPerformed(evt);
+            }
+        });
+
+        manageOrganizationJButton.setText("Manage Orders");
+        manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageOrganizationJButtonActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 51));
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Restaurant Admin Work Area");
+
+        lblLoggedIn.setText("Logged In As:");
+
+        txtUserName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblLoggedOut.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        lblLoggedOut.setForeground(new java.awt.Color(255, 0, 0));
+        lblLoggedOut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLoggedOut.setText("Log Out");
+        lblLoggedOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLoggedOut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lblLoggedOutFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lblLoggedOutFocusLost(evt);
+            }
+        });
+        lblLoggedOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblLoggedOutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblLoggedOutMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(lblLoggedIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLoggedOut)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLoggedIn)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(manageOrganizationJButton)
+                .addGap(18, 18, 18)
+                .addComponent(manageEmployeeJButton)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
+       
+    }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
+
+    private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
+       
+    }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+
+    private void lblLoggedOutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblLoggedOutFocusGained
+
+    private void lblLoggedOutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblLoggedOutFocusLost
+
+    private void lblLoggedOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseEntered
+        // TODO add your handling code here:
+        lblLoggedOut.setForeground(Color.blue);
+    }//GEN-LAST:event_lblLoggedOutMouseEntered
+
+    private void lblLoggedOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseExited
+        // TODO add your handling code here:
+        lblLoggedOut.setForeground(Color.red);
+    }//GEN-LAST:event_lblLoggedOutMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblLoggedIn;
+    private javax.swing.JLabel lblLoggedOut;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JButton manageEmployeeJButton;
+    private javax.swing.JButton manageOrganizationJButton;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
