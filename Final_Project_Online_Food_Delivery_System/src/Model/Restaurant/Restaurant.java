@@ -4,6 +4,7 @@
  */
 package Model.Restaurant;
 
+import Model.Menu.Menu;
 import Model.RestaurantAdmin.RestaurantAdmin;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Restaurant {
     private String res_city;
     private int res_pincode;
     private String res_type;
-    private ArrayList<String> menulist;
+    private ArrayList<Menu> menulist;
 
     public int getRestaurantId() {
         return restaurantId;
@@ -45,14 +46,6 @@ public class Restaurant {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public ArrayList<String> getMenulist() {
-        return menulist;
-    }
-
-    public void setMenulist(ArrayList<String> menulist) {
-        this.menulist = menulist;
     }
 
     public String getRes_street_add() {
@@ -94,6 +87,14 @@ public class Restaurant {
     public void setRes_type(String res_type) {
         this.res_type = res_type;
     }
-    
 
+    public ArrayList<Menu> getMenulist() {
+        return menulist;
+    }
+
+    public void setMenulist(ArrayList<Menu> menulist) {
+        this.menulist = menulist;
+    }
+    
+    
 }
