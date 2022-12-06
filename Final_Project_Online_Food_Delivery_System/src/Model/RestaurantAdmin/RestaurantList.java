@@ -4,6 +4,7 @@
  */
 package Model.RestaurantAdmin;
 
+import Model.System.Ecosystem;
 import java.util.ArrayList;
 
 /**
@@ -12,8 +13,15 @@ import java.util.ArrayList;
  */
 public class RestaurantList {
     
+    Ecosystem ecosystem;
     ArrayList<RestaurantAdmin> retaurantAdmin;
 
+    public RestaurantList(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
+        this.retaurantAdmin = new ArrayList<RestaurantAdmin>();
+    }
+
+    
     public ArrayList<RestaurantAdmin> getRetaurantAdmin() {
         return retaurantAdmin;
     }

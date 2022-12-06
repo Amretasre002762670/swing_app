@@ -5,7 +5,7 @@
 package Model.System;
 
 import Model.Employee.EmployeeDirectory;
-import Model.Roles.Role;
+import Model.Role.Role;
 import Model.UserAccount.UserAccountDirectory;
 import Model.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public abstract class Organization {
         this.name = name;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
+        userAccountDirectory = new UserAccountDirectory(this);
         organizationID = counter;
         ++counter;
     }

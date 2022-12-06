@@ -5,7 +5,7 @@
 package Model.System;
 
 import Model.Employee.Employee;
-import Model.Roles.SystemAdminrole;
+import Model.Role.SystemAdminrole;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -13,17 +13,20 @@ import Model.UserAccount.UserAccount;
  * @author puppalanagavaishnavi
  */
 public class ConfigureaSystem {
-    public static Ecosystem configure(){
-        
+
+    public static Ecosystem configure() {
+
         Ecosystem system = Ecosystem.getInstance();
-        
-      
-        
-        
-        Employee employee = system.getEmployeeDirectory().createEmployee("RA");
-        
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminrole());
-        
+
+        Employee employee = system.getEmployeeList().createEmployee("RA");
+
+        UserAccount ua = new UserAccount();
+        ua.setUsername("sysadmin");
+        ua.setPassword("sysadmin");
+        ua.setRole("System Admin");
+
+        system.getUserAccountDir().addUserAccounts(ua);
+
         return system;
-}
+    }
 }

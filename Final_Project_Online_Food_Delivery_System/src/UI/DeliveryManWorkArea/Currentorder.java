@@ -4,6 +4,8 @@
  */
 package UI.DeliveryManWorkArea;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author SRADDHA
@@ -17,9 +19,6 @@ public class Currentorder extends javax.swing.JPanel {
     /**
      * Creates new form Currentorder
      */
-    public Currentorder() {
-        initComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

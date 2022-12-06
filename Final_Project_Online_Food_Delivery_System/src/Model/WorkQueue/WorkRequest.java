@@ -18,10 +18,14 @@ import java.util.Date;
     private UserAccount sender;
     private UserAccount receiver;
     private String status;
+    private Time requestTime;
+    private Time resolveTime;
     private Date requestDate;
-    private Date resolveDate;
+    
     
     public WorkRequest(){
+        requestTime = new Time();
+        resolveTime = new Time();
         requestDate = new Date();
     }
 
@@ -57,6 +61,22 @@ import java.util.Date;
         this.status = status;
     }
 
+    public Time getRequestTime() {
+        return requestTime;
+    }
+
+    public void setRequestTime(Time requestTime) {
+        this.requestTime = requestTime;
+    }
+
+    public Time getResolveTime() {
+        return resolveTime;
+    }
+
+    public void setResolveTime(Time resolveTime) {
+        this.resolveTime = resolveTime;
+    }
+
     public Date getRequestDate() {
         return requestDate;
     }
@@ -64,12 +84,5 @@ import java.util.Date;
     public void setRequestDate(Date requestDate) {
         this.requestDate = requestDate;
     }
-
-    public Date getResolveDate() {
-        return resolveDate;
-    }
-
-    public void setResolveDate(Date resolveDate) {
-        this.resolveDate = resolveDate;
-    }
+    
 }

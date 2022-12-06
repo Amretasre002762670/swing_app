@@ -4,6 +4,10 @@
  */
 package Model.UserAccount;
 
+import Model.Employee.Employee;
+import Model.Role.Role;
+import Model.WorkQueue.WorkQueue;
+
 /**
  *
  * @author puppalanagavaishnavi
@@ -12,9 +16,12 @@ public class UserAccount {
 
     private String username;
     private String password;
+//    private Employee employee;
     private String role;
-    
+    private WorkQueue workQueue;
 
+
+    
     public String getUsername() {
         return username;
     }
@@ -30,7 +37,23 @@ public class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
+
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
+    }
+
     public String getRole() {
         return role;
     }

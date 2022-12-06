@@ -149,7 +149,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
     private void btndelcurodersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelcurodersActionPerformed
         // TODO add your handling code here:
         {
-        Currentorder curorder = new Currentorder();
+        Currentorder curorder = new Currentorder(panelBackWorkArea);
         panelBackWorkArea.removeAll();
         panelBackWorkArea.add("Currentorder",curorder);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);

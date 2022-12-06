@@ -5,7 +5,11 @@
 package UI.CustomerWorkArea;
 
 import Model.Customer.Customer;
+import Model.Restaurant.Restaurant;
+import Model.Restaurant.RestaurantDirectory;
+import UI.Restaurants.RestaurantSearchPanel;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,12 +21,20 @@ public class CustomerWorkArea extends javax.swing.JPanel {
      * Creates new form CustomerWorkArea
      */
     Customer cusAccount;
+    javax.swing.JPanel panelBackWorkArea;
+    javax.swing.JPanel panelLogin;
+    RestaurantDirectory resList;
 
-    public CustomerWorkArea(Customer cusAccount) {
+    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea, javax.swing.JPanel panelLogin, RestaurantDirectory resList) {
         initComponents();
+        this.panelBackWorkArea = panelBackWorkArea;
+        this.panelLogin = panelLogin;
         this.cusAccount = cusAccount;
+        this.resList = resList;
+//        this.CustomerWorkAreaPanel = new CustomerWorkArea(this.cusAccount, this.panelBackWorkArea, this.panelLogin, this.resList);
         txtUserName.setEditable(false);
         txtUserName.setText(cusAccount.getCustName());
+//        
     }
 
     /**
@@ -96,6 +108,9 @@ public class CustomerWorkArea extends javax.swing.JPanel {
             }
         });
         lblLoggedOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLoggedOutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblLoggedOutMouseEntered(evt);
             }
@@ -109,6 +124,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         CustomerLandingPanelLayout.setHorizontalGroup(
             CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
+                .addContainerGap(461, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
                 .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
@@ -121,14 +141,8 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                                 .addComponent(lblLoggedIn)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)))
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLandingPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
         );
 
         CustomerLandingPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSearchRestaurants, btnTrackOrder, btnViewOrderHistory, lblSmallHeading});
@@ -175,9 +189,22 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
+                                                  
+        // TODO add your handling code here:
+    private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.removeAll();
+        panelBackWorkArea.add("LoginPanel", panelLogin);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//        panelBackWorkArea.remove(this);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_lblLoggedOutMouseClicked
 
     private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
         // TODO add your handling code here:
+        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea);
+        panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
 
 

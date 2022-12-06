@@ -4,6 +4,8 @@
  */
 package Model.Customer;
 
+import Model.System.Ecosystem;
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -11,10 +13,12 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class CustomerDirectory {
+    Ecosystem ecosystem;
     private ArrayList<Customer> customerList;
 
-    public CustomerDirectory() {
-        customerList = new ArrayList<>();
+    public CustomerDirectory(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
+        customerList = new ArrayList<Customer>();
     }
 
     public ArrayList<Customer> getCustomerList() {
@@ -24,11 +28,16 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    
-    public Customer addCustomer(Customer newCustomer) {
-        customerList.add(newCustomer);
+    public Customer createCustomer(Customer newCustomer){
+        customerList.add(newCustomer);  
         return newCustomer;
+
     }
+   
+     public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
+    
     
     public boolean findCustomer(String customerName, String customerPassword) {
         boolean ifCustomer = false;
@@ -49,6 +58,16 @@ public class CustomerDirectory {
             }
         }
         return resultCustomer;
+    }
+    
+    public Customer searchCustomerWithUserAccount(UserAccount user) {
+        Customer searchedCustomer = null;
+        for(Customer customer: customerList) {
+            if(customer.getUserAccount().getUsername().equals(user.getUsername())) {
+                searchedCustomer = customer;
+            }
+        }
+        return searchedCustomer;
     }
     
 }
