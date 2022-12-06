@@ -24,6 +24,10 @@ public class UserAccountDirectory {
         userAccountList = new ArrayList();
     }
 
+    public UserAccountDirectory() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public ArrayList<UserAccount> getUserAccountList() {
         return userAccountList;
     }
