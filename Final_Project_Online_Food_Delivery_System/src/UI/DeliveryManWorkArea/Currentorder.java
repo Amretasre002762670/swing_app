@@ -86,6 +86,11 @@ public class Currentorder extends javax.swing.JPanel {
 
         btncusdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btncusdetails.setText("Customer Details");
+        btncusdetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncusdetailsActionPerformed(evt);
+            }
+        });
 
         lbldelcurorder.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbldelcurorder.setForeground(new java.awt.Color(0, 51, 255));
@@ -191,6 +196,15 @@ public class Currentorder extends javax.swing.JPanel {
    
     }
     }//GEN-LAST:event_btnresdetailsActionPerformed
+
+    private void btncusdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusdetailsActionPerformed
+        // TODO add your handling code here:
+        {
+        CustomerDetails cusdetails = new CustomerDetails();
+        panelBackWorkArea.add("CustomerDetails",cusdetails);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }
+    }//GEN-LAST:event_btncusdetailsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
