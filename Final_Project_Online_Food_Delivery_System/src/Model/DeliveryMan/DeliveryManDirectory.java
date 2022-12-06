@@ -7,15 +7,18 @@ package Model.DeliveryMan;
 import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 import Model.Customer.Customer;
+import Model.System.Ecosystem;
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class DeliveryManDirectory {
     
+    Ecosystem ecosystem;
     private ArrayList<DeliveryMan> deliveryManList;
 
-    public DeliveryManDirectory() {
+    public DeliveryManDirectory(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
         deliveryManList = new ArrayList<DeliveryMan>();
     }
      public ArrayList<DeliveryMan> getDeliveryManList() {

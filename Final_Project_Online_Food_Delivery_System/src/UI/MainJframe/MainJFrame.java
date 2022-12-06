@@ -12,6 +12,7 @@ import Model.RestaurantAdmin.RestaurantAdmin;
 import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
 import Model.UserAccount.UserAccountDirectory;
+import Model.DeliveryMan.DeliveryManDirectory;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import java.awt.Color;
 import java.sql.Connection;
@@ -30,9 +31,9 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-//    CustomerDirectory customerList;
-//    UserAccountDirectory userAccountDir;
-//    RestaurantDirectory resList;
+    CustomerDirectory customerList;
+    UserAccountDirectory userAccountDir;
+    RestaurantDirectory resList;
     
     Ecosystem ecosystem;
 
@@ -43,6 +44,9 @@ public class MainJFrame extends javax.swing.JFrame {
 //        this.userAccountDir = new UserAccountDirectory();
 //        this.resList = new RestaurantDirectory();
         this.ecosystem = new Ecosystem();
+        this.customerList = this.ecosystem.getCustomerDirectory();
+        this.userAccountDir = this.ecosystem.getUserAccountDir();
+        this.resList = this.ecosystem.getRestaurantDirectory();
         populateCustomerList();
         populateRestaurantList();
     }
@@ -90,11 +94,19 @@ public class MainJFrame extends javax.swing.JFrame {
                     addUser.setPassword(accountPassword);
                     addUser.setRole(accountRole);
 
-                    addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
-                    ecosystem.getCustomerDirectory().createCustomer(addCustomer);
-                    ecosystem.getUserAccountDir().addUserAccounts(addUser);
-//                    customerList.createCustomer(addCustomer);
-//                    userAccountDir.addUserAccounts(addUser);
+//                    addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
+                    addCustomer = new Customer(addUser);
+                    addCustomer.setCus_emailid(custEmailID);
+                    addCustomer.setCustName(custName);
+                    addCustomer.setCustId(custId);
+                    addCustomer.setCustPhoneNumber(custPhoneNum);
+                    addCustomer.setHome_City(cusCity);
+                    addCustomer.setHome_pincode(cusPincode);
+                    addCustomer.setHome_streetAddress(cusStreetAdd);
+                    
+                    
+                    customerList.createCustomer(addCustomer);
+                    userAccountDir.addUserAccounts(addUser);
                 }
             }
 
@@ -150,9 +162,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     addRes.setPhoneNumber(resPhoneNum);
                     addRes.setRes_type(resType);
                     
-                    ecosystem.getRestaurantDirectory().addRestaurant(addRes);
-//                    resList.addRestaurant(addRes);
-
+                    resList.addRestaurant(addRes);
                 }
             }
             

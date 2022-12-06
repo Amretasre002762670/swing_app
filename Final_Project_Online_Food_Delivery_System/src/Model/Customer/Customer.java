@@ -25,15 +25,15 @@ public class Customer {
         this.userAccount = user;
     }
     
-    public Customer(int custId, String custName, String home_streetAddress, String home_City, int home_pincode, int custPhoneNumber, String cus_emailid) {
-        this.custId = custId;
-        this.custName = custName;
-        this.home_streetAddress = home_streetAddress;
-        this.home_City = home_City;
-        this.home_pincode = home_pincode;
-        this.cus_emailid = cus_emailid;
-        this.custPhoneNumber = custPhoneNumber;
-    }
+//    public Customer(int custId, String custName, String home_streetAddress, String home_City, int home_pincode, int custPhoneNumber, String cus_emailid) {
+//        this.custId = custId;
+//        this.custName = custName;
+//        this.home_streetAddress = home_streetAddress;
+//        this.home_City = home_City;
+//        this.home_pincode = home_pincode;
+//        this.cus_emailid = cus_emailid;
+//        this.custPhoneNumber = custPhoneNumber;
+//    }
     
     public Customer(int custId, String custName, String home_streetAddress, String home_City, int home_pincode, int custPhoneNumber, String cus_emailid, UserAccount userAccount) {
         this.userAccount = userAccount;

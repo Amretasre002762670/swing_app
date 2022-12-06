@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model.System;
+
 import Model.Customer.Customer;
 import Model.Customer.CustomerDirectory;
 import Model.DeliveryMan.DeliveryManDirectory;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class Ecosystem {
-    
+
     private static Ecosystem business;
     private CustomerDirectory customerDirectory;
     private DeliveryManDirectory deliveryManDirectory;
@@ -27,10 +28,10 @@ public class Ecosystem {
     private RestaurantList restaurantAdminList;
     private EmployeeDirectory employeeList;
     private UserAccountDirectory userAccountDir;
-    
-    public static Ecosystem getInstance(){
-        if(business==null){
-            business=new Ecosystem();  
+
+    public static Ecosystem getInstance() {
+        if (business == null) {
+            business = new Ecosystem();
         }
         return business;
     }
@@ -38,12 +39,13 @@ public class Ecosystem {
     public static void setBusiness(Ecosystem business) {
         Ecosystem.business = business;
     }
-    
+
     public Ecosystem() {
-        customerDirectory  = new CustomerDirectory();
-        deliveryManDirectory = new DeliveryManDirectory();
-        restaurantDirectory = new RestaurantDirectory();
-        restaurantAdminList = new RestaurantList();
+        customerDirectory = new CustomerDirectory(this);
+        deliveryManDirectory = new DeliveryManDirectory(this);
+        restaurantDirectory = new RestaurantDirectory(this);
+        restaurantAdminList = new RestaurantList(this);
+        userAccountDir = new UserAccountDirectory(this);
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -53,7 +55,7 @@ public class Ecosystem {
     public void setCustomerDirectory(CustomerDirectory customerDirectory) {
         this.customerDirectory = customerDirectory;
     }
-    
+
     public DeliveryManDirectory getDeliveryManDirectory() {
         return deliveryManDirectory;
     }
@@ -61,7 +63,7 @@ public class Ecosystem {
     public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
         this.deliveryManDirectory = deliveryManDirectory;
     }
-
+    
     public RestaurantDirectory getRestaurantDirectory() {
         return restaurantDirectory;
     }
@@ -85,14 +87,13 @@ public class Ecosystem {
     public void setUserAccountDir(UserAccountDirectory userAccountDir) {
         this.userAccountDir = userAccountDir;
     }
-    
+
 //    @Override
 //    public ArrayList<Role> getSupportedRole() {
 //        ArrayList<Role> roleList=new ArrayList<Role>();
 //        roleList.add(new SystemAdminrole());
 //        return roleList;
 //    }
-
     public EmployeeDirectory getEmployeeList() {
         return employeeList;
     }
@@ -101,7 +102,4 @@ public class Ecosystem {
         this.employeeList = employeeList;
     }
 
-   
 }
-
-

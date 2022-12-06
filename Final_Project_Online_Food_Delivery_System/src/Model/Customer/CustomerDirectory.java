@@ -4,6 +4,7 @@
  */
 package Model.Customer;
 
+import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
@@ -12,10 +13,12 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class CustomerDirectory {
+    Ecosystem ecosystem;
     private ArrayList<Customer> customerList;
 
-    public CustomerDirectory() {
-        customerList = new ArrayList<>();
+    public CustomerDirectory(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
+        customerList = new ArrayList<Customer>();
     }
 
     public ArrayList<Customer> getCustomerList() {

@@ -6,6 +6,7 @@ package Model.Restaurant;
 
 import Model.UserAccount.UserAccount;
 import Model.Customer.Customer;
+import Model.System.Ecosystem;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +14,13 @@ import java.util.ArrayList;
  * @author puppalanagavaishnavi
  */
 public class RestaurantDirectory {
-
+    
+    
+    Ecosystem ecosystem;
     private ArrayList<Restaurant> restaurantList;
 
-    public RestaurantDirectory() {
+    public RestaurantDirectory(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
         restaurantList = new ArrayList<Restaurant>();
     }
 
