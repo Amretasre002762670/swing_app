@@ -4,6 +4,7 @@
  */
 package Model.RestaurantAdmin;
 
+import Model.Restaurant.Restaurant;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -12,13 +13,9 @@ import Model.UserAccount.UserAccount;
  */
 public class RestaurantAdmin {
     private UserAccount accountDetails;
-    private int resId;
+    private int resAdminId;
     private String resName;
-    private String resStreetAddress;
-    private String resCity;
-    private String resPincode;
-    private String resType; // Eg Indian, Italian, BBQ, etc
-    private int resPhoneNum;
+    private Restaurant restaurantDetails;
 
     public UserAccount getAccountDetails() {
         return accountDetails;
@@ -28,12 +25,12 @@ public class RestaurantAdmin {
         this.accountDetails = accountDetails;
     }
 
-    public int getResId() {
-        return resId;
+    public int getResAdminId() {
+        return resAdminId;
     }
 
-    public void setResId(int resId) {
-        this.resId = resId;
+    public void setResAdminId(int resAdminId) {
+        this.resAdminId = resAdminId;
     }
 
     public String getResName() {
@@ -43,45 +40,7 @@ public class RestaurantAdmin {
     public void setResName(String resName) {
         this.resName = resName;
     }
-
-    public String getResStreetAddress() {
-        return resStreetAddress;
-    }
-
-    public void setResStreetAddress(String resStreetAddress) {
-        this.resStreetAddress = resStreetAddress;
-    }
-
-    public String getResCity() {
-        return resCity;
-    }
-
-    public void setResCity(String resCity) {
-        this.resCity = resCity;
-    }
-
-    public String getResPincode() {
-        return resPincode;
-    }
-
-    public void setResPincode(String resPincode) {
-        this.resPincode = resPincode;
-    }
-
-    public String getResType() {
-        return resType;
-    }
-
-    public void setResType(String resType) {
-        this.resType = resType;
-    }
-
-    public int getResPhoneNum() {
-        return resPhoneNum;
-    }
-
-    public void setResPhoneNum(int resPhoneNum) {
-        this.resPhoneNum = resPhoneNum;
-    }
     
+    
+
 }

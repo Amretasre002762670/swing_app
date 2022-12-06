@@ -16,11 +16,12 @@ public class UserAccount {
 
     private String username;
     private String password;
-    private Employee employee;
-    private Role role;
+//    private Employee employee;
+    private String role;
     private WorkQueue workQueue;
 
 
+    
     public String getUsername() {
         return username;
     }
@@ -37,21 +38,13 @@ public class UserAccount {
         this.password = password;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 
     public WorkQueue getWorkQueue() {
         return workQueue;
@@ -60,7 +53,13 @@ public class UserAccount {
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
     }
-    
-  
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
     
 }

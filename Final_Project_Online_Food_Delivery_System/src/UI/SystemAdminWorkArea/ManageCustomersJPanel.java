@@ -334,7 +334,7 @@ public void populateRequestTable(){
             txtCustName.setText(c.getCustName());
             txtCustStreetAddress.setText(c.getHome_streetAddress());
             txtCustCity.setText(c.getHome_City());
-            txtCustPincode.setText(c.getHome_pincode());
+            txtCustPincode.setText(String.valueOf(c.getHome_pincode()));
             txtCustPhoneNum.setText(Integer.toString(c.getCustPhoneNumber()));
             txtCustEmailAdd.setText(c.getCus_emailid());
             txtCustUserName.setText(c.getUserAccount().getUsername());
@@ -376,7 +376,7 @@ public void populateRequestTable(){
                 c.setCustName(txtCustName.getText());
                 c.setHome_streetAddress(txtCustStreetAddress.getText());
                 c.setHome_City(txtCustCity.getText());
-                c.setHome_pincode(txtCustPincode.getText());
+                c.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
                 c.setCustPhoneNumber(Integer.parseInt(txtCustStreetAddress.getText()));
                 c.setCus_emailid(txtCustEmailAdd.getText());
                 
@@ -406,18 +406,32 @@ public void populateRequestTable(){
 
         String username = txtCustUserName.getText();
         String password = String.valueOf(txtCustPass.getPassword());
+        String new_role = "Customer";
         int CustId = Integer.parseInt(txtCustID.getText());
         String name = txtCustName.getText();
         String streetaddress = txtCustStreetAddress.getText();
         String City = txtCustCity.getText();
-        String Pincode = txtCustPincode.getText();
+        int Pincode = Integer.parseInt(txtCustPincode.getText());
         int phoneNumber = Integer.parseInt(txtCustStreetAddress.getText());
         String Emailaddress = txtCustEmailAdd.getText();
-        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
+//        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
-        UserAccount account = ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee );
+        UserAccount account = new UserAccount();
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setRole("Customer");
+        
+        ecosystem.getUserAccountDir().addUserAccounts(account);
 
-        Customer c = ecosystem.getCustomerDirectory().createCustomer();
+        Customer c = new Customer(account);
+        c.setCustName(name);
+        c.setCus_emailid(Emailaddress);
+        c.setCustPhoneNumber(phoneNumber);
+        c.setHome_City(City);
+        c.setHome_pincode(Pincode);
+        c.setHome_streetAddress(streetaddress);
+        
+        ecosystem.getCustomerDirectory().createCustomer(customer);
 
         txtCustID.setText("");
         txtCustStreetAddress.setText("");

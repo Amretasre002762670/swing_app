@@ -290,9 +290,9 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         int phoneNum = Integer.parseInt(txtRestPhonNum.getText());
         String address = txtRestAdd.getText();
 
-        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(restMan);
+        Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
 
-        UserAccount account = ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee);
+        UserAccount account = ecosystem.getUserAccountDir().addUserAccounts(userAccount);
 
         Restaurant restaurant = ecosystem.getRestaurantDirectory().createRestaurant();
 
@@ -328,9 +328,9 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
             if (restaurant.getRestaurantName().equals(r.getRestaurantName())) {
                 r.setRestaurantId(Integer.parseInt(txtRestID.getText()));
                 r.setRestaurantName(txtRestName.getText());
-                r.setRestaurantManager(txtRestManager.getText());
+//                r.setRestaurantManager(txtRestManager.getText());
                 r.setPhoneNumber(Integer.parseInt(txtRestPhonNum.getText()));
-                r.setAddress(txtRestAdd.getText());
+//                r.setAddress(txtRestAdd.getText()); // Address cannot be one line, need to be divided
                 
             }
         }
@@ -354,11 +354,11 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
             restaurant = r;
             txtRestID.setText(Integer.toString(r.getRestaurantId()));
             txtRestName.setText(r.getRestaurantName());
-            txtRestManager.setText(r.getRestaurantManager());
+//            txtRestManager.setText(r.getRestaurantManager());
             txtRestPhonNum.setText(Integer.toString(r.getPhoneNumber()));
-            txtRestAdd.setText(r.getAddress());
-            txtRestUsername.setText(r.getUserAccount().getUsername());
-            txtRestPassword.setText(r.getUserAccount().getPassword());
+//            txtRestAdd.setText(r.getAddress());
+            txtRestUsername.setText(r.getRestaurantAdmin().getAccountDetails().getUsername());
+            txtRestPassword.setText(r.getRestaurantAdmin().getAccountDetails().getPassword());
 
         }else {
             JOptionPane.showMessageDialog(null, "Please select a row");
@@ -413,10 +413,10 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[model.getColumnCount()];
                 row[0] = restaurant;
                 row[1] = restaurant.getRestaurantName();
-                row[2] = restaurant.getRestaurantManager();
-                row[3] = restaurant.getPhoneNumber();
-                row[4] = restaurant.getAddress();
-                row[5] = restaurant.getUserAccount().getUsername();
+//                row[2] = restaurant.getRestaurantManager();
+                row[2] = restaurant.getPhoneNumber();
+//                row[3] = restaurant.getAddress();
+                row[4] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
 
                 model.addRow(row);
                 }  
