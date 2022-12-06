@@ -75,7 +75,7 @@
                   <Component id="lblSearchResType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmboBoxResType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="531" max="32767" attributes="0"/>
+              <EmptySpace pref="551" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

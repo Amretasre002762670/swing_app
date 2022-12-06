@@ -40,35 +40,26 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace pref="461" max="32767" attributes="0"/>
+                  <Component id="lblLoggedOut" min="-2" pref="97" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnSearchRestaurants" linkSize="1" max="32767" attributes="0"/>
-                              <Component id="btnTrackOrder" linkSize="1" max="32767" attributes="0"/>
-                              <Component id="btnViewOrderHistory" linkSize="1" max="32767" attributes="0"/>
-                              <Component id="lblSmallHeading" linkSize="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblLoggedIn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtUserName" min="-2" pref="140" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTitle" pref="588" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="lblLoggedOut" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Component id="btnSearchRestaurants" linkSize="1" max="32767" attributes="0"/>
+                      <Component id="btnTrackOrder" linkSize="1" max="32767" attributes="0"/>
+                      <Component id="btnViewOrderHistory" linkSize="1" max="32767" attributes="0"/>
+                      <Component id="lblSmallHeading" linkSize="1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblLoggedIn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtUserName" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Component id="lblTitle" alignment="1" pref="600" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -91,7 +82,7 @@
                   <Component id="btnTrackOrder" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="btnViewOrderHistory" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="155" max="32767" attributes="0"/>
+                  <EmptySpace pref="137" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

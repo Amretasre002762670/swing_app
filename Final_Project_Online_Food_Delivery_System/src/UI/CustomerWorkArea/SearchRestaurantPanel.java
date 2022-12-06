@@ -118,7 +118,7 @@ public class SearchRestaurantPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSearchResType)
                     .addComponent(cmboBoxResType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addContainerGap(551, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

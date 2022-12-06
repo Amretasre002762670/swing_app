@@ -4,8 +4,9 @@
  */
 package Model.DeliveryMan;
 
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
-
+import Model.Customer.Customer;
 /**
  *
  * @author puppalanagavaishnavi
@@ -17,4 +18,24 @@ public class DeliveryManDirectory {
     public DeliveryManDirectory() {
         deliveryManList = new ArrayList<DeliveryMan>();
     }
+     public ArrayList<DeliveryMan> getDeliveryManList() {
+        return deliveryManList;
+    }
+
+    public void setDeliveryManList(ArrayList<DeliveryMan> deliveryManList) {
+        this.deliveryManList = deliveryManList;
+    }
+    
+    public DeliveryMan createDeliveryMan(String name, UserAccount userAccount){
+        DeliveryMan d = new DeliveryMan();
+        d.setDeliveryManName(name);
+        d.setUserAccount(userAccount);
+        deliveryManList.add(d);  
+        return d;
+    }
+    
+    public void deleteDeliveryMan(DeliveryMan deliveryMan) {
+        deliveryManList.remove(deliveryMan);
+    }
 }
+

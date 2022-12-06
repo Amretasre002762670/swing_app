@@ -9,6 +9,7 @@ import Model.Customer.CustomerDirectory;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
 import Model.RestaurantAdmin.RestaurantAdmin;
+import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
 import Model.UserAccount.UserAccountDirectory;
 import UI.CustomerWorkArea.CustomerWorkArea;
@@ -29,16 +30,19 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    CustomerDirectory customerList;
-    UserAccountDirectory userAccountDir;
-    RestaurantDirectory resList;
+//    CustomerDirectory customerList;
+//    UserAccountDirectory userAccountDir;
+//    RestaurantDirectory resList;
+    
+    Ecosystem ecosystem;
 
     public MainJFrame() {
         initComponents();
         lblWarningUserType.setVisible(false);
-        this.customerList = new CustomerDirectory();
-        this.userAccountDir = new UserAccountDirectory();
-        this.resList = new RestaurantDirectory();
+//        this.customerList = new CustomerDirectory();
+//        this.userAccountDir = new UserAccountDirectory();
+//        this.resList = new RestaurantDirectory();
+        this.ecosystem = new Ecosystem();
         populateCustomerList();
         populateRestaurantList();
     }
@@ -87,8 +91,10 @@ public class MainJFrame extends javax.swing.JFrame {
                     addUser.setRole(accountRole);
 
                     addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
-                    customerList.addCustomer(addCustomer);
-                    userAccountDir.addUserAccounts(addUser);
+                    ecosystem.getCustomerDirectory().createCustomer(addCustomer);
+                    ecosystem.getUserAccountDir().addUserAccounts(addUser);
+//                    customerList.createCustomer(addCustomer);
+//                    userAccountDir.addUserAccounts(addUser);
                 }
             }
 
@@ -144,7 +150,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     addRes.setPhoneNumber(resPhoneNum);
                     addRes.setRes_type(resType);
                     
-                    resList.addRestaurant(addRes);
+                    ecosystem.getRestaurantDirectory().addRestaurant(addRes);
+//                    resList.addRestaurant(addRes);
 
                 }
             }
@@ -403,21 +410,19 @@ public class MainJFrame extends javax.swing.JFrame {
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=?");
 
-            st.setString(1, userName);
+            st.setString(1, userName); 
             st.setString(2, password);
-            ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery(); // authenticating users using user name and password
             if (rs.next()) {
-//                dispose();
 
                 UserAccount user = new UserAccount();
                 user.setUsername(rs.getString("user_name"));
                 user.setPassword(rs.getString("user_password"));
-                user.setRole(rs.getString("user_role"));
 
                 if (rs.getString("user_role").equals("Customer")) {
-                    Customer searchCustomer = customerList.searchCustomerWithUserAccount(user);
+                    Customer searchCustomer = ecosystem.getCustomerDirectory().searchCustomerWithUserAccount(user);
                     if (searchCustomer != null) {
-                        cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, resList);
+                        cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory());
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("Customer", cusWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);

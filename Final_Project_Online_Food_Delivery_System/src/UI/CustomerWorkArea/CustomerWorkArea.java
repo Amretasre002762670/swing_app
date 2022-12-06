@@ -9,6 +9,7 @@ import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
 import UI.Restaurants.RestaurantSearchPanel;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -123,27 +124,22 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         CustomerLandingPanelLayout.setHorizontalGroup(
             CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
+                .addContainerGap(461, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
                 .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSearchRestaurants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTrackOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnViewOrderHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSmallHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSearchRestaurants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTrackOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewOrderHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSmallHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                                .addComponent(lblLoggedIn)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLandingPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)))))
+                        .addComponent(lblLoggedIn)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         CustomerLandingPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSearchRestaurants, btnTrackOrder, btnViewOrderHistory, lblSmallHeading});
@@ -167,7 +163,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                 .addComponent(btnTrackOrder)
                 .addGap(50, 50, 50)
                 .addComponent(btnViewOrderHistory)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         add(CustomerLandingPanel, "card2");

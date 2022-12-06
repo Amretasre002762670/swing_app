@@ -25,11 +25,16 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    
-    public Customer addCustomer(Customer newCustomer) {
-        customerList.add(newCustomer);
+    public Customer createCustomer(Customer newCustomer){
+        customerList.add(newCustomer);  
         return newCustomer;
+
     }
+   
+     public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
+    
     
     public boolean findCustomer(String customerName, String customerPassword) {
         boolean ifCustomer = false;

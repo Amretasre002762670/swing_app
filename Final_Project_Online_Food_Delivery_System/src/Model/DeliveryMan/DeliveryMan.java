@@ -22,6 +22,10 @@ public class DeliveryMan {
         this.community = community;
     }
 
+    DeliveryMan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getDeliveryManId() {
         return deliveryManId;
     }
@@ -53,5 +57,8 @@ public class DeliveryMan {
     public void setCommunity(String community) {
         this.community = community;
     }
-
+  @Override
+    public String toString(){
+        return deliveryManName;
+    }
 }
