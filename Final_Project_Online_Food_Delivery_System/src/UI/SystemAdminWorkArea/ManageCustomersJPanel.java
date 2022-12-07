@@ -386,7 +386,7 @@ public void populateRequestTable() {
             }
         }
 
-        JOptionPane.showMessageDialog(null, "Customer Updated Successfully.");
+        JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
         populateTable();
         txtCustID.setText("");
         txtCustName.setText("");
@@ -439,6 +439,7 @@ public void populateRequestTable() {
         populateTable();
 
         txtCustID.setText("");
+        txtCustName.setText("");
         txtCustStreetAddress.setText("");
         txtCustEmailAdd.setText("");
         txtCustUserName.setText("");
