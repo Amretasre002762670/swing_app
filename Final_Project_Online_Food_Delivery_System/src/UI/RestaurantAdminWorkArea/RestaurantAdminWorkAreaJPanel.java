@@ -4,19 +4,28 @@
  */
 package UI.RestaurantAdminWorkArea;
 
+import Model.System.Ecosystem;
 import java.awt.Color;
+import javax.swing.JPanel;
+import Model.Restaurant.Restaurant;
+import UI.SystemAdminWorkArea.ManageRestaurantsJPanel;
+import java.awt.CardLayout;
 
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
-
+JPanel userProcessContainer;
+    Ecosystem ecosystem;
+    private Restaurant restaurant;
     /**
      * Creates new form RestaurantAdminWorkAreaJPanel
      */
-    public RestaurantAdminWorkAreaJPanel() {
+    public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem ecoSystem) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem=ecoSystem;
     }
 
     /**
@@ -28,8 +37,8 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        manageEmployeeJButton = new javax.swing.JButton();
-        manageOrganizationJButton = new javax.swing.JButton();
+        manageMenuJButton = new javax.swing.JButton();
+        manageOrdersJButton = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         lblLoggedIn = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
@@ -38,17 +47,17 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
 
-        manageEmployeeJButton.setText("Manage menu");
-        manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
+        manageMenuJButton.setText("Manage menu");
+        manageMenuJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageEmployeeJButtonActionPerformed(evt);
+                manageMenuJButtonActionPerformed(evt);
             }
         });
 
-        manageOrganizationJButton.setText("Manage Orders");
-        manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
+        manageOrdersJButton.setText("Manage Orders");
+        manageOrdersJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageOrganizationJButtonActionPerformed(evt);
+                manageOrdersJButtonActionPerformed(evt);
             }
         });
 
@@ -102,8 +111,8 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(manageMenuJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,20 +127,23 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(lblLoggedIn)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(manageOrganizationJButton)
+                .addComponent(manageOrdersJButton)
                 .addGap(18, 18, 18)
-                .addComponent(manageEmployeeJButton)
+                .addComponent(manageMenuJButton)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
-       
-    }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
+    private void manageMenuJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuJButtonActionPerformed
+    ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer,ecosystem, restaurant);
+       userProcessContainer.add("manageMenuJPanel", manageMenuJPanel);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageMenuJButtonActionPerformed
 
-    private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-       
-    }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+    private void manageOrdersJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrdersJButtonActionPerformed
+             
+    }//GEN-LAST:event_manageOrdersJButtonActionPerformed
 
     private void lblLoggedOutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusGained
         // TODO add your handling code here:
@@ -156,8 +168,8 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblLoggedIn;
     private javax.swing.JLabel lblLoggedOut;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JButton manageEmployeeJButton;
-    private javax.swing.JButton manageOrganizationJButton;
+    private javax.swing.JButton manageMenuJButton;
+    private javax.swing.JButton manageOrdersJButton;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

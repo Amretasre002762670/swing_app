@@ -20,11 +20,11 @@ import Model.WorkQueue.WorkRequest;
  */
 public class UserAccountDirectory {
     
-    Ecosystem ecosystem;
+   // Ecosystem ecosystem;
     private ArrayList<UserAccount> userAccountList;
 
     public UserAccountDirectory(Ecosystem ecosystem) {
-        this.ecosystem = ecosystem;
+     //   this.ecosystem = ecosystem;
         userAccountList = new ArrayList();
     }
 
