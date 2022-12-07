@@ -31,7 +31,12 @@ public class CustomerDirectory {
     public Customer createCustomer(Customer newCustomer){
         customerList.add(newCustomer);  
         return newCustomer;
-
+    }
+    
+    public Customer addCustomer(UserAccount user) {
+        Customer newCustomer = new Customer(user);
+        customerList.add(newCustomer);
+        return newCustomer;
     }
    
      public void deleteCustomer(Customer customer) {
