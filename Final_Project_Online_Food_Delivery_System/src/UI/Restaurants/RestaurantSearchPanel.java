@@ -4,12 +4,20 @@
  */
 package UI.Restaurants;
 
+import Model.Customer.Customer;
+import Model.Menu.Menu;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
+import UI.MenuWorkArea.ViewMenuPanel;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -22,28 +30,68 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
      */
     RestaurantDirectory resList;
     javax.swing.JPanel panelBackWorkArea;
+    Customer cusAccount;
 
-    public RestaurantSearchPanel(RestaurantDirectory resList, javax.swing.JPanel panelBackWorkArea) {
+    public RestaurantSearchPanel(RestaurantDirectory resList, javax.swing.JPanel panelBackWorkArea, Customer cusAccount) {
         initComponents();
         this.resList = resList;
+        this.cusAccount = cusAccount;
         lblWarType.setVisible(false);
         lblWarText.setVisible(false);
         this.panelBackWorkArea = panelBackWorkArea;
     }
 
     public void populateTable(ArrayList<Restaurant> restaurantList) {
-        
+
         DefaultTableModel resTable = (DefaultTableModel) tblRestaurantList.getModel();
         resTable.setRowCount(0);
         for (Restaurant res : restaurantList) {
             Object[] row = new Object[6];
-            row[0] = res.getRestaurantName();
+            row[0] = res;
             row[1] = res.getRes_type();
             row[2] = res.getPhoneNumber();
             row[3] = res.getRes_street_add();
             row[4] = res.getRes_city();
             row[5] = res.getRes_pincode();
             resTable.addRow(row);
+        }
+    }
+
+    public void populateMenuList(Restaurant selectedRestaurant) {
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?;");
+
+            st.setInt(1, selectedRestaurant.getRestaurantId());
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(rs.getString("food_cateogory"));
+                String fd_category = rs.getString("food_cateogory");
+                String fd_name = rs.getString("food_name");
+                float fd_price = rs.getFloat("food_price");
+                String fd_preference = rs.getString("food_preference");
+                String fd_size = rs.getString("food_size");
+                int res_id = rs.getInt("restaurant_id");
+
+                Menu newMenu = new Menu();
+
+                newMenu.setFood_category(fd_category);
+                newMenu.setFood_name(fd_name);
+                newMenu.setFood_preference(fd_preference);
+                newMenu.setFood_price(fd_price);
+                newMenu.setFood_Qty(fd_size);
+                newMenu.setRestaurant_id(res_id);
+                
+                selectedRestaurant.addMenu(newMenu);
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
     }
 
@@ -175,6 +223,11 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         TablePanel.setViewportView(tblRestaurantList);
 
         btnViewMenu.setText("View Menu");
+        btnViewMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -193,29 +246,28 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
                                 .addGap(24, 24, 24)
                                 .addComponent(btnBack))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(277, 277, 277)
+                                .addGap(91, 91, 91)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblSearchType)
+                                            .addComponent(lblSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cmbBoxSearchType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblWarType, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblWarText, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(155, 155, 155)
+                                        .addComponent(btnSearch))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(272, 272, 272)
                                 .addComponent(btnViewMenu)))
-                        .addGap(0, 273, Short.MAX_VALUE)))
+                        .addGap(0, 72, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSearchType)
-                            .addComponent(lblSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbBoxSearchType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblWarType, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblWarText, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(btnSearch)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblSearch, lblSearchType});
@@ -243,9 +295,9 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
                 .addComponent(btnSearch)
                 .addGap(69, 69, 69)
                 .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
+                .addGap(35, 35, 35)
                 .addComponent(btnViewMenu)
-                .addGap(61, 61, 61))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -308,11 +360,32 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
     private void cmbBoxSearchTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSearchTypeActionPerformed
         // TODO add your handling code here:
-        if(cmbBoxSearchType.getSelectedItem().equals("View All")) {
+        if (cmbBoxSearchType.getSelectedItem().equals("View All")) {
             lblSearch.setVisible(false);
             txtSearch.setVisible(false);
         }
     }//GEN-LAST:event_cmbBoxSearchTypeActionPerformed
+
+    private void btnViewMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMenuActionPerformed
+        // TODO add your handling code here:
+        int selectedResInd = tblRestaurantList.getSelectedRow();
+
+        if (selectedResInd < 0) {
+            JOptionPane.showMessageDialog(this, "Select a Restaurant");
+        }
+
+        DefaultTableModel restaurantTable = (DefaultTableModel) tblRestaurantList.getModel();
+
+        Restaurant selectedRestaurant = (Restaurant) restaurantTable.getValueAt(selectedResInd, 0);
+        
+        
+        // ADD MENU PANEL
+
+        ViewMenuPanel menuPanel = new ViewMenuPanel(panelBackWorkArea, selectedRestaurant, cusAccount);
+        panelBackWorkArea.removeAll();
+        panelBackWorkArea.add("MenuPanel", menuPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnViewMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
