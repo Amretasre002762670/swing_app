@@ -8,6 +8,7 @@ import Model.Employee.Employee;
 import Model.Role.Role;
 import Model.Role.SystemAdminrole;
 import Model.System.Ecosystem;
+import Model.System.Organization;
 import java.util.ArrayList;
 
 /**
@@ -17,10 +18,17 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
     
     Ecosystem ecosystem;
+    Organization org;
     private ArrayList<UserAccount> userAccountList;
 
     public UserAccountDirectory(Ecosystem ecosystem) {
         this.ecosystem = ecosystem;
+        userAccountList = new ArrayList();
+    }
+    
+    public UserAccountDirectory(Organization org) {
+//        this.ecosystem = ecosystem;
+        this.org = org;
         userAccountList = new ArrayList();
     }
 

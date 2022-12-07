@@ -12,8 +12,9 @@ public class Menu {
     private int restaurant_id;
     private String food_category;
     private String food_name;
-    private int food_price;
+    private float food_price;
     private String food_preference;
+    private String food_Qty;
 
     public int getRestaurant_id() {
         return restaurant_id;
@@ -39,11 +40,11 @@ public class Menu {
         this.food_name = food_name;
     }
 
-    public int getFood_price() {
+    public float getFood_price() {
         return food_price;
     }
 
-    public void setFood_price(int food_price) {
+    public void setFood_price(float food_price) {
         this.food_price = food_price;
     }
 
@@ -54,6 +55,20 @@ public class Menu {
     public void setFood_preference(String food_preference) {
         this.food_preference = food_preference;
     }
+
+    public String getFood_Qty() {
+        return food_Qty;
+    }
+
+    public void setFood_Qty(String food_Qty) {
+        this.food_Qty = food_Qty;
+    }
+
+    @Override
+    public String toString() {
+        return food_name; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
     
     
 }
