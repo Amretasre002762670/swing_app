@@ -4,11 +4,15 @@
  */
 package Model.UserAccount;
 
+import Model.Customer.Customer;
 import Model.Employee.Employee;
 import Model.Role.Role;
 import Model.Role.SystemAdminrole;
 import Model.System.Ecosystem;
 import java.util.ArrayList;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+
 
 /**
  *
@@ -64,6 +68,12 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+     public UserAccount AddUserAccount() {
+        UserAccount newUserAccount = new UserAccount();
+        userAccountList.add(newUserAccount);
+        return newUserAccount;
+     }
 
 //    public UserAccount createUserAccount(String username, String password, Employee employee) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
