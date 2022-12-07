@@ -42,7 +42,7 @@ public abstract class Organization {
         this.name = name;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
+        userAccountDirectory = new UserAccountDirectory(this);
         organizationID = counter;
         ++counter;
     }

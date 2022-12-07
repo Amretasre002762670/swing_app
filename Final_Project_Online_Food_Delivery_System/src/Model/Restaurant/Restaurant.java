@@ -24,6 +24,11 @@ public class Restaurant {
     private String res_type;
     private ArrayList<Menu> menulist;
 
+    public Restaurant() {
+        this.menulist = new ArrayList<Menu>();
+    }
+    
+
     public int getRestaurantId() {
         return restaurantId;
     }
@@ -96,5 +101,14 @@ public class Restaurant {
         this.menulist = menulist;
     }
     
+    public Menu addMenu(Menu newMenu) {
+        menulist.add(newMenu);
+        return newMenu;
+    }
+
+    @Override
+    public String toString() {
+        return restaurantName; 
+    }
     
 }
