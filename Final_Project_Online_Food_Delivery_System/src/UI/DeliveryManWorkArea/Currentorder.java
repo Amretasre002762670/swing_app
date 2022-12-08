@@ -38,13 +38,12 @@ public class Currentorder extends javax.swing.JPanel {
         txtorders = new javax.swing.JTextField();
         txtresaddress = new javax.swing.JTextField();
         btnback = new javax.swing.JButton();
-        btnmainmenu = new javax.swing.JButton();
         btnresdetails = new javax.swing.JButton();
         btncusdetails = new javax.swing.JButton();
         lbldelcurorder = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 204, 204));
+        setBackground(new java.awt.Color(204, 204, 255));
 
         lblid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblid.setText("Order ID");
@@ -73,9 +72,6 @@ public class Currentorder extends javax.swing.JPanel {
         btnback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnback.setText("Back");
 
-        btnmainmenu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnmainmenu.setText("Main Menu");
-
         btnresdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnresdetails.setText("Restaurant Details");
         btnresdetails.addActionListener(new java.awt.event.ActionListener() {
@@ -92,8 +88,7 @@ public class Currentorder extends javax.swing.JPanel {
             }
         });
 
-        lbldelcurorder.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbldelcurorder.setForeground(new java.awt.Color(0, 51, 255));
+        lbldelcurorder.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbldelcurorder.setText("CURRENT ORDER");
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\SRADDHA\\Downloads\\cur.png")); // NOI18N
@@ -103,17 +98,11 @@ public class Currentorder extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(btnback)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnmainmenu)
-                .addGap(381, 381, 381))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(296, 296, 296)
-                        .addComponent(lbldelcurorder))
+                        .addGap(41, 41, 41)
+                        .addComponent(btnback))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -138,18 +127,19 @@ public class Currentorder extends javax.swing.JPanel {
                                 .addGap(92, 92, 92)
                                 .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(lbldelcurorder)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(31, 31, 31)
                 .addComponent(lbldelcurorder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnmainmenu)
-                    .addComponent(btnback))
+                .addGap(18, 18, 18)
+                .addComponent(btnback)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -175,7 +165,7 @@ public class Currentorder extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(421, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -190,7 +180,7 @@ public class Currentorder extends javax.swing.JPanel {
     private void btnresdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresdetailsActionPerformed
         // TODO add your handling code here:
         {
-        RestaurantDetails resdetails = new RestaurantDetails();
+        RestaurantDetails resdetails = new RestaurantDetails(panelBackWorkArea);
         panelBackWorkArea.add("RestaurantDetails",resdetails);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
    
@@ -210,7 +200,6 @@ public class Currentorder extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
     private javax.swing.JButton btncusdetails;
-    private javax.swing.JButton btnmainmenu;
     private javax.swing.JButton btnresdetails;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbldelcurorder;
