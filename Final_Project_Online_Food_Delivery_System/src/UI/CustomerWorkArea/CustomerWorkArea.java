@@ -198,7 +198,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
         // TODO add your handling code here:
-        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea);
+        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea, cusAccount);
         panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
