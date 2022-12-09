@@ -36,6 +36,7 @@ public class MainJFrame extends javax.swing.JFrame {
     CustomerDirectory customerList;
     UserAccountDirectory userAccountDir;
     RestaurantDirectory resList;
+    DeliveryManDirectory dellist;
 
     Ecosystem ecosystem;
 
@@ -49,8 +50,10 @@ public class MainJFrame extends javax.swing.JFrame {
         this.customerList = this.ecosystem.getCustomerDirectory();
         this.userAccountDir = this.ecosystem.getUserAccountDir();
         this.resList = this.ecosystem.getRestaurantDirectory();
-        populateCustomerList();
-        populateRestaurantList();
+        this.dellist = this.ecosystem.getDeliveryManDirectory();
+        //populateCustomerList();
+       // populateRestaurantList();
+        
     }
 
     public void checkUserType(String selectedRole) {
@@ -203,6 +206,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

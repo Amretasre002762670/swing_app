@@ -46,10 +46,7 @@ public class Customer {
         this.custPhoneNumber = custPhoneNumber;
     }
 
-    Customer() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+   
     public int getCustId() {
         return custId;
     }
