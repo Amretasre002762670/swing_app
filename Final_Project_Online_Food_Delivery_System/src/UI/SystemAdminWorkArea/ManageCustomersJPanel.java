@@ -30,14 +30,14 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private Customer customer;
-    CustomerDirectory custList;
+    CustomerDirectory customerList;
 
-    public ManageCustomersJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
+    public ManageCustomersJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, CustomerDirectory customerList) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
-        this.custList = ecosystem.getCustomerDirectory();
+        this.customerList = customerList;
         populateComboBox();
         populateTable();
     }
@@ -305,8 +305,10 @@ public void populateRequestTable() {
 
         model.setRowCount(0);
 
-        for (Customer customer : ecosystem.getCustomerDirectory().getCustomerList()) {
-            Object[] row = new Object[9];
+        for (Customer customer :customerList.getCustomerList()) {
+            Object[] row = new Object[8];
+         //    System.out.println("Manage Customer panel");
+          //  System.out.println(customer.getCustName());
             row[0] = customer.getCustId();
             row[1] = customer;
             row[2] = customer.getHome_streetAddress();
@@ -373,7 +375,7 @@ public void populateRequestTable() {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 
-        for (Customer c : ecosystem.getCustomerDirectory().getCustomerList()) {
+        for (Customer c : customerList.getCustomerList()) {
             if (customer.getCustName().equals(c.getCustName())) {
                 c.setCustId(Integer.parseInt(txtCustID.getText()));
                 c.setCustName(txtCustName.getText());
@@ -410,7 +412,7 @@ public void populateRequestTable() {
         String username = txtCustUserName.getText();
         String password = String.valueOf(txtCustPass.getPassword());
         String new_role = "Customer";
-        int CustId = Integer.parseInt(txtCustID.getText());
+        //int CustId = Integer.parseInt(txtCustID.getText());
         String name = txtCustName.getText();
         String streetaddress = txtCustStreetAddress.getText();
         String City = txtCustCity.getText();
@@ -426,15 +428,16 @@ public void populateRequestTable() {
 
         
         
-        Customer c = custList.addCustomer(account);
+        Customer c = customerList.addCustomer(account);
         c.setCus_emailid(Emailaddress);
         c.setCustPhoneNumber(phoneNumber);
         c.setHome_City(City);
+        c.setCustName(name);
         c.setHome_pincode(Pincode);
         c.setHome_streetAddress(streetaddress);
-        c.setUserAccount(userAccount);
+        //c.setUserAccount(userAccount);
 
-        ecosystem.getCustomerDirectory().createCustomer(customer);
+       // ecosystem.getCustomerDirectory().createCustomer(customer);
         
         populateTable();
 
@@ -455,7 +458,7 @@ public void populateRequestTable() {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        sysAdminwjp.populateTree();
+       // sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
