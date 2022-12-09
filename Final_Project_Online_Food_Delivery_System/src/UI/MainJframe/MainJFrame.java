@@ -14,6 +14,9 @@ import Model.UserAccount.UserAccount;
 import Model.UserAccount.UserAccountDirectory;
 import Model.DeliveryMan.DeliveryManDirectory;
 import Model.Menu.Menu;
+import Model.Order.Order;
+import Model.Order.OrderList;
+import Model.WorkQueue.WorkQueue;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import java.awt.Color;
 import java.sql.Connection;
@@ -35,8 +38,9 @@ public class MainJFrame extends javax.swing.JFrame {
     CustomerDirectory customerList;
     UserAccountDirectory userAccountDir;
     RestaurantDirectory resList;
-
+    OrderList orderHis;
     Ecosystem ecosystem;
+    WorkQueue workQueue;
 
     public MainJFrame() {
         initComponents();
@@ -48,6 +52,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.customerList = this.ecosystem.getCustomerDirectory();
         this.userAccountDir = this.ecosystem.getUserAccountDir();
         this.resList = this.ecosystem.getRestaurantDirectory();
+        this.workQueue = new WorkQueue();
+        orderHis = new OrderList();
         populateCustomerList();
         populateRestaurantList();
     }
@@ -85,7 +91,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     String cusCity = rs.getString("customer_city");
                     int cusPincode = Integer.parseInt(rs.getString("customer_pincode"));
 
-//                int account_id = Integer.parseInt(rs_userAcct.getString("user_id"));
                     String accountName = rs_userAcct.getString("user_name");
                     String accountPassword = rs_userAcct.getString("user_password");
                     String accountRole = rs_userAcct.getString("user_role");
@@ -95,7 +100,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     addUser.setPassword(accountPassword);
                     addUser.setRole(accountRole);
 
-//                    addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
                     addCustomer = new Customer(addUser);
                     addCustomer.setCus_emailid(custEmailID);
                     addCustomer.setCustName(custName);
@@ -153,7 +157,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     resAdmin.setResName(restName);
 
                     addRes = new Restaurant();
-                    
+
                     addRes.setRestaurantName(restName);
                     addRes.setRestaurantId(resId);
                     addRes.setRestaurantAdmin(resAdmin);
@@ -166,7 +170,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     try {
                         PreparedStatement st_menu = (PreparedStatement) connection
                                 .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?");
-                        
+
                         st_menu.setInt(1, resId);
 
                         ResultSet rs_menu = st_menu.executeQuery();
@@ -177,6 +181,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             String fd_size = rs_menu.getString("food_size");
                             int res_id = rs_menu.getInt("restaurant_id");
                             String fd_category = rs_menu.getString("food_cateogory");
+                            int fd_id = rs_menu.getInt("food_id");
 
                             Menu newMenu = new Menu();
 
@@ -186,6 +191,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             newMenu.setFood_price(fd_price);
                             newMenu.setFood_Qty(fd_size);
                             newMenu.setRestaurant_id(res_id);
+                            newMenu.setFood_id(fd_id);
 
                             addRes.addMenu(newMenu);
                         }
@@ -195,6 +201,38 @@ public class MainJFrame extends javax.swing.JFrame {
 
                     resList.addRestaurant(addRes);
                 }
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void populateOrderHistory(Customer currentCus) {
+        int cusId = currentCus.getCustId();
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM Order_Directory WHERE customer_id=?");
+
+            st.setInt(1, cusId);
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Order orderItem = new Order();
+                for (Restaurant res : resList.getRestaurantList()) {
+                    if (res.getRestaurantId() == rs.getInt("restaurant_id")) {
+                        orderItem.setResDetails(res);
+                    }
+                }
+                orderItem.setCusDetails(currentCus);
+                orderItem.setDatePlaced(rs.getString("datePlaced"));
+                orderItem.setOrderCreatedAt(rs.getString("orderCratedAt"));
+                orderItem.setOrder_id(rs.getInt("order_id_generated"));
+                orderHis.addOrder(orderItem);
             }
 
         } catch (SQLException sqlException) {
@@ -240,10 +278,11 @@ public class MainJFrame extends javax.swing.JFrame {
         lblFrameTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFrameTitle.setText("Online Delivery System");
 
+        panelBackWorkArea.setBackground(new java.awt.Color(204, 255, 204));
         panelBackWorkArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panelBackWorkArea.setMaximumSize(new java.awt.Dimension(650, 650));
-        panelBackWorkArea.setMinimumSize(new java.awt.Dimension(650, 650));
-        panelBackWorkArea.setPreferredSize(new java.awt.Dimension(650, 650));
+        panelBackWorkArea.setMaximumSize(new java.awt.Dimension(900, 900));
+        panelBackWorkArea.setMinimumSize(new java.awt.Dimension(900, 900));
+        panelBackWorkArea.setPreferredSize(new java.awt.Dimension(900, 900));
         panelBackWorkArea.setLayout(new java.awt.CardLayout());
 
         panelLogin.setBackground(new java.awt.Color(204, 204, 255));
@@ -267,6 +306,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         lblUserType.setText("User Login Type:");
 
+        btnUserType.setBackground(new java.awt.Color(204, 255, 204));
         btnUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a User!", "Customer", "Delivery Man", "Restaurant Admin", "Community Admin", "System Admin" }));
         btnUserType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -279,7 +319,17 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnLogin.setBackground(new java.awt.Color(204, 255, 204));
         btnLogin.setText("Login");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLoginMouseExited(evt);
+            }
+        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -331,9 +381,6 @@ public class MainJFrame extends javax.swing.JFrame {
         panelLoginLayout.setHorizontalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(btnLogin))
-            .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -362,7 +409,12 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(chckBoxShowPassword))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblWarningUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lblWarningUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 199, Short.MAX_VALUE))
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addComponent(btnLogin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelLoginLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUserName, lblUserType});
@@ -386,13 +438,13 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(lblUserType)
                     .addComponent(btnUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblWarningUserType))
-                .addGap(55, 55, 55)
+                .addGap(50, 50, 50)
                 .addComponent(btnLogin)
-                .addGap(66, 66, 66)
+                .addGap(71, 71, 71)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewUser)
                     .addComponent(btnNewUserLogin))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         panelBackWorkArea.add(panelLogin, "card2");
@@ -403,7 +455,7 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFrameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                    .addComponent(lblFrameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panelBackWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -415,7 +467,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(lblFrameTitle)
                 .addGap(18, 18, 18)
-                .addComponent(panelBackWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addComponent(panelBackWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -444,78 +496,61 @@ public class MainJFrame extends javax.swing.JFrame {
         String userRole = (String) btnUserType.getSelectedItem();
         checkUserType(userRole);
         CustomerWorkArea cusWorkArea;
-        try {
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+        if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
+            lblWarningUserType.setVisible(false);
+            JOptionPane.showMessageDialog(this, "All fields are Mandatory");
+        } else {
+            try {
+                Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                        "root", "amre1999");
 
-            PreparedStatement st = (PreparedStatement) connection
-                    .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=?");
+                PreparedStatement st = (PreparedStatement) connection
+                        .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=? and user_role=?");
 
-            st.setString(1, userName);
-            st.setString(2, password);
-            ResultSet rs = st.executeQuery(); // authenticating users using user name and password
-            if (rs.next()) {
+                st.setString(1, userName);
+                st.setString(2, password);
+                st.setString(3, userRole);
+                ResultSet rs = st.executeQuery(); // authenticating users using user name and password
+                
+                if (rs.next()) {
 
-                UserAccount user = new UserAccount();
-                user.setUsername(rs.getString("user_name"));
-                user.setPassword(rs.getString("user_password"));
+                    UserAccount user = new UserAccount();
+                    user.setUsername(rs.getString("user_name"));
+                    user.setPassword(rs.getString("user_password"));
 
-                if (rs.getString("user_role").equals("Customer")) {
-                    Customer searchCustomer = ecosystem.getCustomerDirectory().searchCustomerWithUserAccount(user);
-                    if (searchCustomer != null) {
-                        cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory());
-                        panelBackWorkArea.removeAll();
-                        panelBackWorkArea.add("Customer", cusWorkArea);
-                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-                        txtUserName.setText("");
-                        txtPassword.setText("");
-                        btnUserType.setSelectedIndex(0);
-                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Customer not available!");
+                    if (rs.getString("user_role").equals("Customer")) {
+                        Customer searchCustomer = ecosystem.getCustomerDirectory().searchCustomerWithUserAccount(user);
+                        if (searchCustomer != null) {
+
+                            populateOrderHistory(searchCustomer);
+
+                            cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory(), orderHis, workQueue);
+                            panelBackWorkArea.removeAll();
+                            panelBackWorkArea.add("Customer", cusWorkArea);
+                            
+                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+
+                            txtUserName.setText("");
+                            txtPassword.setText("");
+                            btnUserType.setSelectedIndex(0);
+
+                            JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Customer not available!");
+                        }
+
+                    } else if (rs.getString("user_role").equals("Delivery Man")) {
+                        // add your code here
+                        JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
                     }
-                    //                Customer customer_profile = new Customer(user);
-//                    try {
-//                        PreparedStatement st_customer_profile = (PreparedStatement) connection
-//                                .prepareStatement("Select customer_id, customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode from Customer_Directory where user_name=?");
-//                        st_customer_profile.setString(1, userName);
-//
-//                        ResultSet rs_cus_dir = st_customer_profile.executeQuery();
-//                        if (rs_cus_dir.next()) {
-//
-//                            Customer customer_profile = new Customer(Integer.parseInt(rs_cus_dir.getString("customer_id")), rs_cus_dir.getString("customer_name"), rs_cus_dir.getString("customer_street_address"), rs_cus_dir.getString("customer_city"), Integer.parseInt(rs_cus_dir.getString("customer_pincode")), Integer.parseInt(rs_cus_dir.getString("customer_phoneNum")),  rs_cus_dir.getString("customer_emailid"), user);
-//                            cusWorkArea = new CustomerWorkArea(customer_profile, panelBackWorkArea);
-//                            panelBackWorkArea.removeAll();
-//                            panelBackWorkArea.add("Customer", cusWorkArea);
-//                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-//                            JOptionPane.showMessageDialog(this, "You have successfully logged in");
-//                        }
-//
-//                    } catch (SQLException sqlException) {
-//                        sqlException.printStackTrace();
-//                    }
-                } else if (rs.getString("user_role").equals("Delivery Man")) {
-                    // add your code here
-                    JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
-                }
 
-            } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
-                JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Wrong Username & Password");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Wrong Username & Password");
+                }
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
             }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
         }
-//        if (txtUserName.getText().equals("user") && txtPassword.getText().equals("user") && userType.equals("Customer")) {
-//            if (customerList.findCustomer(txtUserName.getText(), txtPassword.getText())) {
-//                resultCustomer = customerList.searchCustomerProfile(txtUserName.getText());
-//            }
-//            CustomerWorkArea cusWorkArea = new CustomerWorkArea(resultCustomer);
-//            panelBackWorkArea.removeAll();
-//            panelBackWorkArea.add("Customer", cusWorkArea);
-//            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnNewUserLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseEntered
@@ -557,6 +592,17 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUserTypeActionPerformed
+
+    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
+        // TODO add your handling code here:
+        btnLogin.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnLoginMouseEntered
+
+    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+        // TODO add your handling code here:
+        btnLogin.setBackground(new Color(204, 255, 204));
+
+    }//GEN-LAST:event_btnLoginMouseExited
 
     /**
      * @param args the command line arguments
