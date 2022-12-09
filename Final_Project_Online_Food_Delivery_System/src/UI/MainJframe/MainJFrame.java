@@ -13,6 +13,7 @@ import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
 import Model.UserAccount.UserAccountDirectory;
 import Model.DeliveryMan.DeliveryManDirectory;
+import Model.Menu.Menu;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import java.awt.Color;
 import java.sql.Connection;
@@ -154,6 +155,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     resAdmin.setResName(restName);
 
                     addRes = new Restaurant();
+                    
                     addRes.setRestaurantName(restName);
                     addRes.setRestaurantId(resId);
                     addRes.setRestaurantAdmin(resAdmin);
@@ -162,6 +164,39 @@ public class MainJFrame extends javax.swing.JFrame {
                     addRes.setRes_city(resCity);
                     addRes.setPhoneNumber(resPhoneNum);
                     addRes.setRes_type(resType);
+
+
+
+                    try {
+                        PreparedStatement st_menu = (PreparedStatement) connection
+                                .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?");
+                        
+                        st_menu.setInt(1, resId);
+
+                        ResultSet rs_menu = st_menu.executeQuery();
+                        while (rs_menu.next()) {
+                            String fd_name = rs_menu.getString("food_name");
+                            float fd_price = rs_menu.getFloat("food_price");
+                            String fd_preference = rs_menu.getString("food_preference");
+                            String fd_size = rs_menu.getString("food_size");
+                            int res_id = rs_menu.getInt("restaurant_id");
+                            String fd_category = rs_menu.getString("food_cateogory");
+
+                            Menu newMenu = new Menu();
+
+                            newMenu.setFood_category(fd_category);
+                            newMenu.setFood_name(fd_name);
+                            newMenu.setFood_preference(fd_preference);
+                            newMenu.setFood_price(fd_price);
+                            newMenu.setFood_Qty(fd_size);
+                            newMenu.setRestaurant_id(res_id);
+
+                            addRes.addMenu(newMenu);
+                        }
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
+
 
                     resList.addRestaurant(addRes);
                 }

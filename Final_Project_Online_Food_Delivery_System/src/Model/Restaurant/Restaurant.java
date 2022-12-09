@@ -24,6 +24,11 @@ public class Restaurant {
     private String res_type;
     private ArrayList<Menu> menulist;
 
+    public Restaurant() {
+        this.menulist = new ArrayList<Menu>();
+    }
+    
+
     public int getRestaurantId() {
         return restaurantId;
     }
@@ -100,5 +105,14 @@ public class Restaurant {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public Menu addMenu(Menu newMenu) {
+        menulist.add(newMenu);
+        return newMenu;
+    }
+
+    @Override
+    public String toString() {
+        return restaurantName; 
+    }
     
 }
