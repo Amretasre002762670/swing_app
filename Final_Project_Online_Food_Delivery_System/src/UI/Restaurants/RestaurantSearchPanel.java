@@ -180,6 +180,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBack.setText("<< Back");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBackMouseClicked(evt);
@@ -425,7 +426,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
         // ADD MENU PANEL
         ViewMenuPanel menuPanel = new ViewMenuPanel(panelBackWorkArea, selectedRestaurant, cusAccount, workQueue);
-        panelBackWorkArea.removeAll();
+//        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("MenuPanel", menuPanel);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnViewMenuActionPerformed

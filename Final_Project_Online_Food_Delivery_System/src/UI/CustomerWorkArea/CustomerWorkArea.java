@@ -227,7 +227,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
         // TODO add your handling code here:
-        panelBackWorkArea.removeAll();
+//        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("LoginPanel", panelLogin);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
 //        panelBackWorkArea.remove(this);
@@ -236,6 +236,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
         // TODO add your handling code here:
+//        panelBackWorkArea.removeAll();
         RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea, cusAccount, workQueue);
         panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
@@ -243,6 +244,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void btnViewOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderHistoryActionPerformed
         // TODO add your handling code here:
+//        panelBackWorkArea.removeAll();
         OrderHistory orderHistory = new OrderHistory(panelBackWorkArea, orderHis);
         panelBackWorkArea.add("SearchRestrauntsPanel", orderHistory);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
