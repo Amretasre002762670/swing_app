@@ -28,17 +28,22 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    public Customer createCustomer(Customer newCustomer){
-        customerList.add(newCustomer);  
+    public Customer createnewCustomer  (){
+        Customer newC = new Customer();
+        customerList.add(newC);  
+        return newC;
+    }
+    
+    public Customer addCustomer(UserAccount user) {
+        Customer newCustomer = new Customer(user);
+        customerList.add(newCustomer);
         return newCustomer;
-
     }
    
      public void deleteCustomer(Customer customer) {
         customerList.remove(customer);
     }
-    
-    
+   
     public boolean findCustomer(String customerName, String customerPassword) {
         boolean ifCustomer = false;
         for (Customer cus: customerList) {
@@ -68,6 +73,10 @@ public class CustomerDirectory {
             }
         }
         return searchedCustomer;
+    }
+
+    public void createCustomer(Customer addCustomer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

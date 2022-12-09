@@ -16,7 +16,7 @@ public class UserAccount {
 
     private String username;
     private String password;
-//    private Employee employee;
+   private Employee employee;
     private String role;
     private WorkQueue workQueue;
 
@@ -38,13 +38,13 @@ public class UserAccount {
         this.password = password;
     }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
+ public Employee getEmployee() {
+       return employee; 
+ }
+
+    public void setEmployee(Employee employee) {
+       this.employee = employee;
+   }
 
     public WorkQueue getWorkQueue() {
         return workQueue;
@@ -61,5 +61,8 @@ public class UserAccount {
     public void setRole(String role) {
         this.role = role;
     }
-    
+    @Override
+    public String toString() {
+        return username;
+    }
 }

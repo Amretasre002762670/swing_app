@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
@@ -218,11 +218,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageAllCustomersActionPerformed
 
     private void btnManageRestaurentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurentsActionPerformed
-        
+        ManageRestaurantsJPanel manageRestaurantsJPanel = new ManageRestaurantsJPanel(userProcessContainer, account, ecosystem);
+       userProcessContainer.add("manageRestaurantsJPanel", manageRestaurantsJPanel);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRestaurentsActionPerformed
 
     private void btnManageDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDeliveryManActionPerformed
-       
+        ManageDeliveryManJPanel managaeDeliveryManJPanel = new ManageDeliveryManJPanel(userProcessContainer, account, ecosystem);
+       userProcessContainer.add("managaeDeliveryManJPanel", managaeDeliveryManJPanel);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageDeliveryManActionPerformed
 
     private void lblLoggedOutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusGained

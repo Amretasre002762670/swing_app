@@ -100,6 +100,10 @@ public class Restaurant {
     public void setMenulist(ArrayList<Menu> menulist) {
         this.menulist = menulist;
     }
+
+    public Object getUserAccount() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public Menu addMenu(Menu newMenu) {
         menulist.add(newMenu);

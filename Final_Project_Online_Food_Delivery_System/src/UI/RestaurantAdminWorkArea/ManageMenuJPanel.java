@@ -4,18 +4,50 @@
  */
 package UI.RestaurantAdminWorkArea;
 
+import Model.Menu.Menu;
+import Model.Restaurant.Restaurant;
+import Model.System.Ecosystem;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class ManageMenuJPanel extends javax.swing.JPanel {
+  JPanel userProcessContainer;
+    private Ecosystem ecoSystem;
+    private Restaurant restaurant;
+    
+    public ManageMenuJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Restaurant restaurant) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.ecoSystem=ecoSystem;
+        this.restaurant=restaurant;
+    }
+    
+        public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
 
+          model.setRowCount(0);
+           for (Menu menu : restaurant.getMenulist()){
+                    
+                Object[] row = new Object[2];
+                row[0] = menu;
+ 
+                model.addRow(row);
+                }  
+    
+    
+    }
     /**
      * Creates new form ManageMenuJPanel
      */
-    public ManageMenuJPanel() {
-        initComponents();
-    }
+   
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +63,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         menuTable = new javax.swing.JTable();
         newMenuTextField = new javax.swing.JTextField();
         addMenuBtn = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
@@ -74,6 +107,12 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setBackground(new java.awt.Color(0, 153, 153));
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 0));
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Manage Orders");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,34 +121,45 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(newMenuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(addMenuBtn))
-                    .addComponent(btnBack))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(btnBack)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(57, 57, 57)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newMenuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addMenuBtn))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        RestaurantAdminWorkAreaJPanel adminWorkAreaJPanel = (RestaurantAdminWorkAreaJPanel) component;
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void addMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMenuBtnActionPerformed
@@ -121,6 +171,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     private javax.swing.JButton addMenuBtn;
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable menuTable;
     private javax.swing.JTextField newMenuTextField;
     // End of variables declaration//GEN-END:variables

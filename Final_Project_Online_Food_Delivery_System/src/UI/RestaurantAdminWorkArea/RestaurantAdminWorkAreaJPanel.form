@@ -42,8 +42,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="manageEmployeeJButton" min="-2" pref="150" max="-2" attributes="0"/>
-                  <Component id="manageOrganizationJButton" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="manageMenuJButton" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="manageOrdersJButton" min="-2" pref="150" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -62,29 +62,29 @@
                   <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="manageOrganizationJButton" min="-2" max="-2" attributes="0"/>
+              <Component id="manageOrdersJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="manageEmployeeJButton" min="-2" max="-2" attributes="0"/>
+              <Component id="manageMenuJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="106" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="manageEmployeeJButton">
+    <Component class="javax.swing.JButton" name="manageMenuJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage menu"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageEmployeeJButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageMenuJButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="manageOrganizationJButton">
+    <Component class="javax.swing.JButton" name="manageOrdersJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Orders"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOrganizationJButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOrdersJButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
