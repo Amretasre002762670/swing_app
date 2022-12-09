@@ -75,8 +75,7 @@ public class CustomerDirectory {
         return searchedCustomer;
     }
 
-    public void createCustomer(Customer addCustomer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void createCustomer(Customer cus) {
+        customerList.add(cus);
     }
-    
 }

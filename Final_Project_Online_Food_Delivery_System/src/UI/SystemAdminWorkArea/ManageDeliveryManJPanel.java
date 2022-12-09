@@ -7,7 +7,6 @@ import Model.Customer.Customer;
 import Model.DeliveryMan.DeliveryMan;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
-import Model.Role.Customerrole;
 import Model.Role.DeliveryManrole;
 import Model.Role.Role;
 import static Model.Role.Role.RoleType.DeliveryMan;

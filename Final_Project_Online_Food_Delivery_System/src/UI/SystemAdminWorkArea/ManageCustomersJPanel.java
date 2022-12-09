@@ -10,7 +10,6 @@ import Model.System.Ecosystem;
 import Model.Employee.Employee;
 import Model.Role.RestaurantAdminrole;
 import Model.Role.Role;
-import Model.Role.Customerrole;
 import java.awt.CardLayout;
 import java.awt.Component;
 import Model.UserAccount.UserAccount;
@@ -424,8 +423,7 @@ public void populateRequestTable() {
         account.setPassword(password);
         account.setRole("Customer");
 
-        
-        
+  
         Customer c = custList.addCustomer(account);
         c.setCus_emailid(Emailaddress);
         c.setCustPhoneNumber(phoneNumber);
@@ -434,7 +432,7 @@ public void populateRequestTable() {
         c.setHome_streetAddress(streetaddress);
         c.setUserAccount(userAccount);
 
-        ecosystem.getCustomerDirectory().createCustomer(customer);
+//        ecosystem.getCustomerDirectory().createnewCustomer(customer);
         
         populateTable();
 
