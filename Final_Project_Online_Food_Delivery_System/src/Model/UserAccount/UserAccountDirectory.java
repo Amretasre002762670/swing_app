@@ -4,12 +4,16 @@
  */
 package Model.UserAccount;
 
+import Model.Customer.Customer;
 import Model.Employee.Employee;
 import Model.Role.Role;
 import Model.Role.SystemAdminrole;
 import Model.System.Ecosystem;
 import Model.System.Organization;
 import java.util.ArrayList;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+
 
 /**
  *
@@ -17,12 +21,16 @@ import java.util.ArrayList;
  */
 public class UserAccountDirectory {
     
+
+   // Ecosystem ecosystem;
+
     Ecosystem ecosystem;
     Organization org;
+
     private ArrayList<UserAccount> userAccountList;
 
     public UserAccountDirectory(Ecosystem ecosystem) {
-        this.ecosystem = ecosystem;
+     //   this.ecosystem = ecosystem;
         userAccountList = new ArrayList();
     }
     
@@ -30,6 +38,10 @@ public class UserAccountDirectory {
 //        this.ecosystem = ecosystem;
         this.org = org;
         userAccountList = new ArrayList();
+    }
+
+    public UserAccountDirectory() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public ArrayList<UserAccount> getUserAccountList() {
@@ -68,6 +80,12 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+     public UserAccount AddUserAccount() {
+        UserAccount newUserAccount = new UserAccount();
+        userAccountList.add(newUserAccount);
+        return newUserAccount;
+     }
 
 //    public UserAccount createUserAccount(String username, String password, Employee employee) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
