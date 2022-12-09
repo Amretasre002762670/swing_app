@@ -15,6 +15,7 @@ import Model.UserAccount.UserAccountDirectory;
 import Model.DeliveryMan.DeliveryManDirectory;
 import Model.Menu.Menu;
 import UI.CustomerWorkArea.CustomerWorkArea;
+import UI.DeliveryManWorkArea.DeliveryManWorkArea;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,8 +65,8 @@ public class MainJFrame extends javax.swing.JFrame {
         Customer addCustomer;
         UserAccount addUser;
         try {
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_delivery_system",
+                    "root", "sraddha0304");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("SELECT * FROM Customer_Directory");
@@ -121,7 +122,7 @@ public class MainJFrame extends javax.swing.JFrame {
         UserAccount resAdminAcct;
         try {
             Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+                    "root", "sraddha0304");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("SELECT * FROM Restaurant_Directory;");
@@ -444,9 +445,10 @@ public class MainJFrame extends javax.swing.JFrame {
         String userRole = (String) btnUserType.getSelectedItem();
         checkUserType(userRole);
         CustomerWorkArea cusWorkArea;
+        DeliveryManWorkArea delworkarea;
         try {
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_delivery_system",
+                    "root", "sraddha0304");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=?");
@@ -496,7 +498,11 @@ public class MainJFrame extends javax.swing.JFrame {
 //                    }
                 } else if (rs.getString("user_role").equals("Delivery Man")) {
                     // add your code here
-                    JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
+                    delworkarea = new DeliveryManWorkArea(panelBackWorkArea);
+                    panelBackWorkArea.removeAll();
+                    panelBackWorkArea.add("DeliveryManWorkArea", delworkarea);
+                    ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                    
                 }
 
             } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
