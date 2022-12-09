@@ -18,7 +18,7 @@ public class Customerrole  {
 
     
 
-public class Customerrole {
+
 
     
 //    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
