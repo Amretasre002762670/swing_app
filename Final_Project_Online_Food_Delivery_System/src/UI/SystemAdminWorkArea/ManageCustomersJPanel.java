@@ -423,8 +423,7 @@ public void populateRequestTable() {
         account.setPassword(password);
         account.setRole("Customer");
 
-        
-        
+  
         Customer c = custList.addCustomer(account);
         c.setCus_emailid(Emailaddress);
         c.setCustPhoneNumber(phoneNumber);
@@ -433,7 +432,7 @@ public void populateRequestTable() {
         c.setHome_streetAddress(streetaddress);
         c.setUserAccount(userAccount);
 
-        ecosystem.getCustomerDirectory().createCustomer(customer);
+//        ecosystem.getCustomerDirectory().createnewCustomer(customer);
         
         populateTable();
 

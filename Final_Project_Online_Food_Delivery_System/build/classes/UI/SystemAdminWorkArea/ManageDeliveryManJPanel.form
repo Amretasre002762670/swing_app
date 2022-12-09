@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="cc" red="cc" type="rgb"/>
+    </Property>
+    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="cc" red="cc" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblDelUsername" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDelId" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDelCom" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDelPassword" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDelname" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="delComboBox" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliveryManID" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliveryManUserName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliveryManPassword" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliverManCommunity" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliverManName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnUpdateDeli" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="saveBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" pref="84" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="499" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="97" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="delComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliveryManID" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliverManName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelCom" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliverManCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliveryManUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliveryManPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUpdateDeli" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="deliveryManJTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="4" rowCount="0">
+                <Column editable="true" title=" ID" type="java.lang.Integer"/>
+                <Column editable="true" title="Name" type="java.lang.String"/>
+                <Column editable="true" title="Community" type="java.lang.String"/>
+                <Column editable="true" title="Username" type="java.lang.String"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Role:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="delComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeliveryManID">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delivery Man ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelUsername">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Username:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDelete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="saveBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtDeliveryManPassword">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeliveryManUserName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Password:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUpdateDeli">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateDeliActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCreate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Create"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRefresh">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Refresh"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;- Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelCom">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Community:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeliverManCommunity">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeliverManName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelname">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

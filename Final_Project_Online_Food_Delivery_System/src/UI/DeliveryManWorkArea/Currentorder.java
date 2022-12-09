@@ -4,6 +4,7 @@
  */
 package UI.DeliveryManWorkArea;
 
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -97,6 +98,12 @@ public class Currentorder extends javax.swing.JPanel {
         lbldelcurback.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbldelcurbackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbldelcurbackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbldelcurbackMouseExited(evt);
             }
         });
 
@@ -205,6 +212,17 @@ public class Currentorder extends javax.swing.JPanel {
       panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea); // TODO add your handling code here:
     }//GEN-LAST:event_lbldelcurbackMouseClicked
+
+    private void lbldelcurbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseEntered
+        // TODO add your handling code here:
+        lbldelcurback.setForeground(Color.blue);
+        
+    }//GEN-LAST:event_lbldelcurbackMouseEntered
+
+    private void lbldelcurbackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseExited
+        // TODO add your handling code here:
+        lbldelcurback.setForeground(Color.red);
+    }//GEN-LAST:event_lbldelcurbackMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

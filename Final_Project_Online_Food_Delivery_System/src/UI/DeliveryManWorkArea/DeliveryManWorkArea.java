@@ -4,15 +4,19 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.WorkQueue.WorkQueue;
+
 /**
  *
  * @author SRADDHA
  */
 public class DeliveryManWorkArea extends javax.swing.JPanel {
  javax.swing.JPanel panelBackWorkArea;
-    public DeliveryManWorkArea(javax.swing.JPanel panelBackWorkArea) {
+ WorkQueue workqueue;
+    public DeliveryManWorkArea(javax.swing.JPanel  panelBackWorkArea,WorkQueue workqueue) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
+        this.workqueue = workqueue;
     }
 
 /**
@@ -64,7 +68,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
             }
         });
 
-        lbllogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbllogout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbllogout.setForeground(new java.awt.Color(255, 51, 51));
         lbllogout.setText("Logout");
 
@@ -72,12 +76,6 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(titledeliverylbl)
-                .addGap(93, 93, 93)
-                .addComponent(lbllogout)
-                .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -90,17 +88,22 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                         .addGap(149, 149, 149)
                         .addComponent(lbldelloggedin)
                         .addGap(32, 32, 32)
-                        .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(titledeliverylbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                                .addComponent(lbllogout)))))
+                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titledeliverylbl)
-                    .addComponent(lbllogout))
-                .addGap(48, 48, 48)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbllogout)
+                    .addComponent(titledeliverylbl))
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbldelloggedin))
@@ -110,15 +113,15 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 .addComponent(btndelorders)
                 .addGap(37, 37, 37)
                 .addComponent(btndelcuroders)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(645, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndelviewqueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelviewqueueActionPerformed
         // TODO add your handling code here:
         {  
-        ViewQueue viewqueue = new ViewQueue();
-    panelBackWorkArea.removeAll();
+        ViewQueue viewqueue = new ViewQueue(panelBackWorkArea,workqueue);
+    
     panelBackWorkArea.add("ViewQueue", viewqueue);
     ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
                             
@@ -129,7 +132,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
          {
         Currentorder curorder = new Currentorder(panelBackWorkArea);
-        panelBackWorkArea.removeAll();
+        
         panelBackWorkArea.add("Currentorder",curorder);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
    

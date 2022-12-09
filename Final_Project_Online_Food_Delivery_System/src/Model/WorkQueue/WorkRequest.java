@@ -4,6 +4,7 @@
  */
 package Model.WorkQueue;
 
+import Model.Order.Order;
 import Model.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -11,24 +12,23 @@ import java.util.Date;
  *
  * @author puppalanagavaishnavi
  */
-
-    public abstract class WorkRequest {
+public class WorkRequest {
 
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
     private String status;
-    private Time requestTime;
-    private Time resolveTime;
-    private Date requestDate;
-    
-    
-    public WorkRequest(){
-        requestTime = new Time();
-        resolveTime = new Time();
-        requestDate = new Date();
-    }
+    private String requestTime;
+    private String resolveTime;
+    private String requestDate;
+    Order orderRequest;
 
+//    public WorkRequest(){
+//        requestTime = new Time();
+//        resolveTime = new Time();
+//        requestDate = new Date();
+//    }
+    
     public String getMessage() {
         return message;
     }
@@ -61,28 +61,40 @@ import java.util.Date;
         this.status = status;
     }
 
-    public Time getRequestTime() {
+    public String getRequestTime() {
         return requestTime;
     }
 
-    public void setRequestTime(Time requestTime) {
+    public void setRequestTime(String requestTime) {
         this.requestTime = requestTime;
     }
 
-    public Time getResolveTime() {
+    public String getResolveTime() {
         return resolveTime;
     }
 
-    public void setResolveTime(Time resolveTime) {
+    public void setResolveTime(String resolveTime) {
         this.resolveTime = resolveTime;
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
     }
+
+    public Order getOrderRequest() {
+        return orderRequest;
+    }
+
+    public void setOrderRequest(Order orderRequest) {
+        this.orderRequest = orderRequest;
+    }
+
     
+    
+    
+
 }

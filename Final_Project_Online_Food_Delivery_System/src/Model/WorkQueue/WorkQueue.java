@@ -4,6 +4,7 @@
  */
 package Model.WorkQueue;
 
+import Model.Customer.Customer;
 import java.util.ArrayList;
 
 /**
@@ -19,5 +20,20 @@ public class WorkQueue {
 
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
+    }
+    
+    public void addWorkRequest(WorkRequest workRequest) {
+        workRequestList.add(workRequest);
+    }
+    
+    public WorkRequest findWorkrequestForCustomer(Customer cusDetails) {
+       WorkRequest searchResult = new WorkRequest();
+       for(WorkRequest workReq: workRequestList) {
+           if(workReq.getSender().getUsername().equals(cusDetails.getCustName())) {
+               searchResult = workReq;
+               break;
+           }
+       }
+       return searchResult;
     }
 }

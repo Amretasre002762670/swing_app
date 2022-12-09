@@ -4,6 +4,8 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.WorkQueue.WorkQueue;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -11,13 +13,18 @@ import javax.swing.JPanel;
  * @author SRADDHA
  */
 public class ViewQueue extends javax.swing.JPanel {
-   
-
+   javax.swing.JPanel  panelBackWorkArea;
+   WorkQueue workqueue;
     /**
      * Creates new form ViewQueue
      */
-    public ViewQueue() {
+    public ViewQueue(javax.swing.JPanel  panelBackWorkArea,WorkQueue workqueue) {
         initComponents();
+        this.panelBackWorkArea=panelBackWorkArea;
+        this.workqueue= workqueue;
+      
+      
+        
         
     }
 
@@ -37,14 +44,13 @@ public class ViewQueue extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnback = new javax.swing.JButton();
         btnacceptorder = new javax.swing.JButton();
         btnprocess = new javax.swing.JButton();
+        lbldelback = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 255));
 
-        lbltitleorderqueue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbltitleorderqueue.setForeground(new java.awt.Color(153, 51, 0));
+        lbltitleorderqueue.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         lbltitleorderqueue.setText("VIEW ORDER QUEUE");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,15 +76,6 @@ public class ViewQueue extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\SRADDHA\\Downloads\\Ss2.png")); // NOI18N
 
-        btnback.setBackground(new java.awt.Color(255, 102, 102));
-        btnback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnback.setText("Back");
-        btnback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackActionPerformed(evt);
-            }
-        });
-
         btnacceptorder.setBackground(new java.awt.Color(255, 153, 153));
         btnacceptorder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnacceptorder.setText("Accept this Order");
@@ -97,6 +94,22 @@ public class ViewQueue extends javax.swing.JPanel {
             }
         });
 
+        lbldelback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelback.setForeground(new java.awt.Color(255, 51, 51));
+        lbldelback.setText(">>Back");
+        lbldelback.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbldelback.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbldelbackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbldelbackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbldelbackMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,19 +120,19 @@ public class ViewQueue extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(btnback)
-                                .addGap(138, 138, 138)
-                                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addComponent(lbldelback)
+                                .addGap(264, 264, 264)
+                                .addComponent(lbltitleorderqueue))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(319, 319, 319)
                         .addComponent(btnacceptorder)
                         .addGap(29, 29, 29)
-                        .addComponent(btnprocess)))
+                        .addComponent(btnprocess))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,22 +141,18 @@ public class ViewQueue extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(lbldelback))
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnacceptorder)
                     .addComponent(btnprocess))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnbackActionPerformed
 
     private void btnprocessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprocessActionPerformed
         // TODO add your handling code here:
@@ -154,14 +163,30 @@ public class ViewQueue extends javax.swing.JPanel {
          
     }//GEN-LAST:event_btnacceptorderActionPerformed
 
+    private void lbldelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelbackMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_lbldelbackMouseClicked
+
+    private void lbldelbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelbackMouseEntered
+        // TODO add your handling code here:
+        lbldelback.setForeground(Color.blue);
+    }//GEN-LAST:event_lbldelbackMouseEntered
+
+    private void lbldelbackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelbackMouseExited
+        // TODO add your handling code here:
+        lbldelback.setForeground(Color.red);
+    }//GEN-LAST:event_lbldelbackMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnacceptorder;
-    private javax.swing.JButton btnback;
     private javax.swing.JButton btnprocess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbldelback;
     private javax.swing.JLabel lbltitleorderqueue;
     // End of variables declaration//GEN-END:variables
 }
