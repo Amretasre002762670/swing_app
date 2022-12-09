@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class Order {
 
-    private long order_id;
+    private int order_id;
     private String datePlaced;
     private String orderCreatedAt;
     private Customer cusDetails;
@@ -31,11 +31,11 @@ public class Order {
         menu = new ArrayList<Menu>();
     }
 
-    public long getOrder_id() {
+    public int getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(long order_id) {
+    public void setOrder_id(int order_id) {
         this.order_id = order_id;
     }
 
@@ -118,6 +118,12 @@ public class Order {
     public void setTotal(float total) {
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return datePlaced; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
     
     
     

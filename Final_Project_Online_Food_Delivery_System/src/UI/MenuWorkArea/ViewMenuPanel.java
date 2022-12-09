@@ -9,8 +9,15 @@ import Model.Menu.Menu;
 import Model.Menu.OrderMenuItem;
 import Model.Order.Order;
 import Model.Restaurant.Restaurant;
+import Model.WorkQueue.WorkQueue;
 import UI.CustomerWorkArea.OrderSummaryPanel;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -35,10 +42,12 @@ public class ViewMenuPanel extends javax.swing.JPanel {
     Customer cusAccount;
     java.util.Date date = new java.util.Date();
     Random rand;
-    long order_id;
+    int order_id;
+    DecimalFormat df = new DecimalFormat("#.##");
+    WorkQueue workQueue;
 //    List<String> list = new ArrayList<String>();
 
-    public ViewMenuPanel(javax.swing.JPanel panelBackWorkArea, Restaurant selectedRes, Customer cusAccount) {
+    public ViewMenuPanel(javax.swing.JPanel panelBackWorkArea, Restaurant selectedRes, Customer cusAccount, WorkQueue workQueue) {
         initComponents();
         selectedMenu = new ArrayList<Menu>();
         this.panelBackWorkArea = panelBackWorkArea;
@@ -47,10 +56,33 @@ public class ViewMenuPanel extends javax.swing.JPanel {
         txtResName.setEditable(false);
         txtResName.setText(selectedRes.getRestaurantName());
         txtTotalItems.setEditable(false);
-        rand = new Random();
         populateTable(this.selectedRes);
+        this.workQueue = workQueue;
         order = new Order();
-        order_id = rand.nextLong(5000);
+    }
+
+    public void generateOrderId() {
+        rand = new Random();
+        order_id = rand.nextInt(5000);
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement getOrderId = (PreparedStatement) connection
+                    .prepareStatement("SELECT order_id_generated FROM Order_Directory");
+
+            ResultSet rs = getOrderId.executeQuery();
+
+            while (rs.next()) {
+                if (order_id == rs.getInt("order_id_generated")) {
+                    order_id = rand.nextInt(5000);
+                }
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+//        return order_id;
     }
 
     public void populateTable(Restaurant res) {
@@ -102,10 +134,11 @@ public class ViewMenuPanel extends javax.swing.JPanel {
         lblResName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblResName.setText("Selected Restaurant Name:");
 
-        btnBack.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBack.setText("<< Back");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBackMouseClicked(evt);
@@ -118,6 +151,7 @@ public class ViewMenuPanel extends javax.swing.JPanel {
             }
         });
 
+        tblMenu.setBackground(new java.awt.Color(204, 255, 204));
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -158,9 +192,12 @@ public class ViewMenuPanel extends javax.swing.JPanel {
 
         lblTotalItems.setText("Total Items Added:");
 
+        txtTotalItems.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+
         btnViewCart.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         btnViewCart.setForeground(new java.awt.Color(255, 0, 0));
         btnViewCart.setText("View Cart >>");
+        btnViewCart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnViewCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnViewCartMouseClicked(evt);
@@ -175,6 +212,15 @@ public class ViewMenuPanel extends javax.swing.JPanel {
 
         btnAddToCart.setBackground(new java.awt.Color(204, 255, 204));
         btnAddToCart.setText("Add To Cart");
+        btnAddToCart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddToCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAddToCartMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAddToCartMouseExited(evt);
+            }
+        });
         btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddToCartActionPerformed(evt);
@@ -214,7 +260,7 @@ public class ViewMenuPanel extends javax.swing.JPanel {
                 .addGap(204, 204, 204)
                 .addComponent(lblTotalItems)
                 .addGap(18, 18, 18)
-                .addComponent(txtTotalItems, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTotalItems, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -244,7 +290,7 @@ public class ViewMenuPanel extends javax.swing.JPanel {
                     .addComponent(txtTotalItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnViewCart)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -265,12 +311,12 @@ public class ViewMenuPanel extends javax.swing.JPanel {
 
     private void btnViewCartMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewCartMouseEntered
         // TODO add your handling code here:
-        btnBack.setForeground(Color.blue);
+        btnViewCart.setForeground(Color.blue);
     }//GEN-LAST:event_btnViewCartMouseEntered
 
     private void btnViewCartMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewCartMouseExited
         // TODO add your handling code here:
-        btnBack.setForeground(Color.red);
+        btnViewCart.setForeground(Color.red);
     }//GEN-LAST:event_btnViewCartMouseExited
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
@@ -279,6 +325,7 @@ public class ViewMenuPanel extends javax.swing.JPanel {
 
         if (selectedMenuInd < 0) {
             JOptionPane.showMessageDialog(this, "Select an Item before adding to cart!");
+            return;
         }
 
         DefaultTableModel menuTable = (DefaultTableModel) tblMenu.getModel();
@@ -292,37 +339,48 @@ public class ViewMenuPanel extends javax.swing.JPanel {
         menuItemCount++;
 
         txtTotalItems.setText(String.valueOf(menuItemCount));
-        
+
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
     private void btnViewCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewCartMouseClicked
         // TODO add your handling code here:\
-        int qty=0;
-        String time = date.getHours()+ ":" + date.getMinutes() + ":" + date.getSeconds();
-        String dateCreated = date.getMonth() + "/" +  date.getDate();
+        int qty = 0;
+        generateOrderId();
+        String time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        String dateCreated = date.getMonth() + "/" + date.getDate();
         float total = 0;
         order.setResDetails(selectedRes);
         order.setCusDetails(cusAccount);
         order.setDatePlaced(dateCreated);
         order.setOrderCreatedAt(time);
         order.setOrder_id(order_id);
-        
-//        ArrayList<OrderMenuItem> newList = new ArrayList<OrderMenuItem>();
-  
+
+        ArrayList<OrderMenuItem> newList = new ArrayList<OrderMenuItem>();
         // Traverse through the first list
+        OrderMenuItem menuItem = new OrderMenuItem();
 //        for (Menu element : selectedMenu) {
 //            if (!newList.contains(element)) {
+//                menuItem.setFood_name(element.getFood_name());
+//                menuItem.setFood_price(String.valueOf(element.getFood_price()));
+//                System.out.println(menuItem.getFood_name());
+//                newList.add(menuItem);
+//            } else {
 //                qty++;
-//                newList.add(element.getFood_name());
+//                menuItem.setQuantity(qty);
 //            }
 //        }
-        
-        for(Menu item: selectedMenu) {
+//        for (OrderMenuItem menu : newList) {
+//            System.out.println(menu.getFood_name());
+//            System.out.println(menu.getFood_price());
+//            System.out.println(menu.getQuantity());
+//
+//        }
+        for (Menu item : selectedMenu) {
             total = total + item.getFood_price();
         }
-        order.setTotal(total);
-        
-        OrderSummaryPanel orderSummary = new OrderSummaryPanel(panelBackWorkArea, order);
+        order.setTotal(Float.parseFloat(df.format(total)));
+
+        OrderSummaryPanel orderSummary = new OrderSummaryPanel(panelBackWorkArea, order, workQueue);
         panelBackWorkArea.removeAll();
         panelBackWorkArea.add("OrderSummaryPanel", orderSummary);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
@@ -331,6 +389,17 @@ public class ViewMenuPanel extends javax.swing.JPanel {
     private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblMenuMouseClicked
+
+    private void btnAddToCartMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddToCartMouseEntered
+        // TODO add your handling code here:
+        btnAddToCart.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnAddToCartMouseEntered
+
+    private void btnAddToCartMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddToCartMouseExited
+        // TODO add your handling code here:
+        btnAddToCart.setBackground(new Color(204, 255, 204));
+
+    }//GEN-LAST:event_btnAddToCartMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
