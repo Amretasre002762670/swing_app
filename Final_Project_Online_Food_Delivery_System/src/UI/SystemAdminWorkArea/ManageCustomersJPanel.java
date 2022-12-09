@@ -5,11 +5,11 @@
 package UI.SystemAdminWorkArea;
 
 import Model.Customer.Customer;
+import Model.Customer.CustomerDirectory;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
 import Model.Role.RestaurantAdminrole;
 import Model.Role.Role;
-import Model.Role.Customerrole;
 import java.awt.CardLayout;
 import java.awt.Component;
 import Model.UserAccount.UserAccount;
@@ -21,22 +21,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author puppalanagavaishnavi
  */
+
+
 public class ManageCustomersJPanel extends javax.swing.JPanel {
 
- private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private Customer customer;
+    CustomerDirectory custList;
+
     public ManageCustomersJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;        
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
+        this.custList = ecosystem.getCustomerDirectory();
         populateComboBox();
         populateTable();
     }
-   
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,37 +290,36 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void populateRequestTable(){
-        
+public void populateRequestTable() {
+
     }
-    
-    public void populateComboBox(){
-       cbxRole.removeAllItems();
-       cbxRole.addItem(Role.RoleType.Customer.toString());
+
+    public void populateComboBox() {
+        cbxRole.removeAllItems();
+        cbxRole.addItem(Role.RoleType.Customer.toString());
     }
-    
-    public void populateTable(){
+
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
 
         model.setRowCount(0);
-        
-            for (Customer customer : ecosystem.getCustomerDirectory().getCustomerList()) {
-                Object[] row = new Object[9];
-                row[0] = customer;
-                row[1] = customer.getCustName();
-                row[2] = customer.getHome_streetAddress();
-                row[3] = customer.getHome_City();
-                row[4] = customer.getHome_pincode();
-                row[5] = customer.getCustPhoneNumber();
-                row[6] = customer.getCus_emailid();
-                row[7] = customer.getUserAccount().getUsername();
-                model.addRow(row);
-        
-            }
+
+        for (Customer customer : ecosystem.getCustomerDirectory().getCustomerList()) {
+            Object[] row = new Object[9];
+            row[0] = customer.getCustId();
+            row[1] = customer;
+            row[2] = customer.getHome_streetAddress();
+            row[3] = customer.getHome_City();
+            row[4] = customer.getHome_pincode();
+            row[5] = customer.getCustPhoneNumber();
+            row[6] = customer.getCus_emailid();
+            row[7] = customer.getUserAccount().getUsername();
+            model.addRow(row);
+
+        }
     }
-    
- 
-    
+
+
     private void cbxRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRoleActionPerformed
         // TODO add your handling code here:
         populateComboBox();
@@ -328,7 +330,7 @@ public void populateRequestTable(){
         int selectedRow = customerJTable.getSelectedRow();
 
         if (selectedRow >= 0) {
-            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 0);
+            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 1);
             customer = c;
             txtCustID.setText(Integer.toString(c.getCustId()));
             txtCustName.setText(c.getCustName());
@@ -339,7 +341,7 @@ public void populateRequestTable(){
             txtCustEmailAdd.setText(c.getCus_emailid());
             txtCustUserName.setText(c.getUserAccount().getUsername());
             txtCustPass.setText(c.getUserAccount().getPassword());
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Please select a row");
         }
         txtCustID.getText();
@@ -350,7 +352,7 @@ public void populateRequestTable(){
         txtCustPhoneNum.getText();
         txtCustEmailAdd.getText();
         txtCustUserName.getText();
-   
+
         populateTable();
     }//GEN-LAST:event_btnUpdateCustActionPerformed
 
@@ -371,7 +373,7 @@ public void populateRequestTable(){
         // TODO add your handling code here:
 
         for (Customer c : ecosystem.getCustomerDirectory().getCustomerList()) {
-            if (customer.getCustName().equals(c.getCustName()) ) {
+            if (customer.getCustName().equals(c.getCustName())) {
                 c.setCustId(Integer.parseInt(txtCustID.getText()));
                 c.setCustName(txtCustName.getText());
                 c.setHome_streetAddress(txtCustStreetAddress.getText());
@@ -379,11 +381,11 @@ public void populateRequestTable(){
                 c.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
                 c.setCustPhoneNumber(Integer.parseInt(txtCustStreetAddress.getText()));
                 c.setCus_emailid(txtCustEmailAdd.getText());
-                
+
             }
         }
 
-        JOptionPane.showMessageDialog(null, "Customer Updated Successfully.");
+        JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
         populateTable();
         txtCustID.setText("");
         txtCustName.setText("");
@@ -416,31 +418,33 @@ public void populateRequestTable(){
         String Emailaddress = txtCustEmailAdd.getText();
 //        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
-        UserAccount account = new UserAccount();
+        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         account.setUsername(username);
         account.setPassword(password);
         account.setRole("Customer");
-        
-        ecosystem.getUserAccountDir().addUserAccounts(account);
 
-        Customer c = new Customer(account);
-        c.setCustName(name);
+  
+        Customer c = custList.addCustomer(account);
         c.setCus_emailid(Emailaddress);
         c.setCustPhoneNumber(phoneNumber);
         c.setHome_City(City);
         c.setHome_pincode(Pincode);
         c.setHome_streetAddress(streetaddress);
+        c.setUserAccount(userAccount);
+
+//        ecosystem.getCustomerDirectory().createnewCustomer(customer);
         
-        ecosystem.getCustomerDirectory().createCustomer(customer);
+        populateTable();
 
         txtCustID.setText("");
+        txtCustName.setText("");
         txtCustStreetAddress.setText("");
         txtCustEmailAdd.setText("");
         txtCustUserName.setText("");
         txtCustPass.setText("");
-        populateTable();
         JOptionPane.showMessageDialog(null, "Customer has been Created");
-     
+
+
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
