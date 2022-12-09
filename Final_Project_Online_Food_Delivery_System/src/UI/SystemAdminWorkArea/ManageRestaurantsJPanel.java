@@ -413,10 +413,11 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[model.getColumnCount()];
                 row[0] = restaurant;
                 row[1] = restaurant.getRestaurantName();
-//                row[2] = restaurant.getRestaurantManager();
-                row[2] = restaurant.getPhoneNumber();
-//                row[3] = restaurant.getAddress();
-                row[4] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
+      // row[2] = restaurant.getRestaurantManager();
+                row[3] = restaurant.getPhoneNumber();
+                row[4] = restaurant.getRes_street_add();
+                
+                row[5] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
 
                 model.addRow(row);
                 }  

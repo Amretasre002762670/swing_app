@@ -49,6 +49,7 @@ public class Customer {
     Customer() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
     public int getCustId() {
         return custId;
@@ -112,6 +113,11 @@ public class Customer {
 
     public void setCus_emailid(String cus_emailid) {
         this.cus_emailid = cus_emailid;
+    }
+
+    @Override
+    public String toString() {
+        return custName; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
 

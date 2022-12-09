@@ -22,6 +22,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import UI.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -65,7 +67,7 @@ public class MainJFrame extends javax.swing.JFrame {
         UserAccount addUser;
         try {
             Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+                    "root", "Qazmaggi123@");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("SELECT * FROM Customer_Directory");
@@ -121,7 +123,7 @@ public class MainJFrame extends javax.swing.JFrame {
         UserAccount resAdminAcct;
         try {
             Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+                    "root", "Qazmaggi123@");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("SELECT * FROM Restaurant_Directory;");
@@ -163,6 +165,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     addRes.setPhoneNumber(resPhoneNum);
                     addRes.setRes_type(resType);
 
+
+
                     try {
                         PreparedStatement st_menu = (PreparedStatement) connection
                                 .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?");
@@ -192,6 +196,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     } catch (SQLException sqlException) {
                         sqlException.printStackTrace();
                     }
+
 
                     resList.addRestaurant(addRes);
                 }
@@ -444,9 +449,10 @@ public class MainJFrame extends javax.swing.JFrame {
         String userRole = (String) btnUserType.getSelectedItem();
         checkUserType(userRole);
         CustomerWorkArea cusWorkArea;
+        SystemAdminWorkAreaJPanel sysadminWorkArea;
         try {
             Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
+                    "root", "Qazmaggi123@");
 
             PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("Select user_name, user_password, user_role from User_Account_Directory where user_name=? and user_password=?");
@@ -455,7 +461,7 @@ public class MainJFrame extends javax.swing.JFrame {
             st.setString(2, password);
             ResultSet rs = st.executeQuery(); // authenticating users using user name and password
             if (rs.next()) {
-
+                System.out.println(rs.getString("user_name"));
                 UserAccount user = new UserAccount();
                 user.setUsername(rs.getString("user_name"));
                 user.setPassword(rs.getString("user_password"));
@@ -497,8 +503,17 @@ public class MainJFrame extends javax.swing.JFrame {
                 } else if (rs.getString("user_role").equals("Delivery Man")) {
                     // add your code here
                     JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
+                } else if (rs.getString("user_role").equals("System Admin")) {
+                    // add your code here
+                    sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem);
+                    panelBackWorkArea.removeAll();
+                    panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
+                    ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                    txtUserName.setText("");
+                    txtPassword.setText("");
+                    btnUserType.setSelectedIndex(0);
+                    JOptionPane.showMessageDialog(this, "You have successfully logged in");
                 }
-
             } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
                 JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
             } else {
