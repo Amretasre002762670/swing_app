@@ -11,19 +11,26 @@ import Model.UserAccount.UserAccount;
  * @author puppalanagavaishnavi
  */
 public class DeliveryMan {
+    
     private int deliveryManId;
     private String deliveryManName;
     private UserAccount userAccount;
+    private long deliveryManNumber;
     private String community;
+    private long zipcodeCovered;
 
     public DeliveryMan(String deliveryManName, UserAccount userAccount, String community) {
         this.userAccount = userAccount;
         this.deliveryManName = this.userAccount.getUsername();
         this.community = community;
     }
+    
+    public DeliveryMan(UserAccount userAcct) {
+        userAccount = userAcct;
+    }
 
-    DeliveryMan() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DeliveryMan() {
+        userAccount = new UserAccount();
     }
 
     public int getDeliveryManId() {
@@ -57,6 +64,24 @@ public class DeliveryMan {
     public void setCommunity(String community) {
         this.community = community;
     }
+
+    public long getDeliveryManNumber() {
+        return deliveryManNumber;
+    }
+
+    public void setDeliveryManNumber(long deliveryManNumber) {
+        this.deliveryManNumber = deliveryManNumber;
+    }
+
+    public long getZipcodeCovered() {
+        return zipcodeCovered;
+    }
+
+    public void setZipcodeCovered(long zipcodeCovered) {
+        this.zipcodeCovered = zipcodeCovered;
+    }
+    
+    
   @Override
     public String toString(){
         return deliveryManName;

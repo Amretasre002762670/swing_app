@@ -62,6 +62,7 @@ public class OrderHistory extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(650, 650));
         setMinimumSize(new java.awt.Dimension(650, 650));
+        setPreferredSize(new java.awt.Dimension(650, 650));
 
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

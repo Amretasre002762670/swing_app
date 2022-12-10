@@ -5,6 +5,7 @@
 package UI.CustomerWorkArea;
 
 import Model.Customer.Customer;
+import Model.Restaurant.RestaurantDirectory;
 import Model.WorkQueue.WorkQueue;
 import Model.WorkQueue.WorkRequest;
 import java.awt.Color;
@@ -22,11 +23,14 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
     JPanel panelBackWorkArea;
     WorkQueue workQueue;
     Customer cusDetails;
+//    RestaurantDirectory resList;
+    
     public CurrentOrderPanel(JPanel panelBackWorkArea, WorkQueue workQueue, Customer cusDetails) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
         this.workQueue = workQueue;
         this.cusDetails = cusDetails;
+//        this.resList = resList;
         
         txtDelContact.setEditable(false);
         txtDelName.setEditable(false);
@@ -34,6 +38,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         txtOrderPlacedAt.setEditable(false);
         txtResName.setEditable(false);
         
+        populateCurrentOrder();
         
     }
     
@@ -241,6 +246,8 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         // TODO add your handling code here:
+//        CustomerWorkArea cusWorkArea = new CustomerWorkArea(cusDetails, panelBackWorkArea, resList);
+        
         panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnBackMouseClicked

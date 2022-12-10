@@ -381,7 +381,7 @@ public class ViewMenuPanel extends javax.swing.JPanel {
         order.setTotal(Float.parseFloat(df.format(total)));
 
         OrderSummaryPanel orderSummary = new OrderSummaryPanel(panelBackWorkArea, order, workQueue);
-        panelBackWorkArea.removeAll();
+//        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("OrderSummaryPanel", orderSummary);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnViewCartMouseClicked

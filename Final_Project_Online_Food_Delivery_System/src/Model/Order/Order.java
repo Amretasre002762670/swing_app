@@ -5,6 +5,7 @@
 package Model.Order;
 
 import Model.Customer.Customer;
+import Model.DeliveryMan.DeliveryMan;
 import Model.Menu.Menu;
 import Model.Menu.OrderMenuItem;
 import Model.Restaurant.Restaurant;
@@ -22,6 +23,7 @@ public class Order {
     private String orderCreatedAt;
     private Customer cusDetails;
     private Restaurant resDetails;
+    private DeliveryMan deliverManDetails;
     private ArrayList<Menu> menu;
     private float total;
 //    private ArrayList<OrderMenuItem> orderHis;
@@ -123,6 +125,15 @@ public class Order {
     public String toString() {
         return datePlaced; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    public DeliveryMan getDeliverManDetails() {
+        return deliverManDetails;
+    }
+
+    public void setDeliverManDetails(DeliveryMan deliverManDetails) {
+        this.deliverManDetails = deliverManDetails;
+    }
+    
     
     
     

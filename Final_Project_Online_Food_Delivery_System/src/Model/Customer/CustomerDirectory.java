@@ -28,7 +28,7 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    public Customer createnewCustomer  (){
+    public Customer createnewCustomer(){
         Customer newC = new Customer();
         customerList.add(newC);  
         return newC;

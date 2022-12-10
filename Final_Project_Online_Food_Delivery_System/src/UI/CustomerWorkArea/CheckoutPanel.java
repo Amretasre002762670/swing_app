@@ -35,6 +35,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
     JPanel panelBackWorkArea;
     Order order;
     WorkQueue workQueue;
+    
 
     public CheckoutPanel(JPanel panelBackWorkArea, Order order, WorkQueue workQueue) {
         initComponents();
@@ -58,44 +59,14 @@ public class CheckoutPanel extends javax.swing.JPanel {
         WorkRequest workRequest = new WorkRequest();
         workRequest.setOrderRequest(order);
         workRequest.setMessage("Order Placed");
-        workRequest.setSender(order.getCusDetails().getUserAccount());
+        workRequest.setCusAcct(order.getCusDetails().getUserAccount());
         workRequest.setRequestDate(order.getDatePlaced());
         workRequest.setRequestTime(order.getOrderCreatedAt());
         workRequest.setStatus("negative");
+        workRequest.setResAdmin(order.getResDetails().getRestaurantAdmin().getAccountDetails());
         
         workQueue.addWorkRequest(workRequest);
     }
-
-//    public static void send(String from, String password, String to, String sub, String msg) {
-//        //Get properties object    
-//        Properties props = new Properties();
-//        props.put("mail.smtp.host", "smtp.gmail.com");
-//        props.put("mail.smtp.socketFactory.port", "465");
-//        props.put("mail.smtp.socketFactory.class",
-//                "javax.net.ssl.SSLSocketFactory");
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.port", "465");
-//        //get Session   
-//        Session session = Session.getDefaultInstance(props,
-//                new javax.mail.Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(from, password);
-//            }
-//        });
-//        //compose message    
-//        try {
-//            MimeMessage message = new MimeMessage(session);
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-//            message.setSubject(sub);
-//            message.setText(msg);
-//            //send message  
-//            Transport.send(message);
-//            System.out.println("message sent successfully");
-//        } catch (MessagingException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
 
     public void sendOrderToDB() {
         String queryOrderTable = "INSERT INTO Order_Directory (datePlaced, orderCratedAt, customer_id, restaurant_id, order_id_generated) VALUES (?, ?, ?, ?, ?)";
@@ -165,6 +136,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
         lblWarCVVEmpty = new javax.swing.JLabel();
         lblWarCardNumEmpty = new javax.swing.JLabel();
         txtCvv = new javax.swing.JPasswordField();
+        lblMainMenu = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(675, 675));
@@ -281,6 +253,21 @@ public class CheckoutPanel extends javax.swing.JPanel {
         lblWarCardNumEmpty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWarCardNumEmpty.setText("Cannot Be Empty");
 
+        lblMainMenu.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblMainMenu.setForeground(new java.awt.Color(255, 0, 0));
+        lblMainMenu.setText("Main Menu");
+        lblMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMainMenuMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMainMenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMainMenuMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -317,8 +304,10 @@ public class CheckoutPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblWarDate, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblWarCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblWarCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblWarCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblMainMenu)
+                                        .addComponent(lblWarCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNameOnCard)
                                 .addGap(18, 18, 18)
@@ -340,7 +329,9 @@ public class CheckoutPanel extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(lblHeading)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(lblMainMenu))
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNameOnCard)
@@ -437,18 +428,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
 
     private void btnProceedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseClicked
         // TODO add your handling code here:
-        // Recipient's email ID needs to be mentioned.
-//        String cusEmailId = order.getCusDetails().getCus_emailid();
-//        String confirmationText = "Your Order" + order.getOrder_id() + "is Confirmed";
-//        String sub = "Order confirmed";
-//
-//        String to = "amretasrert@gmail.com";
-//
-//        // Sender's email ID needs to be mentioned
-//        String from = "amretasre6@gmail.com";
-//        String password = "Amretagavishna15";
-//
-//        send(from, password, to, sub, confirmationText);
         if(txtCardNum.equals("") || txtCvv.equals("") || txtNameOnCard.equals("") || txtValidTill.equals("")) {
             JOptionPane.showMessageDialog(this, "All fields are Mandatory");
         }
@@ -468,12 +447,34 @@ public class CheckoutPanel extends javax.swing.JPanel {
     private void btnProceedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseEntered
         // TODO add your handling code here:
         btnProceed.setForeground(Color.blue);
+        
     }//GEN-LAST:event_btnProceedMouseEntered
 
     private void btnProceedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseExited
         // TODO add your handling code here:
         btnProceed.setForeground(new Color(0, 153, 51));
     }//GEN-LAST:event_btnProceedMouseExited
+
+    private void lblMainMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseEntered
+        // TODO add your handling code here:
+        lblMainMenu.setForeground(Color.blue);
+        CurrentOrderPanel currentOrderPanel = new CurrentOrderPanel(panelBackWorkArea, workQueue, order.getCusDetails());
+        panelBackWorkArea.add("CurrentOrderPanel", currentOrderPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_lblMainMenuMouseEntered
+
+    private void lblMainMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseExited
+        // TODO add your handling code here:
+        lblMainMenu.setForeground(Color.red);
+    }//GEN-LAST:event_lblMainMenuMouseExited
+
+    private void lblMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseClicked
+        // TODO add your handling code here:
+        CurrentOrderPanel currentOrderPanel = new CurrentOrderPanel(panelBackWorkArea, workQueue, order.getCusDetails());
+        panelBackWorkArea.add("CurrentOrderPanel", currentOrderPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        panelBackWorkArea.getAccessibleContext();
+    }//GEN-LAST:event_lblMainMenuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -483,6 +484,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCardNum;
     private javax.swing.JLabel lblCvv;
     private javax.swing.JLabel lblHeading;
+    private javax.swing.JLabel lblMainMenu;
     private javax.swing.JLabel lblNameOnCard;
     private javax.swing.JLabel lblValidTill;
     private javax.swing.JLabel lblWarCVVEmpty;

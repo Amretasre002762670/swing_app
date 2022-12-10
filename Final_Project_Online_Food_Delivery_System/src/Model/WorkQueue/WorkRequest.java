@@ -15,20 +15,16 @@ import java.util.Date;
 public class WorkRequest {
 
     private String message;
-    private UserAccount sender;
-    private UserAccount receiver;
+    private UserAccount resAdmin;
+    private UserAccount cusAcct;
+    private UserAccount deliveryMan;
     private String status;
     private String requestTime;
     private String resolveTime;
     private String requestDate;
     Order orderRequest;
 
-//    public WorkRequest(){
-//        requestTime = new Time();
-//        resolveTime = new Time();
-//        requestDate = new Date();
-//    }
-    
+
     public String getMessage() {
         return message;
     }
@@ -37,20 +33,28 @@ public class WorkRequest {
         this.message = message;
     }
 
-    public UserAccount getSender() {
-        return sender;
+    public UserAccount getResAdmin() {
+        return resAdmin;
     }
 
-    public void setSender(UserAccount sender) {
-        this.sender = sender;
+    public UserAccount getCusAcct() {
+        return cusAcct;
     }
 
-    public UserAccount getReceiver() {
-        return receiver;
+    public UserAccount getDeliveryMan() {
+        return deliveryMan;
     }
 
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
+    public void setResAdmin(UserAccount resAdmin) {
+        this.resAdmin = resAdmin;
+    }
+
+    public void setCusAcct(UserAccount cusAcct) {
+        this.cusAcct = cusAcct;
+    }
+
+    public void setDeliveryMan(UserAccount deliveryMan) {
+        this.deliveryMan = deliveryMan;
     }
 
     public String getStatus() {
@@ -92,8 +96,15 @@ public class WorkRequest {
     public void setOrderRequest(Order orderRequest) {
         this.orderRequest = orderRequest;
     }
-
     
+//    public WorkRequest updateWorkRequestMessage(WorkRequest workReq, String Message) {
+//        orderRequest.get
+//    }
+
+    @Override
+    public String toString() {
+        return requestDate; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
     
     
 

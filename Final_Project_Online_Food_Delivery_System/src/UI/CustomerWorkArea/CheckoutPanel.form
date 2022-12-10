@@ -69,8 +69,11 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblWarDate" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <Component id="lblWarCvv" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
                                   <Component id="lblWarCardNo" min="-2" pref="152" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="lblMainMenu" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblWarCvv" min="-2" pref="142" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -98,7 +101,10 @@
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="lblHeading" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMainMenu" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="lblNameOnCard" min="-2" max="-2" attributes="0"/>
@@ -343,6 +349,22 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtCvv">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMainMenu">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="13" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Main Menu"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMainMenuMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMainMenuMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMainMenuMouseExited"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

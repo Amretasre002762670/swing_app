@@ -29,7 +29,7 @@ public class WorkQueue {
     public WorkRequest findWorkrequestForCustomer(Customer cusDetails) {
        WorkRequest searchResult = new WorkRequest();
        for(WorkRequest workReq: workRequestList) {
-           if(workReq.getSender().getUsername().equals(cusDetails.getCustName())) {
+           if(workReq.getCusAcct().getUsername().equals(cusDetails.getCustName())) {
                searchResult = workReq;
                break;
            }
