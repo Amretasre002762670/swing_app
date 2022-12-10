@@ -4,7 +4,10 @@
  */
 package Model.RestaurantAdmin;
 
+import Model.Restaurant.Restaurant;
+import Model.RestaurantAdmin.RestaurantAdmin;
 import Model.System.Ecosystem;
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -14,21 +17,28 @@ import java.util.ArrayList;
 public class RestaurantList {
     
     Ecosystem ecosystem;
-    ArrayList<RestaurantAdmin> retaurantAdmin;
+    ArrayList<RestaurantAdmin> restaurantAdminList;
 
     public RestaurantList(Ecosystem ecosystem) {
         this.ecosystem = ecosystem;
-        this.retaurantAdmin = new ArrayList<RestaurantAdmin>();
+        this.restaurantAdminList = new ArrayList<RestaurantAdmin>();
     }
 
-    
-    public ArrayList<RestaurantAdmin> getRetaurantAdmin() {
-        return retaurantAdmin;
+    public Ecosystem getEcosystem() {
+        return ecosystem;
     }
 
-    public void setRetaurantAdmin(ArrayList<RestaurantAdmin> retaurantAdmin) {
-        this.retaurantAdmin = retaurantAdmin;
+    public void setEcosystem(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
     }
-    
+
+    public ArrayList<RestaurantAdmin> getRestaurantAdminList() {
+        return restaurantAdminList;
+    }
+
+    public void setRestaurantAdminList(ArrayList<RestaurantAdmin> restaurantAdminList) {
+        this.restaurantAdminList = restaurantAdminList;
+    }
+
     
 }

@@ -9,6 +9,7 @@ import Model.Menu.Menu;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
 import Model.WorkQueue.WorkQueue;
+import UI.CustomerWorkArea.CustomerWorkArea;
 import UI.MenuWorkArea.ViewMenuPanel;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JPanel;
 
 /**
  *
@@ -391,6 +393,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         panelBackWorkArea.remove(this);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).previous(JPanel CustomerWorkArea);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnBackMouseClicked
 

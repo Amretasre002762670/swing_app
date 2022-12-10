@@ -28,7 +28,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
     RestaurantDirectory resList;
     OrderList orderHis;
     WorkQueue workQueue;
-
+    
     public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea, javax.swing.JPanel panelLogin, RestaurantDirectory resList, OrderList orderHis, WorkQueue workQueue) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
@@ -103,6 +103,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnTrackOrderMouseExited(evt);
+            }
+        });
+        btnTrackOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrackOrderActionPerformed(evt);
             }
         });
 
@@ -227,11 +232,8 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
         // TODO add your handling code here:
-//        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("LoginPanel", panelLogin);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-//        panelBackWorkArea.remove(this);
-//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_lblLoggedOutMouseClicked
 
     private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
@@ -281,6 +283,13 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         btnViewOrderHistory.setBackground(new Color(204, 255, 204));
 
     }//GEN-LAST:event_btnViewOrderHistoryMouseExited
+
+    private void btnTrackOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackOrderActionPerformed
+        // TODO add your handling code here:
+        CurrentOrderPanel trackOrder = new CurrentOrderPanel(panelBackWorkArea, workQueue, cusAccount);
+        panelBackWorkArea.add("Track Order", trackOrder);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnTrackOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

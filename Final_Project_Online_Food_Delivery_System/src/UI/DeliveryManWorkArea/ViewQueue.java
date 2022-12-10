@@ -4,7 +4,13 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.DeliveryMan.DeliveryMan;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +22,39 @@ public class ViewQueue extends javax.swing.JPanel {
     /**
      * Creates new form ViewQueue
      */
-    public ViewQueue() {
+    
+    JPanel panelBackWorkArea;
+    WorkQueue workQueue;
+    DeliveryMan delManDetails;
+    
+    public ViewQueue(JPanel panelBackWorkArea, WorkQueue workQueue, DeliveryMan delManDetails) {
         initComponents();
+        
+        this.panelBackWorkArea = panelBackWorkArea;
+        this.workQueue = workQueue;
+        this.delManDetails = delManDetails;
+    }
+    
+    public void populateTable() {
+        
+        DefaultTableModel ordersTable = (DefaultTableModel) tblOrders.getModel();
+        
+        ordersTable.setRowCount(0);
+        
+        for(WorkRequest workReq: workQueue.getWorkRequestList()) {
+            Object row[] = new Object[7];
+            
+            row[0] = workReq.getOrderRequest().getOrder_id();
+            row[1] = workReq;
+            row[2] = workReq.getOrderRequest().getResDetails().getRestaurantName();
+            row[3] = workReq.getOrderRequest().getResDetails().getRes_street_add();
+            row[4] = workReq.getOrderRequest().getCusDetails().getCustName();
+            row[5] = workReq.getOrderRequest().getCusDetails().getCustPhoneNumber();
+            row[6] = workReq.getOrderRequest().getCusDetails().getHome_streetAddress();
+            
+            ordersTable.addRow(row);
+            
+        }
         
     }
 
@@ -35,19 +72,21 @@ public class ViewQueue extends javax.swing.JPanel {
 
         lbltitleorderqueue = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblOrders = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnback = new javax.swing.JButton();
         btnacceptorder = new javax.swing.JButton();
         btnprocess = new javax.swing.JButton();
+        btnBack = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(650, 650));
+        setMinimumSize(new java.awt.Dimension(650, 650));
+        setPreferredSize(new java.awt.Dimension(650, 650));
 
         lbltitleorderqueue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbltitleorderqueue.setForeground(new java.awt.Color(153, 51, 0));
         lbltitleorderqueue.setText("VIEW ORDER QUEUE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -58,28 +97,17 @@ public class ViewQueue extends javax.swing.JPanel {
                 "Order ID", "Created At", "Restaurant Name", "Restaurant Street Address", "Customer Name", "Customer Phone Number", "Customer Street Address"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane1.setViewportView(tblOrders);
+        if (tblOrders.getColumnModel().getColumnCount() > 0) {
+            tblOrders.getColumnModel().getColumn(0).setResizable(false);
+            tblOrders.getColumnModel().getColumn(1).setResizable(false);
+            tblOrders.getColumnModel().getColumn(2).setResizable(false);
+            tblOrders.getColumnModel().getColumn(3).setResizable(false);
+            tblOrders.getColumnModel().getColumn(4).setResizable(false);
+            tblOrders.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\SRADDHA\\Downloads\\Ss2.png")); // NOI18N
-
-        btnback.setBackground(new java.awt.Color(255, 102, 102));
-        btnback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnback.setText("Back");
-        btnback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackActionPerformed(evt);
-            }
-        });
-
-        btnacceptorder.setBackground(new java.awt.Color(255, 153, 153));
+        btnacceptorder.setBackground(new java.awt.Color(204, 255, 204));
         btnacceptorder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnacceptorder.setText("Accept this Order");
         btnacceptorder.addActionListener(new java.awt.event.ActionListener() {
@@ -88,12 +116,27 @@ public class ViewQueue extends javax.swing.JPanel {
             }
         });
 
-        btnprocess.setBackground(new java.awt.Color(255, 153, 153));
+        btnprocess.setBackground(new java.awt.Color(204, 255, 204));
         btnprocess.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnprocess.setText("Process");
         btnprocess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnprocessActionPerformed(evt);
+            }
+        });
+
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 0, 0));
+        btnBack.setText("<< Back");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBackMouseExited(evt);
             }
         });
 
@@ -107,43 +150,44 @@ public class ViewQueue extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(btnback)
-                                .addGap(138, 138, 138)
+                                .addComponent(btnBack)
+                                .addGap(203, 203, 203)
                                 .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
+                        .addComponent(jLabel1)
+                        .addGap(134, 134, 134)
                         .addComponent(btnacceptorder)
-                        .addGap(29, 29, 29)
+                        .addGap(84, 84, 84)
                         .addComponent(btnprocess)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnacceptorder)
-                    .addComponent(btnprocess))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnBack)
+                                .addGap(29, 29, 29)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnacceptorder)
+                            .addComponent(btnprocess))))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnbackActionPerformed
 
     private void btnprocessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprocessActionPerformed
         // TODO add your handling code here:
@@ -151,17 +195,48 @@ public class ViewQueue extends javax.swing.JPanel {
 
     private void btnacceptorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacceptorderActionPerformed
         // TODO add your handling code here:
-         
+        int selectedWorkInd = tblOrders.getSelectedRow();
+        
+        if(selectedWorkInd < 0) {
+            JOptionPane.showMessageDialog(this, "Select a Request");
+            return;
+        }
+        
+        DefaultTableModel selectedWork = (DefaultTableModel) tblOrders.getModel();
+        
+        WorkRequest acceptedWork = (WorkRequest) selectedWork.getValueAt(selectedWorkInd, 1);
+        
+        acceptedWork.setDeliveryMan(delManDetails.getUserAccount());
+        acceptedWork.setMessage("Delivery Man Accepted");
+        acceptedWork.setStatus("positive");
+        
+        JOptionPane.showMessageDialog(this, "Successfully Accepted this Order");
     }//GEN-LAST:event_btnacceptorderActionPerformed
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
+        // TODO add your handling code here:
+        btnBack.setForeground(Color.blue);
+    }//GEN-LAST:event_btnBackMouseEntered
+
+    private void btnBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseExited
+        // TODO add your handling code here:
+        btnBack.setForeground(Color.red);
+    }//GEN-LAST:event_btnBackMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBack;
     private javax.swing.JButton btnacceptorder;
-    private javax.swing.JButton btnback;
     private javax.swing.JButton btnprocess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbltitleorderqueue;
+    private javax.swing.JTable tblOrders;
     // End of variables declaration//GEN-END:variables
 }

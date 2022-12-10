@@ -6,6 +6,7 @@ package UI.MainJframe;
 
 import Model.Customer.Customer;
 import Model.Customer.CustomerDirectory;
+import Model.DeliveryMan.DeliveryMan;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
 import Model.RestaurantAdmin.RestaurantAdmin;
@@ -27,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import UI.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -44,10 +46,12 @@ public class MainJFrame extends javax.swing.JFrame {
     OrderList orderHis;
     Ecosystem ecosystem;
     WorkQueue workQueue;
+    DeliveryManDirectory deliveryManList;
 
     public MainJFrame() {
         initComponents();
         lblWarningUserType.setVisible(false);
+
 //        this.customerList = new CustomerDirectory();
 //        this.userAccountDir = new UserAccountDirectory();
 //        this.resList = new RestaurantDirectory();
@@ -56,9 +60,14 @@ public class MainJFrame extends javax.swing.JFrame {
         this.userAccountDir = this.ecosystem.getUserAccountDir();
         this.resList = this.ecosystem.getRestaurantDirectory();
         this.workQueue = new WorkQueue();
+        this.deliveryManList = new DeliveryManDirectory();
+        
         orderHis = new OrderList();
+
+        // Methods to populate the respective lists from DB
         populateCustomerList();
         populateRestaurantList();
+        populateDeliveryManList();
     }
 
     public void checkUserType(String selectedRole) {
@@ -85,10 +94,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
             ResultSet rs = st.executeQuery();
             ResultSet rs_userAcct = st_userAcct.executeQuery();
-            
+
             while (rs_userAcct.next()) {
                 while (rs.next()) {
-                    System.out.println(rs.getString("customer_id"));
                     int custId = Integer.parseInt(rs.getString("customer_id"));
                     String custName = rs.getString("customer_name");
                     String custEmailID = rs.getString("customer_emailid");
@@ -244,6 +252,45 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+    }
+
+    public void populateDeliveryManList() {
+        DeliveryMan addDeliveryMan;
+        UserAccount addUserAccount;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/online_delivery_system",
+                    "root", "amre1999");
+
+//            PreparedStatement st = (PreparedStatement) connection
+//                    .prepareStatement("SELECT * FROM DeliveryMan_Directory");
+            PreparedStatement st_userAcct = (PreparedStatement) connection
+                    .prepareStatement("SELECT * FROM User_Account_Directory u, DeliveryMan_Directory c WHERE u.user_id = c.user_id");
+
+            ResultSet rs = st_userAcct.executeQuery();
+
+            while (rs.next()) {
+                
+                addUserAccount = new UserAccount();
+                
+                addUserAccount.setUsername(rs.getString("user_name"));
+                addUserAccount.setPassword(rs.getString("user_password"));
+                addUserAccount.setRole(rs.getString("user_role"));
+
+                addDeliveryMan = deliveryManList.addDeliveryManWithUserAcct(addUserAccount);;
+
+                addDeliveryMan.setDeliveryManId(rs.getInt("deliveryman_id"));
+                addDeliveryMan.setDeliveryManName(rs.getString("deliveryman_name"));
+                addDeliveryMan.setDeliveryManNumber(rs.getLong("deliveryman_phoneNumber"));
+                addDeliveryMan.setZipcodeCovered(rs.getLong("zipcode_covered"));
+                addDeliveryMan.setCommunity(rs.getString("area_covered"));
+
+//                deliveryManList.addDeliveryMan(addDeliveryMan);
+
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } 
     }
 
     /**
@@ -504,7 +551,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CustomerWorkArea cusWorkArea;
         DeliveryManWorkArea delworkarea;
         SystemAdminWorkAreaJPanel sysadminWorkArea;
-        
+
         if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
             lblWarningUserType.setVisible(false);
             JOptionPane.showMessageDialog(this, "All fields are Mandatory");
@@ -519,18 +566,20 @@ public class MainJFrame extends javax.swing.JFrame {
                 st.setString(1, userName);
                 st.setString(2, password);
                 st.setString(3, userRole);
-                
+
                 ResultSet rs = st.executeQuery(); // authenticating users using user name and password
 
                 if (rs.next()) {
 
                     UserAccount user = new UserAccount();
+
                     user.setUsername(rs.getString("user_name"));
                     user.setPassword(rs.getString("user_password"));
+                    user.setRole(rs.getString("user_role"));
 
                     if (rs.getString("user_role").equals("Customer")) {
                         Customer searchCustomer = ecosystem.getCustomerDirectory().searchCustomerWithUserAccount(user);
-                        
+
                         if (searchCustomer != null) {
 
                             populateOrderHistory(searchCustomer);
@@ -538,7 +587,6 @@ public class MainJFrame extends javax.swing.JFrame {
                             cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory(), orderHis, workQueue);
                             panelBackWorkArea.removeAll();
                             panelBackWorkArea.add("Customer", cusWorkArea);
-
                             ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
 
                             txtUserName.setText("");
@@ -549,16 +597,20 @@ public class MainJFrame extends javax.swing.JFrame {
                         } else {
                             JOptionPane.showMessageDialog(this, "Customer not available!");
                         }
-                        
+
                     } else if (rs.getString("user_role").equals("Delivery Man")) {
-                        // add your code here
 
-                        delworkarea = new DeliveryManWorkArea(panelBackWorkArea);
-                        panelBackWorkArea.removeAll();
-                        panelBackWorkArea.add("DeliveryManWorkArea", delworkarea);
-                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        DeliveryMan delMan = deliveryManList.findDeliveryManDetails(user);
+                        System.out.println(delMan.getUserAccount().getUsername());
 
-                        JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
+                        if (delMan != null) {
+                            delworkarea = new DeliveryManWorkArea(panelBackWorkArea, workQueue, delMan);
+                            panelBackWorkArea.add("DeliveryManWorkArea", delworkarea);
+                            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Create a new Delivery Man Profile");
+                        }
+                        
                     } else if (rs.getString("user_role").equals("System Admin")) {
                         // add your code here
                         sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem);
