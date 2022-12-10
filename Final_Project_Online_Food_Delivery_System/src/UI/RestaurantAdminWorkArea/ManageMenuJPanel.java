@@ -15,6 +15,7 @@ import Model.Menu.Menu;
 import Model.Menu.OrderMenuItem;
 import Model.Order.Order;
 import Model.Restaurant.Restaurant;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
@@ -288,6 +289,56 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+  //  public void sendMenuToDB(Menu m) {
+    //    String queryMenuTable = "INSERT INTO Menu_Directory (restaurant_id, food_category, food_name, food_price, food_preference, food_size) VALUES (?, ?, ?, ?, ?, ?)";
+//        int cus_id = 0;
+     //   try {
+          //  Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+           //         "root", "bhanu123@");
+
+          //  PreparedStatement st_MenuTable = (PreparedStatement) connection
+          //          .prepareStatement(queryMenuTable);
+
+         //   st_MenuTable.setInt(1, m.getRestaurant_id());
+         //   st_MenuTable.setString(2, m.getFood_category());
+         //   st_MenuTable.setString(3, m.getFood_name());
+          //  st_MenuTable.setFloat(4, m.getFood_price());
+          //  st_MenuTable.setString(5, m.getFood_preference());
+         //   st_MenuTable.setString(6, m.getFood_Qty());
+            
+         //   st_MenuTable.execute();
+
+       // } catch (SQLException sqlException) {
+       //     sqlException.printStackTrace();
+      //  }
+   // }
+    
+  //  public void updateMenuInDB(Menu m, int row) {
+   //     String queryMenuTable = "UPDATE ROW_NUMBER(row) Menu_Directory SET restaurant_id=?, food_category=?, food_name=?, food_price=?, food_preference=?, food_size=?";
+        
+     //   try {
+      //      Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+         //           "root", "bhanu123@");
+
+        //    PreparedStatement st_MenuTable = (PreparedStatement) connection
+         //           .prepareStatement(queryMenuTable);
+
+         //   st_MenuTable.setInt(1, m.getRestaurant_id());
+          //  st_MenuTable.setString(2, m.getFood_category());
+          //  st_MenuTable.setString(3, m.getFood_name());
+          //  st_MenuTable.setFloat(4, m.getFood_price());
+         //   st_MenuTable.setString(5, m.getFood_preference());
+          //  st_MenuTable.setString(6, m.getFood_Qty());
+            
+          //  st_MenuTable.execute();
+
+     //   } catch (SQLException sqlException) {
+     //       sqlException.printStackTrace();
+     //   }
+        
+   // }
+    
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
@@ -308,12 +359,29 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        Menu menu = new Menu();
+      //  Menu menu = new Menu();
+      //  menu.setFood_name(txtMenuName.getText());
+         Menu menu = new Menu();
+        menu.setRestaurant_id(Integer.parseInt(txtRestID.getText()));
+        menu.setFood_category(txtCategory.getText());
         menu.setFood_name(txtMenuName.getText());
+        menu.setFood_Qty(txtQty.getText());
+        menu.setFood_price(Float.parseFloat(txtPrice.getText()));
+        menu.setFood_preference(txtPreference.getText());
+                
+     //   sendMenuToDB(menu);
         
+        txtRestID.setText("");
+        txtCategory.setText("");       
+        txtMenuName.setText("");
+        txtQty.setText("");
+        txtPrice.setText("");
+        txtPreference.setText("");
+        
+//selectedRes.addMenu(menu);
                
         
-selectedRes.addMenu(menu);
+//selectedRes.addMenu(menu);
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -329,7 +397,31 @@ selectedRes.addMenu(menu);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: int selectedMenuInd = tblMenu.getSelectedRow();
 
-       
+       int selectedMenuInd = tblMenu.getSelectedRow();
+        int selectedRow = tblMenu.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            Menu m = (Menu) tblMenu.getValueAt(selectedRow, 1);
+    //        menu = m;
+            txtRestID.setText(Integer.toString(m.getRestaurant_id()));
+            txtCategory.setText(m.getFood_category());       
+            txtMenuName.setText(m.getFood_name());
+            txtQty.setText(m.getFood_Qty());
+            txtPrice.setText(Float.toString(m.getFood_price()));
+            txtPreference.setText(m.getFood_preference());
+          //  updateMenuInDB(m,selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+        }
+        txtRestID.getText();
+        txtCategory.getText();
+        txtMenuName.getText();
+        txtQty.getText();
+        txtPrice.getText();
+        txtPreference.getText();
+        
+    //    populateTable(Restaurant res);
+  
 
       
     }//GEN-LAST:event_jButton1ActionPerformed

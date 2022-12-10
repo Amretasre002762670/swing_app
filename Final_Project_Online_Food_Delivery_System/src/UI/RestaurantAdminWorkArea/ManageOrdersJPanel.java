@@ -4,17 +4,26 @@
  */
 package UI.RestaurantAdminWorkArea;
 
+import Model.Restaurant.Restaurant;
+import Model.System.Ecosystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class ManageOrdersJPanel extends javax.swing.JPanel {
-
+    JPanel userProcessContainer;
+    private Ecosystem ecoSystem;
+    private Restaurant restaurant;
+    javax.swing.JPanel panelBackWorkArea;
+     Restaurant selectedRes;
     /**
      * Creates new form ManageOrdersJPanel
      */
-    public ManageOrdersJPanel() {
-        initComponents();
+    public ManageOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Restaurant restaurant) {
+         this.panelBackWorkArea = panelBackWorkArea;
+        this.selectedRes = selectedRes;
     }
     
     
