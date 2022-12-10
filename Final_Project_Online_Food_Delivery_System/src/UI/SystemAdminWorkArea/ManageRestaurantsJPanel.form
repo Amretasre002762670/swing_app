@@ -21,70 +21,63 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblTitle" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="515" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblRestPassword" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblRestUsername" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtRestUsername" alignment="0" pref="138" max="32767" attributes="0"/>
-                                          <Component id="txtRestPassword" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblRestManager" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblRestID" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblRestPhoneNum" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblRestAdd" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblRestName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtRestAdd" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="txtRestPhonNum" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="restComboBox" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="txtRestID" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="txtRestManager" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                          <Component id="txtRestName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <Component id="lblRestID" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestPhoneNum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestAdd" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestPincode" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestCity" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestUsername" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRestType" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtRestAdd" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestPhonNum" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestID" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestUsername" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestPassword" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestPincode" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestCity" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtRestType" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnUpdateManager" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="saveBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="btnDelete" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="99" max="32767" attributes="0"/>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="515" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblTitle" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnRefresh" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,14 +92,9 @@
                   </Group>
                   <Component id="lblTitle" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="97" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="restComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblRestID" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRestID" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -118,37 +106,52 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblRestManager" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRestManager" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblRestPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRestPhonNum" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblRestAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRestAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblRestAdd" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRestAdd" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblRestUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRestUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblRestPincode" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRestPincode" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblRestPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRestPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblRestCity" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRestCity" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblRestType" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRestType" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblRestUsername" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtRestUsername" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="lblRestPassword" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtRestPassword" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdateManager" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -180,16 +183,34 @@
         <Component class="javax.swing.JTable" name="restJTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
-                <Column editable="true" title="Restaurant ID" type="java.lang.Integer"/>
+              <Table columnCount="8" rowCount="0">
+                <Column editable="false" title="Restaurant ID" type="java.lang.Integer"/>
                 <Column editable="true" title="Restaurant Name" type="java.lang.String"/>
-                <Column editable="true" title="Phone Number" type="java.lang.Integer"/>
-                <Column editable="true" title="Address" type="java.lang.String"/>
-                <Column editable="true" title="Username" type="java.lang.String"/>
+                <Column editable="false" title="Phone Number" type="java.lang.Integer"/>
+                <Column editable="false" title="Address" type="java.lang.String"/>
+                <Column editable="false" title="Username" type="java.lang.String"/>
+                <Column editable="false" title="Pincode" type="java.lang.Integer"/>
+                <Column editable="false" title="City" type="java.lang.String"/>
+                <Column editable="true" title="Restaurant Type" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -274,30 +295,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtRestPhonNum">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtRestManager">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtRestID">
-    </Component>
-    <Component class="javax.swing.JComboBox" name="restComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Role:"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRestID">
       <Properties>
         <Property name="text" type="java.lang.String" value="Restaurant ID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRestManager">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Restaurant Manager:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRestPhoneNum">
@@ -328,6 +330,27 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Manage Restaurants"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRestPincode">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pincode:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtRestPincode">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRestCity">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" City :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtRestCity">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRestType">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Restaurant Type :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtRestType">
     </Component>
   </SubComponents>
 </Form>

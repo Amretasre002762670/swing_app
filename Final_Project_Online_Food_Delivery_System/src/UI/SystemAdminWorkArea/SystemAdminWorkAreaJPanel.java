@@ -4,6 +4,8 @@
  */
 package UI.SystemAdminWorkArea;
 import Model.Customer.CustomerDirectory;
+import Model.DeliveryMan.DeliveryManDirectory;
+import Model.Restaurant.RestaurantDirectory;
 import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -23,14 +25,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
    Ecosystem ecosystem;
    UserAccount account;
    CustomerDirectory customerList;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem,CustomerDirectory customerList ) {
+   DeliveryManDirectory deliveryManList;
+   RestaurantDirectory restaurantList;
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem,CustomerDirectory customerList, DeliveryManDirectory deliveryManList) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.customerList=customerList;
+        this.deliveryManList=deliveryManList;
+        this.restaurantList=restaurantList;
         
        // populateTree();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,14 +191,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageAllCustomersActionPerformed
 
     private void btnManageRestaurentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurentsActionPerformed
-        ManageRestaurantsJPanel manageRestaurantsJPanel = new ManageRestaurantsJPanel(userProcessContainer, account, ecosystem);
+        ManageRestaurantsJPanel manageRestaurantsJPanel = new ManageRestaurantsJPanel(userProcessContainer, account, ecosystem, restaurantList);
        userProcessContainer.add("manageRestaurantsJPanel", manageRestaurantsJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRestaurentsActionPerformed
 
     private void btnManageDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDeliveryManActionPerformed
-        ManageDeliveryManJPanel managaeDeliveryManJPanel = new ManageDeliveryManJPanel(userProcessContainer, account, ecosystem);
+        ManageDeliveryManJPanel managaeDeliveryManJPanel = new ManageDeliveryManJPanel(userProcessContainer, account, ecosystem, deliveryManList);
        userProcessContainer.add("managaeDeliveryManJPanel", managaeDeliveryManJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);

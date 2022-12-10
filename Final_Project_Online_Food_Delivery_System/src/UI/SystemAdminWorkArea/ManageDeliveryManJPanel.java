@@ -5,6 +5,7 @@
 package UI.SystemAdminWorkArea;
 import Model.Customer.Customer;
 import Model.DeliveryMan.DeliveryMan;
+import Model.DeliveryMan.DeliveryManDirectory;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
 import Model.Role.Customerrole;
@@ -26,15 +27,17 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private DeliveryMan deliveryMan;
+    DeliveryManDirectory deliveryManList;
  
     /**
      * Creates new form ManageDeliveryManJPanel
      */
-    public ManageDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
+    public ManageDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, DeliveryManDirectory deliveryManList) {
         initComponents();
         this.userProcessContainer = userProcessContainer;        
         this.userAccount = account;
         this.ecosystem = ecosystem;
+        this.deliveryManList = deliveryManList;
         populateTable();
         populateComboBox();
     }
@@ -256,7 +259,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 
-        for (DeliveryMan d : ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
+        for (DeliveryMan d : deliveryManList.getDeliveryManList()) {
             if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName()) ) {
                 d.setDeliveryManName(txtDeliverManName.getText());
                 d.setDeliveryManId(Integer.parseInt(txtDeliveryManID.getText()));
@@ -279,7 +282,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         int selectedRow = deliveryManJTable.getSelectedRow();
 
         if (selectedRow >= 0) {
-            DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 0);
+            DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 1);
             deliveryMan = d;
             txtDeliveryManID.setText(String.valueOf(d.getDeliveryManId()));
             txtDeliverManName.setText(d.getDeliveryManName());
@@ -290,7 +293,10 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         }else {
             JOptionPane.showMessageDialog(null, "Please select a row");
         }
+        txtDeliveryManID.getText();
         txtDeliverManName.getText();
+        txtDeliverManCommunity.getText();
+        txtDeliveryManUserName.getText();
         populateTable();
     }//GEN-LAST:event_btnUpdateDeliActionPerformed
 
@@ -299,27 +305,40 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         String username = txtDeliveryManUserName.getText();
         String password = String.valueOf(txtDeliveryManPassword.getPassword());
+        String new_role = "DeliveryMan";
         String name = txtDeliverManName.getText();
-       int DelId = Integer.parseInt(txtDeliveryManID.getText());
+        //int DelId = Integer.parseInt(txtDeliveryManID.getText());
         String community = txtDeliverManCommunity.getText();
 
-        Employee employee = ecosystem.getEmployeeList().createEmployee(name);
+       // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
                 
                // getEmployeeDirectory().createEmployee(name);
 
-        UserAccount account = ecosystem.getUserAccountDir().addUserAccounts(userAccount);
+        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
                // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
+account.setUsername(username);
+account.setPassword(password);
+account.setRole("DeliveryMan");
 
-        DeliveryMan d = ecosystem.getDeliveryManDirectory().createDeliveryMan(name, account);
-
+        DeliveryMan d = deliveryManList.createDeliveryMan(account);
+        d.setCommunity(community);
+        d.setDeliveryManName(name);
+        
         txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
         txtDeliveryManUserName.setText("");
         txtDeliveryManPassword.setText("");
 
-        populateTable();
-        JOptionPane.showMessageDialog(null, "Delivery Man Created");
+         populateTable();
+        //JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
+        
+        txtDeliveryManID.setText("");
+        txtDeliverManName.setText("");
+        txtDeliverManCommunity.setText("");
+        txtDeliveryManUserName.setText("");
+        txtDeliveryManPassword.setText("");
+         JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -369,7 +388,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         
-            for (DeliveryMan deliveryMan : ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
+            for (DeliveryMan deliveryMan : deliveryManList.getDeliveryManList()) {
                 Object[] row = new Object[model.getColumnCount()];
                 row[0] = deliveryMan.getDeliveryManId();
                 row[1] = deliveryMan;

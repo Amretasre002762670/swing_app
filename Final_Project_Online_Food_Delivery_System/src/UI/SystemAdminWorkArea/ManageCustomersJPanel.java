@@ -362,9 +362,11 @@ public void populateRequestTable() {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 0);
-            ecosystem.getCustomerDirectory().deleteCustomer(c);
+        if (selectedRow >= 0)
+        {
+            Customer selectedcustomer = (Customer) customerJTable.getValueAt(selectedRow, 0);
+            customerList.deleteCustomer(selectedcustomer);
+           // ecosystem.getCustomerDirectory().deleteCustomer(c);
             JOptionPane.showMessageDialog(null, "Customer deleted Successfully.");
             populateTable();
         } else {
@@ -438,7 +440,7 @@ public void populateRequestTable() {
         //c.setUserAccount(userAccount);
 
        // ecosystem.getCustomerDirectory().createCustomer(customer);
-        
+        //JOptionPane.showMessageDialog(null, "Customer has been Created");
         populateTable();
 
         txtCustID.setText("");
