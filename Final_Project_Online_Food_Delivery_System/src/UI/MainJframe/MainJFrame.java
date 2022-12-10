@@ -37,6 +37,8 @@ public class MainJFrame extends javax.swing.JFrame {
     CustomerDirectory customerList;
     UserAccountDirectory userAccountDir;
     RestaurantDirectory resList;
+    RestaurantDirectory restaurantList;
+    DeliveryManDirectory deliveryManList;
 
     Ecosystem ecosystem;
 
@@ -48,10 +50,15 @@ public class MainJFrame extends javax.swing.JFrame {
 //        this.resList = new RestaurantDirectory();
         this.ecosystem = new Ecosystem();
         this.customerList = this.ecosystem.getCustomerDirectory();
+        this.deliveryManList = this.ecosystem.getDeliveryManDirectory();
+        this.restaurantList = this.ecosystem.getRestaurantDirectory();
         this.userAccountDir = this.ecosystem.getUserAccountDir();
         this.resList = this.ecosystem.getRestaurantDirectory();
+        
         populateCustomerList();
+      //  populateDeliveryManList();
         populateRestaurantList();
+        
     }
 
     public void checkUserType(String selectedRole) {
@@ -98,7 +105,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     addUser.setRole(accountRole);
 
 //                    addCustomer = new Customer(custId, custName, cusStreetAdd, cusCity, cusPincode, custPhoneNum, custEmailID, addUser);
-                    addCustomer = new Customer(addUser);
+                    addCustomer = customerList.addCustomer( addUser);
                     addCustomer.setCus_emailid(custEmailID);
                     addCustomer.setCustName(custName);
                     addCustomer.setCustId(custId);
@@ -107,7 +114,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     addCustomer.setHome_pincode(cusPincode);
                     addCustomer.setHome_streetAddress(cusStreetAdd);
 
-                    customerList.createCustomer(addCustomer);
+                    //customerList.createCustomer(addCustomer);
                     userAccountDir.addUserAccounts(addUser);
                 }
             }
@@ -505,7 +512,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "This is Deliveryman panel");
                 } else if (rs.getString("user_role").equals("System Admin")) {
                     // add your code here
-                    sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem);
+                    sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem,customerList,deliveryManList);
                     panelBackWorkArea.removeAll();
                     panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
                     ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
@@ -514,6 +521,20 @@ public class MainJFrame extends javax.swing.JFrame {
                     btnUserType.setSelectedIndex(0);
                     JOptionPane.showMessageDialog(this, "You have successfully logged in");
                 }
+              //  else if (rs.getString("user_role").equals("Restaurant Admin")) {
+                 //   Customer searchRestaurant = resList.searchRestaurantWithUserAccount(user);
+                   // if (searchRestaurant != null) {
+                     //   ResWorkArea = new CustomWorkArea(searchRestaurant, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory());
+                     //   panelBackWorkArea.removeAll();
+                      //  panelBackWorkArea.add("Customer", ResWorkArea);
+                      //  ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                       // txtUserName.setText("");
+                      //  txtPassword.setText("");
+                       // btnUserType.setSelectedIndex(0);
+                       // JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                  //  } else {
+                       // JOptionPane.showMessageDialog(this, "Customer not available!");
+                  //  }
             } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
                 JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
             } else {
