@@ -8,6 +8,8 @@ import Model.Customer.Customer;
 import Model.Menu.Menu;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
+import Model.WorkQueue.WorkQueue;
+import UI.CustomerWorkArea.CustomerWorkArea;
 import UI.MenuWorkArea.ViewMenuPanel;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JPanel;
 
 /**
  *
@@ -31,13 +34,18 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
     RestaurantDirectory resList;
     javax.swing.JPanel panelBackWorkArea;
     Customer cusAccount;
+    WorkQueue workQueue;
 
-    public RestaurantSearchPanel(RestaurantDirectory resList, javax.swing.JPanel panelBackWorkArea, Customer cusAccount) {
+    public RestaurantSearchPanel(RestaurantDirectory resList, javax.swing.JPanel panelBackWorkArea, Customer cusAccount, WorkQueue workQueue) {
         initComponents();
+        
         this.resList = resList;
         this.cusAccount = cusAccount;
+        this.workQueue = workQueue;
+        
         lblWarType.setVisible(false);
         lblWarText.setVisible(false);
+        
         this.panelBackWorkArea = panelBackWorkArea;
     }
 
@@ -57,43 +65,43 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         }
     }
 
-    public void populateMenuList(Restaurant selectedRestaurant) {
-        try {
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
-                    "root", "amre1999");
-
-            PreparedStatement st = (PreparedStatement) connection
-                    .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?;");
-
-            st.setInt(1, selectedRestaurant.getRestaurantId());
-
-            ResultSet rs = st.executeQuery();
-
-            while (rs.next()) {
-                System.out.println(rs.getString("food_cateogory"));
-                String fd_category = rs.getString("food_cateogory");
-                String fd_name = rs.getString("food_name");
-                float fd_price = rs.getFloat("food_price");
-                String fd_preference = rs.getString("food_preference");
-                String fd_size = rs.getString("food_size");
-                int res_id = rs.getInt("restaurant_id");
-
-                Menu newMenu = new Menu();
-
-                newMenu.setFood_category(fd_category);
-                newMenu.setFood_name(fd_name);
-                newMenu.setFood_preference(fd_preference);
-                newMenu.setFood_price(fd_price);
-                newMenu.setFood_Qty(fd_size);
-                newMenu.setRestaurant_id(res_id);
-                
-                selectedRestaurant.addMenu(newMenu);
-            }
-
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-    }
+//    public void populateMenuList(Restaurant selectedRestaurant) {
+//        try {
+//            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+//                    "root", "amre1999");
+//
+//            PreparedStatement st = (PreparedStatement) connection
+//                    .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?;");
+//
+//            st.setInt(1, selectedRestaurant.getRestaurantId());
+//
+//            ResultSet rs = st.executeQuery();
+//
+//            while (rs.next()) {
+//                System.out.println(rs.getString("food_cateogory"));
+//                String fd_category = rs.getString("food_cateogory");
+//                String fd_name = rs.getString("food_name");
+//                float fd_price = rs.getFloat("food_price");
+//                String fd_preference = rs.getString("food_preference");
+//                String fd_size = rs.getString("food_size");
+//                int res_id = rs.getInt("restaurant_id");
+//
+//                Menu newMenu = new Menu();
+//
+//                newMenu.setFood_category(fd_category);
+//                newMenu.setFood_name(fd_name);
+//                newMenu.setFood_preference(fd_preference);
+//                newMenu.setFood_price(fd_price);
+//                newMenu.setFood_Qty(fd_size);
+//                newMenu.setRestaurant_id(res_id);
+//
+//                selectedRestaurant.addMenu(newMenu);
+//            }
+//
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace();
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +139,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         lblSearchType.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSearchType.setText("Search Type:");
 
+        txtSearch.setBackground(new java.awt.Color(242, 242, 242));
         txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSearchFocusLost(evt);
@@ -142,25 +151,38 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setBackground(new java.awt.Color(204, 255, 204));
         btnSearch.setText("Search");
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSearchMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchMouseExited(evt);
+            }
+        });
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        lblWarType.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblWarType.setForeground(new java.awt.Color(255, 51, 0));
         lblWarType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblWarType.setText("Choose One!");
 
+        lblWarText.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblWarText.setForeground(new java.awt.Color(255, 0, 51));
         lblWarText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblWarText.setText("This Field cannot be Empty!");
 
-        btnBack.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBack.setText("<< Back");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBackMouseClicked(evt);
@@ -173,6 +195,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
             }
         });
 
+        cmbBoxSearchType.setBackground(new java.awt.Color(242, 242, 242));
         cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select One Search Type", "Restaurant Name", "Restaurant Type", "Restaurant Street Address", "Restaurant City", "Restaurant Pincode", "View All" }));
         cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +245,17 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         tblRestaurantList.setPreferredSize(new java.awt.Dimension(300, 300));
         TablePanel.setViewportView(tblRestaurantList);
 
+        btnViewMenu.setBackground(new java.awt.Color(204, 255, 204));
         btnViewMenu.setText("View Menu");
+        btnViewMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnViewMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnViewMenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnViewMenuMouseExited(evt);
+            }
+        });
         btnViewMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewMenuActionPerformed(evt);
@@ -272,6 +305,8 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblSearch, lblSearchType});
 
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblWarText, lblWarType});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -310,14 +345,24 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         String searchType = String.valueOf(cmbBoxSearchType.getSelectedItem());
         String searchText = txtSearch.getText();
         ArrayList<Restaurant> searchResults = null;
-        if (searchType.equals("") && !searchType.equals("View All")) {
+        if (searchType.equals("") && searchType.equals("Select One Search Type")) {
             lblWarType.setVisible(true);
+            lblWarText.setVisible(true);
         } else if (searchType.equals("View All")) {
             populateTable(resList.getRestaurantList());
+            lblWarType.setVisible(false);
+            lblWarText.setVisible(false);
         } else {
-            if (searchText.equals("")) {
+            if (searchText.equals("") && searchType.equals("Select One Search Type")) {
                 lblWarText.setVisible(true);
+                lblWarType.setVisible(true);
+            } else if (searchText.equals("")) {
+                lblWarText.setVisible(true);
+            } else if (searchType.equals("Select One Search Type") && !searchText.equals("")) {
+                lblWarType.setVisible(true);
             } else {
+                lblWarType.setVisible(false);
+                lblWarText.setVisible(false);
                 if (searchType.equals("Restaurant Name")) {
                     searchResults = resList.searchWithResName(searchText);
                 } else if (searchType.equals("Restaurant Type")) {
@@ -348,13 +393,16 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         panelBackWorkArea.remove(this);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).previous(JPanel CustomerWorkArea);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
         // TODO add your handling code here:
-        if (txtSearch.getText().equals("")) {
+        if (txtSearch.getText().equals("") && !cmbBoxSearchType.getSelectedItem().equals("View All") && (cmbBoxSearchType.getSelectedIndex() == 0)) {
             lblWarText.setVisible(true);
+        } else {
+            lblWarText.setVisible(false);
         }
     }//GEN-LAST:event_txtSearchFocusLost
 
@@ -372,20 +420,40 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
         if (selectedResInd < 0) {
             JOptionPane.showMessageDialog(this, "Select a Restaurant");
+            return;
         }
 
         DefaultTableModel restaurantTable = (DefaultTableModel) tblRestaurantList.getModel();
-
+        
         Restaurant selectedRestaurant = (Restaurant) restaurantTable.getValueAt(selectedResInd, 0);
-        
-        
-        // ADD MENU PANEL
 
-        ViewMenuPanel menuPanel = new ViewMenuPanel(panelBackWorkArea, selectedRestaurant, cusAccount);
-        panelBackWorkArea.removeAll();
+        // ADD MENU PANEL
+        ViewMenuPanel menuPanel = new ViewMenuPanel(panelBackWorkArea, selectedRestaurant, cusAccount, workQueue);
+//        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("MenuPanel", menuPanel);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnViewMenuActionPerformed
+
+    private void btnSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseEntered
+        // TODO add your handling code here:
+        btnSearch.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnSearchMouseEntered
+
+    private void btnSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseExited
+        // TODO add your handling code here:
+        btnSearch.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_btnSearchMouseExited
+
+    private void btnViewMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMenuMouseEntered
+        // TODO add your handling code here:
+        btnViewMenu.setBackground(new Color(255, 255, 204));
+
+    }//GEN-LAST:event_btnViewMenuMouseEntered
+
+    private void btnViewMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMenuMouseExited
+        // TODO add your handling code here:
+        btnViewMenu.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_btnViewMenuMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

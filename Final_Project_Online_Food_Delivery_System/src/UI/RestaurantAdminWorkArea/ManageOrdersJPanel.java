@@ -16,6 +16,12 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     public ManageOrdersJPanel() {
         initComponents();
     }
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

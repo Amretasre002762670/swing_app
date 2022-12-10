@@ -5,8 +5,10 @@
 package UI.CustomerWorkArea;
 
 import Model.Customer.Customer;
+import Model.Order.OrderList;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
+import Model.WorkQueue.WorkQueue;
 import UI.Restaurants.RestaurantSearchPanel;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -24,13 +26,17 @@ public class CustomerWorkArea extends javax.swing.JPanel {
     javax.swing.JPanel panelBackWorkArea;
     javax.swing.JPanel panelLogin;
     RestaurantDirectory resList;
-
-    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea, javax.swing.JPanel panelLogin, RestaurantDirectory resList) {
+    OrderList orderHis;
+    WorkQueue workQueue;
+    
+    public CustomerWorkArea(Customer cusAccount, javax.swing.JPanel panelBackWorkArea, javax.swing.JPanel panelLogin, RestaurantDirectory resList, OrderList orderHis, WorkQueue workQueue) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
         this.panelLogin = panelLogin;
         this.cusAccount = cusAccount;
         this.resList = resList;
+        this.orderHis = orderHis;
+        this.workQueue = workQueue;
 //        this.CustomerWorkAreaPanel = new CustomerWorkArea(this.cusAccount, this.panelBackWorkArea, this.panelLogin, this.resList);
         txtUserName.setEditable(false);
         txtUserName.setText(cusAccount.getCustName());
@@ -58,9 +64,12 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(675, 675));
         setLayout(new java.awt.CardLayout());
 
         CustomerLandingPanel.setBackground(new java.awt.Color(204, 204, 255));
+        CustomerLandingPanel.setMaximumSize(new java.awt.Dimension(675, 675));
+        CustomerLandingPanel.setMinimumSize(new java.awt.Dimension(675, 675));
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -70,6 +79,14 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         btnSearchRestaurants.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         btnSearchRestaurants.setText("Search Restaurants");
         btnSearchRestaurants.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearchRestaurants.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSearchRestaurantsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSearchRestaurantsMouseExited(evt);
+            }
+        });
         btnSearchRestaurants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchRestaurantsActionPerformed(evt);
@@ -80,11 +97,37 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         btnTrackOrder.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         btnTrackOrder.setText("Track Order");
         btnTrackOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTrackOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTrackOrderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTrackOrderMouseExited(evt);
+            }
+        });
+        btnTrackOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrackOrderActionPerformed(evt);
+            }
+        });
 
         btnViewOrderHistory.setBackground(new java.awt.Color(204, 255, 204));
         btnViewOrderHistory.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         btnViewOrderHistory.setText("View Order History");
         btnViewOrderHistory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnViewOrderHistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnViewOrderHistoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnViewOrderHistoryMouseExited(evt);
+            }
+        });
+        btnViewOrderHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewOrderHistoryActionPerformed(evt);
+            }
+        });
 
         lblLoggedIn.setText("Logged In As:");
 
@@ -124,11 +167,11 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         CustomerLandingPanelLayout.setHorizontalGroup(
             CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                .addContainerGap(461, Short.MAX_VALUE)
+                .addContainerGap(536, Short.MAX_VALUE)
                 .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
             .addGroup(CustomerLandingPanelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(300, 300, 300)
                 .addGroup(CustomerLandingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSearchRestaurants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTrackOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,7 +182,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
         );
 
         CustomerLandingPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSearchRestaurants, btnTrackOrder, btnViewOrderHistory, lblSmallHeading});
@@ -163,7 +206,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
                 .addComponent(btnTrackOrder)
                 .addGap(50, 50, 50)
                 .addComponent(btnViewOrderHistory)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         add(CustomerLandingPanel, "card2");
@@ -189,19 +232,64 @@ public class CustomerWorkArea extends javax.swing.JPanel {
 
     private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
         // TODO add your handling code here:
-        panelBackWorkArea.removeAll();
         panelBackWorkArea.add("LoginPanel", panelLogin);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-//        panelBackWorkArea.remove(this);
-//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_lblLoggedOutMouseClicked
 
     private void btnSearchRestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsActionPerformed
         // TODO add your handling code here:
-        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea, cusAccount);
+//        panelBackWorkArea.removeAll();
+        RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea, cusAccount, workQueue);
         panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
+
+    private void btnViewOrderHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderHistoryActionPerformed
+        // TODO add your handling code here:
+//        panelBackWorkArea.removeAll();
+        OrderHistory orderHistory = new OrderHistory(panelBackWorkArea, orderHis);
+        panelBackWorkArea.add("SearchRestrauntsPanel", orderHistory);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnViewOrderHistoryActionPerformed
+
+    private void btnSearchRestaurantsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsMouseEntered
+        // TODO add your handling code here:
+        btnSearchRestaurants.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnSearchRestaurantsMouseEntered
+
+    private void btnSearchRestaurantsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchRestaurantsMouseExited
+        // TODO add your handling code here:
+        btnSearchRestaurants.setBackground(new Color(204, 255, 204));
+
+    }//GEN-LAST:event_btnSearchRestaurantsMouseExited
+
+    private void btnTrackOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackOrderMouseEntered
+        // TODO add your handling code here:
+        btnTrackOrder.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnTrackOrderMouseEntered
+
+    private void btnTrackOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackOrderMouseExited
+        // TODO add your handling code here:
+        btnTrackOrder.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_btnTrackOrderMouseExited
+
+    private void btnViewOrderHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewOrderHistoryMouseEntered
+        // TODO add your handling code here:
+        btnViewOrderHistory.setBackground(new Color(255, 255, 204));
+    }//GEN-LAST:event_btnViewOrderHistoryMouseEntered
+
+    private void btnViewOrderHistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewOrderHistoryMouseExited
+        // TODO add your handling code here:
+        btnViewOrderHistory.setBackground(new Color(204, 255, 204));
+
+    }//GEN-LAST:event_btnViewOrderHistoryMouseExited
+
+    private void btnTrackOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackOrderActionPerformed
+        // TODO add your handling code here:
+        CurrentOrderPanel trackOrder = new CurrentOrderPanel(panelBackWorkArea, workQueue, cusAccount);
+        panelBackWorkArea.add("Track Order", trackOrder);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnTrackOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

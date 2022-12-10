@@ -3,38 +3,45 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SystemAdminWorkArea;
+
 import Model.Customer.Customer;
 import Model.DeliveryMan.DeliveryMan;
 import Model.DeliveryMan.DeliveryManDirectory;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
-import Model.Role.Customerrole;
 import Model.Role.DeliveryManrole;
 import Model.Role.Role;
 import static Model.Role.Role.RoleType.DeliveryMan;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class ManageDeliveryManJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private DeliveryMan deliveryMan;
     DeliveryManDirectory deliveryManList;
- 
+
     /**
      * Creates new form ManageDeliveryManJPanel
      */
     public ManageDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, DeliveryManDirectory deliveryManList) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;        
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
         this.deliveryManList = deliveryManList;
@@ -72,6 +79,8 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         txtDeliverManName = new javax.swing.JTextField();
         lblDelname = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        lblDelPhoneNum = new javax.swing.JLabel();
+        txtDeliveryManPhoneNum = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
@@ -154,6 +163,8 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage DeliveryMan ");
 
+        lblDelPhoneNum.setText("Phone Number");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +187,8 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel6)
                             .addComponent(lblDelCom)
                             .addComponent(lblDelPassword)
-                            .addComponent(lblDelname))
+                            .addComponent(lblDelname)
+                            .addComponent(lblDelPhoneNum))
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(delComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +196,8 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
                             .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeliveryManPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(btnCreate)
@@ -203,10 +216,11 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRefresh)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBack)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -231,9 +245,13 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
                     .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDelPhoneNum)
+                    .addComponent(txtDeliveryManPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDelPassword)
                     .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnUpdateDeli)
@@ -243,6 +261,9 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = deliveryManJTable.getSelectedRow();
@@ -260,11 +281,11 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         for (DeliveryMan d : deliveryManList.getDeliveryManList()) {
-            if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName()) ) {
+            if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName())) {
                 d.setDeliveryManName(txtDeliverManName.getText());
                 d.setDeliveryManId(Integer.parseInt(txtDeliveryManID.getText()));
                 d.setCommunity(txtDeliverManCommunity.getText());
-                       
+
             }
         }
 
@@ -290,7 +311,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             txtDeliveryManUserName.setText(d.getUserAccount().getUsername());
             txtDeliveryManPassword.setText(d.getUserAccount().getPassword());
 
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Please select a row");
         }
         txtDeliveryManID.getText();
@@ -310,35 +331,33 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         //int DelId = Integer.parseInt(txtDeliveryManID.getText());
         String community = txtDeliverManCommunity.getText();
 
-       // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
-                
-               // getEmployeeDirectory().createEmployee(name);
-
+        // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
+        // getEmployeeDirectory().createEmployee(name);
         UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
-               // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
-account.setUsername(username);
-account.setPassword(password);
-account.setRole("DeliveryMan");
+        // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setRole("DeliveryMan");
 
-        DeliveryMan d = deliveryManList.createDeliveryMan(account);
+        DeliveryMan d = deliveryManList.addDeliveryManWithUserAcct(account);
         d.setCommunity(community);
         d.setDeliveryManName(name);
-        
+
         txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
         txtDeliveryManUserName.setText("");
         txtDeliveryManPassword.setText("");
 
-         populateTable();
+        populateTable();
         //JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
-        
+
         txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
         txtDeliveryManUserName.setText("");
         txtDeliveryManPassword.setText("");
-         JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
+        JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -352,7 +371,7 @@ account.setRole("DeliveryMan");
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-       // sysAdminwjp.populateTree();
+        // sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
@@ -372,6 +391,7 @@ account.setRole("DeliveryMan");
     private javax.swing.JLabel lblDelCom;
     private javax.swing.JLabel lblDelId;
     private javax.swing.JLabel lblDelPassword;
+    private javax.swing.JLabel lblDelPhoneNum;
     private javax.swing.JLabel lblDelUsername;
     private javax.swing.JLabel lblDelname;
     private javax.swing.JLabel lblTitle;
@@ -380,27 +400,28 @@ account.setRole("DeliveryMan");
     private javax.swing.JTextField txtDeliverManName;
     private javax.swing.JTextField txtDeliveryManID;
     private javax.swing.JPasswordField txtDeliveryManPassword;
+    private javax.swing.JTextField txtDeliveryManPhoneNum;
     private javax.swing.JTextField txtDeliveryManUserName;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-         DefaultTableModel model = (DefaultTableModel) deliveryManJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) deliveryManJTable.getModel();
 
         model.setRowCount(0);
-        
-            for (DeliveryMan deliveryMan : deliveryManList.getDeliveryManList()) {
-                Object[] row = new Object[model.getColumnCount()];
-                row[0] = deliveryMan.getDeliveryManId();
-                row[1] = deliveryMan;
-                row[2] = deliveryMan.getCommunity();
-                row[3] = deliveryMan.getUserAccount().getUsername();
 
-                model.addRow(row);
-                }  
+        for (DeliveryMan deliveryMan : deliveryManList.getDeliveryManList()) {
+            Object[] row = new Object[model.getColumnCount()];
+            row[0] = deliveryMan.getDeliveryManId();
+            row[1] = deliveryMan;
+            row[2] = deliveryMan.getCommunity();
+            row[3] = deliveryMan.getUserAccount().getUsername();
+
+            model.addRow(row);
+        }
     }
 
     private void populateComboBox() {
-     delComboBox.removeAllItems();
-       delComboBox.addItem(Role.RoleType.DeliveryMan.toString());   
-}
+        delComboBox.removeAllItems();
+        delComboBox.addItem(Role.RoleType.DeliveryMan.toString());
+    }
 }

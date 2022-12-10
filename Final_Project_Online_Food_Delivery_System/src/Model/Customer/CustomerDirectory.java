@@ -28,7 +28,7 @@ public class CustomerDirectory {
     public void setCustomerList(ArrayList<Customer> customerList) {
         this.customerList = customerList;
     }
-    public Customer createnewCustomer  (){
+    public Customer createnewCustomer(){
         Customer newC = new Customer();
         customerList.add(newC);  
         return newC;
@@ -74,5 +74,8 @@ public class CustomerDirectory {
         }
         return searchedCustomer;
     }
-  
+
+    public void createCustomer(Customer cus) {
+        customerList.add(cus);
+    }
 }

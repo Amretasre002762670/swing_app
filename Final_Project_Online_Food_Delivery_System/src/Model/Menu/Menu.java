@@ -15,6 +15,7 @@ public class Menu {
     private float food_price;
     private String food_preference;
     private String food_Qty;
+    private int food_id;
 
     public int getRestaurant_id() {
         return restaurant_id;
@@ -64,6 +65,14 @@ public class Menu {
         this.food_Qty = food_Qty;
     }
 
+    public int getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(int food_id) {
+        this.food_id = food_id;
+    }
+    
     @Override
     public String toString() {
         return food_name; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody

@@ -7,7 +7,6 @@ package Model.UserAccount;
 import Model.Customer.Customer;
 import Model.Employee.Employee;
 import Model.Role.Role;
-import Model.Role.SystemAdminrole;
 import Model.System.Ecosystem;
 import Model.System.Organization;
 import java.util.ArrayList;

@@ -44,6 +44,7 @@
                           <Component id="lblDelCom" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDelPassword" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDelname" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDelPhoneNum" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -53,6 +54,7 @@
                           <Component id="txtDeliveryManPassword" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="txtDeliverManCommunity" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="txtDeliverManName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="txtDeliveryManPhoneNum" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -78,10 +80,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnRefresh" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTitle" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTitle" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="97" max="-2" attributes="0"/>
@@ -112,10 +116,15 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDelPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDeliveryManPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDelPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDeliveryManPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdateDeli" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -285,6 +294,13 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Manage DeliveryMan "/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDelPhoneNum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Phone Number"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeliveryManPhoneNum">
     </Component>
   </SubComponents>
 </Form>

@@ -4,6 +4,7 @@
  */
 package Model.WorkQueue;
 
+import Model.Order.Order;
 import Model.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -11,23 +12,18 @@ import java.util.Date;
  *
  * @author puppalanagavaishnavi
  */
+public class WorkRequest {
 
-    public abstract class WorkRequest {
-
-    private String message;
-    private UserAccount sender;
-    private UserAccount receiver;
+    private String message; // "Order Placed"
+    private UserAccount resAdmin;
+    private UserAccount cusAcct;
+    private UserAccount deliveryMan;
     private String status;
-    private Time requestTime;
-    private Time resolveTime;
-    private Date requestDate;
-    
-    
-    public WorkRequest(){
-        requestTime = new Time();
-        resolveTime = new Time();
-        requestDate = new Date();
-    }
+    private String requestTime;
+    private String resolveTime;
+    private String requestDate;
+    Order orderRequest;
+
 
     public String getMessage() {
         return message;
@@ -37,20 +33,28 @@ import java.util.Date;
         this.message = message;
     }
 
-    public UserAccount getSender() {
-        return sender;
+    public UserAccount getResAdmin() {
+        return resAdmin;
     }
 
-    public void setSender(UserAccount sender) {
-        this.sender = sender;
+    public UserAccount getCusAcct() {
+        return cusAcct;
     }
 
-    public UserAccount getReceiver() {
-        return receiver;
+    public UserAccount getDeliveryMan() {
+        return deliveryMan;
     }
 
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
+    public void setResAdmin(UserAccount resAdmin) {
+        this.resAdmin = resAdmin;
+    }
+
+    public void setCusAcct(UserAccount cusAcct) {
+        this.cusAcct = cusAcct;
+    }
+
+    public void setDeliveryMan(UserAccount deliveryMan) {
+        this.deliveryMan = deliveryMan;
     }
 
     public String getStatus() {
@@ -61,28 +65,47 @@ import java.util.Date;
         this.status = status;
     }
 
-    public Time getRequestTime() {
+    public String getRequestTime() {
         return requestTime;
     }
 
-    public void setRequestTime(Time requestTime) {
+    public void setRequestTime(String requestTime) {
         this.requestTime = requestTime;
     }
 
-    public Time getResolveTime() {
+    public String getResolveTime() {
         return resolveTime;
     }
 
-    public void setResolveTime(Time resolveTime) {
+    public void setResolveTime(String resolveTime) {
         this.resolveTime = resolveTime;
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
     }
+
+    public Order getOrderRequest() {
+        return orderRequest;
+    }
+
+    public void setOrderRequest(Order orderRequest) {
+        this.orderRequest = orderRequest;
+    }
     
+//    public WorkRequest updateWorkRequestMessage(WorkRequest workReq, String Message) {
+//        orderRequest.get
+//    }
+
+    @Override
+    public String toString() {
+        return requestDate; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
+
 }

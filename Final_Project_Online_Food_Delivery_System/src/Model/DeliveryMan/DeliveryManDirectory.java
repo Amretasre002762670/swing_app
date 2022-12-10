@@ -6,14 +6,14 @@ package Model.DeliveryMan;
 
 import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
-import Model.Customer.Customer;
 import Model.System.Ecosystem;
+
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class DeliveryManDirectory {
-    
+
     Ecosystem ecosystem;
     private ArrayList<DeliveryMan> deliveryManList;
 
@@ -21,22 +21,56 @@ public class DeliveryManDirectory {
         this.ecosystem = ecosystem;
         deliveryManList = new ArrayList<DeliveryMan>();
     }
-     public ArrayList<DeliveryMan> getDeliveryManList() {
+    
+    public DeliveryManDirectory() {
+        deliveryManList = new ArrayList<DeliveryMan>();
+    }
+
+    public ArrayList<DeliveryMan> getDeliveryManList() {
         return deliveryManList;
     }
 
     public void setDeliveryManList(ArrayList<DeliveryMan> deliveryManList) {
         this.deliveryManList = deliveryManList;
     }
-    
-    public DeliveryMan createDeliveryMan( UserAccount user){
-        DeliveryMan newDeliveryMan = new DeliveryMan(user);
-        deliveryManList.add(newDeliveryMan);  
-        return newDeliveryMan;
+
+    public void addDeliveryMan(DeliveryMan addDelMan) {
+        deliveryManList.add(addDelMan);
     }
-     
-    public void deleteDeliveryMan(DeliveryMan selecteddeliveryMan) {
-        deliveryManList.remove(selecteddeliveryMan);
+
+    public DeliveryMan addDeliveryManWithUserAcct(UserAccount user) {
+        DeliveryMan delMan = new DeliveryMan(user);
+        deliveryManList.add(delMan);
+        return delMan;
+    }
+
+//public Customer addCustomer(UserAccount user) {
+//        Customer newCustomer = new Customer(user);
+//        customerList.add(newCustomer);
+//        return newCustomer;
+//    }
+    public DeliveryMan createDeliveryMan(String name, UserAccount userAccount) {
+        DeliveryMan d = new DeliveryMan(userAccount);
+        d.setDeliveryManName(name);
+        d.setUserAccount(userAccount);
+        deliveryManList.add(d);
+        return d;
+    }
+
+    public void deleteDeliveryMan(DeliveryMan deliveryMan) {
+        deliveryManList.remove(deliveryMan);
+    }
+
+    public DeliveryMan findDeliveryManDetails(UserAccount user) {
+        
+        DeliveryMan deliveryManDetails = new DeliveryMan();
+
+        for (DeliveryMan delMan : deliveryManList) {
+            if (delMan.getUserAccount().getUsername().equals(user.getUsername())) {
+                deliveryManDetails = delMan;
+                break;
+            }
+        }
+        return deliveryManDetails;
     }
 }
-
