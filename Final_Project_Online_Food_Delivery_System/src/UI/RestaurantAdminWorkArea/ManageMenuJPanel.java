@@ -311,8 +311,13 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.setFood_name(txtMenuName.getText());
+        
+               
+        
+selectedRes.addMenu(menu);
 
-       
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
