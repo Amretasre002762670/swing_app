@@ -32,7 +32,8 @@ public class RestaurantDirectory {
         restaurantList.add(resDetails);
         return resDetails;
     }
-
+       
+    
     public ArrayList<Restaurant> searchWithResName(String resName) {
         ArrayList<Restaurant> result = new ArrayList<Restaurant>();
         for (Restaurant restaurant : restaurantList) {

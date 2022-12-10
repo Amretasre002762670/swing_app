@@ -21,6 +21,9 @@ public class DeliveryMan {
         this.deliveryManName = this.userAccount.getUsername();
         this.community = community;
     }
+     public DeliveryMan(UserAccount user) {
+        this.userAccount = user;
+    }
 
     DeliveryMan() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

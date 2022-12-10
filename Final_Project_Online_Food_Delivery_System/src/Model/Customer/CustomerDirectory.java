@@ -40,8 +40,8 @@ public class CustomerDirectory {
         return newCustomer;
     }
    
-     public void deleteCustomer(Customer customer) {
-        customerList.remove(customer);
+     public void deleteCustomer(Customer selectedcustomer) {
+        customerList.remove(selectedcustomer);
     }
    
     public boolean findCustomer(String customerName, String customerPassword) {
@@ -74,9 +74,5 @@ public class CustomerDirectory {
         }
         return searchedCustomer;
     }
-
-    public void createCustomer(Customer addCustomer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+  
 }

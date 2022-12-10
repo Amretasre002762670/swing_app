@@ -5,7 +5,7 @@
 package Model.System;
 
 import Model.Employee.Employee;
-import Model.Role.SystemAdminrole;
+//import Model.Role.SystemAdminrole;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -22,7 +22,7 @@ public class ConfigureaSystem {
 
         UserAccount ua = new UserAccount();
         ua.setUsername("sysadmin");
-        ua.setPassword("sysadmin");
+        ua.setPassword("sysadmin123");
         ua.setRole("System Admin");
 
         system.getUserAccountDir().addUserAccounts(ua);

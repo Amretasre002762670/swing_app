@@ -29,16 +29,14 @@ public class DeliveryManDirectory {
         this.deliveryManList = deliveryManList;
     }
     
-    public DeliveryMan createDeliveryMan(String name, UserAccount userAccount){
-        DeliveryMan d = new DeliveryMan();
-        d.setDeliveryManName(name);
-        d.setUserAccount(userAccount);
-        deliveryManList.add(d);  
-        return d;
+    public DeliveryMan createDeliveryMan( UserAccount user){
+        DeliveryMan newDeliveryMan = new DeliveryMan(user);
+        deliveryManList.add(newDeliveryMan);  
+        return newDeliveryMan;
     }
-    
-    public void deleteDeliveryMan(DeliveryMan deliveryMan) {
-        deliveryManList.remove(deliveryMan);
+     
+    public void deleteDeliveryMan(DeliveryMan selecteddeliveryMan) {
+        deliveryManList.remove(selecteddeliveryMan);
     }
 }
 

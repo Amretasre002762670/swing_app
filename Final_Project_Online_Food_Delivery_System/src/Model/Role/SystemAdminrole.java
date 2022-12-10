@@ -16,14 +16,14 @@ import javax.swing.JPanel;
  * @author puppalanagavaishnavi
  */
 
-   public class SystemAdminrole extends Role{
+   //public class SystemAdminrole extends Role{
 
   
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Ecosystem system) {
-        return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
-    }
+   // public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Ecosystem system) {
+       // return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
+  // }//
     
-}
+//}
 
 
   
