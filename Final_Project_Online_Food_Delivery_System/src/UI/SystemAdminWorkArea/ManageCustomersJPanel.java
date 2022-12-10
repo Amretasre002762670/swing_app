@@ -17,13 +17,16 @@ import Model.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author puppalanagavaishnavi
  */
-
-
 public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
@@ -38,6 +41,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.ecosystem = ecosystem;
         this.customerList = customerList;
+        txtCustID.setEditable(false);
         populateComboBox();
         populateTable();
     }
@@ -291,7 +295,88 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void populateRequestTable() {
+
+    public void sendUserAccountDetails(UserAccount userAccount) {
+        String queryCustomerTable = "INSERT INTO User_Account_Directory (user_name, user_password, user_role) VALUES (?, ?, ?);";
+
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "Qazmaggi123@");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+            st_CustomerTable.setString(1, userAccount.getUsername());
+            st_CustomerTable.setString(2, userAccount.getPassword());
+            st_CustomerTable.setString(3, userAccount.getRole());
+
+            st_CustomerTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
+    }
+
+    public int getUserIdForUserCreated(UserAccount user) {
+        String queryCustomerTable = "SELECT user_id FROM User_Account_Directory WHERE user_name=?;";
+        int cus_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "Qazmaggi123@");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+            st_CustomerTable.setString(1, user.getUsername());
+
+            ResultSet rs = st_CustomerTable.executeQuery();
+
+            while (rs.next()) {
+                cus_id = rs.getInt("user_id");
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
+        return cus_id;
+    }
+
+    public void sendCustomerToDB(Customer c) {
+        String queryCustomerTable = "INSERT INTO Customer_Directory (customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode, user_id, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int cus_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "Qazmaggi123@");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+            st_CustomerTable.setString(1, c.getCustName());
+            st_CustomerTable.setString(2, c.getCus_emailid());
+            st_CustomerTable.setInt(3, c.getCustPhoneNumber());
+            st_CustomerTable.setString(4, c.getHome_streetAddress());
+            st_CustomerTable.setString(5, c.getHome_City());
+            st_CustomerTable.setInt(6, c.getHome_pincode());
+
+            UserAccount user = new UserAccount();
+            user.setUsername(c.getUserAccount().getUsername());
+            user.setPassword(c.getUserAccount().getPassword());
+
+            cus_id = getUserIdForUserCreated(user);
+            
+            st_CustomerTable.setInt(7, cus_id);
+            st_CustomerTable.setString(8, c.getUserAccount().getUsername());
+
+            st_CustomerTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void populateRequestTable() {
 
     }
 
@@ -305,10 +390,10 @@ public void populateRequestTable() {
 
         model.setRowCount(0);
 
-        for (Customer customer :customerList.getCustomerList()) {
+        for (Customer customer : customerList.getCustomerList()) {
             Object[] row = new Object[8];
-         //    System.out.println("Manage Customer panel");
-          //  System.out.println(customer.getCustName());
+            //    System.out.println("Manage Customer panel");
+            //  System.out.println(customer.getCustName());
             row[0] = customer.getCustId();
             row[1] = customer;
             row[2] = customer.getHome_streetAddress();
@@ -362,11 +447,10 @@ public void populateRequestTable() {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
-        if (selectedRow >= 0)
-        {
+        if (selectedRow >= 0) {
             Customer selectedcustomer = (Customer) customerJTable.getValueAt(selectedRow, 0);
             customerList.deleteCustomer(selectedcustomer);
-           // ecosystem.getCustomerDirectory().deleteCustomer(c);
+            // ecosystem.getCustomerDirectory().deleteCustomer(c);
             JOptionPane.showMessageDialog(null, "Customer deleted Successfully.");
             populateTable();
         } else {
@@ -419,7 +503,7 @@ public void populateRequestTable() {
         String streetaddress = txtCustStreetAddress.getText();
         String City = txtCustCity.getText();
         int Pincode = Integer.parseInt(txtCustPincode.getText());
-        int phoneNumber = Integer.parseInt(txtCustStreetAddress.getText());
+        int phoneNumber = Integer.parseInt(txtCustPhoneNum.getText());
         String Emailaddress = txtCustEmailAdd.getText();
 //        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
@@ -428,8 +512,6 @@ public void populateRequestTable() {
         account.setPassword(password);
         account.setRole("Customer");
 
-        
-        
         Customer c = customerList.addCustomer(account);
         c.setCus_emailid(Emailaddress);
         c.setCustPhoneNumber(phoneNumber);
@@ -439,9 +521,17 @@ public void populateRequestTable() {
         c.setHome_streetAddress(streetaddress);
         //c.setUserAccount(userAccount);
 
-       // ecosystem.getCustomerDirectory().createCustomer(customer);
+        // ecosystem.getCustomerDirectory().createCustomer(customer);
         //JOptionPane.showMessageDialog(null, "Customer has been Created");
         populateTable();
+
+//        for(Customer cus: customerList.getCustomerList()) {
+//            System.out.println(cus.getCustName());
+//        }
+        sendUserAccountDetails(account);
+//        int cus_id = getUserIdForUserCreated(account);
+//        System.out.println(cus_id);
+        sendCustomerToDB(c);
 
         txtCustID.setText("");
         txtCustName.setText("");
@@ -460,7 +550,7 @@ public void populateRequestTable() {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-       // sysAdminwjp.populateTree();
+        // sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
