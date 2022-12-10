@@ -42,6 +42,7 @@ public class Currentorder extends javax.swing.JPanel {
             txtorders.setText(String.valueOf(currentOrder.getOrderRequest().getMenu().size()));
             txtresaddress.setText(currentOrder.getOrderRequest().getResDetails().getRes_street_add());
             txttime.setText(currentOrder.getRequestTime());
+            txtStatus.setText(currentOrder.getMessage());
         } else {
             lblWarning.setVisible(true);
         }
@@ -74,19 +75,25 @@ public class Currentorder extends javax.swing.JPanel {
         lbldelcurback = new javax.swing.JLabel();
         btnUpdateStatus = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
+        lblStatusOrder = new javax.swing.JLabel();
+        txtStatus = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
-        lblid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblid.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lblid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblid.setText("Order ID");
 
-        lbltime.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbltime.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbltime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltime.setText("Ordered Time");
 
-        lblloorders.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblloorders.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lblloorders.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblloorders.setText("Number of orders");
 
-        lblresaddress.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblresaddress.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lblresaddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblresaddress.setText("Restaurant Address");
 
         txtid.addActionListener(new java.awt.event.ActionListener() {
@@ -146,55 +153,61 @@ public class Currentorder extends javax.swing.JPanel {
         lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWarning.setText("There is no Current Orders");
 
+        lblStatusOrder.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lblStatusOrder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStatusOrder.setText("Status Of Order:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(btnresdetails)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(btnUpdateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
-                .addComponent(btncusdetails)
-                .addGap(216, 216, 216))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbldelcurorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbldelcurorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(btnresdetails)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                        .addComponent(btnUpdateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
+                        .addComponent(btncusdetails))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblid)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap()
+                                .addComponent(lbldelcurback))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(183, 183, 183)
-                                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(287, 287, 287))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbltime)
-                            .addComponent(lblloorders)
-                            .addComponent(lblresaddress))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txttime, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(txtorders)
-                            .addComponent(txtresaddress))
-                        .addGap(0, 0, 0))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbldelcurback)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(237, 237, 237)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblid)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lblStatusOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lbltime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblloorders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblresaddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txttime, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                            .addComponent(txtorders)
+                                            .addComponent(txtresaddress)
+                                            .addComponent(txtStatus))))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnUpdateStatus, btncusdetails, btnresdetails});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblid, lblloorders, lblresaddress, lbltime});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtStatus, txtid, txtorders, txtresaddress, txttime});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +216,9 @@ public class Currentorder extends javax.swing.JPanel {
                 .addComponent(lbldelcurorder)
                 .addGap(18, 18, 18)
                 .addComponent(lbldelcurback)
-                .addGap(60, 60, 60)
+                .addGap(11, 11, 11)
+                .addComponent(lblWarning)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblid))
@@ -219,14 +234,16 @@ public class Currentorder extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblresaddress)
                     .addComponent(txtresaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStatusOrder)
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnresdetails)
                     .addComponent(btncusdetails)
                     .addComponent(btnUpdateStatus))
-                .addGap(75, 75, 75)
-                .addComponent(lblWarning)
-                .addContainerGap())
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -259,7 +276,7 @@ public class Currentorder extends javax.swing.JPanel {
 
     private void lbldelcurbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseClicked
         panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea); // TODO add your handling code here:
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "DeliveryManWorkArea"); // TODO add your handling code here:
     }//GEN-LAST:event_lbldelcurbackMouseClicked
 
     private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
@@ -274,6 +291,7 @@ public class Currentorder extends javax.swing.JPanel {
     private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JButton btncusdetails;
     private javax.swing.JButton btnresdetails;
+    private javax.swing.JLabel lblStatusOrder;
     private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lbldelcurback;
     private javax.swing.JLabel lbldelcurorder;
@@ -281,6 +299,7 @@ public class Currentorder extends javax.swing.JPanel {
     private javax.swing.JLabel lblloorders;
     private javax.swing.JLabel lblresaddress;
     private javax.swing.JLabel lbltime;
+    private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtorders;
     private javax.swing.JTextField txtresaddress;

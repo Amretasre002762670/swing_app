@@ -7,6 +7,7 @@ package UI.DeliveryManWorkArea;
 import Model.DeliveryMan.DeliveryMan;
 import Model.WorkQueue.WorkQueue;
 import Model.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -32,7 +33,6 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         txtloggedin.setEditable(false);
         txtloggedin.setText(this.delManDetails.getDeliveryManName());
 
-
     }
 
     /**
@@ -51,7 +51,6 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         lbldelloggedin = new javax.swing.JLabel();
         txtloggedin = new javax.swing.JTextField();
         btndelviewqueue = new javax.swing.JButton();
-        btndelorders = new javax.swing.JButton();
         btndelcuroders = new javax.swing.JButton();
         lbllogout = new javax.swing.JLabel();
 
@@ -59,6 +58,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         setForeground(new java.awt.Color(204, 204, 255));
 
         titledeliverylbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        titledeliverylbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titledeliverylbl.setText("DELIVERYMAN WORK AREA");
 
         lbldelloggedin.setFont(new java.awt.Font("Helvetica", 2, 14)); // NOI18N
@@ -72,10 +72,6 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 btndelviewqueueActionPerformed(evt);
             }
         });
-
-        btndelorders.setBackground(new java.awt.Color(204, 255, 204));
-        btndelorders.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
-        btndelorders.setText("Delivered Orders");
 
         btndelcuroders.setBackground(new java.awt.Color(204, 255, 204));
         btndelcuroders.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
@@ -100,43 +96,41 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(titledeliverylbl)
-                .addGap(93, 93, 93)
-                .addComponent(lbllogout)
-                .addGap(67, 67, 67))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btndelcuroders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btndelviewqueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btndelorders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(lbldelloggedin)
                         .addGap(32, 32, 32)
-                        .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(220, 220, 220))
+                        .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btndelcuroders, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(btndelviewqueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 240, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbllogout)
+                .addGap(66, 66, 66))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titledeliverylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titledeliverylbl)
-                    .addComponent(lbllogout))
-                .addGap(48, 48, 48)
+                .addGap(21, 21, 21)
+                .addComponent(titledeliverylbl)
+                .addGap(31, 31, 31)
+                .addComponent(lbllogout)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbldelloggedin))
                 .addGap(83, 83, 83)
                 .addComponent(btndelviewqueue)
-                .addGap(33, 33, 33)
-                .addComponent(btndelorders)
-                .addGap(37, 37, 37)
+                .addGap(95, 95, 95)
                 .addComponent(btndelcuroders)
                 .addContainerGap(283, Short.MAX_VALUE))
         );
@@ -156,10 +150,14 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         {
             WorkRequest currentOrder = workQueue.findCurrentWorkRequest();
-            Currentorder curorder = new Currentorder(panelBackWorkArea, currentOrder, flag, workQueue);
-            panelBackWorkArea.add("Currentorder", curorder);
-            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-
+            System.out.println(workQueue.findCurrentWorkRequest().getStatus() == null);
+            if (workQueue.findCurrentWorkRequest().getStatus() == null) {
+                JOptionPane.showMessageDialog(this, "No Current Orders To Display");
+            } else {
+                Currentorder curorder = new Currentorder(panelBackWorkArea, currentOrder, flag, workQueue);
+                panelBackWorkArea.add("Currentorder", curorder);
+                ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+            }
         }
     }//GEN-LAST:event_btndelcurodersActionPerformed
 
@@ -172,7 +170,6 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btndelcuroders;
-    private javax.swing.JButton btndelorders;
     private javax.swing.JButton btndelviewqueue;
     private javax.swing.JLabel lbldelloggedin;
     private javax.swing.JLabel lbllogout;

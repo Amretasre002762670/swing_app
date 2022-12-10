@@ -179,7 +179,7 @@ public class CustomerDetails extends javax.swing.JPanel {
     private void lbldelcusbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcusbackMouseClicked
         // TODO add your handling code here:
          panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Currentorder");
     }//GEN-LAST:event_lbldelcusbackMouseClicked
 
     private void lbldelcusbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcusbackMouseEntered

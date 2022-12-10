@@ -122,7 +122,7 @@ public class RestaurantDetails extends javax.swing.JPanel {
                                 .addGap(26, 26, 26)
                                 .addComponent(lbldelbackbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(94, 94, 94)
+                                .addContainerGap(94, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbldelresphone)
                                     .addComponent(lbldelresmanager)
@@ -131,11 +131,10 @@ public class RestaurantDetails extends javax.swing.JPanel {
                                     .addComponent(lbldelresaddress))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtdelresname)
-                                        .addComponent(txtdelresmanager)
-                                        .addComponent(txtdelresphone)
-                                        .addComponent(txtdelresaddress))
+                                    .addComponent(txtdelresname)
+                                    .addComponent(txtdelresmanager)
+                                    .addComponent(txtdelresphone)
+                                    .addComponent(txtdelresaddress)
                                     .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 189, Short.MAX_VALUE))
                     .addComponent(lbldelresdetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -180,7 +179,7 @@ public class RestaurantDetails extends javax.swing.JPanel {
     private void lbldelbackbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelbackbtnMouseClicked
         // TODO add your handling code here:
         panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Currentorder");
     }//GEN-LAST:event_lbldelbackbtnMouseClicked
 
     private void lbldelbackbtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelbackbtnMouseEntered

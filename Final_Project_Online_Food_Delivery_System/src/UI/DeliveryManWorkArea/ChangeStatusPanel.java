@@ -63,6 +63,11 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setText("<< Back");
         btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
 
         lblOrderStatus.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblOrderStatus.setText("Current Order Status:");
@@ -162,6 +167,12 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
             lblWarning.setVisible(true);
         }
     }//GEN-LAST:event_btnOrderDeliveredActionPerformed
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Currentorder");
+    }//GEN-LAST:event_btnBackMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
