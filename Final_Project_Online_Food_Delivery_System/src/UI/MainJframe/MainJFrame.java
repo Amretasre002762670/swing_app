@@ -28,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import UI.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+import UI.RestaurantAdminWorkArea.RestaurantAdminWorkAreaJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -553,6 +554,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CustomerWorkArea cusWorkArea;
         DeliveryManWorkArea delworkarea;
         SystemAdminWorkAreaJPanel sysadminWorkArea;
+        RestaurantAdminWorkAreaJPanel resadminWorkArea;
 
         if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
             lblWarningUserType.setVisible(false);
@@ -624,17 +626,17 @@ public class MainJFrame extends javax.swing.JFrame {
                         btnUserType.setSelectedIndex(0);
                         JOptionPane.showMessageDialog(this, "You have successfully logged in");
                     }
-              //       } else if (rs.getString("user_role").equals("Restaurant Admin")) {
+                     else if (rs.getString("user_role").equals("Restaurant Admin")) {
                         // add your code here
-                  //      resAdminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem );
-                  //      panelBackWorkArea.removeAll();
-                   //     panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
-                    //    ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-                    //    txtUserName.setText("");
-                    //    txtPassword.setText("");
-                     //   btnUserType.setSelectedIndex(0);
-                    //    JOptionPane.showMessageDialog(this, "You have successfully logged in");
-                   // }
+                       resadminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem );
+                        panelBackWorkArea.removeAll();
+                       panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
+                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        txtUserName.setText("");
+                       txtPassword.setText("");
+                        btnUserType.setSelectedIndex(0);
+                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                   }
                 } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
                     JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
                 } else {
