@@ -6,6 +6,8 @@ package UI.DeliveryManWorkArea;
 
 import Model.DeliveryMan.DeliveryMan;
 import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,15 +18,21 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
     javax.swing.JPanel panelBackWorkArea;
     WorkQueue workQueue;
     DeliveryMan delManDetails;
+    JPanel panelLogin;
 
-    public DeliveryManWorkArea(javax.swing.JPanel panelBackWorkArea, WorkQueue workQueue, DeliveryMan delManDetails) {
+    int flag = 0;
+
+    public DeliveryManWorkArea(javax.swing.JPanel panelBackWorkArea, WorkQueue workQueue, DeliveryMan delManDetails, JPanel panelLogin) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
         this.workQueue = workQueue;
         this.delManDetails = delManDetails;
-        
+        this.panelLogin = panelLogin;
+
         txtloggedin.setEditable(false);
         txtloggedin.setText(this.delManDetails.getDeliveryManName());
+
+
     }
 
     /**
@@ -53,10 +61,11 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         titledeliverylbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         titledeliverylbl.setText("DELIVERYMAN WORK AREA");
 
-        lbldelloggedin.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        lbldelloggedin.setFont(new java.awt.Font("Helvetica", 2, 14)); // NOI18N
         lbldelloggedin.setText("Logged in as:");
 
-        btndelviewqueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btndelviewqueue.setBackground(new java.awt.Color(204, 255, 204));
+        btndelviewqueue.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         btndelviewqueue.setText("View Queue");
         btndelviewqueue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,10 +73,12 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btndelorders.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btndelorders.setBackground(new java.awt.Color(204, 255, 204));
+        btndelorders.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         btndelorders.setText("Delivered Orders");
 
-        btndelcuroders.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btndelcuroders.setBackground(new java.awt.Color(204, 255, 204));
+        btndelcuroders.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         btndelcuroders.setText("Current Order");
         btndelcuroders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +89,11 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         lbllogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbllogout.setForeground(new java.awt.Color(255, 51, 51));
         lbllogout.setText("Logout");
+        lbllogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbllogoutMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,16 +109,17 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btndelorders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btndelcuroders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btndelviewqueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btndelviewqueue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btndelorders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(lbldelloggedin)
                         .addGap(32, 32, 32)
-                        .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtloggedin, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(220, 220, 220))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,14 +138,14 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 .addComponent(btndelorders)
                 .addGap(37, 37, 37)
                 .addComponent(btndelcuroders)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndelviewqueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelviewqueueActionPerformed
         // TODO add your handling code here:
         {
-            ViewQueue viewqueue = new ViewQueue(panelBackWorkArea, workQueue, delManDetails);
+            ViewQueue viewqueue = new ViewQueue(panelBackWorkArea, workQueue, delManDetails, flag);
             panelBackWorkArea.add("ViewQueue", viewqueue);
             ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
 
@@ -138,12 +155,19 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
     private void btndelcurodersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelcurodersActionPerformed
         // TODO add your handling code here:
         {
-            Currentorder curorder = new Currentorder(panelBackWorkArea);
+            WorkRequest currentOrder = workQueue.findCurrentWorkRequest();
+            Currentorder curorder = new Currentorder(panelBackWorkArea, currentOrder, flag, workQueue);
             panelBackWorkArea.add("Currentorder", curorder);
             ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
 
         }
     }//GEN-LAST:event_btndelcurodersActionPerformed
+
+    private void lbllogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllogoutMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.add("Login Panel", panelLogin);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_lbllogoutMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

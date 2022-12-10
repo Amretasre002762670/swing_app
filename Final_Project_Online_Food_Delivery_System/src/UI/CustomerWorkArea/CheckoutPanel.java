@@ -35,7 +35,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
     JPanel panelBackWorkArea;
     Order order;
     WorkQueue workQueue;
-    
 
     public CheckoutPanel(JPanel panelBackWorkArea, Order order, WorkQueue workQueue) {
         initComponents();
@@ -53,9 +52,9 @@ public class CheckoutPanel extends javax.swing.JPanel {
         lblWarValidTillEmpty.setVisible(false);
 
     }
-    
+
     public void populateWorkQueue() {
-        
+
         WorkRequest workRequest = new WorkRequest();
         workRequest.setOrderRequest(order);
         workRequest.setMessage("Order Placed");
@@ -64,7 +63,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
         workRequest.setRequestTime(order.getOrderCreatedAt());
         workRequest.setStatus("negative");
         workRequest.setResAdmin(order.getResDetails().getRestaurantAdmin().getAccountDetails());
-        
+
         workQueue.addWorkRequest(workRequest);
     }
 
@@ -101,7 +100,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
                 st_MenuOrderTable.execute();
             }
 
-//            }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -125,7 +123,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
         txtValidTill = new javax.swing.JTextField();
         txtCardNum = new javax.swing.JTextField();
         btnBack = new javax.swing.JLabel();
-        chckBoxEmailUpdates = new javax.swing.JCheckBox();
         btnProceed = new javax.swing.JLabel();
         lblWarDate = new javax.swing.JLabel();
         lblWarCvv = new javax.swing.JLabel();
@@ -198,8 +195,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
             }
         });
 
-        chckBoxEmailUpdates.setText("Get Email Updates");
-
         btnProceed.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         btnProceed.setForeground(new java.awt.Color(0, 153, 51));
         btnProceed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -256,6 +251,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
         lblMainMenu.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblMainMenu.setForeground(new java.awt.Color(255, 0, 0));
         lblMainMenu.setText("Main Menu");
+        lblMainMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMainMenuMouseClicked(evt);
@@ -276,45 +272,47 @@ public class CheckoutPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(btnBack))
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMainMenu))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblCvv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblCardNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblValidTill, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chckBoxEmailUpdates)
-                                    .addComponent(txtValidTill, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblWarValidTillEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtCvv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                            .addComponent(txtCardNum, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addComponent(lblWarCVVEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblWarCardNumEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnProceed, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblWarDate, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblWarCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblMainMenu)
-                                        .addComponent(lblWarCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap()
+                                .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNameOnCard)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNameOnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblWarName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                .addGap(200, 200, 200)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblNameOnCard)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtNameOnCard, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblWarName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblCvv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblCardNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblValidTill, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtValidTill, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblWarValidTillEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(txtCvv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                                    .addComponent(txtCardNum, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addComponent(lblWarCVVEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblWarCardNumEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnProceed, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblWarDate, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblWarCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblWarCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblWarNameEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,9 +359,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
                     .addComponent(lblWarCardNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblWarCardNumEmpty)
-                .addGap(50, 50, 50)
-                .addComponent(chckBoxEmailUpdates)
-                .addGap(27, 27, 27)
+                .addGap(98, 98, 98)
                 .addComponent(btnProceed)
                 .addGap(89, 89, 89))
         );
@@ -373,6 +369,7 @@ public class CheckoutPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Customer work area");
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
@@ -428,26 +425,28 @@ public class CheckoutPanel extends javax.swing.JPanel {
 
     private void btnProceedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseClicked
         // TODO add your handling code here:
-        if(txtCardNum.equals("") || txtCvv.equals("") || txtNameOnCard.equals("") || txtValidTill.equals("")) {
+        if (txtCardNum.getText().equals("") || txtCvv.getText().equals("") || txtNameOnCard.getText().equals("") || txtValidTill.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "All fields are Mandatory");
+            return;
+        } else {
+            sendOrderToDB();
+
+            populateWorkQueue();
+
+            JOptionPane.showMessageDialog(this, "Sucessfully placed order");
         }
-        sendOrderToDB();
-        
-        populateWorkQueue();
-        
-        JOptionPane.showMessageDialog(this, "Sucessfully placed order");
-        
+
         txtCardNum.setText("");
         txtCvv.setText("");
         txtNameOnCard.setText("");
         txtValidTill.setText("");
-        
+
     }//GEN-LAST:event_btnProceedMouseClicked
 
     private void btnProceedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseEntered
         // TODO add your handling code here:
         btnProceed.setForeground(Color.blue);
-        
+
     }//GEN-LAST:event_btnProceedMouseEntered
 
     private void btnProceedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProceedMouseExited
@@ -458,9 +457,6 @@ public class CheckoutPanel extends javax.swing.JPanel {
     private void lblMainMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseEntered
         // TODO add your handling code here:
         lblMainMenu.setForeground(Color.blue);
-        CurrentOrderPanel currentOrderPanel = new CurrentOrderPanel(panelBackWorkArea, workQueue, order.getCusDetails());
-        panelBackWorkArea.add("CurrentOrderPanel", currentOrderPanel);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_lblMainMenuMouseEntered
 
     private void lblMainMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseExited
@@ -470,17 +466,17 @@ public class CheckoutPanel extends javax.swing.JPanel {
 
     private void lblMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseClicked
         // TODO add your handling code here:
-        CurrentOrderPanel currentOrderPanel = new CurrentOrderPanel(panelBackWorkArea, workQueue, order.getCusDetails());
-        panelBackWorkArea.add("CurrentOrderPanel", currentOrderPanel);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-        panelBackWorkArea.getAccessibleContext();
+//        CurrentOrderPanel currentOrderPanel = new CurrentOrderPanel(panelBackWorkArea, workQueue, order.getCusDetails());
+//        panelBackWorkArea.add("CurrentOrderPanel", currentOrderPanel);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Customer work area");
     }//GEN-LAST:event_lblMainMenuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
     private javax.swing.JLabel btnProceed;
-    private javax.swing.JCheckBox chckBoxEmailUpdates;
     private javax.swing.JLabel lblCardNum;
     private javax.swing.JLabel lblCvv;
     private javax.swing.JLabel lblHeading;

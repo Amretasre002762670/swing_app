@@ -4,6 +4,7 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.Restaurant.Restaurant;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -12,14 +13,28 @@ import javax.swing.JPanel;
  * @author SRADDHA
  */
 public class RestaurantDetails extends javax.swing.JPanel {
+    
      javax.swing.JPanel panelBackWorkArea;
+     Restaurant resDetails;
     /**
      * Creates new form RestaurantDetails
      */
-     public RestaurantDetails(javax.swing.JPanel panelBackWorkArea) {
+     public RestaurantDetails(javax.swing.JPanel panelBackWorkArea, Restaurant resDetails) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
+        this.resDetails = resDetails;
         
+        txtdelresaddress.setEditable(false);
+        txtdelresid.setEditable(false);
+        txtdelresmanager.setEditable(false);
+        txtdelresname.setEditable(false);
+        txtdelresphone.setEditable(false);
+        
+        txtdelresaddress.setText(String.valueOf(resDetails.getRes_pincode()));
+        txtdelresmanager.setText(resDetails.getRes_street_add());
+        txtdelresid.setText(resDetails.getRestaurantName());
+        txtdelresname.setText(String.valueOf(resDetails.getPhoneNumber()));
+        txtdelresphone.setText(resDetails.getRes_city());
     }
 
     
@@ -50,23 +65,28 @@ public class RestaurantDetails extends javax.swing.JPanel {
 
         lbldelresdetails.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbldelresdetails.setForeground(new java.awt.Color(51, 51, 51));
+        lbldelresdetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelresdetails.setText("RESTAURANT DETAILS");
 
-        lbldelresid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelresid.setText("Restaurant ID:");
+        lbldelresid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldelresid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelresid.setText("Restaurant Name:");
 
-        lbldelresname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelresname.setText("Restaurant Name:");
+        lbldelresname.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldelresname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelresname.setText("Restaurant Contact:");
 
-        lbldelresmanager.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelresmanager.setText("Restaurant Manager:");
+        lbldelresmanager.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldelresmanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelresmanager.setText("Address:");
 
-        lbldelresphone.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelresphone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbldelresphone.setText("Phone number:");
+        lbldelresphone.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldelresphone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelresphone.setText("City:");
 
-        lbldelresaddress.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelresaddress.setText("Address:");
+        lbldelresaddress.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldelresaddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelresaddress.setText("Pincode:");
 
         txtdelresmanager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,55 +117,63 @@ public class RestaurantDetails extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lbldelbackbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
-                        .addComponent(lbldelresdetails))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbldelresphone)
-                            .addComponent(lbldelresmanager)
-                            .addComponent(lbldelresname)
-                            .addComponent(lbldelresid)
-                            .addComponent(lbldelresaddress))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtdelresid, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(txtdelresname)
-                            .addComponent(txtdelresmanager)
-                            .addComponent(txtdelresphone)
-                            .addComponent(txtdelresaddress))))
-                .addContainerGap(557, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(lbldelbackbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbldelresphone)
+                                    .addComponent(lbldelresmanager)
+                                    .addComponent(lbldelresname)
+                                    .addComponent(lbldelresid)
+                                    .addComponent(lbldelresaddress))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtdelresname)
+                                        .addComponent(txtdelresmanager)
+                                        .addComponent(txtdelresphone)
+                                        .addComponent(txtdelresaddress))
+                                    .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 189, Short.MAX_VALUE))
+                    .addComponent(lbldelresdetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtdelresaddress, txtdelresid, txtdelresmanager, txtdelresname, txtdelresphone});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lbldelresaddress, lbldelresid, lbldelresmanager, lbldelresname, lbldelresphone});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbldelresdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbldelbackbtn))
-                .addGap(53, 53, 53)
+                .addContainerGap()
+                .addComponent(lbldelresdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(lbldelbackbtn)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelresid)
                     .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdelresname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbldelresname, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lbldelresname))
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdelresmanager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbldelresmanager))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtdelresphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbldelresphone, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lbldelresphone))
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbldelresaddress)
                     .addComponent(txtdelresaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(742, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

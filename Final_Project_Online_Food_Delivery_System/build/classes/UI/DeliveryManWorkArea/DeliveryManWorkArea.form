@@ -35,20 +35,21 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btndelorders" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btndelcuroders" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btndelviewqueue" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btndelviewqueue" max="32767" attributes="0"/>
+                          <Component id="btndelorders" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Component id="lbldelloggedin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="txtloggedin" min="-2" pref="93" max="-2" attributes="0"/>
+                      <Component id="txtloggedin" min="-2" pref="116" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,7 +72,7 @@
               <Component id="btndelorders" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="btndelcuroders" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="295" max="32767" attributes="0"/>
+              <EmptySpace pref="283" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,7 +89,7 @@
     <Component class="javax.swing.JLabel" name="lbldelloggedin">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="2"/>
+          <Font name="Helvetica" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Logged in as:"/>
       </Properties>
@@ -97,8 +98,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="btndelviewqueue">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="ff" red="cc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="View Queue"/>
       </Properties>
@@ -108,16 +112,22 @@
     </Component>
     <Component class="javax.swing.JButton" name="btndelorders">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="ff" red="cc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Delivered Orders"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btndelcuroders">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="ff" red="cc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Current Order"/>
       </Properties>
@@ -135,6 +145,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbllogoutMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

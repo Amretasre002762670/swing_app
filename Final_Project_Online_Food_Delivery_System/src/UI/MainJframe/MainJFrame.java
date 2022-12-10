@@ -586,7 +586,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
                             cusWorkArea = new CustomerWorkArea(searchCustomer, panelBackWorkArea, panelLogin, ecosystem.getRestaurantDirectory(), orderHis, workQueue);
                             panelBackWorkArea.removeAll();
-                            panelBackWorkArea.add("Customer", cusWorkArea);
+                            panelBackWorkArea.add("Customer work area", cusWorkArea);
                             ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
 
                             txtUserName.setText("");
@@ -604,7 +604,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         System.out.println(delMan.getUserAccount().getUsername());
 
                         if (delMan != null) {
-                            delworkarea = new DeliveryManWorkArea(panelBackWorkArea, workQueue, delMan);
+                            delworkarea = new DeliveryManWorkArea(panelBackWorkArea, workQueue, delMan, panelLogin);
                             panelBackWorkArea.add("DeliveryManWorkArea", delworkarea);
                             ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
                         } else {
@@ -681,7 +681,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
         // TODO add your handling code here:
-        btnLogin.setBackground(new Color(204, 255, 204));
+        btnLogin.setBackground(new Color(255, 255, 204));
 
     }//GEN-LAST:event_btnLoginMouseExited
 

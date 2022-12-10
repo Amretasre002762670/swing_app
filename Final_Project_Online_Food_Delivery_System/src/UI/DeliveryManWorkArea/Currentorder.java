@@ -4,6 +4,8 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
 
 /**
@@ -11,15 +13,44 @@ import javax.swing.JPanel;
  * @author SRADDHA
  */
 public class Currentorder extends javax.swing.JPanel {
-     javax.swing.JPanel panelBackWorkArea;
-    public Currentorder(javax.swing.JPanel panelBackWorkArea) {
+
+    javax.swing.JPanel panelBackWorkArea;
+    WorkRequest currentOrder;
+    int flag;
+    WorkQueue workQueue;
+
+    public Currentorder(javax.swing.JPanel panelBackWorkArea, WorkRequest currentOrder, int flag, WorkQueue workQueue) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
+        this.currentOrder = currentOrder;
+        this.flag = flag;
+        this.workQueue = workQueue;
+
+        txtid.setEditable(false);
+        txtorders.setEditable(false);
+        txtresaddress.setEditable(false);
+        txttime.setEditable(false);
+        lblWarning.setVisible(false);
+
+//        for (WorkRequest workRequest : this.workQueue.getWorkRequestList()) {
+//            System.out.println(workRequest.getMessage());
+//            System.out.println(workRequest.getStatus());
+//        }
+        System.out.println(currentOrder.getStatus().equals("positive"));
+        if (currentOrder.getStatus().equals("positive")) {
+            txtid.setText(String.valueOf(currentOrder.getOrderRequest().getOrder_id()));
+            txtorders.setText(String.valueOf(currentOrder.getOrderRequest().getMenu().size()));
+            txtresaddress.setText(currentOrder.getOrderRequest().getResDetails().getRes_street_add());
+            txttime.setText(currentOrder.getRequestTime());
+        } else {
+            lblWarning.setVisible(true);
+        }
+
     }
+
     /**
      * Creates new form Current order
      */
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,8 +71,9 @@ public class Currentorder extends javax.swing.JPanel {
         btnresdetails = new javax.swing.JButton();
         btncusdetails = new javax.swing.JButton();
         lbldelcurorder = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         lbldelcurback = new javax.swing.JLabel();
+        btnUpdateStatus = new javax.swing.JButton();
+        lblWarning = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -69,6 +101,7 @@ public class Currentorder extends javax.swing.JPanel {
             }
         });
 
+        btnresdetails.setBackground(new java.awt.Color(204, 255, 204));
         btnresdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnresdetails.setText("Restaurant Details");
         btnresdetails.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +110,7 @@ public class Currentorder extends javax.swing.JPanel {
             }
         });
 
+        btncusdetails.setBackground(new java.awt.Color(204, 255, 204));
         btncusdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btncusdetails.setText("Customer Details");
         btncusdetails.addActionListener(new java.awt.event.ActionListener() {
@@ -86,10 +120,8 @@ public class Currentorder extends javax.swing.JPanel {
         });
 
         lbldelcurorder.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbldelcurorder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcurorder.setText("CURRENT ORDER");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\SRADDHA\\Downloads\\cur.png")); // NOI18N
-        jLabel2.setText("jLabel2");
 
         lbldelcurback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbldelcurback.setForeground(new java.awt.Color(255, 51, 51));
@@ -100,77 +132,101 @@ public class Currentorder extends javax.swing.JPanel {
             }
         });
 
+        btnUpdateStatus.setBackground(new java.awt.Color(204, 255, 204));
+        btnUpdateStatus.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        btnUpdateStatus.setText("Update Status");
+        btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStatusActionPerformed(evt);
+            }
+        });
+
+        lblWarning.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblWarning.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWarning.setText("There is no Current Orders");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(btnresdetails)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(btnUpdateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addComponent(btncusdetails)
+                .addGap(216, 216, 216))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbldelcurorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnresdetails)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btncusdetails))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbltime)
-                                    .addComponent(lblloorders)
-                                    .addComponent(lblresaddress))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtorders, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txttime, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtresaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
                                 .addComponent(lblid)
-                                .addGap(92, 92, 92)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(287, 287, 287))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lbldelcurback)
-                        .addGap(219, 219, 219)
-                        .addComponent(lbldelcurorder)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbltime)
+                            .addComponent(lblloorders)
+                            .addComponent(lblresaddress))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txttime, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(txtorders)
+                            .addComponent(txtresaddress))
+                        .addGap(0, 0, 0))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbldelcurback)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnUpdateStatus, btncusdetails, btnresdetails});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblid, lblloorders, lblresaddress, lbltime});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
+                .addComponent(lbldelcurorder)
+                .addGap(18, 18, 18)
+                .addComponent(lbldelcurback)
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblid))
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbldelcurorder)
-                    .addComponent(lbldelcurback))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblid)
-                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbltime)
-                            .addComponent(txttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblloorders)
-                            .addComponent(txtorders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblresaddress)
-                            .addComponent(txtresaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnresdetails)
-                            .addComponent(btncusdetails)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(414, Short.MAX_VALUE))
+                    .addComponent(lbltime)
+                    .addComponent(txttime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblloorders)
+                    .addComponent(txtorders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblresaddress)
+                    .addComponent(txtresaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnresdetails)
+                    .addComponent(btncusdetails)
+                    .addComponent(btnUpdateStatus))
+                .addGap(75, 75, 75)
+                .addComponent(lblWarning)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -185,32 +241,40 @@ public class Currentorder extends javax.swing.JPanel {
     private void btnresdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresdetailsActionPerformed
         // TODO add your handling code here:
         {
-        RestaurantDetails resdetails = new RestaurantDetails(panelBackWorkArea);
-        panelBackWorkArea.add("RestaurantDetails",resdetails);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-   
-    }
+            RestaurantDetails resdetails = new RestaurantDetails(panelBackWorkArea, currentOrder.getOrderRequest().getResDetails());
+            panelBackWorkArea.add("RestaurantDetails", resdetails);
+            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+
+        }
     }//GEN-LAST:event_btnresdetailsActionPerformed
 
     private void btncusdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusdetailsActionPerformed
         // TODO add your handling code here:
         {
-        CustomerDetails cusdetails = new CustomerDetails(panelBackWorkArea);
-        panelBackWorkArea.add("CustomerDetails",cusdetails);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-    }
+            CustomerDetails cusdetails = new CustomerDetails(panelBackWorkArea, currentOrder.getOrderRequest().getCusDetails());
+            panelBackWorkArea.add("CustomerDetails", cusdetails);
+            ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        }
     }//GEN-LAST:event_btncusdetailsActionPerformed
 
     private void lbldelcurbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseClicked
-      panelBackWorkArea.remove(this);
+        panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea); // TODO add your handling code here:
     }//GEN-LAST:event_lbldelcurbackMouseClicked
 
+    private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
+        // TODO add your handling code here:
+        ChangeStatusPanel changeStatusPanel = new ChangeStatusPanel(panelBackWorkArea, currentOrder, workQueue);
+        panelBackWorkArea.add("Change Status Panel", changeStatusPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_btnUpdateStatusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JButton btncusdetails;
     private javax.swing.JButton btnresdetails;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lbldelcurback;
     private javax.swing.JLabel lbldelcurorder;
     private javax.swing.JLabel lblid;

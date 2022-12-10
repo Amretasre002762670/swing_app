@@ -298,7 +298,7 @@ public class OrderSummaryPanel extends javax.swing.JPanel {
     private void btnCheckoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCheckoutMouseClicked
         // TODO add your handling code here:
         CheckoutPanel checkOut = new CheckoutPanel(panelBackWorkArea, order, workQueue);
-//        panelBackWorkArea.removeAll();
+        panelBackWorkArea.remove(this);
         panelBackWorkArea.add("CheckoutPanel", checkOut);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnCheckoutMouseClicked

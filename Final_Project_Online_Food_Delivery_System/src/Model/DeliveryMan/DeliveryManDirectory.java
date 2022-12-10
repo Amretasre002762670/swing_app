@@ -7,6 +7,8 @@ package Model.DeliveryMan;
 import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 import Model.System.Ecosystem;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
 
 /**
  *
@@ -73,4 +75,5 @@ public class DeliveryManDirectory {
         }
         return deliveryManDetails;
     }
+   
 }

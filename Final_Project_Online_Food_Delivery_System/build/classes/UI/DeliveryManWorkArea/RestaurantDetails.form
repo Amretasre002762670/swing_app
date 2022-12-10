@@ -23,69 +23,74 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="lbldelbackbtn" min="-2" pref="52" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                      <Component id="lbldelresdetails" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lbldelresphone" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbldelresmanager" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbldelresname" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbldelresid" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbldelresaddress" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="lbldelbackbtn" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lbldelresphone" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbldelresmanager" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbldelresname" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbldelresid" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbldelresaddress" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtdelresname" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtdelresmanager" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtdelresphone" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtdelresaddress" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtdelresid" linkSize="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtdelresid" alignment="0" pref="158" max="32767" attributes="0"/>
-                          <Component id="txtdelresname" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtdelresmanager" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtdelresphone" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtdelresaddress" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="lbldelresdetails" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="557" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbldelresdetails" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="lbldelbackbtn" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbldelresdetails" min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="lbldelbackbtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelresid" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelresid" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtdelresname" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbldelresname" alignment="3" min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="lbldelresname" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtdelresmanager" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbldelresmanager" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtdelresphone" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbldelresphone" alignment="0" min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="lbldelresphone" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbldelresaddress" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelresaddress" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="742" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,48 +104,53 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="RESTAURANT DETAILS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelresid">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Restaurant ID:"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Restaurant Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelresname">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Restaurant Name:"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Restaurant Contact:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelresmanager">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Restaurant Manager:"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Address:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelresphone">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Phone number:"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="City:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelresaddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Address:"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Pincode:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtdelresid">

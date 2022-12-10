@@ -21,85 +21,79 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="titleCustomerdet" max="32767" attributes="0"/>
+          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="lbldelcusback" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                      <Component id="titleCustomerdet" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lbldelcuststrtaddress" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbldelcustemail" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbldelcustnumber" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbldelcustemail" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbldelcustnumber" linkSize="2" alignment="0" max="32767" attributes="0"/>
                           <Component id="lbldelcustcity" alignment="0" max="32767" attributes="0"/>
                           <Component id="lbldelcustpincode" alignment="0" max="32767" attributes="0"/>
                           <Component id="lbldelcustname" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbldelcustid" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtdelcustcity" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtdelcusid" max="32767" attributes="0"/>
+                          <Component id="txtdelcustnumber" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtdelcustemail" pref="165" max="32767" attributes="0"/>
                           <Component id="txtdelcusname" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtdelcusstrtaddress" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtdelcustemail" pref="117" max="32767" attributes="0"/>
-                          <Component id="txtdelcustnumber" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtdelcustcity" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtdelcustpincode" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="lbldelcusback" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
+              <EmptySpace pref="124" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="titleCustomerdet" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbldelcusback" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbldelcustid" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtdelcusid" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="titleCustomerdet" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="lbldelcusback" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelcustname" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelcusname" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelcuststrtaddress" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelcusstrtaddress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelcustcity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelcustcity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbldelcustpincode" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelcustpincode" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelcustnumber" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="txtdelcustnumber" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbldelcustemail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtdelcustemail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="208" max="32767" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,58 +104,54 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="CUSTOMER DETAILS"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbldelcustid">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Customer_ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcustname">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcuststrtaddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Street Address"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcustcity">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="City"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcustpincode">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Pincode"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcustnumber">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Contact number"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtdelcusid">
     </Component>
     <Component class="javax.swing.JTextField" name="txtdelcusname">
     </Component>
@@ -176,8 +166,9 @@
     <Component class="javax.swing.JLabel" name="lbldelcustemail">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
+          <Font name="Helvetica" size="14" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
     </Component>

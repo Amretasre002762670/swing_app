@@ -17,33 +17,38 @@ import javax.swing.table.DefaultTableModel;
  * @author SRADDHA
  */
 public class ViewQueue extends javax.swing.JPanel {
-   
 
     /**
      * Creates new form ViewQueue
      */
-    
     JPanel panelBackWorkArea;
     WorkQueue workQueue;
     DeliveryMan delManDetails;
-    
-    public ViewQueue(JPanel panelBackWorkArea, WorkQueue workQueue, DeliveryMan delManDetails) {
+    int flag;
+
+    public ViewQueue(JPanel panelBackWorkArea, WorkQueue workQueue, DeliveryMan delManDetails, int flag) {
         initComponents();
-        
+
         this.panelBackWorkArea = panelBackWorkArea;
         this.workQueue = workQueue;
         this.delManDetails = delManDetails;
+        this.flag = 0;
+
+        populateTable();
+//        for(WorkRequest workRequest: this.workQueue.getWorkRequestList()) {
+//           System.out.println(workRequest.getMessage());
+//        }
     }
-    
+
     public void populateTable() {
-        
+
         DefaultTableModel ordersTable = (DefaultTableModel) tblOrders.getModel();
-        
+
         ordersTable.setRowCount(0);
-        
-        for(WorkRequest workReq: workQueue.getWorkRequestList()) {
+
+        for (WorkRequest workReq : workQueue.getWorkRequestList()) {
             Object row[] = new Object[7];
-            
+
             row[0] = workReq.getOrderRequest().getOrder_id();
             row[1] = workReq;
             row[2] = workReq.getOrderRequest().getResDetails().getRestaurantName();
@@ -51,15 +56,12 @@ public class ViewQueue extends javax.swing.JPanel {
             row[4] = workReq.getOrderRequest().getCusDetails().getCustName();
             row[5] = workReq.getOrderRequest().getCusDetails().getCustPhoneNumber();
             row[6] = workReq.getOrderRequest().getCusDetails().getHome_streetAddress();
-            
-            ordersTable.addRow(row);
-            
-        }
-        
-    }
 
-    
-    
+            ordersTable.addRow(row);
+
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,19 +150,19 @@ public class ViewQueue extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(203, 203, 203)
-                                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack)
+                        .addGap(203, 203, 203)
+                        .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jLabel1)
                         .addGap(134, 134, 134)
                         .addComponent(btnacceptorder)
                         .addGap(84, 84, 84)
-                        .addComponent(btnprocess)))
+                        .addComponent(btnprocess))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,20 +174,20 @@ public class ViewQueue extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42))
+                                .addGap(45, 45, 45))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnBack)
-                                .addGap(29, 29, 29)))
+                                .addGap(32, 32, 32)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
+                        .addGap(49, 49, 49)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnacceptorder)
                             .addComponent(btnprocess))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,27 +198,31 @@ public class ViewQueue extends javax.swing.JPanel {
     private void btnacceptorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacceptorderActionPerformed
         // TODO add your handling code here:
         int selectedWorkInd = tblOrders.getSelectedRow();
-        
-        if(selectedWorkInd < 0) {
+
+        if (selectedWorkInd < 0) {
             JOptionPane.showMessageDialog(this, "Select a Request");
             return;
         }
-        
+
         DefaultTableModel selectedWork = (DefaultTableModel) tblOrders.getModel();
-        
+
         WorkRequest acceptedWork = (WorkRequest) selectedWork.getValueAt(selectedWorkInd, 1);
-        
-        acceptedWork.setDeliveryMan(delManDetails.getUserAccount());
-        acceptedWork.setMessage("Delivery Man Accepted");
-        acceptedWork.setStatus("positive");
-        
+
+        if (acceptedWork.getStatus().equals("negative") && flag == 0) {
+            acceptedWork.setDeliveryMan(delManDetails.getUserAccount());
+            acceptedWork.setMessage("Deliveryman Accepted");
+            acceptedWork.setStatus("positive");
+            acceptedWork.getOrderRequest().setDeliverManDetails(delManDetails);
+//            flag = 1;
+        }
+
         JOptionPane.showMessageDialog(this, "Successfully Accepted this Order");
     }//GEN-LAST:event_btnacceptorderActionPerformed
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         // TODO add your handling code here:
         panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "DeliveryManWorkArea");
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
