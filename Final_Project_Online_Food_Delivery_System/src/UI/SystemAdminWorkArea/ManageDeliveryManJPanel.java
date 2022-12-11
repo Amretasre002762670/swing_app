@@ -258,7 +258,82 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
+     public void sendUserAccountDetails(UserAccount userAccount) {
+        String queryDeliveryManTable = "INSERT INTO User_Account_Directory (user_name, user_password, user_role) VALUES (?, ?, ?);";
+
+        try {
+           Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                   "root", "Qazmaggi123@");
+
+           PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                   .prepareStatement(queryDeliveryManTable);
+
+           st_DeliveryManTable.setString(1, userAccount.getUsername());
+          st_DeliveryManTable.setString(2, userAccount.getPassword());
+         st_DeliveryManTable.setString(3, userAccount.getRole());
+
+         st_DeliveryManTable.execute();
+
+       } catch (SQLException sqlException) {
+           sqlException.printStackTrace();
+
+       }
+   }
+
+  public int getUserIdForUserCreated(UserAccount user) {
+      String queryDeliveryManTable = "SELECT user_id FROM User_Account_Directory WHERE user_name=?;";
+       int del_id = 0;
+       try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                  "root", "Qazmaggi123@");
+
+          PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                  .prepareStatement(queryDeliveryManTable);
+
+         st_DeliveryManTable.setString(1, user.getUsername());
+
+          ResultSet rs = st_DeliveryManTable.executeQuery();
+
+         while (rs.next()) {
+              del_id = rs.getInt("user_id");
+          }
+
+       } catch (SQLException sqlException) {
+         sqlException.printStackTrace();
+
+      }
+       return del_id;
+    }
+
+    public void sendDeliveryManToDB(DeliveryMan d ) {
+      String queryDeliveryManTable = "INSERT INTO DeliveryMan_Directory (deliveryman_name, deliveryman_community, deliveryman_phoneNum, user_id, user_name) VALUES (?,?,?,?,?);";
+      int del_id = 0;
+     try {
+           Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                 "root", "Qazmaggi123@");
+
+          PreparedStatement  st_DeliveryManTable = (PreparedStatement) connection
+                 .prepareStatement(queryDeliveryManTable);
+
+          st_DeliveryManTable.setString(1, d.getDeliveryManName());
+            st_DeliveryManTable.setString(2, d.getCommunity());
+             st_DeliveryManTable.setLong(3, d.getDeliveryManNumber());
+           
+            UserAccount user = new UserAccount();
+            user.setUsername(d.getUserAccount().getUsername());
+            user.setPassword(d.getUserAccount().getPassword());
+
+            del_id = getUserIdForUserCreated(user);
+            
+            st_DeliveryManTable.setInt(4, del_id);
+           st_DeliveryManTable.setString(5, d.getUserAccount().getUsername());
+
+           st_DeliveryManTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
     
     
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -324,7 +399,12 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-
+        
+if(txtDeliveryManUserName.getText().length() <= 0 || String.valueOf(txtDeliveryManPassword.getPassword()).length() <= 0 ||
+        txtDeliverManName.getText().length() <= 0 || txtDeliverManCommunity.getText().length() <= 0 ) 
+        {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+        }
         String username = txtDeliveryManUserName.getText();
         String password = String.valueOf(txtDeliveryManPassword.getPassword());
         String new_role = "DeliveryMan";
@@ -337,11 +417,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         // getEmployeeDirectory().createEmployee(name);
         
         
-        if(username.length() <= 0 || String.valueOf(txtDeliveryManPassword.getPassword()).length() <= 0 ||
-        txtDeliverManName.getText().length() <= 0 || txtDeliverManCommunity.getText().length() <= 0 ) 
-        {
-            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
-        }
+
         
         UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
@@ -361,6 +437,11 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         txtDeliveryManPassword.setText("");
 
         populateTable();
+        
+        sendUserAccountDetails(account);
+//        int cus_id = getUserIdForUserCreated(account);
+//        System.out.println(cus_id);
+        sendDeliveryManToDB(d);
         //JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
 
         txtDeliveryManID.setText("");
