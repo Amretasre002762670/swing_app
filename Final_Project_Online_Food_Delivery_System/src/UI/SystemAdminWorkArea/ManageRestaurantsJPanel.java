@@ -14,6 +14,7 @@ import Model.Role.Role;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -313,12 +314,12 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
       //  String restMan = txtRestManager.getText();
        
 
-      //  Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
+      // Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
 
-        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
+       UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         account.setUsername(username);
         account.setPassword(password);
-        account.setRole("Restaurant");
+       account.setRole("Restaurant Admin");
 
         Restaurant r = restaurantList.createRestaurant();
         r.setRestaurantName(restName);
@@ -473,7 +474,21 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                 }  
         
     }
+ //public void populateTable(ArrayList<Restaurant> restaurantList) {
 
+      //  DefaultTableModel resTable = (DefaultTableModel) restJTable.getModel();
+      //  resTable.setRowCount(0);
+      //  for (Restaurant res : restaurantList) {
+      //      Object[] row = new Object[6];
+     //       row[0] = res;
+     //       row[1] = res.getRes_type();
+     //       row[2] = res.getPhoneNumber();
+    //        row[3] = res.getRes_street_add();
+    //        row[4] = res.getRes_city();
+   //         row[5] = res.getRes_pincode();
+   //         resTable.addRow(row);
+   //     }
+  //  }
     //private void populateComboBox() {
      //  restComboBox.removeAllItems();
       // restComboBox.addItem(Role.RoleType.RestaurantAdmin.toString()); 

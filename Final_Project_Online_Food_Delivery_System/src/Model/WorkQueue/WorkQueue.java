@@ -5,6 +5,7 @@
 package Model.WorkQueue;
 
 import Model.Customer.Customer;
+import Model.Restaurant.Restaurant;
 import java.util.ArrayList;
 
 /**
@@ -35,5 +36,19 @@ public class WorkQueue {
            }
        }
        return searchResult;
+    }
+    
+    public ArrayList<WorkRequest> findResWorkQueue(Restaurant selectedRes) {
+        
+       ArrayList<WorkRequest> workReqList = new ArrayList<WorkRequest>();
+       
+       for(WorkRequest workReq: workRequestList) {
+           if((workReq.getOrderRequest().getResDetails().getRestaurantId() == selectedRes.getRestaurantId()) 
+                   && (workReq.getOrderRequest().getResDetails().getRestaurantName().equals(selectedRes.getRestaurantName()))) {
+               workReqList.add(workReq);
+           }
+       }
+       
+       return workReqList;
     }
 }

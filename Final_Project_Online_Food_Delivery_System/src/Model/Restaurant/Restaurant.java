@@ -6,6 +6,7 @@ package Model.Restaurant;
 
 import Model.Menu.Menu;
 import Model.RestaurantAdmin.RestaurantAdmin;
+import Model.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +28,11 @@ public class Restaurant {
     public Restaurant() {
         this.menulist = new ArrayList<Menu>();
     }
-    
+
+    public Restaurant(RestaurantAdmin restaurantAdmin) {
+        this.restaurantAdmin = restaurantAdmin;
+        this.menulist = new ArrayList<Menu>();
+    }
 
     public int getRestaurantId() {
         return restaurantId;
@@ -101,18 +106,17 @@ public class Restaurant {
         this.menulist = menulist;
     }
 
-    public Object getUserAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+
     public Menu addMenu(Menu newMenu) {
+        System.out.println("Inside menu method");
+        System.out.println(newMenu.getFood_name());
         menulist.add(newMenu);
         return newMenu;
     }
 
     @Override
     public String toString() {
-        return restaurantName; 
+        return restaurantName;
     }
-    
+
 }

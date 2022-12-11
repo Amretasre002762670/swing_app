@@ -25,12 +25,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="lblCustCity" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCustStreetAddress" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCustName" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCustID" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCustPhoneNumber" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCustPincode" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
@@ -43,7 +42,6 @@
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="txtRestID" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                   <Component id="txtMenuName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                   <Component id="txtCategory" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                   <Component id="txtQty" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
@@ -91,12 +89,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="114" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblCustID" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRestID" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCategory" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -249,13 +242,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPreference">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCustID">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Restaurant ID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtRestID">
     </Component>
     <Component class="javax.swing.JLabel" name="lblCustStreetAddress">
       <Properties>

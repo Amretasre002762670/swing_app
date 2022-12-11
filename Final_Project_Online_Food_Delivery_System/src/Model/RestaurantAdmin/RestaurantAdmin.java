@@ -12,10 +12,16 @@ import Model.UserAccount.UserAccount;
  * @author amretasrerengarajan
  */
 public class RestaurantAdmin {
+    
     private UserAccount accountDetails;
     private int resAdminId;
     private String resName;
-    private Restaurant restaurantDetails;
+//    private Restaurant restaurantDetails;
+
+    public RestaurantAdmin(UserAccount accountDetails) {
+        this.accountDetails = accountDetails;
+//        this.restaurantDetails = new Restaurant(this);
+    }
 
     public UserAccount getAccountDetails() {
         return accountDetails;
@@ -40,7 +46,13 @@ public class RestaurantAdmin {
     public void setResName(String resName) {
         this.resName = resName;
     }
-    
-    
+
+//    public Restaurant getRestaurantDetails() {
+//        return restaurantDetails;
+//    }
+//
+//    public void setRestaurantDetails(Restaurant restaurantDetails) {
+//        this.restaurantDetails = restaurantDetails;
+//    }
 
 }

@@ -27,13 +27,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
    CustomerDirectory customerList;
    DeliveryManDirectory deliveryManList;
    RestaurantDirectory restaurantList;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem,CustomerDirectory customerList, DeliveryManDirectory deliveryManList) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem,CustomerDirectory customerList, DeliveryManDirectory deliveryManList, RestaurantDirectory retaurantList) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.customerList=customerList;
         this.deliveryManList=deliveryManList;
-        this.restaurantList=restaurantList;
+        this.restaurantList=retaurantList;
         
        // populateTree();
     }

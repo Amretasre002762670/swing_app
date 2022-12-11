@@ -284,6 +284,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName())) {
                 d.setDeliveryManName(txtDeliverManName.getText());
                 d.setDeliveryManId(Integer.parseInt(txtDeliveryManID.getText()));
+              // d.setDeliveryManNumber(Integer.parseInt(txtDeliveryManPhoneNum.getText()));
                 d.setCommunity(txtDeliverManCommunity.getText());
 
             }
@@ -294,6 +295,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
+      //  txtDeliveryManPhoneNum.setText("");
         txtDeliveryManPassword.setText("");
         txtDeliveryManUserName.setText("");
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -308,6 +310,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             txtDeliveryManID.setText(String.valueOf(d.getDeliveryManId()));
             txtDeliverManName.setText(d.getDeliveryManName());
             txtDeliverManCommunity.setText(d.getCommunity());
+          //  txtDeliveryManPhoneNum.setText(String.valueOf(d.getDeliveryManNumber()));
             txtDeliveryManUserName.setText(d.getUserAccount().getUsername());
             txtDeliveryManPassword.setText(d.getUserAccount().getPassword());
 
@@ -317,6 +320,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         txtDeliveryManID.getText();
         txtDeliverManName.getText();
         txtDeliverManCommunity.getText();
+      //   txtDeliveryManPhoneNum.getText();
         txtDeliveryManUserName.getText();
         populateTable();
     }//GEN-LAST:event_btnUpdateDeliActionPerformed
@@ -329,6 +333,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         String new_role = "DeliveryMan";
         String name = txtDeliverManName.getText();
         //int DelId = Integer.parseInt(txtDeliveryManID.getText());
+        //int phonenumber = Integer.parseInt(txtDeliveryManPhoneNum.getText());
         String community = txtDeliverManCommunity.getText();
 
         // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
@@ -346,6 +351,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
+     //   txtDeliveryManPhoneNum.setText("");
         txtDeliveryManUserName.setText("");
         txtDeliveryManPassword.setText("");
 

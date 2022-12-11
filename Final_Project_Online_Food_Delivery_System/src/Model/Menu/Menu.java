@@ -75,7 +75,7 @@ public class Menu {
     
     @Override
     public String toString() {
-        return food_name; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return food_name; 
     }
     
     

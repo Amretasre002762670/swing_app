@@ -23,6 +23,8 @@ public class RestaurantDirectory {
         this.ecosystem = ecosystem;
         restaurantList = new ArrayList<Restaurant>();
     }
+    
+    
 
     public ArrayList<Restaurant> getRestaurantList() {
         return restaurantList;
@@ -117,4 +119,17 @@ public class RestaurantDirectory {
         }
         return resultRestaurant;
     }
+
+    public Restaurant searchRestaurantWithUserAccount(UserAccount user) {
+        Restaurant searchedRestaurant = null;
+        for(Restaurant restaurant: restaurantList) {
+            System.out.println("Inside loop");
+            System.out.println(restaurant.getRestaurantAdmin().getAccountDetails().getUsername());
+            if(restaurant.getRestaurantAdmin().getAccountDetails().getUsername().equals(user.getUsername())) {
+                searchedRestaurant = restaurant;
+            }
+        }
+        return searchedRestaurant;
+    }
 }
+

@@ -6,31 +6,56 @@ package UI.RestaurantAdminWorkArea;
 
 import Model.Restaurant.Restaurant;
 import Model.System.Ecosystem;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import Model.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class ManageOrdersJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
+
     private Ecosystem ecoSystem;
     private Restaurant restaurant;
     javax.swing.JPanel panelBackWorkArea;
-     Restaurant selectedRes;
+    Restaurant selectedRes;
+    WorkQueue workQueue;
+
+    ;
     /**
      * Creates new form ManageOrdersJPanel
      */
-    public ManageOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Restaurant restaurant) {
-         this.panelBackWorkArea = panelBackWorkArea;
+    public ManageOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem, Restaurant restaurant, WorkQueue workQueue) {
+        this.panelBackWorkArea = userProcessContainer;
         this.selectedRes = selectedRes;
+        this.workQueue = workQueue;
+
+        populateTable();
     }
-    
-    
-    
-    
-    
-    
+
+    public void populateTable() {
+        ArrayList<WorkRequest> resWorkQueue = workQueue.findResWorkQueue(selectedRes);
+        DefaultTableModel manageOrders = (DefaultTableModel) manageOrdersTable.getModel();
+
+        manageOrders.setRowCount(0);
+
+        for (WorkRequest work : resWorkQueue) {
+            Object[] row = new Object[5];
+
+            row[0] = work.getOrderRequest().getOrder_id();
+            row[1] = work;
+            row[2] = work.getOrderRequest().getOrderCreatedAt();
+            row[3] = work.getOrderRequest().getDeliverManDetails().getDeliveryManName();
+            row[4] = work.getMessage();
+
+            manageOrders.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +73,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setMaximumSize(new java.awt.Dimension(650, 650));
+        setMinimumSize(new java.awt.Dimension(650, 650));
+        setPreferredSize(new java.awt.Dimension(650, 650));
 
         manageOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,14 +85,14 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "OrderID", "OrderPlacedAt", "CustomerName", "DeliveryManName", "Status"
+                "OrderID", "Date Placed", "Time Placed", "DeliveryManName", "Status"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -103,46 +130,57 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addGap(78, 78, 78)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(243, 243, 243)
                 .addComponent(requestTestJButton)
-                .addGap(71, 71, 71))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(btnBack)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBack))
-                .addGap(29, 29, 29)
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(btnBack)
+                .addGap(81, 81, 81)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(requestTestJButton)
-                .addGap(41, 41, 41))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
-        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        //        userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(userProcessContainer, userAccount, enterprise));
-        //        layout.next(userProcessContainer);
+        int getSelectedRow = manageOrdersTable.getSelectedRow();
+
+        if (getSelectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Select a Request");
+            return;
+        }
+
+        DefaultTableModel selectedWorkReq = (DefaultTableModel) manageOrdersTable.getModel();
+
+        WorkRequest selected = (WorkRequest) selectedWorkReq.getValueAt(getSelectedRow, 1);
+
+        ChangeStatusPanel statusPanel = new ChangeStatusPanel(panelBackWorkArea, selected);
+        panelBackWorkArea.add("Change Status Panel", statusPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-      
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
 

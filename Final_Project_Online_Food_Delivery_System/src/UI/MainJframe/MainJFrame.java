@@ -18,6 +18,7 @@ import Model.Menu.Menu;
 import Model.Order.Order;
 import Model.Order.OrderList;
 import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import UI.DeliveryManWorkArea.DeliveryManWorkArea;
 import java.awt.Color;
@@ -30,6 +31,7 @@ import javax.swing.JOptionPane;
 import UI.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 import UI.RestaurantAdminWorkArea.RestaurantAdminWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -61,7 +63,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.deliveryManList = this.ecosystem.getDeliveryManDirectory();
         this.resList = this.ecosystem.getRestaurantDirectory();
         this.userAccountDir = this.ecosystem.getUserAccountDir();
-        this.resList = this.ecosystem.getRestaurantDirectory();
+        //  this.resList = this.ecosystem.getRestaurantDirectory();
         this.workQueue = new WorkQueue();
         this.deliveryManList = new DeliveryManDirectory();
 
@@ -156,6 +158,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
             while (rs_admin_dir.next()) {
                 while (rs.next()) {
+                    
                     int resId = Integer.parseInt(rs.getString("restaurant_id"));
                     String restName = rs.getString("restaurant_name");
                     int resPhoneNum = Integer.parseInt(rs.getString("restaurant_phoneNum"));
@@ -163,36 +166,49 @@ public class MainJFrame extends javax.swing.JFrame {
                     String resCity = rs.getString("restaurant_city");
                     int resPincode = Integer.parseInt(rs.getString("restaurant_pincode"));
                     String resType = rs.getString("restaurant_type");
+                    
+                    String resAdminUserName = rs_admin_dir.getString("user_name");
+                    String resAdminPass = rs_admin_dir.getString("user_password");
+                    String resAdminRole = rs_admin_dir.getString("user_role");
+                    
+                    int resAdminId = rs_admin_dir.getInt("res_admin_id");
+                    String resAdminName = rs.getString("res_admin_name");
 
                     resAdminAcct = new UserAccount();
-                    resAdminAcct.setUsername(rs_admin_dir.getString("user_name"));
-                    resAdminAcct.setPassword(rs_admin_dir.getString("user_password"));
-                    resAdminAcct.setUsername(rs_admin_dir.getString("user_role"));
+                    resAdminAcct.setUsername(resAdminUserName);
+                    resAdminAcct.setPassword(resAdminPass);
+                    resAdminAcct.setRole(resAdminRole);
+                    
+                    userAccountDir.addUserAccounts(resAdminAcct);
 
-                    resAdmin = new RestaurantAdmin();
-                    resAdmin.setAccountDetails(resAdminAcct);
-                    resAdmin.setResAdminId(Integer.parseInt(rs_admin_dir.getString("res_admin_id")));
+                    resAdmin = new RestaurantAdmin(resAdminAcct);
+                    resAdmin.setResAdminId(resAdminId);
                     resAdmin.setResName(restName);
-
-                    addRes = new Restaurant();
+                    
+                    addRes = new Restaurant(resAdmin);
 
                     addRes.setRestaurantName(restName);
                     addRes.setRestaurantId(resId);
-                    addRes.setRestaurantAdmin(resAdmin);
+//                    addRes.setRestaurantAdmin(resAdmin);
                     addRes.setRes_street_add(resStreetAdd);
                     addRes.setRes_pincode(resPincode);
                     addRes.setRes_city(resCity);
                     addRes.setPhoneNumber(resPhoneNum);
                     addRes.setRes_type(resType);
-
+                    
+//                    resAdmin.setRestaurantDetails(addRes);
+                    
                     try {
                         PreparedStatement st_menu = (PreparedStatement) connection
-                                .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?");
+                                .prepareStatement("SELECT * FROM Menu_Directory WHERE restaurant_id =?;");
 
                         st_menu.setInt(1, resId);
 
                         ResultSet rs_menu = st_menu.executeQuery();
                         while (rs_menu.next()) {
+                            
+                            System.out.println(rs_menu.getString("food_name"));
+                            
                             String fd_name = rs_menu.getString("food_name");
                             float fd_price = rs_menu.getFloat("food_price");
                             String fd_preference = rs_menu.getString("food_preference");
@@ -210,7 +226,8 @@ public class MainJFrame extends javax.swing.JFrame {
                             newMenu.setFood_Qty(fd_size);
                             newMenu.setRestaurant_id(res_id);
                             newMenu.setFood_id(fd_id);
-
+                          
+                            
                             addRes.addMenu(newMenu);
                         }
                     } catch (SQLException sqlException) {
@@ -224,6 +241,8 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        
+        
     }
 
     public void populateOrderHistory(Customer currentCus) {
@@ -555,6 +574,7 @@ public class MainJFrame extends javax.swing.JFrame {
         DeliveryManWorkArea delworkarea;
         SystemAdminWorkAreaJPanel sysadminWorkArea;
         RestaurantAdminWorkAreaJPanel resadminWorkArea;
+        ArrayList<WorkRequest> selectedResWorkQueue = new ArrayList<WorkRequest>();
 
         if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
             lblWarningUserType.setVisible(false);
@@ -605,7 +625,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     } else if (rs.getString("user_role").equals("Delivery Man")) {
 
                         DeliveryMan delMan = deliveryManList.findDeliveryManDetails(user);
-                        System.out.println(delMan.getUserAccount().getUsername());
+//                        System.out.println(delMan.getUserAccount().getUsername());
 
                         if (delMan != null) {
                             delworkarea = new DeliveryManWorkArea(panelBackWorkArea, workQueue, delMan);
@@ -617,7 +637,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
                     } else if (rs.getString("user_role").equals("System Admin")) {
                         // add your code here
-                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, deliveryManList);
+                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, deliveryManList, resList);
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
@@ -625,18 +645,23 @@ public class MainJFrame extends javax.swing.JFrame {
                         txtPassword.setText("");
                         btnUserType.setSelectedIndex(0);
                         JOptionPane.showMessageDialog(this, "You have successfully logged in");
-                    }
-                     else if (rs.getString("user_role").equals("Restaurant Admin")) {
+                    } else if (rs.getString("user_role").equals("Restaurant Admin")) {
                         // add your code here
-                       resadminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem );
+                        Restaurant resDetails = resList.searchRestaurantWithUserAccount(user);
+//                        selectedResWorkQueue = workQueue.findResWorkQueue(resDetails);
+                        
+                        resadminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, resDetails, workQueue);
+                        
                         panelBackWorkArea.removeAll();
-                       panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
+                        panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        
                         txtUserName.setText("");
-                       txtPassword.setText("");
+                        txtPassword.setText("");
                         btnUserType.setSelectedIndex(0);
+                        
                         JOptionPane.showMessageDialog(this, "You have successfully logged in");
-                   }
+                    }
                 } else if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
                     JOptionPane.showMessageDialog(this, "All fields are Mandatory!");
                 } else {
