@@ -23,14 +23,12 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
     JPanel panelBackWorkArea;
     WorkQueue workQueue;
     Customer cusDetails;
-//    RestaurantDirectory resList;
 
     public CurrentOrderPanel(JPanel panelBackWorkArea, WorkQueue workQueue, Customer cusDetails) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
         this.workQueue = workQueue;
         this.cusDetails = cusDetails;
-//        this.resList = resList;
 
         txtDelContact.setEditable(false);
         txtDelName.setEditable(false);
@@ -40,7 +38,6 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         lblWarning.setVisible(false);
         
         WorkRequest curWorkRequest = this.workQueue.findWorkrequestForCustomer(this.cusDetails);
-//        System.out.println((curWorkRequest.getOrderRequest() == null));
         if (curWorkRequest.getOrderRequest() == null) {
             lblWarning.setVisible(true);
         } else {
@@ -66,9 +63,9 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
         txtResName.setText(curWorkRequest.getOrderRequest().getResDetails().getRestaurantName());
         if (curWorkRequest.getMessage().equals("Order Placed")) {
             progressBar.setValue(0);
-        } else if (curWorkRequest.getMessage().equals("Preparing Order")) {
-            progressBar.setValue(25);
         } else if (curWorkRequest.getMessage().equals("Deliveryman Accepted")) {
+            progressBar.setValue(25);
+        } else if (curWorkRequest.getMessage().equals("Preparing Order")) {
             progressBar.setValue(50);
         } else if (curWorkRequest.getMessage().equals("Out For Delivery")) {
             progressBar.setValue(75);
@@ -288,7 +285,6 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         // TODO add your handling code here:
-//        CustomerWorkArea cusWorkArea = new CustomerWorkArea(cusDetails, panelBackWorkArea, resList);
         
         panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);

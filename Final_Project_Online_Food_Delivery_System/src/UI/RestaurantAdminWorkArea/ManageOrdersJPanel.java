@@ -4,6 +4,15 @@
  */
 package UI.RestaurantAdminWorkArea;
 
+import Model.Restaurant.Restaurant;
+import Model.System.Ecosystem;
+import Model.WorkQueue.WorkQueue;
+import Model.WorkQueue.WorkRequest;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author puppalanagavaishnavi
@@ -13,8 +22,39 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrdersJPanel
      */
-    public ManageOrdersJPanel() {
+    
+    private Ecosystem ecoSystem;
+    private Restaurant restaurant;
+    javax.swing.JPanel panelBackWorkArea;
+    Restaurant selectedRes;
+    WorkQueue workQueue;
+    
+    public ManageOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem, Restaurant restaurant, WorkQueue workQueue) {
         initComponents();
+        this.panelBackWorkArea = userProcessContainer;
+        this.selectedRes = selectedRes;
+        this.workQueue = workQueue;
+
+        populateTable();
+    }
+    
+    public void populateTable() {
+        ArrayList<WorkRequest> resWorkQueue = workQueue.findResWorkQueue(selectedRes);
+        DefaultTableModel manageOrders = (DefaultTableModel) manageOrdersTable.getModel();
+
+        manageOrders.setRowCount(0);
+
+        for (WorkRequest work : resWorkQueue) {
+            Object[] row = new Object[5];
+
+            row[0] = work.getOrderRequest().getOrder_id();
+            row[1] = work;
+            row[2] = work.getOrderRequest().getOrderCreatedAt();
+            row[3] = work.getOrderRequest().getDeliverManDetails().getDeliveryManName();
+            row[4] = work.getMessage();
+
+            manageOrders.addRow(row);
+        }
     }
 
     /**
@@ -26,19 +66,128 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblHeading = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        manageOrdersTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        requestTest = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(650, 659));
+        setMinimumSize(new java.awt.Dimension(650, 650));
+
+        lblHeading.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeading.setText("Manage Orders Panel");
+
+        manageOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Order Date", "Order Time", "Delivery Man", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(manageOrdersTable);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("<< Back");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        requestTest.setText("Change Order Status");
+        requestTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestTestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(requestTest)
+                .addGap(242, 242, 242))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblHeading)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(132, 132, 132)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(requestTest)
+                .addContainerGap(247, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void requestTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestActionPerformed
+        // TODO add your handling code here:
+        int getSelectedRow = manageOrdersTable.getSelectedRow();
+
+        if (getSelectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Select a Request");
+            return;
+        }
+
+        DefaultTableModel selectedWorkReq = (DefaultTableModel) manageOrdersTable.getModel();
+
+        WorkRequest selected = (WorkRequest) selectedWorkReq.getValueAt(getSelectedRow, 1);
+
+        ChangeStatusPanel statusPanel = new ChangeStatusPanel(panelBackWorkArea, selected);
+        panelBackWorkArea.add("Change Status Panel", statusPanel);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_requestTestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblHeading;
+    private javax.swing.JTable manageOrdersTable;
+    private javax.swing.JButton requestTest;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import Model.System.Ecosystem;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Model.Restaurant.Restaurant;
+import Model.WorkQueue.WorkQueue;
 import UI.SystemAdminWorkArea.ManageRestaurantsJPanel;
 import java.awt.CardLayout;
 
@@ -16,16 +17,24 @@ import java.awt.CardLayout;
  * @author puppalanagavaishnavi
  */
 public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
-JPanel userProcessContainer;
+
+    JPanel userProcessContainer;
     Ecosystem ecosystem;
-    private Restaurant restaurant;
+    Restaurant restaurant;
+    WorkQueue workQueue;
+
     /**
      * Creates new form RestaurantAdminWorkAreaJPanel
      */
-    public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem ecoSystem) {
+    public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem ecoSystem, Restaurant selectedRes, WorkQueue workQueue) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem=ecoSystem;
+        this.ecosystem = ecoSystem;
+        this.restaurant = selectedRes;
+        this.workQueue = workQueue;
+
+        txtUserName.setEditable(false);
+        txtUserName.setText(restaurant.getRestaurantName());
     }
 
     /**
@@ -46,6 +55,8 @@ JPanel userProcessContainer;
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(650, 650));
+        setMinimumSize(new java.awt.Dimension(650, 650));
 
         manageMenuJButton.setText("Manage menu");
         manageMenuJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +73,6 @@ JPanel userProcessContainer;
         });
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 51));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Restaurant Admin Work Area");
 
@@ -97,52 +107,54 @@ JPanel userProcessContainer;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(lblLoggedIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(manageMenuJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(manageMenuJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(lblLoggedIn)
+                .addGap(18, 18, 18)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblLoggedOut)
-                .addGap(3, 3, 3)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoggedIn)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(143, 143, 143)
                 .addComponent(manageOrdersJButton)
                 .addGap(18, 18, 18)
                 .addComponent(manageMenuJButton)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageMenuJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuJButtonActionPerformed
-    ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer,ecosystem, restaurant);
-       userProcessContainer.add("manageMenuJPanel", manageMenuJPanel);
+        ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer,ecosystem, restaurant, workQueue);
+       userProcessContainer.add("manageOrdersJPanel", manageOrdersJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-       layout.next(userProcessContainer);
+       layout.next(userProcessContainer); 
     }//GEN-LAST:event_manageMenuJButtonActionPerformed
 
     private void manageOrdersJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrdersJButtonActionPerformed
-             
+
     }//GEN-LAST:event_manageOrdersJButtonActionPerformed
 
     private void lblLoggedOutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusGained
