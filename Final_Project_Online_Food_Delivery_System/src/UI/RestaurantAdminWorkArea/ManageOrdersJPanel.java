@@ -36,25 +36,32 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         this.workQueue = workQueue;
 
         populateTable();
+        lblWarning.setVisible(false);
     }
 
     public void populateTable() {
         ArrayList<WorkRequest> resWorkQueue = workQueue.findResWorkQueue(selectedRes);
-        DefaultTableModel manageOrders = (DefaultTableModel) manageOrdersTable.getModel();
+        System.out.println((workQueue.findResWorkQueue(selectedRes) == null));
+        if (resWorkQueue == null) {
+            lblWarning.setVisible(true);
+        } else {
+            DefaultTableModel manageOrders = (DefaultTableModel) manageOrdersTable.getModel();
 
-        manageOrders.setRowCount(0);
+            manageOrders.setRowCount(0);
 
-        for (WorkRequest work : resWorkQueue) {
-            Object[] row = new Object[5];
+            for (WorkRequest work : resWorkQueue) {
+                Object[] row = new Object[5];
 
-            row[0] = work.getOrderRequest().getOrder_id();
-            row[1] = work;
-            row[2] = work.getOrderRequest().getOrderCreatedAt();
-            row[3] = work.getOrderRequest().getDeliverManDetails().getDeliveryManName();
-            row[4] = work.getMessage();
+                row[0] = work.getOrderRequest().getOrder_id();
+                row[1] = work;
+                row[2] = work.getOrderRequest().getOrderCreatedAt();
+                row[3] = work.getOrderRequest().getDeliverManDetails().getDeliveryManName();
+                row[4] = work.getMessage();
 
-            manageOrders.addRow(row);
+                manageOrders.addRow(row);
+            }
         }
+
     }
 
     /**
@@ -71,6 +78,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         requestTestJButton = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+        lblWarning = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(650, 650));
@@ -125,23 +133,33 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage Orders");
 
+        lblWarning.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        lblWarning.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWarning.setText("No Orders To Manage!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(requestTestJButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btnBack)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(btnBack)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(requestTestJButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,11 +169,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(btnBack)
-                .addGap(81, 81, 81)
+                .addGap(61, 61, 61)
+                .addComponent(lblWarning)
+                .addGap(70, 70, 70)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(66, 66, 66)
                 .addComponent(requestTestJButton)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,6 +208,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JTable manageOrdersTable;
     private javax.swing.JButton requestTestJButton;
     // End of variables declaration//GEN-END:variables
