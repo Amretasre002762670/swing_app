@@ -5,7 +5,6 @@
 package Model.System;
 
 import Model.Employee.EmployeeDirectory;
-import Model.Role.Role;
 import Model.UserAccount.UserAccountDirectory;
 import Model.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public abstract class Organization {
     public Organization(){
         
     }
-    public abstract ArrayList<Role> getSupportedRole();
+//    public abstract ArrayList<Role> getSupportedRole();
     
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;

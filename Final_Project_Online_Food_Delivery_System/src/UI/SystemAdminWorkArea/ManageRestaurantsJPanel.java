@@ -4,12 +4,10 @@
  */
 package UI.SystemAdminWorkArea;
 
-
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
 import Model.Restaurant.Restaurant;
-import Model.Role.RestaurantAdminrole;
-import Model.Role.Role;
+import Model.Restaurant.RestaurantDirectory;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -22,18 +20,21 @@ import javax.swing.table.DefaultTableModel;
  * @author puppalanagavaishnavi
  */
 public class ManageRestaurantsJPanel extends javax.swing.JPanel {
- private JPanel userProcessContainer;
+
+    private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private Restaurant restaurant;
-   
-    public ManageRestaurantsJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
+    RestaurantDirectory resList;
+
+    public ManageRestaurantsJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, RestaurantDirectory resList) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;        
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
+        this.resList = resList;
         populateTable();
-        populateComboBox();
+//        populateComboBox();
     }
 
     /**
@@ -59,19 +60,24 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         lblRestUsername = new javax.swing.JLabel();
         txtRestAdd = new javax.swing.JTextField();
         txtRestPhonNum = new javax.swing.JTextField();
-        txtRestManager = new javax.swing.JTextField();
-        txtRestID = new javax.swing.JTextField();
-        restComboBox = new javax.swing.JComboBox();
+        txtType = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         lblRestID = new javax.swing.JLabel();
-        lblRestManager = new javax.swing.JLabel();
         lblRestPhoneNum = new javax.swing.JLabel();
         lblRestAdd = new javax.swing.JLabel();
         lblRestName = new javax.swing.JLabel();
         txtRestName = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
+        txtCity = new javax.swing.JTextField();
+        lblPincode = new javax.swing.JLabel();
+        txtResPincode = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(650, 650));
+        setMinimumSize(new java.awt.Dimension(650, 650));
+        setPreferredSize(new java.awt.Dimension(650, 650));
 
         btnBack.setText("<- Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -137,11 +143,18 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
         lblRestUsername.setText("Username:");
 
-        jLabel6.setText("Role:");
+        txtRestPhonNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRestPhonNumKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRestPhonNumKeyReleased(evt);
+            }
+        });
 
-        lblRestID.setText("Restaurant ID:");
+        jLabel6.setText("City:");
 
-        lblRestManager.setText("Restaurant Manager:");
+        lblRestID.setText("Type:");
 
         lblRestPhoneNum.setText("Phone Number:");
 
@@ -153,6 +166,19 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         lblTitle.setForeground(new java.awt.Color(255, 255, 51));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage Restaurants");
+
+        lblPincode.setText("Pincode");
+
+        txtResPincode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtResPincodeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtResPincodeKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -169,38 +195,43 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(169, 169, 169)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblRestPassword)
+                                        .addComponent(lblRestUsername))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblRestPassword)
-                                            .addComponent(lblRestUsername))
-                                        .addGap(76, 76, 76)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtRestUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                            .addComponent(txtRestPassword)))
-                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblRestManager)
-                                            .addComponent(lblRestID)
                                             .addComponent(jLabel6)
-                                            .addComponent(lblRestPhoneNum)
-                                            .addComponent(lblRestAdd)
-                                            .addComponent(lblRestName))
+                                            .addComponent(lblRestID)
+                                            .addComponent(lblPincode))))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRestPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRestUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtResPincode, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtRestAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRestPhonNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(restComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRestID, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRestName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jLabel2))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblRestPhoneNum)
+                                    .addComponent(lblRestAdd)
+                                    .addComponent(lblRestName))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtRestPhonNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRestAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRestName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(145, 145, 145)
                         .addComponent(btnCreate)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdateManager)
@@ -208,8 +239,15 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                         .addComponent(saveBtn)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel6, lblPincode, lblRestAdd, lblRestID, lblRestName, lblRestPassword, lblRestPhoneNum, lblRestUsername});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -220,27 +258,16 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(restComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestID)
-                    .addComponent(txtRestID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRestName)
                     .addComponent(txtRestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestManager)
-                    .addComponent(txtRestManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRestPhoneNum)
-                    .addComponent(txtRestPhonNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRestPhonNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRestAdd)
@@ -253,13 +280,26 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRestPassword)
                     .addComponent(txtRestPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPincode)
+                    .addComponent(txtResPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRestID)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnUpdateManager)
                     .addComponent(btnDelete)
                     .addComponent(saveBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -269,7 +309,7 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        sysAdminwjp.populateTree();
+//        sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
@@ -282,24 +322,44 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
 
+        if (txtRestUsername.getText().length() <= 0 || String.valueOf(txtRestPassword.getPassword()).length() <= 0
+                || txtRestName.getText().length() <= 0 || txtRestAdd.getText().length() <= 0 || txtCity.getText().length() <= 0
+                || txtResPincode.getText().length() <= 0 || txtRestPhonNum.getText().length() <= 0
+                || txtType.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");
+        }
         String username = txtRestUsername.getText();
         String password = String.valueOf(txtRestPassword.getPassword());
-        int restID = Integer.parseInt(txtRestID.getText());
+
+//        int restID = Integer.parseInt(txtType.getText());
         String restName = txtRestName.getText();
-        String restMan = txtRestManager.getText();
-        int phoneNum = Integer.parseInt(txtRestPhonNum.getText());
-        String address = txtRestAdd.getText();
+        String streetaddress = txtRestAdd.getText();
+        String City = txtCity.getText();
+        int Pincode = Integer.parseInt(txtResPincode.getText());
+        int phoneNumber = Integer.parseInt(txtRestPhonNum.getText());
+        String RestType = txtType.getText();
+        //  String restMan = txtRestManager.getText();
 
-        Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
+        // Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
+        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setRole("Restaurant Admin");
 
-        UserAccount account = ecosystem.getUserAccountDir().addUserAccounts(userAccount);
+        Restaurant r = resList.createRestaurant();
+        r.setRestaurantName(restName);
+        r.setRes_street_add(streetaddress);
+        r.setRes_pincode(Pincode);
+        r.setRes_city(City);
+        r.setPhoneNumber(phoneNumber);
+        r.setRes_type(RestType);
 
-        Restaurant restaurant = ecosystem.getRestaurantDirectory().createRestaurant();
-
-        txtRestID.setText("");
-        txtRestManager.setText("");
+        txtRestName.setText("");
         txtRestPhonNum.setText("");
         txtRestAdd.setText("");
+        txtCity.setText("");
+        txtResPincode.setText("");
+        txtType.setText("");
         txtRestUsername.setText("");
         txtRestPassword.setText("");
 
@@ -323,23 +383,29 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 
-        for (Restaurant r : ecosystem.getRestaurantDirectory().getRestaurantList()){
+        for (Restaurant r : resList.getRestaurantList()) {
 
             if (restaurant.getRestaurantName().equals(r.getRestaurantName())) {
-                r.setRestaurantId(Integer.parseInt(txtRestID.getText()));
+//                r.setRestaurantId(Integer.parseInt(txtRestID.getText()));
                 r.setRestaurantName(txtRestName.getText());
 //                r.setRestaurantManager(txtRestManager.getText());
                 r.setPhoneNumber(Integer.parseInt(txtRestPhonNum.getText()));
-//                r.setAddress(txtRestAdd.getText()); // Address cannot be one line, need to be divided
-                
+                r.setRes_street_add(txtRestAdd.getText());
+                r.setRes_city(txtCity.getText());
+                r.setRes_pincode(Integer.parseInt(txtResPincode.getText()));
+                r.setRes_type(txtType.getText());
+
             }
         }
         JOptionPane.showMessageDialog(null, "Restaurant Updated Successfully.");
         populateTable();
-        txtRestID.setText("");
-        txtRestManager.setText("");
+//        txtRestID.setText("");
+        txtRestName.setText("");
         txtRestPhonNum.setText("");
         txtRestAdd.setText("");
+        txtCity.setText("");
+        txtResPincode.setText("");
+        txtType.setText("");
         txtRestUsername.setText("");
         txtRestPassword.setText("");
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -352,20 +418,25 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             Restaurant r = (Restaurant) restJTable.getValueAt(selectedRow, 0);
             restaurant = r;
-            txtRestID.setText(Integer.toString(r.getRestaurantId()));
+//            txtRestID.setText(Integer.toString(r.getRestaurantId()));
             txtRestName.setText(r.getRestaurantName());
 //            txtRestManager.setText(r.getRestaurantManager());
             txtRestPhonNum.setText(Integer.toString(r.getPhoneNumber()));
-//            txtRestAdd.setText(r.getAddress());
+            txtRestAdd.setText(r.getRes_street_add());
+            txtResPincode.setText(Integer.toString(r.getRes_pincode()));
+            txtCity.setText(r.getRes_city());
+            txtType.setText(r.getRes_type());
             txtRestUsername.setText(r.getRestaurantAdmin().getAccountDetails().getUsername());
             txtRestPassword.setText(r.getRestaurantAdmin().getAccountDetails().getPassword());
 
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Please select a row");
         }
-        txtRestID.getText();
+//        txtRestID.getText();
         txtRestName.getText();
-        txtRestManager.getText();
+        txtCity.getText();
+        txtResPincode.getText();
+        txtType.getText();
         txtRestPhonNum.getText();
         txtRestAdd.getText();
         txtRestUsername.getText();
@@ -374,6 +445,46 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnUpdateManagerActionPerformed
 
+    private void txtRestPhonNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRestPhonNumKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            jLabel1.setText("Please Enter Number only");
+//            txtCustPincode.setText("");
+        } else {
+            jLabel1.setText("");
+        }
+    }//GEN-LAST:event_txtRestPhonNumKeyPressed
+
+    private void txtRestPhonNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRestPhonNumKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+//            jLabel7.setText("Please Enter Number only");
+            txtRestPhonNum.setText("");
+        }
+    }//GEN-LAST:event_txtRestPhonNumKeyReleased
+
+    private void txtResPincodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResPincodeKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            jLabel2.setText("Please Enter Number only");
+//            txtCustPincode.setText("");
+        } else {
+            jLabel2.setText("");
+        }
+    }//GEN-LAST:event_txtResPincodeKeyPressed
+
+    private void txtResPincodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResPincodeKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+//            jLabel7.setText("Please Enter Number only");
+            txtResPincode.setText("");
+        }
+    }//GEN-LAST:event_txtResPincodeKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -381,51 +492,53 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateManager;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPincode;
     private javax.swing.JLabel lblRestAdd;
     private javax.swing.JLabel lblRestID;
-    private javax.swing.JLabel lblRestManager;
     private javax.swing.JLabel lblRestName;
     private javax.swing.JLabel lblRestPassword;
     private javax.swing.JLabel lblRestPhoneNum;
     private javax.swing.JLabel lblRestUsername;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JComboBox restComboBox;
     private javax.swing.JTable restJTable;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtResPincode;
     private javax.swing.JTextField txtRestAdd;
-    private javax.swing.JTextField txtRestID;
-    private javax.swing.JTextField txtRestManager;
     private javax.swing.JTextField txtRestName;
     private javax.swing.JPasswordField txtRestPassword;
     private javax.swing.JTextField txtRestPhonNum;
     private javax.swing.JTextField txtRestUsername;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-         DefaultTableModel model = (DefaultTableModel) restJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) restJTable.getModel();
 
         model.setRowCount(0);
-        
-            for (Restaurant restaurant : ecosystem.getRestaurantDirectory().
-                    getRestaurantList()) {
-                Object[] row = new Object[model.getColumnCount()];
-                row[0] = restaurant;
-                row[1] = restaurant.getRestaurantName();
-      // row[2] = restaurant.getRestaurantManager();
-                row[3] = restaurant.getPhoneNumber();
-                row[4] = restaurant.getRes_street_add();
-                
-                row[5] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
 
-                model.addRow(row);
-                }  
-        
+        for (Restaurant restaurant : ecosystem.getRestaurantDirectory().
+                getRestaurantList()) {
+            Object[] row = new Object[5];
+            row[0] = restaurant;
+            row[1] = restaurant.getRestaurantName();
+            // row[2] = restaurant.getRestaurantManager();
+            row[2] = restaurant.getPhoneNumber();
+            row[3] = restaurant.getRes_street_add();
+
+            row[4] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
+
+            model.addRow(row);
+        }
+
     }
 
-    private void populateComboBox() {
-       restComboBox.removeAllItems();
-       restComboBox.addItem(Role.RoleType.RestaurantAdmin.toString()); 
-    }
+//    private void populateComboBox() {
+//       restComboBox.removeAllItems();
+//       restComboBox.addItem(Role.RoleType.RestaurantAdmin.toString()); 
+//    }
 }

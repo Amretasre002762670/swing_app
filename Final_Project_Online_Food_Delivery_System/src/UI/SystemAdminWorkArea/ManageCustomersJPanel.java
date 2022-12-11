@@ -8,21 +8,23 @@ import Model.Customer.Customer;
 import Model.Customer.CustomerDirectory;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
-import Model.Role.RestaurantAdminrole;
-import Model.Role.Role;
 import java.awt.CardLayout;
 import java.awt.Component;
 import Model.UserAccount.UserAccount;
+import Model.UserAccount.UserAccountDirectory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author puppalanagavaishnavi
  */
-
-
 public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
@@ -30,14 +32,17 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private Ecosystem ecosystem;
     private Customer customer;
     CustomerDirectory custList;
+    UserAccountDirectory userList;
+    Customer updateCustomer;
 
-    public ManageCustomersJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
+    public ManageCustomersJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, CustomerDirectory cusList, UserAccountDirectory userList) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
-        this.custList = ecosystem.getCustomerDirectory();
-        populateComboBox();
+        this.custList = cusList;
+        this.userList = userList;
+//        populateComboBox();
         populateTable();
     }
 
@@ -55,17 +60,12 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         customerJTable = new javax.swing.JTable();
         txtCustUserName = new javax.swing.JTextField();
         lblCustPassword = new javax.swing.JLabel();
-        lblCustID = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        cbxRole = new javax.swing.JComboBox();
-        txtCustID = new javax.swing.JTextField();
         btnUpdateCust = new javax.swing.JButton();
         lblCustStreetAddress = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JButton();
         txtCustStreetAddress = new javax.swing.JTextField();
         txtCustPass = new javax.swing.JPasswordField();
         lblCustEmailAddress = new javax.swing.JLabel();
-        saveBtn = new javax.swing.JButton();
+        btnSelect = new javax.swing.JButton();
         txtCustEmailAdd = new javax.swing.JTextField();
         lblCustName = new javax.swing.JLabel();
         txtCustName = new javax.swing.JTextField();
@@ -75,10 +75,12 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         txtCustPincode = new javax.swing.JTextField();
         lblCustPhoneNumber = new javax.swing.JLabel();
         txtCustPhoneNum = new javax.swing.JTextField();
-        btnRefresh = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -105,17 +107,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         lblCustPassword.setText("Password:");
 
-        lblCustID.setText("Customer ID:");
-
-        jLabel6.setText("Role:");
-
-        cbxRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxRoleActionPerformed(evt);
-            }
-        });
-
-        btnUpdateCust.setText("Update");
+        btnUpdateCust.setBackground(new java.awt.Color(204, 255, 204));
+        btnUpdateCust.setText("Select");
         btnUpdateCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateCustActionPerformed(evt);
@@ -124,34 +117,45 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         lblCustStreetAddress.setText("Street Address");
 
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
         lblCustEmailAddress.setText("Email ID:");
 
-        saveBtn.setText("Save");
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnSelect.setBackground(new java.awt.Color(204, 255, 204));
+        btnSelect.setText("Update");
+        btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
+                btnSelectActionPerformed(evt);
             }
         });
 
         lblCustName.setText("Name:");
 
+        txtCustName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCustNameKeyPressed(evt);
+            }
+        });
+
         lblCustCity.setText("City");
 
         lblCustPincode.setText("Pincode");
 
+        txtCustPincode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCustPincodeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCustPincodeKeyReleased(evt);
+            }
+        });
+
         lblCustPhoneNumber.setText("Phone Number:");
 
-        btnRefresh.setText("Refresh");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
+        txtCustPhoneNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCustPhoneNumKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCustPhoneNumKeyReleased(evt);
             }
         });
 
@@ -177,58 +181,74 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage Customers ");
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("User Account Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                .addGap(65, 65, 65)
-                .addComponent(btnRefresh)
-                .addGap(14, 14, 14))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(btnCreate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdateCust)
-                        .addGap(18, 18, 18)
-                        .addComponent(saveBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                        .addGap(154, 154, 154))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCustStreetAddress)
-                            .addComponent(lblCustEmailAddress)
-                            .addComponent(lblCustUsername)
-                            .addComponent(lblCustPassword)
-                            .addComponent(lblCustID)
-                            .addComponent(jLabel6)
-                            .addComponent(lblCustName)
-                            .addComponent(lblCustCity)
-                            .addComponent(lblCustPincode)
-                            .addComponent(lblCustPhoneNumber))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustPass, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustEmailAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(234, 234, 234)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCustUsername)
+                                            .addComponent(lblCustPassword))
+                                        .addGap(45, 45, 45)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCustPass, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtCustUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCustStreetAddress)
+                                            .addComponent(lblCustEmailAddress)
+                                            .addComponent(lblCustName)
+                                            .addComponent(lblCustCity)
+                                            .addComponent(lblCustPincode)
+                                            .addComponent(lblCustPhoneNumber))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCustEmailAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtCustStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel5))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel6))
+                                            .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(btnCreate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSelect)
+                .addGap(139, 139, 139))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdateCust)
+                .addGap(307, 307, 307))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,67 +256,167 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnRefresh)
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdateCust)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustName)
+                    .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustStreetAddress)
+                    .addComponent(txtCustStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustCity)
+                    .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustPincode)
+                    .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustPhoneNumber)
+                    .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustEmailAddress)
+                    .addComponent(txtCustEmailAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustID)
-                            .addComponent(txtCustID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustName)
-                            .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustStreetAddress)
-                            .addComponent(txtCustStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustCity)
-                            .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustPincode)
-                            .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustPhoneNumber)
-                            .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustEmailAddress)
-                            .addComponent(txtCustEmailAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCustUsername))
+                    .addComponent(lblCustUsername)
                     .addComponent(txtCustUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCustPassword)
                     .addComponent(txtCustPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdateCust)
-                    .addComponent(btnDelete)
-                    .addComponent(saveBtn)
-                    .addComponent(btnCreate))
+                    .addComponent(btnCreate)
+                    .addComponent(btnSelect))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void populateRequestTable() {
 
+//    public void populateComboBox() {
+//        cbxRole.removeAllItems();
+//        cbxRole.addItem(Role.RoleType.Customer.toString());
+//    }
+    public void sendUserAccountDetails(UserAccount userAccount) {
+        String queryCustomerTable = "INSERT INTO User_Account_Directory (user_name, user_password, user_role) VALUES (?, ?, ?);";
+
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+            System.out.println(userAccount.getUsername());
+            System.out.println(userAccount.getPassword());
+            System.out.println(userAccount.getRole());
+
+            st_CustomerTable.setString(1, userAccount.getUsername());
+            st_CustomerTable.setString(2, userAccount.getPassword());
+            st_CustomerTable.setString(3, userAccount.getRole());
+
+            st_CustomerTable.execute();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
     }
 
-    public void populateComboBox() {
-        cbxRole.removeAllItems();
-        cbxRole.addItem(Role.RoleType.Customer.toString());
+    public int getUserIdForUserCreated(UserAccount user) {
+        String queryCustomerTable = "SELECT user_id FROM User_Account_Directory WHERE user_name=?;";
+        int cus_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+            st_CustomerTable.setString(1, user.getUsername());
+
+            ResultSet rs = st_CustomerTable.executeQuery();
+
+            while (rs.next()) {
+                cus_id = rs.getInt("user_id");
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
+        return cus_id;
+    }
+
+    public void sendCustomerToDB(Customer c) {
+        String queryCustomerTable = "INSERT INTO Customer_Directory (customer_name, customer_emailid, customer_phoneNum, customer_street_address, customer_city, customer_pincode, user_id, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int cus_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+            st_CustomerTable.setString(1, c.getCustName());
+            st_CustomerTable.setString(2, c.getCus_emailid());
+            st_CustomerTable.setInt(3, c.getCustPhoneNumber());
+            st_CustomerTable.setString(4, c.getHome_streetAddress());
+            st_CustomerTable.setString(5, c.getHome_City());
+            st_CustomerTable.setInt(6, c.getHome_pincode());
+
+            UserAccount user = new UserAccount();
+            user.setUsername(c.getUserAccount().getUsername());
+            user.setPassword(c.getUserAccount().getPassword());
+
+            cus_id = getUserIdForUserCreated(user);
+
+            System.out.println(cus_id);
+
+            st_CustomerTable.setInt(7, cus_id);
+            st_CustomerTable.setString(8, c.getUserAccount().getUsername());
+
+            st_CustomerTable.execute();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void updateCustomerInDB(Customer c) {
+        String updateQuery = "UPDATE Customer_Directory SET customer_name=?, customer_emailid=?, customer_phoneNum=?, customer_street_address=?, customer_city=?, customer_pincode=? WHERE user_id=? ";
+        int user_id = 0;
+
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(updateQuery);
+
+            st_CustomerTable.setString(1, c.getCustName());
+            st_CustomerTable.setString(2, c.getCus_emailid());
+            st_CustomerTable.setInt(3, c.getCustPhoneNumber());
+            st_CustomerTable.setString(4, c.getHome_streetAddress());
+            st_CustomerTable.setString(5, c.getHome_City());
+            st_CustomerTable.setInt(6, c.getHome_pincode());
+
+            st_CustomerTable.setInt(7, c.getCustId());
+
+            System.out.println(c.getCustId());
+            st_CustomerTable.executeUpdate();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     public void populateTable() {
@@ -304,8 +424,8 @@ public void populateRequestTable() {
 
         model.setRowCount(0);
 
-        for (Customer customer : ecosystem.getCustomerDirectory().getCustomerList()) {
-            Object[] row = new Object[9];
+        for (Customer customer : custList.getCustomerList()) {
+            Object[] row = new Object[8];
             row[0] = customer.getCustId();
             row[1] = customer;
             row[2] = customer.getHome_streetAddress();
@@ -320,11 +440,6 @@ public void populateRequestTable() {
     }
 
 
-    private void cbxRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRoleActionPerformed
-        // TODO add your handling code here:
-        populateComboBox();
-    }//GEN-LAST:event_cbxRoleActionPerformed
-
     private void btnUpdateCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustActionPerformed
         // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
@@ -332,62 +447,57 @@ public void populateRequestTable() {
         if (selectedRow >= 0) {
             Customer c = (Customer) customerJTable.getValueAt(selectedRow, 1);
             customer = c;
-            txtCustID.setText(Integer.toString(c.getCustId()));
+//            txtCustID.setText(Integer.toString(c.getCustId()));
             txtCustName.setText(c.getCustName());
             txtCustStreetAddress.setText(c.getHome_streetAddress());
             txtCustCity.setText(c.getHome_City());
             txtCustPincode.setText(String.valueOf(c.getHome_pincode()));
             txtCustPhoneNum.setText(Integer.toString(c.getCustPhoneNumber()));
             txtCustEmailAdd.setText(c.getCus_emailid());
+            txtCustUserName.setEditable(false);
             txtCustUserName.setText(c.getUserAccount().getUsername());
             txtCustPass.setText(c.getUserAccount().getPassword());
+
+            UserAccount user = new UserAccount();
+            user.setUsername(txtCustUserName.getText());
+            user.setPassword(txtCustPass.getText());
+
+            updateCustomer = new Customer(user);
+            updateCustomer.setCustId(c.getCustId());
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
         }
-        txtCustID.getText();
-        txtCustName.getText();
-        txtCustStreetAddress.getText();
-        txtCustCity.getText();
-        txtCustPincode.getText();
-        txtCustPhoneNum.getText();
-        txtCustEmailAdd.getText();
-        txtCustUserName.getText();
 
-        populateTable();
     }//GEN-LAST:event_btnUpdateCustActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = customerJTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 0);
-            ecosystem.getCustomerDirectory().deleteCustomer(c);
-            JOptionPane.showMessageDialog(null, "Customer deleted Successfully.");
-            populateTable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select any row.");
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
         // TODO add your handling code here:
 
-        for (Customer c : ecosystem.getCustomerDirectory().getCustomerList()) {
-            if (customer.getCustName().equals(c.getCustName())) {
-                c.setCustId(Integer.parseInt(txtCustID.getText()));
-                c.setCustName(txtCustName.getText());
-                c.setHome_streetAddress(txtCustStreetAddress.getText());
-                c.setHome_City(txtCustCity.getText());
-                c.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
-                c.setCustPhoneNumber(Integer.parseInt(txtCustStreetAddress.getText()));
-                c.setCus_emailid(txtCustEmailAdd.getText());
-
-            }
-        }
+//        Customer updateCus = new Customer();
+        updateCustomer.setCustName(txtCustName.getText());
+        updateCustomer.setHome_streetAddress(txtCustStreetAddress.getText());
+        updateCustomer.setHome_City(txtCustCity.getText());
+        updateCustomer.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
+        updateCustomer.setCustPhoneNumber(Integer.parseInt(txtCustPhoneNum.getText()));
+        updateCustomer.setCus_emailid(txtCustEmailAdd.getText());
+//        for (Customer c : ecosystem.getCustomerDirectory().getCustomerList()) {
+//            if (customer.getCustName().equals(c.getCustName())) {
+////                c.setCustId(Integer.parseInt(txtCustID.getText()));
+//                c.setCustName(txtCustName.getText());
+//                c.setHome_streetAddress(txtCustStreetAddress.getText());
+//                c.setHome_City(txtCustCity.getText());
+//                c.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
+//                c.setCustPhoneNumber(Integer.parseInt(txtCustStreetAddress.getText()));
+//                c.setCus_emailid(txtCustEmailAdd.getText());
+//            }
+//        }
+        updateCustomerInDB(updateCustomer);
 
         JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
         populateTable();
-        txtCustID.setText("");
+
+//        txtCustID.setText("");
         txtCustName.setText("");
         txtCustStreetAddress.setText("");
         txtCustCity.setText("");
@@ -396,54 +506,59 @@ public void populateRequestTable() {
         txtCustEmailAdd.setText("");
         txtCustUserName.setText("");
         txtCustPass.setText("");
-    }//GEN-LAST:event_saveBtnActionPerformed
-
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-
-        populateTable();
-    }//GEN-LAST:event_btnRefreshActionPerformed
+    }//GEN-LAST:event_btnSelectActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
 
-        String username = txtCustUserName.getText();
-        String password = String.valueOf(txtCustPass.getPassword());
-        String new_role = "Customer";
-        int CustId = Integer.parseInt(txtCustID.getText());
-        String name = txtCustName.getText();
-        String streetaddress = txtCustStreetAddress.getText();
-        String City = txtCustCity.getText();
-        int Pincode = Integer.parseInt(txtCustPincode.getText());
-        int phoneNumber = Integer.parseInt(txtCustStreetAddress.getText());
-        String Emailaddress = txtCustEmailAdd.getText();
+        if (txtCustCity.getText().equals("") || txtCustEmailAdd.getText().equals("") || txtCustName.getText().equals("")
+                || txtCustPass.getText().equals("") || txtCustPhoneNum.getText().equals("") || txtCustPincode.getText().equals("")
+                || txtCustStreetAddress.getText().equals("") || txtCustUserName.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory");
+        } else {
+            String username = txtCustUserName.getText();
+            String password = String.valueOf(txtCustPass.getPassword());
+            String new_role = "Customer";
+//        int CustId = Integer.parseInt(txtCustID.getText());
+            String name = txtCustName.getText();
+            String streetaddress = txtCustStreetAddress.getText();
+            String City = txtCustCity.getText();
+            int Pincode = Integer.parseInt(txtCustPincode.getText());
+            int phoneNumber = Integer.parseInt(txtCustPhoneNum.getText());
+            String Emailaddress = txtCustEmailAdd.getText();
 //        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
-        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
-        account.setUsername(username);
-        account.setPassword(password);
-        account.setRole("Customer");
+            UserAccount account = userList.AddUserAccount();
+            account.setUsername(username);
+            account.setPassword(password);
+            account.setRole(new_role);
 
-  
-        Customer c = custList.addCustomer(account);
-        c.setCus_emailid(Emailaddress);
-        c.setCustPhoneNumber(phoneNumber);
-        c.setHome_City(City);
-        c.setHome_pincode(Pincode);
-        c.setHome_streetAddress(streetaddress);
-        c.setUserAccount(userAccount);
+            sendUserAccountDetails(account);
 
-//        ecosystem.getCustomerDirectory().createnewCustomer(customer);
-        
-        populateTable();
+            Customer c = custList.addCustomer(account);
+            c.setCus_emailid(Emailaddress);
+            c.setCustPhoneNumber(phoneNumber);
+            c.setHome_City(City);
+            c.setHome_pincode(Pincode);
+            c.setHome_streetAddress(streetaddress);
+            c.setCustName(username);
 
-        txtCustID.setText("");
-        txtCustName.setText("");
-        txtCustStreetAddress.setText("");
-        txtCustEmailAdd.setText("");
-        txtCustUserName.setText("");
-        txtCustPass.setText("");
-        JOptionPane.showMessageDialog(null, "Customer has been Created");
+            sendCustomerToDB(c);
 
+            populateTable();
+
+//        txtCustID.setText("");
+            txtCustName.setText("");
+            txtCustStreetAddress.setText("");
+            txtCustEmailAdd.setText("");
+            txtCustUserName.setText("");
+            txtCustPass.setText("");
+            txtCustCity.setText("");
+            txtCustPincode.setText("");
+            txtCustPhoneNum.setText("");
+
+            JOptionPane.showMessageDialog(null, "Customer has been Created");
+        }
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -453,26 +568,69 @@ public void populateRequestTable() {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        sysAdminwjp.populateTree();
+//        sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void txtCustNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustNameKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtCustNameKeyPressed
+
+    private void txtCustPincodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPincodeKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            jLabel5.setText("Please Enter Number only");
+        } else {
+            jLabel5.setText("");
+        }
+        
+    }//GEN-LAST:event_txtCustPincodeKeyPressed
+
+    private void txtCustPhoneNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPhoneNumKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            jLabel6.setText("Please Enter Number only");
+        } else {
+            jLabel6.setText("");
+        }
+    }//GEN-LAST:event_txtCustPhoneNumKeyPressed
+
+    private void txtCustPincodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPincodeKeyReleased
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+//            jLabel7.setText("Please Enter Number only");
+            txtCustPincode.setText("");
+        }
+    }//GEN-LAST:event_txtCustPincodeKeyReleased
+
+    private void txtCustPhoneNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPhoneNumKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+//            jLabel7.setText("Please Enter Number only");
+            txtCustPhoneNum.setText("");
+        }
+    }//GEN-LAST:event_txtCustPhoneNumKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnSelect;
     private javax.swing.JButton btnUpdateCust;
-    private javax.swing.JComboBox cbxRole;
     private javax.swing.JTable customerJTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCustCity;
     private javax.swing.JLabel lblCustEmailAddress;
-    private javax.swing.JLabel lblCustID;
     private javax.swing.JLabel lblCustName;
     private javax.swing.JLabel lblCustPassword;
     private javax.swing.JLabel lblCustPhoneNumber;
@@ -480,10 +638,8 @@ public void populateRequestTable() {
     private javax.swing.JLabel lblCustStreetAddress;
     private javax.swing.JLabel lblCustUsername;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JButton saveBtn;
     private javax.swing.JTextField txtCustCity;
     private javax.swing.JTextField txtCustEmailAdd;
-    private javax.swing.JTextField txtCustID;
     private javax.swing.JTextField txtCustName;
     private javax.swing.JPasswordField txtCustPass;
     private javax.swing.JTextField txtCustPhoneNum;

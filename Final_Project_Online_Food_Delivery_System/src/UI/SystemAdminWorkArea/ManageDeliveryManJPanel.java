@@ -3,39 +3,125 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SystemAdminWorkArea;
+
 import Model.Customer.Customer;
 import Model.DeliveryMan.DeliveryMan;
+import Model.DeliveryMan.DeliveryManDirectory;
 import Model.System.Ecosystem;
 import Model.Employee.Employee;
-import Model.Role.DeliveryManrole;
-import Model.Role.Role;
-import static Model.Role.Role.RoleType.DeliveryMan;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author puppalanagavaishnavi
  */
 public class ManageDeliveryManJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Ecosystem ecosystem;
     private DeliveryMan deliveryMan;
- 
+    DeliveryManDirectory deliveryManList;
+
     /**
      * Creates new form ManageDeliveryManJPanel
      */
-    public ManageDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem) {
+    public ManageDeliveryManJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem ecosystem, DeliveryManDirectory deliveryManList) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;        
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.ecosystem = ecosystem;
+        this.deliveryManList = deliveryManList;
         populateTable();
-        populateComboBox();
+//        populateComboBox();
+    }
+
+    public void sendUserAccountDetails(UserAccount userAccount) {
+        String queryDeliveryManTable = "INSERT INTO User_Account_Directory (user_name, user_password, user_role) VALUES (?, ?, ?);";
+
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                    .prepareStatement(queryDeliveryManTable);
+
+            st_DeliveryManTable.setString(1, userAccount.getUsername());
+            st_DeliveryManTable.setString(2, userAccount.getPassword());
+            st_DeliveryManTable.setString(3, userAccount.getRole());
+
+            st_DeliveryManTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
+    }
+
+    public int getUserIdForUserCreated(UserAccount user) {
+        String queryDeliveryManTable = "SELECT user_id FROM User_Account_Directory WHERE user_name=?;";
+        int del_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                    .prepareStatement(queryDeliveryManTable);
+
+            st_DeliveryManTable.setString(1, user.getUsername());
+
+            ResultSet rs = st_DeliveryManTable.executeQuery();
+
+            while (rs.next()) {
+                del_id = rs.getInt("user_id");
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
+        }
+        return del_id;
+    }
+
+    public void sendDeliveryManToDB(DeliveryMan d) {
+        String queryDeliveryManTable = "INSERT INTO DeliveryMan_Directory (deliveryman_name, area_covered, deliveryman_phoneNumber, user_id, user_name) VALUES (?,?,?,?,?);";
+        int del_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                    .prepareStatement(queryDeliveryManTable);
+
+            st_DeliveryManTable.setString(1, d.getDeliveryManName());
+            st_DeliveryManTable.setString(2, d.getCommunity());
+            st_DeliveryManTable.setLong(3, d.getDeliveryManNumber());
+
+            UserAccount user = new UserAccount();
+            user.setUsername(d.getUserAccount().getUsername());
+            user.setPassword(d.getUserAccount().getPassword());
+
+            del_id = getUserIdForUserCreated(user);
+
+            st_DeliveryManTable.setInt(4, del_id);
+            st_DeliveryManTable.setString(5, d.getUserAccount().getUsername());
+
+            st_DeliveryManTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     /**
@@ -49,10 +135,6 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         deliveryManJTable = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        delComboBox = new javax.swing.JComboBox();
-        txtDeliveryManID = new javax.swing.JTextField();
-        lblDelId = new javax.swing.JLabel();
         lblDelUsername = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
@@ -61,15 +143,21 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         lblDelPassword = new javax.swing.JLabel();
         btnUpdateDeli = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
-        btnRefresh = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblDelCom = new javax.swing.JLabel();
         txtDeliverManCommunity = new javax.swing.JTextField();
         txtDeliverManName = new javax.swing.JTextField();
         lblDelname = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPhoneNum = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
+        setMaximumSize(new java.awt.Dimension(650, 650));
+        setMinimumSize(new java.awt.Dimension(650, 650));
+        setPreferredSize(new java.awt.Dimension(650, 650));
 
         deliveryManJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,12 +177,9 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(deliveryManJTable);
 
-        jLabel6.setText("Role:");
-
-        lblDelId.setText("Delivery Man ID:");
-
         lblDelUsername.setText("Username:");
 
+        btnDelete.setBackground(new java.awt.Color(204, 255, 204));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +187,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
+        saveBtn.setBackground(new java.awt.Color(204, 255, 204));
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +197,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         lblDelPassword.setText("Password:");
 
+        btnUpdateDeli.setBackground(new java.awt.Color(204, 255, 204));
         btnUpdateDeli.setText("Update");
         btnUpdateDeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +205,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCreate.setBackground(new java.awt.Color(204, 255, 204));
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,14 +213,16 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnRefresh.setText("Refresh");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
+        btnBack.setBackground(new java.awt.Color(204, 255, 204));
+        btnBack.setText("<- Back");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBackMouseExited(evt);
             }
         });
-
-        btnBack.setText("<- Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -143,89 +233,112 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         lblDelname.setText("Name:");
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Delivery Man Panel");
+
+        jLabel2.setText("Phone Number: ");
+
+        txtPhoneNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPhoneNumKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneNumKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRefresh)
-                .addGap(123, 123, 123))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDelUsername)
-                            .addComponent(lblDelId)
-                            .addComponent(jLabel6)
-                            .addComponent(lblDelCom)
-                            .addComponent(lblDelPassword)
-                            .addComponent(lblDelname))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(delComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliveryManID, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnCreate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdateDeli)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(btnCreate)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUpdateDeli)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(saveBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnBack)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(137, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDelUsername)
+                    .addComponent(lblDelCom)
+                    .addComponent(lblDelPassword)
+                    .addComponent(lblDelname)
+                    .addComponent(jLabel2))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(136, 136, 136)
+                .addComponent(jLabel3)
+                .addGap(111, 111, 111))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, lblDelCom, lblDelPassword, lblDelUsername, lblDelname});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDeliverManCommunity, txtDeliverManName, txtDeliveryManPassword, txtDeliveryManUserName, txtPhoneNum});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnRefresh))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(delComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelId)
-                    .addComponent(txtDeliveryManID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelname)
-                    .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelCom)
-                    .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelUsername)
-                    .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDelPassword)
-                    .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate)
-                    .addComponent(btnUpdateDeli)
-                    .addComponent(btnDelete)
-                    .addComponent(saveBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(190, 190, 190)
+                        .addComponent(jLabel3)
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCreate)
+                            .addComponent(btnUpdateDeli)
+                            .addComponent(btnDelete)
+                            .addComponent(saveBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDelname)
+                            .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDelCom)
+                            .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDelUsername)
+                            .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDelPassword)
+                            .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -246,130 +359,182 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         for (DeliveryMan d : ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
-            if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName()) ) {
+            if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName())) {
                 d.setDeliveryManName(txtDeliverManName.getText());
-                d.setDeliveryManId(Integer.parseInt(txtDeliveryManID.getText()));
+                d.setDeliveryManNumber(Integer.parseInt(txtPhoneNum.getText()));
                 d.setCommunity(txtDeliverManCommunity.getText());
-                       
+                d.setDeliveryManNumber(Integer.parseInt(txtPhoneNum.getText()));
+                deliveryManList.addDeliveryMan(d);
             }
         }
 
         JOptionPane.showMessageDialog(null, "Deliveryman Updated Successfully.");
         populateTable();
-        txtDeliveryManID.setText("");
+//        txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
         txtDeliveryManPassword.setText("");
         txtDeliveryManUserName.setText("");
+        txtPhoneNum.setText("");
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void btnUpdateDeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDeliActionPerformed
         // TODO add your handling code here:
         int selectedRow = deliveryManJTable.getSelectedRow();
 
-        if (selectedRow >= 0) {
-            DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 0);
-            deliveryMan = d;
-            txtDeliveryManID.setText(String.valueOf(d.getDeliveryManId()));
-            txtDeliverManName.setText(d.getDeliveryManName());
-            txtDeliverManCommunity.setText(d.getCommunity());
-            txtDeliveryManUserName.setText(d.getUserAccount().getUsername());
-            txtDeliveryManPassword.setText(d.getUserAccount().getPassword());
-
-        }else {
+        if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
-        }
-        txtDeliverManName.getText();
+            return;
+        } 
+        DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 1);
+        deliveryMan = d;
+//            txtDeliveryManID.setText(String.valueOf(d.getDeliveryManId()));
+        txtDeliverManName.setText(d.getDeliveryManName());
+        txtDeliverManCommunity.setText(d.getCommunity());
+        //  txtDeliveryManPhoneNum.setText(String.valueOf(d.getDeliveryManNumber()));
+        txtDeliveryManUserName.setText(d.getUserAccount().getUsername());
+        txtDeliveryManPassword.setText(d.getUserAccount().getPassword());
+        txtPhoneNum.setText(String.valueOf(d.getDeliveryManNumber()));
         populateTable();
     }//GEN-LAST:event_btnUpdateDeliActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
 
+        if (txtDeliveryManUserName.getText().length() <= 0 || String.valueOf(txtDeliveryManPassword.getPassword()).length() <= 0
+                || txtDeliverManName.getText().length() <= 0 || txtDeliverManCommunity.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");
+        }
         String username = txtDeliveryManUserName.getText();
         String password = String.valueOf(txtDeliveryManPassword.getPassword());
+        String new_role = "DeliveryMan";
         String name = txtDeliverManName.getText();
-       int DelId = Integer.parseInt(txtDeliveryManID.getText());
+        //int DelId = Integer.parseInt(txtDeliveryManID.getText());
+        int phonenumber = Integer.parseInt(txtPhoneNum.getText());
         String community = txtDeliverManCommunity.getText();
 
-        Employee employee = ecosystem.getEmployeeList().createEmployee(name);
-                
-               // getEmployeeDirectory().createEmployee(name);
+        // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
+        // getEmployeeDirectory().createEmployee(name);
+        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
+        // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setRole("DeliveryMan");
 
-        UserAccount account = ecosystem.getUserAccountDir().addUserAccounts(userAccount);
-               // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
+        DeliveryMan d = deliveryManList.addDeliveryManWithUserAcct(account);
+        d.setCommunity(community);
+        d.setDeliveryManName(name);
+        d.setDeliveryManNumber(phonenumber);
 
-        DeliveryMan d = ecosystem.getDeliveryManDirectory().createDeliveryMan(name, account);
-
-        txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
         txtDeliverManCommunity.setText("");
+        //   txtDeliveryManPhoneNum.setText("");
         txtDeliveryManUserName.setText("");
         txtDeliveryManPassword.setText("");
 
         populateTable();
-        JOptionPane.showMessageDialog(null, "Delivery Man Created");
+
+        sendUserAccountDetails(account);
+//        int cus_id = getUserIdForUserCreated(account);
+//        System.out.println(cus_id);
+        sendDeliveryManToDB(d);
+        //JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
+
+        txtPhoneNum.setText("");
+        txtDeliverManName.setText("");
+        txtDeliverManCommunity.setText("");
+        txtDeliveryManUserName.setText("");
+        txtDeliveryManPassword.setText("");
+        txtPhoneNum.setText("");
+        JOptionPane.showMessageDialog(this, "Delivery Man has been Created");
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        populateTable();
-    }//GEN-LAST:event_btnRefreshActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        //        CustomerWorkArea cusWorkArea = new CustomerWorkArea(cusDetails, panelBackWorkArea, resList);
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        sysAdminwjp.populateTree();
+        // sysAdminwjp.populateTree();
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+        // panelBackWorkArea.remove(this);
+        //((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
+        // TODO add your handling code here:
+        btnBack.setBackground(Color.red);
+    }//GEN-LAST:event_btnBackMouseEntered
+
+    private void btnBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseExited
+        // TODO add your handling code here:
+        btnBack.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_btnBackMouseExited
+
+    private void txtPhoneNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            jLabel3.setText("Please Enter Number only");
+        } else {
+            jLabel3.setText("");
+        }
+    }//GEN-LAST:event_txtPhoneNumKeyPressed
+
+    private void txtPhoneNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+//            jLabel7.setText("Please Enter Number only");
+            txtPhoneNum.setText("");
+        }
+    }//GEN-LAST:event_txtPhoneNumKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateDeli;
-    private javax.swing.JComboBox delComboBox;
     private javax.swing.JTable deliveryManJTable;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDelCom;
-    private javax.swing.JLabel lblDelId;
     private javax.swing.JLabel lblDelPassword;
     private javax.swing.JLabel lblDelUsername;
     private javax.swing.JLabel lblDelname;
     private javax.swing.JButton saveBtn;
     private javax.swing.JTextField txtDeliverManCommunity;
     private javax.swing.JTextField txtDeliverManName;
-    private javax.swing.JTextField txtDeliveryManID;
     private javax.swing.JPasswordField txtDeliveryManPassword;
     private javax.swing.JTextField txtDeliveryManUserName;
+    private javax.swing.JTextField txtPhoneNum;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-         DefaultTableModel model = (DefaultTableModel) deliveryManJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) deliveryManJTable.getModel();
 
         model.setRowCount(0);
-        
-            for (DeliveryMan deliveryMan : ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
-                Object[] row = new Object[model.getColumnCount()];
-                row[0] = deliveryMan.getDeliveryManId();
-                row[1] = deliveryMan;
-                row[2] = deliveryMan.getCommunity();
-                row[3] = deliveryMan.getUserAccount().getUsername();
 
-                model.addRow(row);
-                }  
+        for (DeliveryMan deliveryMan : deliveryManList.getDeliveryManList()) {
+            Object[] row = new Object[model.getColumnCount()];
+            row[0] = deliveryMan.getDeliveryManId();
+            row[1] = deliveryMan;
+            row[2] = deliveryMan.getCommunity();
+            row[3] = deliveryMan.getUserAccount().getUsername();
+
+            model.addRow(row);
+        }
     }
 
-    private void populateComboBox() {
-     delComboBox.removeAllItems();
-       delComboBox.addItem(Role.RoleType.DeliveryMan.toString());   
-}
+//    private void populateComboBox() {
+//     delComboBox.removeAllItems();
+//       delComboBox.addItem(Role.RoleType.DeliveryMan.toString());   
+//}
 }

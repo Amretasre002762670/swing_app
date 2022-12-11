@@ -165,12 +165,13 @@ public class MainJFrame extends javax.swing.JFrame {
                     resAdminAcct.setUsername(rs_admin_dir.getString("user_name"));
                     resAdminAcct.setPassword(rs_admin_dir.getString("user_password"));
                     resAdminAcct.setRole(rs_admin_dir.getString("user_role"));
-
+                    userAccountDir.addUserAccounts(resAdminAcct);
+                    
                     resAdmin = new RestaurantAdmin();
                     resAdmin.setAccountDetails(resAdminAcct);
                     resAdmin.setResAdminId(Integer.parseInt(rs_admin_dir.getString("res_admin_id")));
                     resAdmin.setResName(restName);
-
+                    
                     addRes = new Restaurant();
 
                     addRes.setRestaurantName(restName);
@@ -276,7 +277,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 addUserAccount.setUsername(rs.getString("user_name"));
                 addUserAccount.setPassword(rs.getString("user_password"));
                 addUserAccount.setRole(rs.getString("user_role"));
-
+                userAccountDir.addUserAccounts(addUserAccount);
+                
                 addDeliveryMan = deliveryManList.addDeliveryManWithUserAcct(addUserAccount);;
 
                 addDeliveryMan.setDeliveryManId(rs.getInt("deliveryman_id"));
@@ -615,7 +617,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         
                     } else if (rs.getString("user_role").equals("System Admin")) {
                         // add your code here
-                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem);
+                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, userAccountDir, user, deliveryManList, resList);
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
