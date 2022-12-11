@@ -393,6 +393,40 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         }
     }
 
+    
+     public void updateCustomerInDB(Customer c, int row) {
+        String queryCustomerTable = "UPDATE ROW_NUMBER(row) Customer_Directory SET customer_name=?, customer_emailid=?, customer_phoneNum=?, customer_street_address=?, customer_city=?, customer_pincode=?, user_id=?, user_name = ?" ;
+        int cus_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "Qazmaggi123@");
+
+            PreparedStatement st_CustomerTable = (PreparedStatement) connection
+                    .prepareStatement(queryCustomerTable);
+
+             st_CustomerTable.setString(1, c.getCustName());
+            st_CustomerTable.setString(2, c.getCus_emailid());
+            st_CustomerTable.setInt(3, c.getCustPhoneNumber());
+            st_CustomerTable.setString(4, c.getHome_streetAddress());
+            st_CustomerTable.setString(5, c.getHome_City());
+            st_CustomerTable.setInt(6, c.getHome_pincode());
+             UserAccount user = new UserAccount();
+            user.setUsername(c.getUserAccount().getUsername());
+            user.setPassword(c.getUserAccount().getPassword());
+
+            cus_id = getUserIdForUserCreated(user);
+            
+            st_CustomerTable.setInt(7, cus_id);
+            st_CustomerTable.setString(8, c.getUserAccount().getUsername());
+
+            st_CustomerTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    
     public void populateRequestTable() {
 
     }
@@ -457,8 +491,10 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         txtCustPhoneNum.getText();
         txtCustEmailAdd.getText();
         txtCustUserName.getText();
-
+        
+     
         populateTable();
+          //updateCustomerInDB(c,selectedRow);
     }//GEN-LAST:event_btnUpdateCustActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -503,6 +539,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
         populateTable();
+      
         txtCustID.setText("");
         txtCustName.setText("");
         txtCustStreetAddress.setText("");
