@@ -125,7 +125,8 @@ ADD food_size VARCHAR(100);
 ALTER TABLE Menu_Directory
 MODIFY COLUMN food_price FLOAT;
 
--- SELECT SQL Queries--  
+-- SELECT SQL Queries--
+
 SELECT * FROM User_Account_Directory;
 
 SELECT user_name, user_password, user_role
@@ -200,10 +201,12 @@ VALUES (1, 'Signature Dishes', 'Orange Chicken', 14.95, '28 oz', 'NON VEG');
 
 
 -- Inserting into Delivery man --
+
 INSERT INTO DeliveryMan_Directory (deliveryman_name, deliveryman_phoneNumber, user_id, user_name, area_covered, zipcode_covered)
 VALUES ('Delivery Man', 2245679876, 3, 'deliveryman', 'Huntington', 02115);
 
 -- Update Queries--
+
 UPDATE Restaurant_Directory
 SET restaurant_type = 'Chinese'
 WHERE restaurant_id = 1;
