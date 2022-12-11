@@ -38,14 +38,14 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 
     public RestaurantSearchPanel(RestaurantDirectory resList, javax.swing.JPanel panelBackWorkArea, Customer cusAccount, WorkQueue workQueue) {
         initComponents();
-        
+
         this.resList = resList;
         this.cusAccount = cusAccount;
         this.workQueue = workQueue;
-        
+
         lblWarType.setVisible(false);
         lblWarText.setVisible(false);
-        
+
         this.panelBackWorkArea = panelBackWorkArea;
     }
 
@@ -102,7 +102,6 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
 //            sqlException.printStackTrace();
 //        }
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -394,7 +393,8 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         panelBackWorkArea.remove(this);
 //        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).previous(JPanel CustomerWorkArea);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+//        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Customer work area");
     }//GEN-LAST:event_btnBackMouseClicked
 
     private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
@@ -424,12 +424,12 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         }
 
         DefaultTableModel restaurantTable = (DefaultTableModel) tblRestaurantList.getModel();
-        
+
         Restaurant selectedRestaurant = (Restaurant) restaurantTable.getValueAt(selectedResInd, 0);
 
         // ADD MENU PANEL
         ViewMenuPanel menuPanel = new ViewMenuPanel(panelBackWorkArea, selectedRestaurant, cusAccount, workQueue);
-//        panelBackWorkArea.removeAll();
+        panelBackWorkArea.remove(this);
         panelBackWorkArea.add("MenuPanel", menuPanel);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnViewMenuActionPerformed

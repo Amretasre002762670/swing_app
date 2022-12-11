@@ -4,6 +4,7 @@
  */
 package UI.DeliveryManWorkArea;
 
+import Model.Customer.Customer;
 import java.awt.Color;
 
 /**
@@ -12,12 +13,28 @@ import java.awt.Color;
  */
 public class CustomerDetails extends javax.swing.JPanel {
   javax.swing.JPanel panelBackWorkArea;
+  Customer cusDetails;
     /**
      * Creates new form CustomerDetails
      */
-    public CustomerDetails(javax.swing.JPanel panelBackWorkArea) {
+    public CustomerDetails(javax.swing.JPanel panelBackWorkArea, Customer cusDetails) {
         initComponents();
         this.panelBackWorkArea = panelBackWorkArea;
+        this.cusDetails = cusDetails;
+        
+        txtdelcusname.setEditable(false);
+        txtdelcusstrtaddress.setEditable(false);
+        txtdelcustcity.setEditable(false);
+        txtdelcustemail.setEditable(false);
+        txtdelcustnumber.setEditable(false);
+        txtdelcustpincode.setEditable(false);
+        
+        txtdelcusname.setText(cusDetails.getCustName());
+        txtdelcusstrtaddress.setText(cusDetails.getHome_streetAddress());
+        txtdelcustcity.setText(cusDetails.getHome_City());
+        txtdelcustemail.setText(cusDetails.getCus_emailid());
+        txtdelcustnumber.setText(String.valueOf(cusDetails.getCustPhoneNumber()));
+        txtdelcustpincode.setText(String.valueOf(cusDetails.getHome_pincode()));
     }
 
     /**
@@ -30,13 +47,11 @@ public class CustomerDetails extends javax.swing.JPanel {
     private void initComponents() {
 
         titleCustomerdet = new javax.swing.JLabel();
-        lbldelcustid = new javax.swing.JLabel();
         lbldelcustname = new javax.swing.JLabel();
         lbldelcuststrtaddress = new javax.swing.JLabel();
         lbldelcustcity = new javax.swing.JLabel();
         lbldelcustpincode = new javax.swing.JLabel();
         lbldelcustnumber = new javax.swing.JLabel();
-        txtdelcusid = new javax.swing.JTextField();
         txtdelcusname = new javax.swing.JTextField();
         txtdelcusstrtaddress = new javax.swing.JTextField();
         txtdelcustcity = new javax.swing.JTextField();
@@ -49,27 +64,31 @@ public class CustomerDetails extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 255));
 
         titleCustomerdet.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        titleCustomerdet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleCustomerdet.setText("CUSTOMER DETAILS");
 
-        lbldelcustid.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbldelcustid.setText("Customer_ID");
-
-        lbldelcustname.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcustname.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcustname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcustname.setText("Name");
 
-        lbldelcuststrtaddress.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcuststrtaddress.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcuststrtaddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcuststrtaddress.setText("Street Address");
 
-        lbldelcustcity.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcustcity.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcustcity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcustcity.setText("City");
 
-        lbldelcustpincode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcustpincode.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcustpincode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcustpincode.setText("Pincode");
 
-        lbldelcustnumber.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcustnumber.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcustnumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcustnumber.setText("Contact number");
 
-        lbldelcustemail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldelcustemail.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        lbldelcustemail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldelcustemail.setText("Email");
 
         lbldelcusback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -93,12 +112,10 @@ public class CustomerDetails extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleCustomerdet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(lbldelcusback)
-                        .addGap(251, 251, 251)
-                        .addComponent(titleCustomerdet))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -107,62 +124,62 @@ public class CustomerDetails extends javax.swing.JPanel {
                             .addComponent(lbldelcustnumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbldelcustcity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbldelcustpincode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbldelcustname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbldelcustid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbldelcustname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtdelcustcity)
-                            .addComponent(txtdelcusid)
+                            .addComponent(txtdelcustnumber)
+                            .addComponent(txtdelcustemail, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                             .addComponent(txtdelcusname)
                             .addComponent(txtdelcusstrtaddress)
-                            .addComponent(txtdelcustemail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addComponent(txtdelcustnumber)
-                            .addComponent(txtdelcustpincode))))
-                .addGap(471, 471, 471))
+                            .addComponent(txtdelcustcity)
+                            .addComponent(txtdelcustpincode)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(lbldelcusback)))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lbldelcustemail, lbldelcustnumber});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(titleCustomerdet)
-                    .addComponent(lbldelcusback))
-                .addGap(92, 92, 92)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbldelcustid)
-                    .addComponent(txtdelcusid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
+                .addComponent(titleCustomerdet)
+                .addGap(26, 26, 26)
+                .addComponent(lbldelcusback)
+                .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustname)
                     .addComponent(txtdelcusname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcuststrtaddress)
                     .addComponent(txtdelcusstrtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustcity)
                     .addComponent(txtdelcustcity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbldelcustpincode)
                     .addComponent(txtdelcustpincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtdelcustnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustemail)
                     .addComponent(txtdelcustemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbldelcusbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcusbackMouseClicked
         // TODO add your handling code here:
          panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).show(panelBackWorkArea, "Currentorder");
     }//GEN-LAST:event_lbldelcusbackMouseClicked
 
     private void lbldelcusbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcusbackMouseEntered
@@ -172,7 +189,7 @@ public class CustomerDetails extends javax.swing.JPanel {
 
     private void lbldelcusbackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcusbackMouseExited
         lbldelcusback.setForeground(Color.red);
-// TODO add your handling code here:
+        // TODO add your handling code here:
         
     }//GEN-LAST:event_lbldelcusbackMouseExited
 
@@ -181,13 +198,11 @@ public class CustomerDetails extends javax.swing.JPanel {
     private javax.swing.JLabel lbldelcusback;
     private javax.swing.JLabel lbldelcustcity;
     private javax.swing.JLabel lbldelcustemail;
-    private javax.swing.JLabel lbldelcustid;
     private javax.swing.JLabel lbldelcustname;
     private javax.swing.JLabel lbldelcustnumber;
     private javax.swing.JLabel lbldelcustpincode;
     private javax.swing.JLabel lbldelcuststrtaddress;
     private javax.swing.JLabel titleCustomerdet;
-    private javax.swing.JTextField txtdelcusid;
     private javax.swing.JTextField txtdelcusname;
     private javax.swing.JTextField txtdelcusstrtaddress;
     private javax.swing.JTextField txtdelcustcity;

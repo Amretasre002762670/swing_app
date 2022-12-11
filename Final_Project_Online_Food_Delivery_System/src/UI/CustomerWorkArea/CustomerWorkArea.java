@@ -240,7 +240,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
 //        panelBackWorkArea.removeAll();
         RestaurantSearchPanel searchRes = new RestaurantSearchPanel(resList, panelBackWorkArea, cusAccount, workQueue);
-        panelBackWorkArea.add("SearchRestrauntsPanel", searchRes);
+        panelBackWorkArea.add("Search Restraunts Panel", searchRes);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnSearchRestaurantsActionPerformed
 
@@ -248,7 +248,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
 //        panelBackWorkArea.removeAll();
         OrderHistory orderHistory = new OrderHistory(panelBackWorkArea, orderHis);
-        panelBackWorkArea.add("SearchRestrauntsPanel", orderHistory);
+        panelBackWorkArea.add("Order History Panel", orderHistory);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnViewOrderHistoryActionPerformed
 
@@ -287,7 +287,7 @@ public class CustomerWorkArea extends javax.swing.JPanel {
     private void btnTrackOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackOrderActionPerformed
         // TODO add your handling code here:
         CurrentOrderPanel trackOrder = new CurrentOrderPanel(panelBackWorkArea, workQueue, cusAccount);
-        panelBackWorkArea.add("Track Order", trackOrder);
+        panelBackWorkArea.add("Current Track Order", trackOrder);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnTrackOrderActionPerformed
 

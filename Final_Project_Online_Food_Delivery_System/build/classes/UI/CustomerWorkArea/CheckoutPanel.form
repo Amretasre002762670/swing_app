@@ -35,58 +35,61 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblMainMenu" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblHeading" min="-2" pref="639" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblCvv" max="32767" attributes="0"/>
-                                  <Component id="lblCardNum" max="32767" attributes="0"/>
-                                  <Component id="lblValidTill" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="chckBoxEmailUpdates" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtValidTill" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="lblWarValidTillEmpty" linkSize="1" min="-2" pref="147" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="txtCvv" alignment="0" pref="170" max="32767" attributes="0"/>
-                                          <Component id="txtCardNum" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="lblWarCVVEmpty" linkSize="1" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="lblWarCardNumEmpty" linkSize="1" min="-2" pref="125" max="-2" attributes="0"/>
-                                      <Component id="btnProceed" min="-2" pref="157" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblWarDate" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <Component id="lblWarCardNo" min="-2" pref="152" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="lblMainMenu" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblWarCvv" min="-2" pref="142" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblHeading" min="-2" pref="639" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNameOnCard" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtNameOnCard" min="-2" pref="173" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblWarName" min="-2" pref="128" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNameOnCard" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtNameOnCard" min="-2" pref="173" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lblWarName" min="-2" pref="128" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblCvv" max="32767" attributes="0"/>
+                                          <Component id="lblCardNum" max="32767" attributes="0"/>
+                                          <Component id="lblValidTill" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtValidTill" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="lblWarValidTillEmpty" linkSize="1" min="-2" pref="147" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="txtCvv" alignment="0" pref="170" max="32767" attributes="0"/>
+                                                  <Component id="txtCardNum" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="lblWarCVVEmpty" linkSize="1" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="lblWarCardNumEmpty" linkSize="1" min="-2" pref="125" max="-2" attributes="0"/>
+                                              <Component id="btnProceed" min="-2" pref="157" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblWarDate" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                          <Component id="lblWarCardNo" min="-2" pref="152" max="-2" attributes="0"/>
+                                          <Component id="lblWarCvv" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -139,9 +142,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblWarCardNumEmpty" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Component id="chckBoxEmailUpdates" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
               <Component id="btnProceed" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
           </Group>
@@ -230,11 +231,6 @@
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBackMouseEntered"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBackMouseExited"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="chckBoxEmailUpdates">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Get Email Updates"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="btnProceed">
       <Properties>
@@ -359,6 +355,9 @@
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Main Menu"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMainMenuMouseClicked"/>
