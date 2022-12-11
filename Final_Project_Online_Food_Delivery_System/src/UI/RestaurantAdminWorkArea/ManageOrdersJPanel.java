@@ -11,6 +11,7 @@ import Model.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import Model.WorkQueue.WorkRequest;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -76,9 +77,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         manageOrdersTable = new javax.swing.JTable();
         requestTestJButton = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         lblWarning = new javax.swing.JLabel();
+        lblBackBtn = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(650, 650));
@@ -120,13 +121,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setText("<- Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         lblTitle.setBackground(new java.awt.Color(0, 153, 153));
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 0));
@@ -137,6 +131,22 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         lblWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWarning.setText("No Orders To Manage!");
+
+        lblBackBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblBackBtn.setForeground(new java.awt.Color(255, 0, 0));
+        lblBackBtn.setText("<< Back");
+        lblBackBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBackBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBackBtnMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -149,10 +159,12 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(btnBack)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(61, 61, 61)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(lblBackBtn)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addComponent(requestTestJButton)
@@ -167,9 +179,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnBack)
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBackBtn)
+                .addGap(72, 72, 72)
                 .addComponent(lblWarning)
                 .addGap(70, 70, 70)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,16 +209,26 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void lblBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseClicked
         // TODO add your handling code here:
         panelBackWorkArea.remove(this);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_lblBackBtnMouseClicked
+
+    private void lblBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseEntered
+        // TODO add your handling code here:
+        lblBackBtn.setForeground(Color.blue);
+    }//GEN-LAST:event_lblBackBtnMouseEntered
+
+    private void lblBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseExited
+        // TODO add your handling code here:
+        lblBackBtn.setForeground(Color.red);
+    }//GEN-LAST:event_lblBackBtnMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBackBtn;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWarning;
     private javax.swing.JTable manageOrdersTable;

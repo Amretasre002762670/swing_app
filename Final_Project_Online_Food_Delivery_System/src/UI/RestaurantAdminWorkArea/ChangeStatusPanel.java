@@ -227,24 +227,6 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseEntered
-        // TODO add your handling code here:
-        lblBackBtn.setForeground(Color.blue);
-    }//GEN-LAST:event_lblBackBtnMouseEntered
-
-    private void lblBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseExited
-        // TODO add your handling code here:
-        lblBackBtn.setForeground(Color.red);
-
-    }//GEN-LAST:event_lblBackBtnMouseExited
-
-    private void lblBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseClicked
-        // TODO add your handling code here:
-        panelBackWorkArea.remove(this);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-
-    }//GEN-LAST:event_lblBackBtnMouseClicked
-
     private void btnPreparingOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreparingOrderActionPerformed
         // TODO add your handling code here:
         workReq.setMessage("Preparing Order");
@@ -254,6 +236,22 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         workReq.setMessage("Ready For Pickup");
     }//GEN-LAST:event_btnReadyToPickUpActionPerformed
+
+    private void lblBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseExited
+        // TODO add your handling code here:
+        lblBackBtn.setForeground(Color.red);
+    }//GEN-LAST:event_lblBackBtnMouseExited
+
+    private void lblBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseEntered
+        // TODO add your handling code here:
+        lblBackBtn.setForeground(Color.blue);
+    }//GEN-LAST:event_lblBackBtnMouseEntered
+
+    private void lblBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackBtnMouseClicked
+        // TODO add your handling code here:
+        panelBackWorkArea.remove(this);
+        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+    }//GEN-LAST:event_lblBackBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
