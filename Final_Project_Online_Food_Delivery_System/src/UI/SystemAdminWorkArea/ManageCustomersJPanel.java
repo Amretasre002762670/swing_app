@@ -446,17 +446,27 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            Customer selectedcustomer = (Customer) customerJTable.getValueAt(selectedRow, 0);
-            customerList.deleteCustomer(selectedcustomer);
-            // ecosystem.getCustomerDirectory().deleteCustomer(c);
-            JOptionPane.showMessageDialog(null, "Customer deleted Successfully.");
-            populateTable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select any row.");
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a record to delete.");
+            return;
         }
+        DefaultTableModel model =(DefaultTableModel) customerJTable.getModel();
+        Customer selectedcustomer = (Customer) model.getValueAt(selectedRow, 0);
+        customerList.deleteCustomer(selectedcustomer);
+         JOptionPane.showMessageDialog(this,"The selected record has been deleted successfully.");
+        populateTable();
+        
+          //  Customer selectedcustomer = (Customer) customerJTable.getValueAt(selectedRow, 0);
+           // customerList.deleteCustomer(selectedcustomer);
+            // ecosystem.getCustomerDirectory().deleteCustomer(c);
+           // JOptionPane.showMessageDialog(null, "Customer deleted Successfully.");
+           // populateTable();
+       // } else {
+           // JOptionPane.showMessageDialog(null, "Please select any row.");
+        //}//
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+   
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 
