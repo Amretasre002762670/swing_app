@@ -335,6 +335,14 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         // Employee employee = ecosystem.getEmployeeList().createEmployee(name);
         // getEmployeeDirectory().createEmployee(name);
+        
+        
+        if(username.length() <= 0 || String.valueOf(txtDeliveryManPassword.getPassword()).length() <= 0 ||
+        txtDeliverManName.getText().length() <= 0 || txtDeliverManCommunity.getText().length() <= 0 ) 
+        {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+        }
+        
         UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         // getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
         account.setUsername(username);
