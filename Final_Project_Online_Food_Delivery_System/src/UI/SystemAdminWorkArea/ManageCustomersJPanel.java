@@ -83,6 +83,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -181,6 +183,10 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setText("jLabel7");
+
+        jLabel8.setText("jLabel8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,8 +231,14 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                             .addComponent(txtCustStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -267,14 +279,20 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                             .addComponent(lblCustCity)
                             .addComponent(txtCustCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustPincode)
-                            .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustPhoneNumber)
-                            .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCustPincode)
+                                    .addComponent(txtCustPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCustPhoneNumber)
+                                    .addComponent(txtCustPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(28, 28, 28)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCustEmailAddress)
                             .addComponent(txtCustEmailAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -511,6 +529,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         String Emailaddress = txtCustEmailAdd.getText();
 //        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
+ if(username.length() <= 0 || String.valueOf(txtCustPass.getPassword()).length() <= 0 ||
+        txtCustName.getText().length() <= 0 || txtCustStreetAddress.getText().length() <= 0 || txtCustCity.getText().length() <= 0 ||
+        txtCustPincode.getText().length() <= 0 || txtCustPhoneNum.getText().length() <= 0 ||
+        txtCustEmailAdd.getText().length() <= 0) 
+        {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+        }
         UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         account.setUsername(username);
         account.setPassword(password);
@@ -573,7 +598,41 @@ userProcessContainer.remove(this);
         btnBack.setForeground(Color.blue);
     }//GEN-LAST:event_btnBackMouseExited
 
+ private void txtCustPincodeKeyPressed(java.awt.event.KeyEvent evt) {                                          
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            jLabel7.setText("Please Enter Number only");
+//            txtCustPincode.setText("");
+        }
+    }                                         
 
+    private void txtCustPincodeKeyReleased(java.awt.event.KeyEvent evt) {                                           
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+//            jLabel7.setText("Please Enter Number only");
+            txtCustPincode.setText("");
+        }
+    }                                          
+
+    private void txtCustPhoneNumKeyPressed(java.awt.event.KeyEvent evt) {                                           
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            jLabel8.setText("Please Enter Number only");
+        }   
+        
+    }                                          
+
+    private void txtCustPhoneNumKeyReleased(java.awt.event.KeyEvent evt) {                                            
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+//            jLabel7.setText("Please Enter Number only");
+            txtCustPhoneNum.setText("");
+        }
+    }   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
     private javax.swing.JButton btnCreate;
@@ -582,6 +641,8 @@ userProcessContainer.remove(this);
     private javax.swing.JComboBox cbxRole;
     private javax.swing.JTable customerJTable;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCustCity;
     private javax.swing.JLabel lblCustEmailAddress;

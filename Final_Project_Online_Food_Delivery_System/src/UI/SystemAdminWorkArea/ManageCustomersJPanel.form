@@ -64,8 +64,17 @@
                           <Component id="txtCustStreetAddress" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="txtCustName" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="txtCustCity" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                          <Component id="txtCustPincode" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                          <Component id="txtCustPhoneNum" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtCustPincode" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                                  <Component id="txtCustPhoneNum" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -120,16 +129,25 @@
                           <Component id="txtCustCity" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCustPincode" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCustPincode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCustPincode" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCustPincode" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCustPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCustPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCustPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCustPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCustEmailAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCustEmailAdd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -373,6 +391,16 @@
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBackMouseEntered"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBackMouseExited"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel7"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel8"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
