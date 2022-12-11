@@ -299,7 +299,13 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-
+if(txtRestUsername.getText().length() <= 0 || String.valueOf(txtRestPassword.getPassword()).length() <= 0 ||
+        txtRestName.getText().length() <= 0 || txtRestAdd.getText().length() <= 0 || txtRestCity.getText().length() <= 0 ||
+        txtRestPincode.getText().length() <= 0 || txtRestPhonNum.getText().length() <= 0 ||
+        txtRestType.getText().length() <= 0) 
+        {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+        }
         String username = txtRestUsername.getText();
         String password = String.valueOf(txtRestPassword.getPassword());
        

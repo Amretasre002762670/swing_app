@@ -516,7 +516,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-
+  if(txtCustUserName.getText().length() <= 0 || String.valueOf(txtCustPass.getPassword()).length() <= 0 ||
+        txtCustName.getText().length() <= 0 || txtCustStreetAddress.getText().length() <= 0 || txtCustCity.getText().length() <= 0 ||
+        txtCustPincode.getText().length() <= 0 || txtCustPhoneNum.getText().length() <= 0 ||
+        txtCustEmailAdd.getText().length() <= 0) 
+        {
+            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+        }
         String username = txtCustUserName.getText();
         String password = String.valueOf(txtCustPass.getPassword());
         String new_role = "Customer";
@@ -529,13 +535,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         String Emailaddress = txtCustEmailAdd.getText();
 //        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(name);
 
- if(username.length() <= 0 || String.valueOf(txtCustPass.getPassword()).length() <= 0 ||
-        txtCustName.getText().length() <= 0 || txtCustStreetAddress.getText().length() <= 0 || txtCustCity.getText().length() <= 0 ||
-        txtCustPincode.getText().length() <= 0 || txtCustPhoneNum.getText().length() <= 0 ||
-        txtCustEmailAdd.getText().length() <= 0) 
-        {
-            JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
-        }
+ //if(username.length() <= 0 || String.valueOf(txtCustPass.getPassword()).length() <= 0 ||
+      //  txtCustName.getText().length() <= 0 || txtCustStreetAddress.getText().length() <= 0 || txtCustCity.getText().length() <= 0 ||
+       // txtCustPincode.getText().length() <= 0 || txtCustPhoneNum.getText().length() <= 0 ||
+       // txtCustEmailAdd.getText().length() <= 0) 
+      //  {
+       //     JOptionPane.showMessageDialog(null, " One or more fields are empty.");            
+       // }
         UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
         account.setUsername(username);
         account.setPassword(password);
