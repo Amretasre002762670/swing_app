@@ -334,7 +334,36 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             sqlException.printStackTrace();
         }
     }
-    
+     public void updateDeliveryManInDB(DeliveryMan d, int row) {
+        String queryDeliveryManTable = "UPDATE ROW_NUMBER(row) DeliveryMan_Directory SET deliveryman_name=?, deliveryman_community=?, deliveryman_phoneNum=?, user_id=?, user_name=?" ;
+        int del_id = 0;
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "Qazmaggi123@");
+
+            PreparedStatement st_DeliveryManTable = (PreparedStatement) connection
+                    .prepareStatement(queryDeliveryManTable);
+  st_DeliveryManTable.setString(1, d.getDeliveryManName());
+            st_DeliveryManTable.setString(2, d.getCommunity());
+             st_DeliveryManTable.setLong(3, d.getDeliveryManNumber());
+           
+            UserAccount user = new UserAccount();
+            user.setUsername(d.getUserAccount().getUsername());
+            user.setPassword(d.getUserAccount().getPassword());
+
+            del_id = getUserIdForUserCreated(user);
+            
+            st_DeliveryManTable.setInt(4, del_id);
+           st_DeliveryManTable.setString(5, d.getUserAccount().getUsername());
+
+           st_DeliveryManTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+            
+
     
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
