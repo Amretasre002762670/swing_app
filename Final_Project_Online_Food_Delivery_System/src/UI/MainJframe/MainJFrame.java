@@ -20,6 +20,7 @@ import Model.Order.OrderList;
 import Model.WorkQueue.WorkQueue;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import UI.DeliveryManWorkArea.DeliveryManWorkArea;
+import UI.RestaurantAdminWorkArea.RestaurantAdminWorkAreaJPanel;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -163,13 +164,14 @@ public class MainJFrame extends javax.swing.JFrame {
                     resAdminAcct = new UserAccount();
                     resAdminAcct.setUsername(rs_admin_dir.getString("user_name"));
                     resAdminAcct.setPassword(rs_admin_dir.getString("user_password"));
-                    resAdminAcct.setUsername(rs_admin_dir.getString("user_role"));
-
+                    resAdminAcct.setRole(rs_admin_dir.getString("user_role"));
+                    userAccountDir.addUserAccounts(resAdminAcct);
+                    
                     resAdmin = new RestaurantAdmin();
                     resAdmin.setAccountDetails(resAdminAcct);
                     resAdmin.setResAdminId(Integer.parseInt(rs_admin_dir.getString("res_admin_id")));
                     resAdmin.setResName(restName);
-
+                    
                     addRes = new Restaurant();
 
                     addRes.setRestaurantName(restName);
@@ -275,7 +277,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 addUserAccount.setUsername(rs.getString("user_name"));
                 addUserAccount.setPassword(rs.getString("user_password"));
                 addUserAccount.setRole(rs.getString("user_role"));
-
+                userAccountDir.addUserAccounts(addUserAccount);
+                
                 addDeliveryMan = deliveryManList.addDeliveryManWithUserAcct(addUserAccount);;
 
                 addDeliveryMan.setDeliveryManId(rs.getInt("deliveryman_id"));
@@ -551,6 +554,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CustomerWorkArea cusWorkArea;
         DeliveryManWorkArea delworkarea;
         SystemAdminWorkAreaJPanel sysadminWorkArea;
+        RestaurantAdminWorkAreaJPanel resadminWorkArea;
 
         if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
             lblWarningUserType.setVisible(false);
@@ -613,13 +617,29 @@ public class MainJFrame extends javax.swing.JFrame {
                         
                     } else if (rs.getString("user_role").equals("System Admin")) {
                         // add your code here
-                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem);
+                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, userAccountDir, user, deliveryManList, resList);
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
                         txtUserName.setText("");
                         txtPassword.setText("");
                         btnUserType.setSelectedIndex(0);
+                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                    } else if (rs.getString("user_role").equals("Restaurant Admin")) {
+                        // add your code here
+                        Restaurant resDetails = resList.searchRestaurantWithUserAccount(user);
+//                        selectedResWorkQueue = workQueue.findResWorkQueue(resDetails);
+                        
+                        resadminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, resDetails, workQueue, panelLogin);
+                        
+                        panelBackWorkArea.removeAll();
+                        panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
+                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        
+                        txtUserName.setText("");
+                        txtPassword.setText("");
+                        btnUserType.setSelectedIndex(0);
+                        
                         JOptionPane.showMessageDialog(this, "You have successfully logged in");
                     }
 

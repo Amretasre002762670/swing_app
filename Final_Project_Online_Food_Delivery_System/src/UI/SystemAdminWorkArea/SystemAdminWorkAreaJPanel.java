@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SystemAdminWorkArea;
+import Model.Customer.CustomerDirectory;
+import Model.DeliveryMan.DeliveryManDirectory;
+import Model.Restaurant.RestaurantDirectory;
 import Model.System.Ecosystem;
 import Model.UserAccount.UserAccount;
+import Model.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -21,11 +25,26 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
    JPanel userProcessContainer;
    Ecosystem ecosystem;
    UserAccount account;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem) {
+   CustomerDirectory cusList;
+   UserAccountDirectory userList;
+   UserAccount user;
+   DeliveryManDirectory deliveryManList;
+   RestaurantDirectory resList;
+   
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,Ecosystem ecosystem, CustomerDirectory cusList, UserAccountDirectory userList, UserAccount user, DeliveryManDirectory deliveryManList, RestaurantDirectory resList) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
-        populateTree();
+        this.cusList = cusList;
+        this.userList = userList;
+        this.user = user;
+        this.deliveryManList = deliveryManList;
+        this.resList = resList;
+        
+        txtUserName.setEditable(false);
+        txtUserName.setText(user.getUsername());
+                
+//        populateTree();
     }
 
     /**
@@ -38,9 +57,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jSplitPane = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         btnManageAllCustomers = new javax.swing.JButton();
         btnManageRestaurents = new javax.swing.JButton();
@@ -49,40 +65,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         lblLoggedIn = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         lblLoggedOut = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        lblSelectedNode = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
-        jTree.setBackground(new java.awt.Color(204, 204, 255));
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("JTree");
-        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTreeValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTree);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jSplitPane.setLeftComponent(jPanel1);
-
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(650, 650));
+        jPanel2.setMinimumSize(new java.awt.Dimension(650, 650));
 
+        btnManageAllCustomers.setBackground(new java.awt.Color(204, 255, 204));
         btnManageAllCustomers.setText("Manage All Customers");
         btnManageAllCustomers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +81,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnManageRestaurents.setBackground(new java.awt.Color(204, 255, 204));
         btnManageRestaurents.setText("Manage Restaurants");
         btnManageRestaurents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +89,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnManageDeliveryMan.setBackground(new java.awt.Color(204, 255, 204));
         btnManageDeliveryMan.setText("Manage Deliveryman");
         btnManageDeliveryMan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +98,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 51));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("System Admin Work Area");
 
@@ -135,10 +127,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Selected Node:");
-
-        lblSelectedNode.setText("<View_selected_node>");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -147,85 +135,83 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLoggedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnManageRestaurents, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnManageAllCustomers)
-                            .addComponent(btnManageDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSelectedNode))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblLoggedIn)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(135, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnManageRestaurents, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageAllCustomers)
+                    .addComponent(btnManageDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(lblLoggedIn)
+                .addGap(29, 29, 29)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageAllCustomers, btnManageDeliveryMan, btnManageRestaurents});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLoggedOut)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblSelectedNode))
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLoggedIn)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(lblLoggedOut)
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLoggedIn)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105)
                 .addComponent(btnManageAllCustomers)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageRestaurents)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageDeliveryMan)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        jSplitPane.setLeftComponent(jPanel3);
+
         add(jSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
-
-        DefaultMutableTreeNode selectedNode= (DefaultMutableTreeNode)jTree.getLastSelectedPathComponent();
-        if(selectedNode!=null){
-            lblSelectedNode.setText(selectedNode.toString());
-        }
-    }//GEN-LAST:event_jTreeValueChanged
-
     private void btnManageAllCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAllCustomersActionPerformed
-        ManageCustomersJPanel manageCustomersJPanel = new ManageCustomersJPanel(userProcessContainer, account, ecosystem);
+        ManageCustomersJPanel manageCustomersJPanel = new ManageCustomersJPanel(userProcessContainer, account, ecosystem, cusList, userList);
         userProcessContainer.add("manageCustomersJPanel", manageCustomersJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageAllCustomersActionPerformed
 
     private void btnManageRestaurentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurentsActionPerformed
-        ManageRestaurantsJPanel manageRestaurantsJPanel = new ManageRestaurantsJPanel(userProcessContainer, account, ecosystem);
+        ManageRestaurantsJPanel manageRestaurantsJPanel = new ManageRestaurantsJPanel(userProcessContainer, account, ecosystem, resList);
        userProcessContainer.add("manageRestaurantsJPanel", manageRestaurantsJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRestaurentsActionPerformed
 
     private void btnManageDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDeliveryManActionPerformed
-        ManageDeliveryManJPanel managaeDeliveryManJPanel = new ManageDeliveryManJPanel(userProcessContainer, account, ecosystem);
+        ManageDeliveryManJPanel managaeDeliveryManJPanel = new ManageDeliveryManJPanel(userProcessContainer, account, ecosystem, deliveryManList);
        userProcessContainer.add("managaeDeliveryManJPanel", managaeDeliveryManJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);
@@ -248,26 +234,22 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
-    {}
-   public void populateTree() {
-         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
-         model.reload();
-    }
+    
+//   public void populateTree() {
+//         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
+//         model.reload();
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageAllCustomers;
     private javax.swing.JButton btnManageDeliveryMan;
     private javax.swing.JButton btnManageRestaurents;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTree jTree;
     private javax.swing.JLabel lblLoggedIn;
     private javax.swing.JLabel lblLoggedOut;
-    private javax.swing.JLabel lblSelectedNode;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

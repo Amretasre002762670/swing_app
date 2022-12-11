@@ -113,7 +113,7 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(232, 232, 232)
+                                .addGap(300, 300, 300)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnOrderPickedUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnOrderDelivered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -146,7 +146,7 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
 
     private void btnOrderPickedUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderPickedUpActionPerformed
         // TODO add your handling code here:
-        if (currentOrderQueue.getMessage().equals("Restaurent Preparing Order") && currentOrderQueue.getStatus().equals("negative")) {
+        if (currentOrderQueue.getMessage().equals("Ready For Pickup")) {
             currentOrderQueue.setMessage("Order Picked Up");
             txtOrderStatus.setText(currentOrderQueue.getMessage());
             lblWarning.setVisible(false);
@@ -158,7 +158,7 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
     private void btnOrderDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderDeliveredActionPerformed
         // TODO add your handling code here:
         if (currentOrderQueue.getMessage().equals("Order Picked Up")) {
-            currentOrderQueue.setMessage("Delivered Order");
+            currentOrderQueue.setMessage("Delivered");
             txtOrderStatus.setText(currentOrderQueue.getMessage());
             currentOrderQueue.setStatus("negative");
             lblWarning.setVisible(false);

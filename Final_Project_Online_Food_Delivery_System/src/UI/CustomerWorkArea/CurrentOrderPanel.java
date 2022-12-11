@@ -42,6 +42,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             lblWarning.setVisible(true);
         } else {
             populateCurrentOrder(curWorkRequest);
+            delivermanDetails(curWorkRequest);
         }
 
     }
@@ -49,10 +50,10 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
     public void delivermanDetails(WorkRequest workReq) {
         if(workReq.getStatus().equals("positive") && workReq.getOrderRequest().getDeliverManDetails() != null) {
             txtDelName.setText(workReq.getOrderRequest().getDeliverManDetails().getDeliveryManName());
-            txtDelName.setText(String.valueOf(workReq.getOrderRequest().getDeliverManDetails().getDeliveryManNumber()));
+            txtDelContact.setText(String.valueOf(workReq.getOrderRequest().getDeliverManDetails().getDeliveryManNumber()));
         } else {
             txtDelName.setText("Delivery Man Not Assigned");
-            txtDelName.setText("Delivery Man Not Assigned");
+            txtDelContact.setText("Delivery Man Not Assigned");
         }
     }
 
@@ -67,7 +68,7 @@ public class CurrentOrderPanel extends javax.swing.JPanel {
             progressBar.setValue(25);
         } else if (curWorkRequest.getMessage().equals("Preparing Order")) {
             progressBar.setValue(50);
-        } else if (curWorkRequest.getMessage().equals("Out For Delivery")) {
+        } else if (curWorkRequest.getMessage().equals("Order Pickedup") || curWorkRequest.getMessage().equals("Ready For Pickup")) {
             progressBar.setValue(75);
         } else if (curWorkRequest.getMessage().equals("Delivered")) {
             progressBar.setValue(100);

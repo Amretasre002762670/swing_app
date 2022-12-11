@@ -35,6 +35,8 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
         txtOrderId.setText(String.valueOf(this.workReq.getOrderRequest().getOrder_id()));
         txtTotalItems.setText(String.valueOf(this.workReq.getOrderRequest().getMenu().size()));
         txtCurOrderStatus.setText(this.workReq.getMessage());
+        
+        populateTable();
     }
     
     public void populateTable() {
@@ -253,11 +255,13 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
     private void btnPreparingOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreparingOrderActionPerformed
         // TODO add your handling code here:
          workReq.setMessage("Preparing Order");
+         txtCurOrderStatus.setText(workReq.getMessage());
     }//GEN-LAST:event_btnPreparingOrderActionPerformed
 
     private void btnReadyToPickUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadyToPickUpActionPerformed
         // TODO add your handling code here:
         workReq.setMessage("Ready For Pickup");
+        txtCurOrderStatus.setText(workReq.getMessage());
     }//GEN-LAST:event_btnReadyToPickUpActionPerformed
 
 

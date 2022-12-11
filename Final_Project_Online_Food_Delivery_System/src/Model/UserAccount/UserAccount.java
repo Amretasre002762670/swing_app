@@ -5,7 +5,6 @@
 package Model.UserAccount;
 
 import Model.Employee.Employee;
-import Model.Role.Role;
 import Model.WorkQueue.WorkQueue;
 
 /**

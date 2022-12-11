@@ -12,6 +12,12 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,18 +30,22 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     private Restaurant restaurant;
     Restaurant selectedRes;
     ArrayList<Menu> selectedMenu;
+    Menu updatedMenu = new Menu();
 
     public ManageMenuJPanel(JPanel userProcessContainer, Ecosystem ecosystem, Restaurant restaurant) {
         initComponents();
         this.selectedMenu = new ArrayList<Menu>();
         this.userProcessContainer = userProcessContainer;
         this.selectedRes = restaurant;
-        
+
         txtResName.setEditable(false);
         txtResName.setText(selectedRes.getRestaurantName());
+
+        populateTable();
     }
-    
+
     public void populateTable() {
+
         DefaultTableModel menuTable = (DefaultTableModel) tblMenu.getModel();
         menuTable.setRowCount(0);
         for (Menu menuItem : selectedRes.getMenulist()) {
@@ -46,7 +56,55 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             row[2] = menuItem.getFood_Qty();
             row[3] = menuItem.getFood_price();
             row[4] = menuItem.getFood_preference();
+
             menuTable.addRow(row);
+        }
+    }
+
+    public void sendMenuToDB(Menu m) {
+        String queryMenuTable = "INSERT INTO Menu_Directory (restaurant_id, food_cateogory, food_name, food_price, food_preference, food_size) VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_MenuTable = (PreparedStatement) connection
+                    .prepareStatement(queryMenuTable);
+
+            st_MenuTable.setInt(1, m.getRestaurant_id());
+            st_MenuTable.setString(2, m.getFood_category());
+            st_MenuTable.setString(3, m.getFood_name());
+            st_MenuTable.setFloat(4, m.getFood_price());
+            st_MenuTable.setString(5, m.getFood_preference());
+            st_MenuTable.setString(6, m.getFood_Qty());
+
+            st_MenuTable.execute();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void updateMenuDB(Menu menu) {
+        String queryMenuTable = "UPDATE Menu_Directory SET food_cateogory=?, food_name=?, food_price=?, food_preference=?, food_size=? WHERE food_id=?;";
+        try {
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Online_Delivery_system",
+                    "root", "amre1999");
+
+            PreparedStatement st_MenuTable = (PreparedStatement) connection
+                    .prepareStatement(queryMenuTable);
+
+            st_MenuTable.setString(1, menu.getFood_category());
+            st_MenuTable.setString(2, menu.getFood_name());
+            st_MenuTable.setFloat(3, menu.getFood_price());
+            st_MenuTable.setString(4, menu.getFood_preference());
+            st_MenuTable.setString(5, menu.getFood_Qty());
+            st_MenuTable.setInt(6, menu.getFood_id());
+            System.out.println(menu.getFood_id());
+            
+            st_MenuTable.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
     }
 
@@ -68,6 +126,19 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JLabel();
         lblResName = new javax.swing.JLabel();
         txtResName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCategory = new javax.swing.JTextField();
+        txtMenuName = new javax.swing.JTextField();
+        txtQty = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        txtPreference = new javax.swing.JTextField();
+        btnCreate = new javax.swing.JButton();
+        btnSelectMenu = new javax.swing.JButton();
+        btnUpdateMenu = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
@@ -102,13 +173,49 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         lblTitle.setBackground(new java.awt.Color(0, 153, 153));
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Manage Orders");
+        lblTitle.setText("Manage Menu Panel");
 
         btnBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setText("<< Back");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
 
         lblResName.setText("Restaurant Name:");
+
+        jLabel1.setText("Category:");
+
+        jLabel2.setText("Name:");
+
+        jLabel3.setText("Quantity:");
+
+        jLabel4.setText("Price:");
+
+        jLabel5.setText("Preference:");
+
+        btnCreate.setText("Create Menu");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnSelectMenu.setText("Select Menu");
+        btnSelectMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectMenuActionPerformed(evt);
+            }
+        });
+
+        btnUpdateMenu.setText("Update Menu");
+        btnUpdateMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,14 +230,40 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(btnCreate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdateMenu)
+                .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(lblResName)
-                .addGap(18, 18, 18)
-                .addComponent(txtResName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(lblResName)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtResName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
+                        .addComponent(btnSelectMenu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCategory)
+                            .addComponent(txtMenuName)
+                            .addComponent(txtQty)
+                            .addComponent(txtPrice)
+                            .addComponent(txtPreference, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,18 +277,141 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                     .addComponent(lblResName)
                     .addComponent(txtResName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSelectMenu)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPreference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreate)
+                    .addComponent(btnUpdateMenu))
+                .addGap(99, 99, 99))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5});
+
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        RestaurantAdminWorkAreaJPanel adminWorkAreaJPanel = (RestaurantAdminWorkAreaJPanel) component;
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+
+        Menu menu = new Menu();
+//        menu.setRestaurant_id((selectedRes.getRestaurantId()));
+        menu.setFood_category(txtCategory.getText());
+        menu.setFood_name(txtMenuName.getText());
+        menu.setFood_Qty(txtQty.getText());
+        menu.setFood_price(Float.parseFloat(txtPrice.getText()));
+        menu.setFood_preference(txtPreference.getText());
+        menu.setRestaurant_id(selectedRes.getRestaurantId());
+        selectedRes.addMenu(menu);
+        sendMenuToDB(menu);
+
+        JOptionPane.showMessageDialog(this, "New Menu Item Created");
+
+        populateTable();
+
+        txtCategory.setText("");
+        txtMenuName.setText("");
+        txtQty.setText("");
+        txtPrice.setText("");
+        txtPreference.setText("");
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnSelectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectMenuActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblMenu.getSelectedRow();
+
+        if (selectedRow > 0) {
+
+            DefaultTableModel menuTable = (DefaultTableModel) tblMenu.getModel();
+
+            Menu m = (Menu) tblMenu.getValueAt(selectedRow, 1);
+
+            txtCategory.setText(m.getFood_category());
+            txtMenuName.setText(m.getFood_name());
+            txtQty.setText(m.getFood_Qty());
+            txtPrice.setText(String.valueOf(m.getFood_price()));
+            txtPreference.setText(m.getFood_preference());
+            updatedMenu.setFood_id(m.getFood_id());
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
+        }
+
+    }//GEN-LAST:event_btnSelectMenuActionPerformed
+
+    private void btnUpdateMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMenuActionPerformed
+        // TODO add your handling code here:
+//        Menu updatedMenu = new Menu();
+
+        updatedMenu.setFood_category(txtCategory.getText());
+        updatedMenu.setFood_name(txtMenuName.getText());
+        updatedMenu.setFood_Qty(txtQty.getText());
+        updatedMenu.setFood_price(Float.parseFloat(txtPrice.getText()));
+        updatedMenu.setFood_preference(txtPreference.getText());
+        updateMenuDB(updatedMenu);
+
+        populateTable();
+
+        txtCategory.setText("");
+        txtMenuName.setText("");
+        txtQty.setText("");
+        txtPrice.setText("");
+        txtPreference.setText("");
+
+        JOptionPane.showMessageDialog(this, "Updated Menu");
+    }//GEN-LAST:event_btnUpdateMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnSelectMenu;
+    private javax.swing.JButton btnUpdateMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblResName;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblMenu;
+    private javax.swing.JTextField txtCategory;
+    private javax.swing.JTextField txtMenuName;
+    private javax.swing.JTextField txtPreference;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQty;
     private javax.swing.JTextField txtResName;
     // End of variables declaration//GEN-END:variables
 }

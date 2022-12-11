@@ -5,6 +5,7 @@
 package Model.WorkQueue;
 
 import Model.Customer.Customer;
+import Model.DeliveryMan.DeliveryMan;
 import Model.Restaurant.Restaurant;
 import java.util.ArrayList;
 
@@ -39,10 +40,10 @@ public class WorkQueue {
         return searchResult;
     }
 
-    public WorkRequest findCurrentWorkRequest() {
+    public WorkRequest findCurrentWorkRequestForDelMan(DeliveryMan delDetails) {
         WorkRequest currentWork = new WorkRequest();
         for (WorkRequest work : workRequestList) {
-            if (work.getMessage().equals("Deliveryman Accepted")) {
+            if (work.getOrderRequest().getDeliverManDetails().getDeliveryManName().equals(delDetails.getDeliveryManName())) {
                 currentWork = work;
             }
         }
