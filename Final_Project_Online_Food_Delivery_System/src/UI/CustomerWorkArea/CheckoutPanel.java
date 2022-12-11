@@ -5,6 +5,7 @@
 package UI.CustomerWorkArea;
 
 import Model.Customer.Customer;
+import Model.Email.SendEmail;
 import Model.Menu.Menu;
 import Model.Order.Order;
 import Model.UserAccount.UserAccount;
@@ -22,6 +23,9 @@ import javax.swing.JPanel;
 import java.util.*;
 
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -35,6 +39,13 @@ public class CheckoutPanel extends javax.swing.JPanel {
     JPanel panelBackWorkArea;
     Order order;
     WorkQueue workQueue;
+    
+    private static final String emailMsgTxt = "Your order is successfully placed";
+    private static final String emailSubjectTxt = "Order placed";
+    private static final String emailFromAddress = "amretasre6@gmail.com";
+
+    // Add List of Email address to who email needs to be sent to
+    private static final String[] emailList = {"amretasrert@gmail.com"};
 
     public CheckoutPanel(JPanel panelBackWorkArea, Order order, WorkQueue workQueue) {
         initComponents();
@@ -103,6 +114,19 @@ public class CheckoutPanel extends javax.swing.JPanel {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+    }
+    
+    public void constructEmail() {
+            SendEmail sendMail = new SendEmail();
+            String[] emailList = {"amretasrert@gmail.com", order.getCusDetails().getCus_emailid()};
+            String emailMsgTxt = "Your order with" + order.getResDetails().getRestaurantName() + " is placed successfully";
+            String emailSubjectTxt = order.getOrder_id() + " order placed";
+            try {
+                sendMail.postMail(emailList, emailSubjectTxt, emailMsgTxt, emailFromAddress);
+            } catch (MessagingException ex) {
+//                Logger.getLogger(CheckoutPanel.class.getName()).log(Level.SEVERE, null, ex);
+                  System.out.println(ex);
+            }
     }
 
     /**
@@ -429,11 +453,15 @@ public class CheckoutPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "All fields are Mandatory");
             return;
         } else {
+
             sendOrderToDB();
 
             populateWorkQueue();
+            
+            constructEmail();
 
-            JOptionPane.showMessageDialog(this, "Sucessfully placed order");
+            JOptionPane.showMessageDialog(this,
+                    "Sucessfully placed order");
         }
 
         txtCardNum.setText("");

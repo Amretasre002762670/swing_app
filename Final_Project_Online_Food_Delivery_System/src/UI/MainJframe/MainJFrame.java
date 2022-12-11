@@ -20,6 +20,7 @@ import Model.Order.OrderList;
 import Model.WorkQueue.WorkQueue;
 import UI.CustomerWorkArea.CustomerWorkArea;
 import UI.DeliveryManWorkArea.DeliveryManWorkArea;
+import UI.RestaurantAdminWorkArea.RestaurantAdminWorkAreaJPanel;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -163,7 +164,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     resAdminAcct = new UserAccount();
                     resAdminAcct.setUsername(rs_admin_dir.getString("user_name"));
                     resAdminAcct.setPassword(rs_admin_dir.getString("user_password"));
-                    resAdminAcct.setUsername(rs_admin_dir.getString("user_role"));
+                    resAdminAcct.setRole(rs_admin_dir.getString("user_role"));
 
                     resAdmin = new RestaurantAdmin();
                     resAdmin.setAccountDetails(resAdminAcct);
@@ -551,6 +552,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CustomerWorkArea cusWorkArea;
         DeliveryManWorkArea delworkarea;
         SystemAdminWorkAreaJPanel sysadminWorkArea;
+        RestaurantAdminWorkAreaJPanel resadminWorkArea;
 
         if (userName.equals("") || password.equals("") || userRole.equals("Choose a User!")) {
             lblWarningUserType.setVisible(false);
@@ -620,6 +622,22 @@ public class MainJFrame extends javax.swing.JFrame {
                         txtUserName.setText("");
                         txtPassword.setText("");
                         btnUserType.setSelectedIndex(0);
+                        JOptionPane.showMessageDialog(this, "You have successfully logged in");
+                    } else if (rs.getString("user_role").equals("Restaurant Admin")) {
+                        // add your code here
+                        Restaurant resDetails = resList.searchRestaurantWithUserAccount(user);
+//                        selectedResWorkQueue = workQueue.findResWorkQueue(resDetails);
+                        
+                        resadminWorkArea = new RestaurantAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, resDetails, workQueue, panelLogin);
+                        
+                        panelBackWorkArea.removeAll();
+                        panelBackWorkArea.add("RestaurantAdmin", resadminWorkArea);
+                        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
+                        
+                        txtUserName.setText("");
+                        txtPassword.setText("");
+                        btnUserType.setSelectedIndex(0);
+                        
                         JOptionPane.showMessageDialog(this, "You have successfully logged in");
                     }
 

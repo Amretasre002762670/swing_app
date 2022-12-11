@@ -32,7 +32,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     public ManageOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem, Restaurant restaurant, WorkQueue workQueue) {
         initComponents();
         this.panelBackWorkArea = userProcessContainer;
-        this.selectedRes = selectedRes;
+        this.selectedRes = restaurant;
         this.workQueue = workQueue;
 
         populateTable();
@@ -111,6 +111,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("<< Back");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);

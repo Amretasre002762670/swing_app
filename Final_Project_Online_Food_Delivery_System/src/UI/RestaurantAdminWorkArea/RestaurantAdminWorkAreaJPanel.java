@@ -22,16 +22,18 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     Ecosystem ecosystem;
     Restaurant restaurant;
     WorkQueue workQueue;
+    JPanel LoginPanel;
 
     /**
      * Creates new form RestaurantAdminWorkAreaJPanel
      */
-    public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem ecoSystem, Restaurant selectedRes, WorkQueue workQueue) {
+    public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem ecoSystem, Restaurant selectedRes, WorkQueue workQueue, JPanel LoginPanel) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecoSystem;
         this.restaurant = selectedRes;
         this.workQueue = workQueue;
+        this.LoginPanel = LoginPanel;
 
         txtUserName.setEditable(false);
         txtUserName.setText(restaurant.getRestaurantName());
@@ -58,14 +60,18 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(650, 650));
         setMinimumSize(new java.awt.Dimension(650, 650));
 
+        manageMenuJButton.setBackground(new java.awt.Color(204, 255, 204));
         manageMenuJButton.setText("Manage menu");
+        manageMenuJButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         manageMenuJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageMenuJButtonActionPerformed(evt);
             }
         });
 
+        manageOrdersJButton.setBackground(new java.awt.Color(204, 255, 204));
         manageOrdersJButton.setText("Manage Orders");
+        manageOrdersJButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         manageOrdersJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageOrdersJButtonActionPerformed(evt);
@@ -76,6 +82,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Restaurant Admin Work Area");
 
+        lblLoggedIn.setFont(new java.awt.Font("Helvetica Neue", 2, 14)); // NOI18N
         lblLoggedIn.setText("Logged In As:");
 
         txtUserName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -94,6 +101,9 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         lblLoggedOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLoggedOutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblLoggedOutMouseEntered(evt);
             }
@@ -111,9 +121,9 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(230, 230, 230)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manageMenuJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(manageOrdersJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(manageMenuJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -138,23 +148,26 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoggedIn)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(143, 143, 143)
+                .addGap(93, 93, 93)
                 .addComponent(manageOrdersJButton)
-                .addGap(18, 18, 18)
+                .addGap(68, 68, 68)
                 .addComponent(manageMenuJButton)
                 .addContainerGap(297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageMenuJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuJButtonActionPerformed
-        ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer,ecosystem, restaurant, workQueue);
-       userProcessContainer.add("manageOrdersJPanel", manageOrdersJPanel);
-       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-       layout.next(userProcessContainer); 
+        ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer, ecosystem, restaurant);
+        userProcessContainer.add("manageMenuJPanel", manageMenuJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageMenuJButtonActionPerformed
 
     private void manageOrdersJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrdersJButtonActionPerformed
-
+        ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer, ecosystem, restaurant, workQueue);
+        userProcessContainer.add("manageOrdersJPanel", manageOrdersJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrdersJButtonActionPerformed
 
     private void lblLoggedOutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblLoggedOutFocusGained
@@ -174,6 +187,12 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         lblLoggedOut.setForeground(Color.red);
     }//GEN-LAST:event_lblLoggedOutMouseExited
+
+    private void lblLoggedOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoggedOutMouseClicked
+        // TODO add your handling code here:
+        userProcessContainer.add("LoginPanel", LoginPanel);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
+    }//GEN-LAST:event_lblLoggedOutMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

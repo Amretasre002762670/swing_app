@@ -40,18 +40,51 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblTitle" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="1" pref="638" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-              <Component id="lblResName" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="txtResName" min="-2" pref="204" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnUpdateMenu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="lblResName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtResName" min="-2" pref="204" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                      <Component id="btnSelectMenu" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel2" max="32767" attributes="0"/>
+                          <Component id="jLabel3" max="32767" attributes="0"/>
+                          <Component id="jLabel4" max="32767" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtCategory" max="32767" attributes="0"/>
+                          <Component id="txtMenuName" max="32767" attributes="0"/>
+                          <Component id="txtQty" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPreference" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="191" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,8 +101,40 @@
                   <Component id="txtResName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="90" max="-2" attributes="0"/>
-              <EmptySpace pref="400" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="110" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnSelectMenu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMenuName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel3" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtQty" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPreference" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUpdateMenu" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,7 +203,7 @@
           <Font name="Helvetica Neue" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Manage Orders"/>
+        <Property name="text" type="java.lang.String" value="Manage Menu Panel"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="btnBack">
@@ -151,6 +216,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;&lt; Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBackMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblResName">
       <Properties>
@@ -158,6 +226,65 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtResName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Category:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quantity:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Price:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Preference:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCategory">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMenuName">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtQty">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPrice">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPreference">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCreate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Create Menu"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSelectMenu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Menu"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectMenuActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUpdateMenu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update Menu"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateMenuActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

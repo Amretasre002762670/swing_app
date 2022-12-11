@@ -149,9 +149,8 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
     private void btndelcurodersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelcurodersActionPerformed
         // TODO add your handling code here:
         {
-            WorkRequest currentOrder = workQueue.findCurrentWorkRequest();
-            System.out.println(workQueue.findCurrentWorkRequest().getStatus() == null);
-            if (workQueue.findCurrentWorkRequest().getStatus() == null) {
+            WorkRequest currentOrder = workQueue.findCurrentWorkRequestForDelMan(delManDetails);
+            if (workQueue.findCurrentWorkRequestForDelMan(delManDetails) == null) {
                 JOptionPane.showMessageDialog(this, "No Current Orders To Display");
             } else {
                 Currentorder curorder = new Currentorder(panelBackWorkArea, currentOrder, flag, workQueue);
