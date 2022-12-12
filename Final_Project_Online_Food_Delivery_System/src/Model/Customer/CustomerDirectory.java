@@ -78,4 +78,8 @@ public class CustomerDirectory {
     public void createCustomer(Customer cus) {
         customerList.add(cus);
     }
+    
+    public void removeCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
 }

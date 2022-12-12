@@ -317,8 +317,6 @@ public class MainJFrame extends javax.swing.JFrame {
         btnUserType = new javax.swing.JComboBox<>();
         btnLogin = new javax.swing.JButton();
         chckBoxShowPassword = new javax.swing.JCheckBox();
-        lblNewUser = new javax.swing.JLabel();
-        btnNewUserLogin = new javax.swing.JLabel();
         lblWarningUserType = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -350,8 +348,10 @@ public class MainJFrame extends javax.swing.JFrame {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Login Page");
 
+        lblUserName.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblUserName.setText("User Name:");
 
+        lblPassword.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblPassword.setText("Password:");
 
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
@@ -360,10 +360,11 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        lblUserType.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblUserType.setText("User Login Type:");
 
-        btnUserType.setBackground(new java.awt.Color(204, 255, 204));
-        btnUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a User!", "Customer", "Delivery Man", "Restaurant Admin", "Community Admin", "System Admin" }));
+        btnUserType.setBackground(new java.awt.Color(242, 242, 242));
+        btnUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a User!", "Customer", "Delivery Man", "Restaurant Admin", "System Admin" }));
         btnUserType.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 btnUserTypeFocusLost(evt);
@@ -399,34 +400,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        lblNewUser.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        lblNewUser.setForeground(new java.awt.Color(255, 0, 51));
-        lblNewUser.setText("New User?");
-
-        btnNewUserLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        btnNewUserLogin.setForeground(new java.awt.Color(51, 51, 255));
-        btnNewUserLogin.setText("Create New User Profile");
-        btnNewUserLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNewUserLogin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnNewUserLoginFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnNewUserLoginFocusLost(evt);
-            }
-        });
-        btnNewUserLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNewUserLoginMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNewUserLoginMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNewUserLoginMouseExited(evt);
-            }
-        });
-
         lblWarningUserType.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblWarningUserType.setForeground(new java.awt.Color(255, 0, 51));
         lblWarningUserType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -443,10 +416,6 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGap(200, 200, 200)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addComponent(lblNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNewUserLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
@@ -466,7 +435,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblWarningUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 199, Short.MAX_VALUE))
+                .addGap(0, 184, Short.MAX_VALUE))
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(btnLogin)
@@ -496,11 +465,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(lblWarningUserType))
                 .addGap(50, 50, 50)
                 .addComponent(btnLogin)
-                .addGap(71, 71, 71)
-                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewUser)
-                    .addComponent(btnNewUserLogin))
-                .addContainerGap(454, Short.MAX_VALUE))
+                .addContainerGap(543, Short.MAX_VALUE))
         );
 
         panelBackWorkArea.add(panelLogin, "card2");
@@ -582,7 +547,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     user.setRole(rs.getString("user_role"));
 
                     if (rs.getString("user_role").equals("Customer")) {
-                        Customer searchCustomer = ecosystem.getCustomerDirectory().searchCustomerWithUserAccount(user);
+                        Customer searchCustomer = customerList.searchCustomerWithUserAccount(user);
 
                         if (searchCustomer != null) {
 
@@ -617,7 +582,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         
                     } else if (rs.getString("user_role").equals("System Admin")) {
                         // add your code here
-                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, userAccountDir, user, deliveryManList, resList);
+                        sysadminWorkArea = new SystemAdminWorkAreaJPanel(panelBackWorkArea, ecosystem, customerList, userAccountDir, user, deliveryManList, resList, panelLogin);
                         panelBackWorkArea.removeAll();
                         panelBackWorkArea.add("SystemAdmin", sysadminWorkArea);
                         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
@@ -654,25 +619,6 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnNewUserLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseEntered
-        // TODO add your handling code here:
-        btnNewUserLogin.setForeground(new Color(0, 204, 255));
-
-    }//GEN-LAST:event_btnNewUserLoginMouseEntered
-
-    private void btnNewUserLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNewUserLoginFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewUserLoginFocusGained
-
-    private void btnNewUserLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNewUserLoginFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewUserLoginFocusLost
-
-    private void btnNewUserLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseExited
-        // TODO add your handling code here:
-        btnNewUserLogin.setForeground(new Color(51, 51, 255));
-    }//GEN-LAST:event_btnNewUserLoginMouseExited
-
     private void btnUserTypeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnUserTypeFocusLost
         // TODO add your handling code here:
         if (btnUserType.getSelectedItem().equals("Choose a User!")) {
@@ -681,14 +627,6 @@ public class MainJFrame extends javax.swing.JFrame {
             lblWarningUserType.setVisible(false);
         }
     }//GEN-LAST:event_btnUserTypeFocusLost
-
-    private void btnNewUserLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewUserLoginMouseClicked
-        // TODO add your handling code here:
-        NewUserLogin newUserPanel = new NewUserLogin();
-        panelBackWorkArea.removeAll();
-        panelBackWorkArea.add("New User", newUserPanel);
-        ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-    }//GEN-LAST:event_btnNewUserLoginMouseClicked
 
     private void btnUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserTypeActionPerformed
         // TODO add your handling code here:
@@ -742,11 +680,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel btnNewUserLogin;
     private javax.swing.JComboBox<String> btnUserType;
     private javax.swing.JCheckBox chckBoxShowPassword;
     private javax.swing.JLabel lblFrameTitle;
-    private javax.swing.JLabel lblNewUser;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;

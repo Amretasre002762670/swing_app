@@ -8,8 +8,10 @@ import Model.System.Ecosystem;
 import Model.Employee.Employee;
 import Model.Restaurant.Restaurant;
 import Model.Restaurant.RestaurantDirectory;
+import Model.RestaurantAdmin.RestaurantAdmin;
 import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,7 +48,6 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         restJTable = new javax.swing.JTable();
@@ -73,18 +74,12 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         txtResPincode = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(650, 650));
         setMinimumSize(new java.awt.Dimension(650, 650));
         setPreferredSize(new java.awt.Dimension(650, 650));
-
-        btnBack.setText("<- Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -98,41 +93,56 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Restaurant ID", "Restaurant Name", "Phone Number", "Address", "Username"
+                "Restaurant ID", "Restaurant Name", "Phone Number", "Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(restJTable);
 
+        btnCreate.setBackground(new java.awt.Color(204, 255, 204));
         btnCreate.setText("Create");
+        btnCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(204, 255, 204));
         btnDelete.setText("Delete");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
 
+        saveBtn.setBackground(new java.awt.Color(204, 255, 204));
         saveBtn.setText("Save");
+        saveBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
             }
         });
 
+        btnUpdateManager.setBackground(new java.awt.Color(204, 255, 204));
         btnUpdateManager.setText("Update");
+        btnUpdateManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateManager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateManagerActionPerformed(evt);
@@ -163,7 +173,6 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         lblRestName.setText("Restaurant Name:");
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 51));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage Restaurants");
 
@@ -180,18 +189,26 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
         jLabel2.setText(" ");
 
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("<< Back");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRefresh)
-                .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -240,10 +257,20 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(150, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel3)
+                        .addGap(45, 45, 45)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRefresh)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel6, lblPincode, lblRestAdd, lblRestID, lblRestName, lblRestPassword, lblRestPhoneNum, lblRestUsername});
@@ -253,11 +280,11 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnRefresh)
-                        .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnRefresh)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,18 +330,6 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-//        sysAdminwjp.populateTree();
-
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         populateTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
@@ -328,6 +343,7 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
                 || txtType.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, " One or more fields are empty.");
         }
+        
         String username = txtRestUsername.getText();
         String password = String.valueOf(txtRestPassword.getPassword());
 
@@ -339,13 +355,17 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         int phoneNumber = Integer.parseInt(txtRestPhonNum.getText());
         String RestType = txtType.getText();
         //  String restMan = txtRestManager.getText();
-
+        
         // Employee employee = ecosystem.getEmployeeList().createEmployee(restMan);
-        UserAccount account = ecosystem.getUserAccountDir().AddUserAccount();
+        UserAccount account = new UserAccount();
         account.setUsername(username);
         account.setPassword(password);
         account.setRole("Restaurant Admin");
-
+        
+        RestaurantAdmin resAdmin = new RestaurantAdmin();
+        resAdmin.setAccountDetails(account);
+        resAdmin.setResName(restName);
+        
         Restaurant r = resList.createRestaurant();
         r.setRestaurantName(restName);
         r.setRes_street_add(streetaddress);
@@ -353,7 +373,9 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         r.setRes_city(City);
         r.setPhoneNumber(phoneNumber);
         r.setRes_type(RestType);
-
+        r.setRestaurantAdmin(resAdmin);
+        
+        
         txtRestName.setText("");
         txtRestPhonNum.setText("");
         txtRestAdd.setText("");
@@ -370,9 +392,9 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = restJTable.getSelectedRow();
-        if (selectedRow >= 0) {
+        if (selectedRow > 0) {
             Restaurant r = (Restaurant) restJTable.getValueAt(selectedRow, 0);
-            ecosystem.getRestaurantDirectory().deleteRestaurant(r);
+            ecosystem.getRestaurantDirectory().removeRestaurant(r);
             JOptionPane.showMessageDialog(null, "Restaurant removed Successfully.");
             populateTable();
         } else {
@@ -485,15 +507,36 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtResPincodeKeyReleased
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        // TODO add your handling code here:
+        jLabel3.setForeground(Color.blue);
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        // TODO add your handling code here:
+        jLabel3.setForeground(Color.red);
+    }//GEN-LAST:event_jLabel3MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnUpdateManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPincode;
@@ -521,16 +564,14 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
 
-        for (Restaurant restaurant : ecosystem.getRestaurantDirectory().
-                getRestaurantList()) {
-            Object[] row = new Object[5];
+        for (Restaurant restaurant : resList.getRestaurantList()) {
+            Object[] row = new Object[4];
+            
             row[0] = restaurant;
             row[1] = restaurant.getRestaurantName();
-            // row[2] = restaurant.getRestaurantManager();
             row[2] = restaurant.getPhoneNumber();
             row[3] = restaurant.getRes_street_add();
-
-            row[4] = restaurant.getRestaurantAdmin().getAccountDetails().getUsername();
+            
 
             model.addRow(row);
         }

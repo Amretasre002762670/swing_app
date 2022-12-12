@@ -77,7 +77,6 @@ public class ViewQueue extends javax.swing.JPanel {
         tblOrders = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnacceptorder = new javax.swing.JButton();
-        btnprocess = new javax.swing.JButton();
         btnBack = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
@@ -86,6 +85,7 @@ public class ViewQueue extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(650, 650));
 
         lbltitleorderqueue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbltitleorderqueue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltitleorderqueue.setText("VIEW ORDER QUEUE");
 
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,18 +118,10 @@ public class ViewQueue extends javax.swing.JPanel {
             }
         });
 
-        btnprocess.setBackground(new java.awt.Color(204, 255, 204));
-        btnprocess.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnprocess.setText("Process");
-        btnprocess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnprocessActionPerformed(evt);
-            }
-        });
-
         btnBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 0, 0));
         btnBack.setText("<< Back");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBackMouseClicked(evt);
@@ -149,51 +141,43 @@ public class ViewQueue extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnBack)
-                        .addGap(203, 203, 203)
-                        .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel1)
-                        .addGap(134, 134, 134)
-                        .addComponent(btnacceptorder)
-                        .addGap(84, 84, 84)
-                        .addComponent(btnprocess))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(btnBack))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(jLabel1)
+                                .addGap(138, 138, 138)
+                                .addComponent(btnacceptorder)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(btnBack)
+                .addGap(75, 75, 75)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnBack)
-                                .addGap(32, 32, 32)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnacceptorder)
-                            .addComponent(btnprocess))))
+                        .addGap(84, 84, 84)
+                        .addComponent(btnacceptorder)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnprocessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprocessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnprocessActionPerformed
 
     private void btnacceptorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacceptorderActionPerformed
         // TODO add your handling code here:
@@ -239,7 +223,6 @@ public class ViewQueue extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
     private javax.swing.JButton btnacceptorder;
-    private javax.swing.JButton btnprocess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbltitleorderqueue;

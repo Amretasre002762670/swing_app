@@ -196,21 +196,27 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Preference:");
 
+        btnCreate.setBackground(new java.awt.Color(204, 255, 204));
         btnCreate.setText("Create Menu");
+        btnCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
 
+        btnSelectMenu.setBackground(new java.awt.Color(204, 255, 204));
         btnSelectMenu.setText("Select Menu");
+        btnSelectMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSelectMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectMenuActionPerformed(evt);
             }
         });
 
+        btnUpdateMenu.setBackground(new java.awt.Color(204, 255, 204));
         btnUpdateMenu.setText("Update Menu");
+        btnUpdateMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateMenuActionPerformed(evt);
