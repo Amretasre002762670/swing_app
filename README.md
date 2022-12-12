@@ -9,7 +9,9 @@
 ### Class Diagram of ONLINE DELIVERY SYSTEM
 ![CLASS DIAGRAM](https://user-images.githubusercontent.com/114785407/206961070-25584c0b-25af-4729-a1fd-3f2aab662142.jpeg)
  
- 
+### Order Workflow UML diagram
+![Order workflow](https://user-images.githubusercontent.com/114785407/206961505-878aff3c-bfee-455e-942e-00b40edf353f.jpeg)
+
  
 ### Database UML diagram
 ![db uml diagram](https://user-images.githubusercontent.com/114785407/206961369-f12be633-658e-4f29-bb2b-8bf34b337a8d.jpeg)
