@@ -84,9 +84,9 @@ public class ViewQueue extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(650, 650));
         setPreferredSize(new java.awt.Dimension(650, 650));
 
-        lbltitleorderqueue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbltitleorderqueue.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         lbltitleorderqueue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbltitleorderqueue.setText("VIEW ORDER QUEUE");
+        lbltitleorderqueue.setText("View Order Queue");
 
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,7 +110,7 @@ public class ViewQueue extends javax.swing.JPanel {
         }
 
         btnacceptorder.setBackground(new java.awt.Color(204, 255, 204));
-        btnacceptorder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnacceptorder.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         btnacceptorder.setText("Accept this Order");
         btnacceptorder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +140,9 @@ public class ViewQueue extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -148,12 +151,9 @@ public class ViewQueue extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(132, 132, 132)
                                 .addComponent(jLabel1)
-                                .addGap(138, 138, 138)
+                                .addGap(135, 135, 135)
                                 .addComponent(btnacceptorder)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -167,13 +167,14 @@ public class ViewQueue extends javax.swing.JPanel {
                 .addComponent(lbltitleorderqueue, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(btnBack)
-                .addGap(75, 75, 75)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
                         .addComponent(btnacceptorder)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );

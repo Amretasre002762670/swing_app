@@ -63,10 +63,10 @@ public class RestaurantDetails extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 255));
 
-        lbldelresdetails.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbldelresdetails.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         lbldelresdetails.setForeground(new java.awt.Color(51, 51, 51));
         lbldelresdetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbldelresdetails.setText("RESTAURANT DETAILS");
+        lbldelresdetails.setText("Restaurant Details");
 
         lbldelresid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbldelresid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,28 +117,27 @@ public class RestaurantDetails extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(94, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbldelresphone)
+                            .addComponent(lbldelresmanager)
+                            .addComponent(lbldelresname)
+                            .addComponent(lbldelresid)
+                            .addComponent(lbldelresaddress))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(lbldelbackbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(94, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbldelresphone)
-                                    .addComponent(lbldelresmanager)
-                                    .addComponent(lbldelresname)
-                                    .addComponent(lbldelresid)
-                                    .addComponent(lbldelresaddress))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtdelresname)
-                                    .addComponent(txtdelresmanager)
-                                    .addComponent(txtdelresphone)
-                                    .addComponent(txtdelresaddress)
-                                    .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtdelresname)
+                            .addComponent(txtdelresmanager)
+                            .addComponent(txtdelresphone)
+                            .addComponent(txtdelresaddress)
+                            .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 189, Short.MAX_VALUE))
                     .addComponent(lbldelresdetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lbldelbackbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtdelresaddress, txtdelresid, txtdelresmanager, txtdelresname, txtdelresphone});
@@ -148,11 +147,11 @@ public class RestaurantDetails extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbldelresdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
+                .addComponent(lbldelresdetails, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(lbldelbackbtn)
-                .addGap(59, 59, 59)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelresid)
                     .addComponent(txtdelresid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

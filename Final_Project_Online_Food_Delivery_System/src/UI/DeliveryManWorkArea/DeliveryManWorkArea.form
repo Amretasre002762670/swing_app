@@ -61,7 +61,7 @@
               <Component id="titledeliverylbl" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="lbllogout" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtloggedin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbldelloggedin" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -70,7 +70,7 @@
               <Component id="btndelviewqueue" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
               <Component id="btndelcuroders" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="291" max="32767" attributes="0"/>
+              <EmptySpace pref="295" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,10 +79,10 @@
     <Component class="javax.swing.JLabel" name="titledeliverylbl">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="24" style="1"/>
+          <Font name="Helvetica" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="DELIVERYMAN WORK AREA"/>
+        <Property name="text" type="java.lang.String" value="Delivery Man Work Area"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelloggedin">

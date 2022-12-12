@@ -208,10 +208,10 @@
     <Component class="javax.swing.JLabel" name="lbldelcurorder">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="24" style="1"/>
+          <Font name="Helvetica" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="CURRENT ORDER"/>
+        <Property name="text" type="java.lang.String" value="Current Order"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbldelcurback">

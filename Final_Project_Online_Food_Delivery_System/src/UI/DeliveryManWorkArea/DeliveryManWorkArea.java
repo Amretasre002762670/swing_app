@@ -58,9 +58,9 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
 
-        titledeliverylbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        titledeliverylbl.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         titledeliverylbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titledeliverylbl.setText("DELIVERYMAN WORK AREA");
+        titledeliverylbl.setText("Delivery Man Work Area");
 
         lbldelloggedin.setFont(new java.awt.Font("Helvetica", 2, 14)); // NOI18N
         lbldelloggedin.setText("Logged in as:");
@@ -140,7 +140,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 .addComponent(btndelviewqueue)
                 .addGap(95, 95, 95)
                 .addComponent(btndelcuroders)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
