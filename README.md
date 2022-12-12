@@ -6,6 +6,9 @@
  3. SRADDHA PEDDA GANGIREDDY GARI (002743943)
 
 
+### Class Diagram of ONLINE DELIVERY SYSTEM
+![Classdiagram_aed](https://user-images.githubusercontent.com/114785407/206958926-1796430f-d628-4eb6-82dc-00177cfa4567.jpeg)
+
 ## Panel Sequence Diagram ##
 
 ### SYSTEM ADMIN PANEL SEQUENCE DIAGRAM ###
