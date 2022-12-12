@@ -112,6 +112,7 @@ public class ChangeStatusPanel extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Current Order Status");
 
+        tblMenu.setBackground(new java.awt.Color(204, 255, 204));
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

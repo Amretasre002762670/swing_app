@@ -88,6 +88,7 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
             }
         });
 
+        restJTable.setBackground(new java.awt.Color(204, 255, 204));
         restJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

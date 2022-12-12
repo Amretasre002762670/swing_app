@@ -80,6 +80,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHeading.setText("Manage Orders Panel");
 
+        manageOrdersTable.setBackground(new java.awt.Color(204, 255, 204));
         manageOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
