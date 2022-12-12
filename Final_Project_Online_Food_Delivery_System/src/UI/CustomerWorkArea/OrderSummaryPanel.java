@@ -140,6 +140,7 @@ public class OrderSummaryPanel extends javax.swing.JPanel {
             }
         });
 
+        tblMenu.setBackground(new java.awt.Color(204, 255, 204));
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

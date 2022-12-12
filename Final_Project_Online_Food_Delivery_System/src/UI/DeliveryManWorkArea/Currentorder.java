@@ -126,9 +126,9 @@ public class Currentorder extends javax.swing.JPanel {
             }
         });
 
-        lbldelcurorder.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbldelcurorder.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         lbldelcurorder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbldelcurorder.setText("CURRENT ORDER");
+        lbldelcurorder.setText("Current Order");
 
         lbldelcurback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbldelcurback.setForeground(new java.awt.Color(255, 51, 51));

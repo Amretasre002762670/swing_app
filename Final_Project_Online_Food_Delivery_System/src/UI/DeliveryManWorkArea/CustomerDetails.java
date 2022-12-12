@@ -63,7 +63,7 @@ public class CustomerDetails extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 255));
 
-        titleCustomerdet.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        titleCustomerdet.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         titleCustomerdet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleCustomerdet.setText("CUSTOMER DETAILS");
 
@@ -134,7 +134,7 @@ public class CustomerDetails extends javax.swing.JPanel {
                             .addComponent(txtdelcustcity)
                             .addComponent(txtdelcustpincode)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(23, 23, 23)
                         .addComponent(lbldelcusback)))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -146,9 +146,9 @@ public class CustomerDetails extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(titleCustomerdet)
-                .addGap(26, 26, 26)
+                .addGap(31, 31, 31)
                 .addComponent(lbldelcusback)
-                .addGap(123, 123, 123)
+                .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustname)
                     .addComponent(txtdelcusname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,7 +172,7 @@ public class CustomerDetails extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldelcustemail)
                     .addComponent(txtdelcustemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

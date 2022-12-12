@@ -145,6 +145,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(650, 650));
         setMinimumSize(new java.awt.Dimension(650, 650));
 
+        tblMenu.setBackground(new java.awt.Color(204, 255, 204));
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

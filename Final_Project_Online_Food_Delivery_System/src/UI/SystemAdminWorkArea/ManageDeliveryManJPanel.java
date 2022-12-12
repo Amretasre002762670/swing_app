@@ -161,6 +161,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(650, 650));
         setPreferredSize(new java.awt.Dimension(650, 650));
 
+        deliveryManJTable.setBackground(new java.awt.Color(204, 255, 204));
         deliveryManJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -226,7 +227,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         lblDelname.setText("Name:");
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Delivery Man Panel");
 
@@ -340,7 +341,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnUpdateDeli)
