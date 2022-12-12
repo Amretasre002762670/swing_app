@@ -23,8 +23,6 @@
 ### DELIVERY MAN PANEL SEQUENCE DIAGRAM ###
 <img width="488" alt="image" src="https://user-images.githubusercontent.com/113134320/206953067-ef326078-ae39-473d-ac3a-262f2f19580a.png">
 
-### Class Diagram of ONLINE DELIVERY SYSTEM
-![Classdiagram_aed](https://user-images.githubusercontent.com/114785407/206958926-1796430f-d628-4eb6-82dc-00177cfa4567.jpeg)
 
 
 
