@@ -33,6 +33,8 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
     private Ecosystem ecosystem;
     private DeliveryMan deliveryMan;
     DeliveryManDirectory deliveryManList;
+    DeliveryMan updateDel;
+    int row = 0;
 
     /**
      * Creates new form ManageDeliveryManJPanel
@@ -143,7 +145,6 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         lblDelPassword = new javax.swing.JLabel();
         btnUpdateDeli = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         lblDelCom = new javax.swing.JLabel();
         txtDeliverManCommunity = new javax.swing.JTextField();
         txtDeliverManName = new javax.swing.JTextField();
@@ -152,6 +153,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPhoneNum = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
@@ -164,15 +166,22 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                " ID", "Name", "Community", "Username"
+                " Name", "Community", "User Name", "Contact Number"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(deliveryManJTable);
@@ -213,27 +222,11 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 255, 204));
-        btnBack.setText("<- Back");
-        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBackMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBackMouseExited(evt);
-            }
-        });
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         lblDelCom.setText("Community:");
 
         lblDelname.setText("Name:");
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Delivery Man Panel");
 
@@ -248,50 +241,65 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblBack.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblBack.setForeground(new java.awt.Color(255, 0, 0));
+        lblBack.setText("<< Back");
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBackMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 137, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnCreate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateDeli)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(btnCreate)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdateDeli)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(saveBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(btnBack)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDelUsername)
-                    .addComponent(lblDelCom)
-                    .addComponent(lblDelPassword)
-                    .addComponent(lblDelname)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(136, 136, 136)
-                .addComponent(jLabel3)
+                            .addComponent(lblDelUsername)
+                            .addComponent(lblDelCom)
+                            .addComponent(lblDelPassword)
+                            .addComponent(lblDelname)
+                            .addComponent(jLabel2))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDeliveryManUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeliveryManPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeliverManCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(136, 136, 136)
+                        .addComponent(jLabel3)))
                 .addGap(111, 111, 111))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBack)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, lblDelCom, lblDelPassword, lblDelUsername, lblDelname});
@@ -303,22 +311,16 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblBack)
+                        .addGap(24, 24, 24)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190)
-                        .addComponent(jLabel3)
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCreate)
-                            .addComponent(btnUpdateDeli)
-                            .addComponent(btnDelete)
-                            .addComponent(saveBtn)))
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
+                        .addGap(183, 183, 183)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDelname)
                             .addComponent(txtDeliverManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -338,7 +340,13 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreate)
+                    .addComponent(btnUpdateDeli)
+                    .addComponent(btnDelete)
+                    .addComponent(saveBtn))
+                .addGap(179, 179, 179))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,7 +355,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         int selectedRow = deliveryManJTable.getSelectedRow();
         if (selectedRow >= 0) {
             DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 0);
-            ecosystem.getDeliveryManDirectory().deleteDeliveryMan(d);
+            deliveryManList.removeCustomer(d);
             JOptionPane.showMessageDialog(null, "Delivery man removed Successfully.");
             populateTable();
         } else {
@@ -358,17 +366,18 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
 
-        for (DeliveryMan d : ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
-            if (deliveryMan.getDeliveryManName().equals(d.getDeliveryManName())) {
-                d.setDeliveryManName(txtDeliverManName.getText());
-                d.setDeliveryManNumber(Integer.parseInt(txtPhoneNum.getText()));
-                d.setCommunity(txtDeliverManCommunity.getText());
-                d.setDeliveryManNumber(Integer.parseInt(txtPhoneNum.getText()));
-                deliveryManList.addDeliveryMan(d);
-            }
-        }
+        UserAccount user = new UserAccount();
+
+        updateDel.setCommunity(txtDeliverManCommunity.getText());
+        updateDel.setDeliveryManName(txtDeliverManName.getText());
+        updateDel.setDeliveryManNumber(Long.parseLong(txtPhoneNum.getText()));
+
+        user.setUsername(txtDeliveryManUserName.getText());
+        user.setPassword(txtDeliveryManPassword.getText());
+        updateDel.setUserAccount(user);
 
         JOptionPane.showMessageDialog(null, "Deliveryman Updated Successfully.");
+
         populateTable();
 //        txtDeliveryManID.setText("");
         txtDeliverManName.setText("");
@@ -382,20 +391,23 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = deliveryManJTable.getSelectedRow();
 
+        row = selectedRow;
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
             return;
-        } 
-        DeliveryMan d = (DeliveryMan) deliveryManJTable.getValueAt(selectedRow, 1);
-        deliveryMan = d;
-//            txtDeliveryManID.setText(String.valueOf(d.getDeliveryManId()));
-        txtDeliverManName.setText(d.getDeliveryManName());
-        txtDeliverManCommunity.setText(d.getCommunity());
-        //  txtDeliveryManPhoneNum.setText(String.valueOf(d.getDeliveryManNumber()));
-        txtDeliveryManUserName.setText(d.getUserAccount().getUsername());
-        txtDeliveryManPassword.setText(d.getUserAccount().getPassword());
-        txtPhoneNum.setText(String.valueOf(d.getDeliveryManNumber()));
-        populateTable();
+        }
+
+        DefaultTableModel deliverManTbl = (DefaultTableModel) deliveryManJTable.getModel();
+        DeliveryMan del = (DeliveryMan) deliverManTbl.getValueAt(selectedRow, 0);
+
+        txtDeliverManName.setText(del.getDeliveryManName());
+        txtDeliverManCommunity.setText(del.getCommunity());
+        txtDeliveryManUserName.setText(del.getUserAccount().getUsername());
+        txtDeliveryManPassword.setText(del.getUserAccount().getPassword());
+        txtPhoneNum.setText(String.valueOf(del.getDeliveryManNumber()));
+
+        updateDel = deliveryManList.updateDeliveryMan(del, selectedRow);
+
     }//GEN-LAST:event_btnUpdateDeliActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -450,31 +462,6 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        //        CustomerWorkArea cusWorkArea = new CustomerWorkArea(cusDetails, panelBackWorkArea, resList);
-        userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        // sysAdminwjp.populateTree();
-
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-        // panelBackWorkArea.remove(this);
-        //((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
-        // TODO add your handling code here:
-        btnBack.setBackground(Color.red);
-    }//GEN-LAST:event_btnBackMouseEntered
-
-    private void btnBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseExited
-        // TODO add your handling code here:
-        btnBack.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_btnBackMouseExited
-
     private void txtPhoneNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumKeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -494,9 +481,31 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtPhoneNumKeyReleased
 
+    private void lblBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseEntered
+        // TODO add your handling code here:
+        lblBack.setForeground(Color.blue);
+    }//GEN-LAST:event_lblBackMouseEntered
+
+    private void lblBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseExited
+        // TODO add your handling code here:
+        lblBack.setForeground(Color.red);
+
+    }//GEN-LAST:event_lblBackMouseExited
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        // TODO add your handling code here:
+         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
+        // sysAdminwjp.populateTree();
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_lblBackMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdateDeli;
@@ -505,6 +514,7 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblDelCom;
     private javax.swing.JLabel lblDelPassword;
     private javax.swing.JLabel lblDelUsername;
@@ -524,10 +534,10 @@ public class ManageDeliveryManJPanel extends javax.swing.JPanel {
 
         for (DeliveryMan deliveryMan : deliveryManList.getDeliveryManList()) {
             Object[] row = new Object[model.getColumnCount()];
-            row[0] = deliveryMan.getDeliveryManId();
-            row[1] = deliveryMan;
-            row[2] = deliveryMan.getCommunity();
-            row[3] = deliveryMan.getUserAccount().getUsername();
+            row[0] = deliveryMan;
+            row[1] = deliveryMan.getCommunity();
+            row[2] = deliveryMan.getUserAccount().getUsername();
+            row[3] = deliveryMan.getDeliveryManNumber();
 
             model.addRow(row);
         }

@@ -47,6 +47,9 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         lblWarText.setVisible(false);
 
         this.panelBackWorkArea = panelBackWorkArea;
+
+        lblWarninSearch.setVisible(false);
+
     }
 
     public void populateTable(ArrayList<Restaurant> restaurantList) {
@@ -124,6 +127,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         TablePanel = new javax.swing.JScrollPane();
         tblRestaurantList = new javax.swing.JTable();
         btnViewMenu = new javax.swing.JButton();
+        lblWarninSearch = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setMaximumSize(new java.awt.Dimension(950, 950));
@@ -195,7 +199,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
         });
 
         cmbBoxSearchType.setBackground(new java.awt.Color(242, 242, 242));
-        cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select One Search Type", "Restaurant Name", "Restaurant Type", "Restaurant Street Address", "Restaurant City", "Restaurant Pincode", "View All" }));
+        cmbBoxSearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select One Search Type", "Restaurant Name", "Restaurant Type", "Restaurant City", "View All" }));
         cmbBoxSearchType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBoxSearchTypeActionPerformed(evt);
@@ -261,6 +265,11 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
             }
         });
 
+        lblWarninSearch.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblWarninSearch.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarninSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWarninSearch.setText("No Restaurants Found");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -300,6 +309,10 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
                                 .addComponent(btnViewMenu)))
                         .addGap(0, 72, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(lblWarninSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblSearch, lblSearchType});
@@ -327,7 +340,9 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
                     .addComponent(lblSearchType))
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addGap(69, 69, 69)
+                .addGap(46, 46, 46)
+                .addComponent(lblWarninSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnViewMenu)
@@ -366,16 +381,18 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
                     searchResults = resList.searchWithResName(searchText);
                 } else if (searchType.equals("Restaurant Type")) {
                     searchResults = resList.searchWithResType(searchText);
-                } else if (searchType.equals("Restaurant Street Address")) {
-                    searchResults = resList.searchWithResAdd(searchText);
                 } else if (searchType.equals("Restaurant City")) {
                     searchResults = resList.searchWithResCity(searchText);
-                } else if (searchType.equals("Restaurant Pincode")) {
-                    searchResults = resList.searchWithResPincode(Integer.parseInt(searchText));
                 } else {
                     JOptionPane.showMessageDialog(this, "Select Search Type and Text");
                 }
-                populateTable(searchResults);
+                if (searchResults.isEmpty() == true) {
+                    lblWarninSearch.setVisible(true);
+                } else {
+                    lblWarninSearch.setVisible(false);
+                    populateTable(searchResults);
+                }
+
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -468,6 +485,7 @@ public class RestaurantSearchPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblSearchType;
     private javax.swing.JLabel lblWarText;
     private javax.swing.JLabel lblWarType;
+    private javax.swing.JLabel lblWarninSearch;
     private javax.swing.JTable tblRestaurantList;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

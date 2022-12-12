@@ -118,7 +118,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             }
         });
 
+        requestTest.setBackground(new java.awt.Color(204, 255, 204));
         requestTest.setText("Change Order Status");
+        requestTest.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         requestTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestTestActionPerformed(evt);

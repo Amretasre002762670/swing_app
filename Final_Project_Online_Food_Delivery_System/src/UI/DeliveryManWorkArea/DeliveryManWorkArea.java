@@ -7,6 +7,7 @@ package UI.DeliveryManWorkArea;
 import Model.DeliveryMan.DeliveryMan;
 import Model.WorkQueue.WorkQueue;
 import Model.WorkQueue.WorkRequest;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -65,7 +66,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         lbldelloggedin.setText("Logged in as:");
 
         btndelviewqueue.setBackground(new java.awt.Color(204, 255, 204));
-        btndelviewqueue.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
+        btndelviewqueue.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         btndelviewqueue.setText("View Queue");
         btndelviewqueue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +75,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         });
 
         btndelcuroders.setBackground(new java.awt.Color(204, 255, 204));
-        btndelcuroders.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
+        btndelcuroders.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         btndelcuroders.setText("Current Order");
         btndelcuroders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,9 +86,16 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         lbllogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbllogout.setForeground(new java.awt.Color(255, 51, 51));
         lbllogout.setText("Logout");
+        lbllogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbllogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbllogoutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbllogoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbllogoutMouseExited(evt);
             }
         });
 
@@ -132,7 +140,7 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
                 .addComponent(btndelviewqueue)
                 .addGap(95, 95, 95)
                 .addComponent(btndelcuroders)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,7 +158,8 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
         {
             WorkRequest currentOrder = workQueue.findCurrentWorkRequestForDelMan(delManDetails);
-            if (workQueue.findCurrentWorkRequestForDelMan(delManDetails) == null) {
+            System.out.println();
+            if (workQueue.findCurrentWorkRequestForDelMan(delManDetails).getStatus() == null) {
                 JOptionPane.showMessageDialog(this, "No Current Orders To Display");
             } else {
                 Currentorder curorder = new Currentorder(panelBackWorkArea, currentOrder, flag, workQueue);
@@ -165,6 +174,16 @@ public class DeliveryManWorkArea extends javax.swing.JPanel {
         panelBackWorkArea.add("Login Panel", panelLogin);
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_lbllogoutMouseClicked
+
+    private void lbllogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllogoutMouseEntered
+        // TODO add your handling code here:
+        lbllogout.setForeground(Color.blue);
+    }//GEN-LAST:event_lbllogoutMouseEntered
+
+    private void lbllogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllogoutMouseExited
+        // TODO add your handling code here:
+        lbllogout.setForeground(Color.red);
+    }//GEN-LAST:event_lbllogoutMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

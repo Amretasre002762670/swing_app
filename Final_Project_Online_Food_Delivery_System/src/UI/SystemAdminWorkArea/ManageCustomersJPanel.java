@@ -81,6 +81,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -92,15 +93,22 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer ID", "Name", "Street Address", "City", "Pincode", "PhoneNumber", "Email ID", "UserName"
+                "Name", "Street Address", "City", "Pincode", "PhoneNumber", "Email ID", "UserName"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(customerJTable);
@@ -109,6 +117,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         btnUpdateCust.setBackground(new java.awt.Color(204, 255, 204));
         btnUpdateCust.setText("Select");
+        btnUpdateCust.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateCustActionPerformed(evt);
@@ -121,6 +130,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         btnSelect.setBackground(new java.awt.Color(204, 255, 204));
         btnSelect.setText("Update");
+        btnSelect.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectActionPerformed(evt);
@@ -150,6 +160,11 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         lblCustPhoneNumber.setText("Phone Number:");
 
+        txtCustPhoneNum.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCustPhoneNumFocusLost(evt);
+            }
+        });
         txtCustPhoneNum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCustPhoneNumKeyPressed(evt);
@@ -161,6 +176,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         btnCreate.setBackground(new java.awt.Color(204, 255, 204));
         btnCreate.setText("Create");
+        btnCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
@@ -185,6 +201,15 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(204, 255, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("User Account Details");
+
+        btnDelete.setBackground(new java.awt.Color(204, 255, 204));
+        btnDelete.setText("Delete");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -235,20 +260,23 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                                             .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(btnCreate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSelect)
-                .addGap(139, 139, 139))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnUpdateCust)
                 .addGap(307, 307, 307))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(btnCreate)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnSelect)
+                        .addGap(95, 95, 95)
+                        .addComponent(btnDelete)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +328,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
-                    .addComponent(btnSelect))
+                    .addComponent(btnSelect)
+                    .addComponent(btnDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -425,15 +454,15 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Customer customer : custList.getCustomerList()) {
-            Object[] row = new Object[8];
-            row[0] = customer.getCustId();
-            row[1] = customer;
-            row[2] = customer.getHome_streetAddress();
-            row[3] = customer.getHome_City();
-            row[4] = customer.getHome_pincode();
-            row[5] = customer.getCustPhoneNumber();
-            row[6] = customer.getCus_emailid();
-            row[7] = customer.getUserAccount().getUsername();
+            Object[] row = new Object[7];
+//            row[0] = customer.getCustId();
+            row[0] = customer;
+            row[1] = customer.getHome_streetAddress();
+            row[2] = customer.getHome_City();
+            row[3] = customer.getHome_pincode();
+            row[4] = customer.getCustPhoneNumber();
+            row[5] = customer.getCus_emailid();
+            row[6] = customer.getUserAccount().getUsername();
             model.addRow(row);
 
         }
@@ -445,7 +474,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         int selectedRow = customerJTable.getSelectedRow();
 
         if (selectedRow >= 0) {
-            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 1);
+            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 0);
             customer = c;
 //            txtCustID.setText(Integer.toString(c.getCustId()));
             txtCustName.setText(c.getCustName());
@@ -481,17 +510,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         updateCustomer.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
         updateCustomer.setCustPhoneNumber(Integer.parseInt(txtCustPhoneNum.getText()));
         updateCustomer.setCus_emailid(txtCustEmailAdd.getText());
-//        for (Customer c : ecosystem.getCustomerDirectory().getCustomerList()) {
-//            if (customer.getCustName().equals(c.getCustName())) {
-////                c.setCustId(Integer.parseInt(txtCustID.getText()));
-//                c.setCustName(txtCustName.getText());
-//                c.setHome_streetAddress(txtCustStreetAddress.getText());
-//                c.setHome_City(txtCustCity.getText());
-//                c.setHome_pincode(Integer.parseInt(txtCustPincode.getText()));
-//                c.setCustPhoneNumber(Integer.parseInt(txtCustStreetAddress.getText()));
-//                c.setCus_emailid(txtCustEmailAdd.getText());
-//            }
-//        }
+
         updateCustomerInDB(updateCustomer);
 
         JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
@@ -541,7 +560,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             c.setHome_City(City);
             c.setHome_pincode(Pincode);
             c.setHome_streetAddress(streetaddress);
-            c.setCustName(username);
+            c.setCustName(name);
 
             sendCustomerToDB(c);
 
@@ -576,7 +595,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     private void txtCustNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustNameKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtCustNameKeyPressed
 
     private void txtCustPincodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPincodeKeyPressed
@@ -587,13 +606,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         } else {
             jLabel5.setText("");
         }
-        
+
     }//GEN-LAST:event_txtCustPincodeKeyPressed
 
     private void txtCustPhoneNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPhoneNumKeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
+        if (Character.isLetter(c)) {
             jLabel6.setText("Please Enter Number only");
         } else {
             jLabel6.setText("");
@@ -602,8 +621,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     private void txtCustPincodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPincodeKeyReleased
         // TODO add your handling code here:
-         char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
 //            jLabel7.setText("Please Enter Number only");
             txtCustPincode.setText("");
         }
@@ -612,16 +631,42 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private void txtCustPhoneNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustPhoneNumKeyReleased
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
+        if (Character.isLetter(c)) {
 //            jLabel7.setText("Please Enter Number only");
             txtCustPhoneNum.setText("");
         }
     }//GEN-LAST:event_txtCustPhoneNumKeyReleased
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = customerJTable.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            Customer c = (Customer) customerJTable.getValueAt(selectedRow, 0);
+            customer = c;
+            custList.removeCustomer(c);
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a row");
+            return;
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtCustPhoneNumFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCustPhoneNumFocusLost
+        // TODO add your handling code here:
+        if (!(txtCustPhoneNum.getText().matches("^[0-9]*$")) || !(txtCustPhoneNum.getText().length() == 10)) {
+            jLabel6.setText("Please enter only numbers of length 10");
+        } else {
+            jLabel6.setText("");
+        }
+    
+    }//GEN-LAST:event_txtCustPhoneNumFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSelect;
     private javax.swing.JButton btnUpdateCust;
     private javax.swing.JTable customerJTable;

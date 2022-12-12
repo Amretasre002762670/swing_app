@@ -6,6 +6,7 @@ package UI.DeliveryManWorkArea;
 
 import Model.WorkQueue.WorkQueue;
 import Model.WorkQueue.WorkRequest;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -30,7 +31,7 @@ public class Currentorder extends javax.swing.JPanel {
         txtorders.setEditable(false);
         txtresaddress.setEditable(false);
         txttime.setEditable(false);
-        lblWarning.setVisible(false);
+//        lblWarning.setVisible(false);
 
 //        for (WorkRequest workRequest : this.workQueue.getWorkRequestList()) {
 //            System.out.println(workRequest.getMessage());
@@ -43,9 +44,7 @@ public class Currentorder extends javax.swing.JPanel {
             txtresaddress.setText(currentOrder.getOrderRequest().getResDetails().getRes_street_add());
             txttime.setText(currentOrder.getRequestTime());
             txtStatus.setText(currentOrder.getMessage());
-        } else {
-            lblWarning.setVisible(true);
-        }
+        } 
 
     }
 
@@ -74,7 +73,6 @@ public class Currentorder extends javax.swing.JPanel {
         lbldelcurorder = new javax.swing.JLabel();
         lbldelcurback = new javax.swing.JLabel();
         btnUpdateStatus = new javax.swing.JButton();
-        lblWarning = new javax.swing.JLabel();
         lblStatusOrder = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
 
@@ -111,6 +109,7 @@ public class Currentorder extends javax.swing.JPanel {
         btnresdetails.setBackground(new java.awt.Color(204, 255, 204));
         btnresdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnresdetails.setText("Restaurant Details");
+        btnresdetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnresdetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnresdetailsActionPerformed(evt);
@@ -120,6 +119,7 @@ public class Currentorder extends javax.swing.JPanel {
         btncusdetails.setBackground(new java.awt.Color(204, 255, 204));
         btncusdetails.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btncusdetails.setText("Customer Details");
+        btncusdetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncusdetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncusdetailsActionPerformed(evt);
@@ -133,25 +133,28 @@ public class Currentorder extends javax.swing.JPanel {
         lbldelcurback.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbldelcurback.setForeground(new java.awt.Color(255, 51, 51));
         lbldelcurback.setText("<<Back");
+        lbldelcurback.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbldelcurback.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbldelcurbackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbldelcurbackMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbldelcurbackMouseExited(evt);
             }
         });
 
         btnUpdateStatus.setBackground(new java.awt.Color(204, 255, 204));
         btnUpdateStatus.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnUpdateStatus.setText("Update Status");
+        btnUpdateStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateStatusActionPerformed(evt);
             }
         });
-
-        lblWarning.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        lblWarning.setForeground(new java.awt.Color(255, 0, 0));
-        lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblWarning.setText("There is no Current Orders");
 
         lblStatusOrder.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         lblStatusOrder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,8 +174,9 @@ public class Currentorder extends javax.swing.JPanel {
                         .addComponent(btnresdetails)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                         .addComponent(btnUpdateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
-                        .addComponent(btncusdetails))
+                        .addGap(252, 252, 252)
+                        .addComponent(btncusdetails)
+                        .addGap(65, 65, 65))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -198,8 +202,7 @@ public class Currentorder extends javax.swing.JPanel {
                                             .addComponent(txtorders)
                                             .addComponent(txtresaddress)
                                             .addComponent(txtStatus))))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -216,9 +219,7 @@ public class Currentorder extends javax.swing.JPanel {
                 .addComponent(lbldelcurorder)
                 .addGap(18, 18, 18)
                 .addComponent(lbldelcurback)
-                .addGap(11, 11, 11)
-                .addComponent(lblWarning)
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblid))
@@ -286,13 +287,22 @@ public class Currentorder extends javax.swing.JPanel {
         ((java.awt.CardLayout) panelBackWorkArea.getLayout()).next(panelBackWorkArea);
     }//GEN-LAST:event_btnUpdateStatusActionPerformed
 
+    private void lbldelcurbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseEntered
+        // TODO add your handling code here:
+        lbldelcurback.setForeground(Color.blue);
+    }//GEN-LAST:event_lbldelcurbackMouseEntered
+
+    private void lbldelcurbackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelcurbackMouseExited
+        // TODO add your handling code here:
+        lbldelcurback.setForeground(Color.red);
+    }//GEN-LAST:event_lbldelcurbackMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUpdateStatus;
     private javax.swing.JButton btncusdetails;
     private javax.swing.JButton btnresdetails;
     private javax.swing.JLabel lblStatusOrder;
-    private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lbldelcurback;
     private javax.swing.JLabel lbldelcurorder;
     private javax.swing.JLabel lblid;

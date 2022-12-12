@@ -23,7 +23,7 @@ public class DeliveryManDirectory {
         this.ecosystem = ecosystem;
         deliveryManList = new ArrayList<DeliveryMan>();
     }
-    
+
     public DeliveryManDirectory() {
         deliveryManList = new ArrayList<DeliveryMan>();
     }
@@ -64,7 +64,7 @@ public class DeliveryManDirectory {
     }
 
     public DeliveryMan findDeliveryManDetails(UserAccount user) {
-        
+
         DeliveryMan deliveryManDetails = new DeliveryMan();
 
         for (DeliveryMan delMan : deliveryManList) {
@@ -75,5 +75,17 @@ public class DeliveryManDirectory {
         }
         return deliveryManDetails;
     }
-   
+
+    public void removeCustomer(DeliveryMan delMan) {
+        deliveryManList.remove(delMan);
+    }
+
+    public DeliveryMan updateDeliveryMan(DeliveryMan delManDetails, int ind) {
+//        DeliveryMan updateDelMan = new DeliveryMan();
+        if (deliveryManList.contains(delManDetails)) {
+            deliveryManList.set(ind, delManDetails);
+        }
+        return delManDetails;
+    }
+
 }
