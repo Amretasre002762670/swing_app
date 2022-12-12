@@ -7,7 +7,14 @@
 
 
 ### Class Diagram of ONLINE DELIVERY SYSTEM
-![Classdiagram_aed](https://user-images.githubusercontent.com/114785407/206958926-1796430f-d628-4eb6-82dc-00177cfa4567.jpeg)
+![CLASS DIAGRAM](https://user-images.githubusercontent.com/114785407/206961070-25584c0b-25af-4729-a1fd-3f2aab662142.jpeg)
+ 
+ 
+ 
+### Database UML diagram
+![db uml diagram](https://user-images.githubusercontent.com/114785407/206961369-f12be633-658e-4f29-bb2b-8bf34b337a8d.jpeg)
+
+
 
 ## Panel Sequence Diagram ##
 
