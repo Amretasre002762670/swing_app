@@ -119,8 +119,8 @@ public class CheckoutPanel extends javax.swing.JPanel {
     public void constructEmail() {
             SendEmail sendMail = new SendEmail();
             String[] emailList = {"amretasrert@gmail.com", order.getCusDetails().getCus_emailid()};
-            String emailMsgTxt = "Your order with" + order.getResDetails().getRestaurantName() + " is placed successfully";
-            String emailSubjectTxt = order.getOrder_id() + " order placed";
+            String emailMsgTxt = "Your order with " + order.getResDetails().getRestaurantName() + " is placed successfully";
+            String emailSubjectTxt = "Order: " + order.getOrder_id() + " placed";
             try {
                 sendMail.postMail(emailList, emailSubjectTxt, emailMsgTxt, emailFromAddress);
             } catch (MessagingException ex) {
