@@ -35,10 +35,10 @@
 
 
 
-CONTEXT:
+### CONTEXT: ###
 Online food delivery system is a Java Swing application with GUI which acts as a platform for people to find restaurants in specific areas and order food and track status of the order.
 
-APPLICATION WORKFLOW:
+### APPLICATION WORKFLOW: ###
 Upon login, every user is shown a different page, menu, and options, depending on the user permissions. 
 
 
@@ -54,18 +54,20 @@ CRUD operations are implemented based on the user who has logged in. for example
 
 
 
-Functionalities of the Project
+**Functionalities of the Project**
 -	Provides the searching facilities based on the restaurant type and address.
 -	It manages delivery details, order details and customer details.
 -	Managing the information of the food item, category, and restaurant.
--	Sends an email confirmation to the customer after the order is successfully placed.
+-	Sends an **email** **confirmation** to the customer after the order is successfully placed.
 -	Customer can track the real-time status of the order.
 
 
-DATABASE:
-We have used MySQL database.
-Database Name: Online delivery system
-Tables: UseraccountDirectory, CustomerDirectory,RestaurantAdminDirectory,RestaurantDirectory,
-Menudirectory,OrderDirectory,OrderMenuRelation.
+#### DATABASE: ####
 
-![image](https://user-images.githubusercontent.com/113550284/206954374-27a7394c-d547-49a6-925b-2cfa69bbea16.png)
+We have used MySQL database.
+
+**Database Name:** Online delivery system
+
+**Tables:** UseraccountDirectory, CustomerDirectory,RestaurantAdminDirectory,RestaurantDirectory, Menudirectory,OrderDirectory,OrderMenuRelation.
+
+
